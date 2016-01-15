@@ -62,3 +62,13 @@ target/
 *.sqlite3
 .idea
 staticfiles
+
+
+.DS_STORE
+*.log
+
+node_modules
+dist
+coverage
+webpack-stats.json
+staticfiles

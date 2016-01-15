@@ -1,0 +1,13 @@
+@import '../styles/vars/colors';
+
+.question {
+  display: block;
+  padding: 10px 20px;
+  border: 1px solid $color-light-grey;
+  background: $color-white;
+  color: $color-dark-grey;
+  border-radius: 3px;
+  width: 100%;
+  margin: 10px 0;
+  cursor: move;
+}
