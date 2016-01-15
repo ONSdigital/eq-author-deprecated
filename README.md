@@ -13,19 +13,15 @@ externalise settings and secret management, in accordance with GDS guidance.
 
 ## How to install
 
-1. Create a new virtualenv
-2. Activate the virtualenv
+1. Create a new virtualenv `mkvirtualenv <env-name>`
+2. Activate the virtualenv `workon <env-name>`
 3. Clone this repo locally
 4. Run `pip install -r requirements.txt`
 
-## How to run the application 
+## How to run the application
 
 `python manage.py runserver`
 
 ## How to run the test suite
 
 `python manage.py test`
-
-
-
-
