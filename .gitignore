@@ -70,3 +70,4 @@ staticfiles
 node_modules
 dist
 coverage
+webpack-stats.json
