@@ -11,8 +11,7 @@ const styleLoader = [
     'importLoaders=1',
     'localIdentName=[name]__[local]___[hash:base64:5]'
   ].join('&'),
-  'postcss',
-  'sass'
+  'postcss'
 ]
 
 module.exports = {
@@ -32,7 +31,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: styleLoader
+        loaders: styleLoader.concat(['sass'])
       },
       {
         test: /\.css$/,
