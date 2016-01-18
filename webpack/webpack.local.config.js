@@ -9,7 +9,7 @@ var config = require('./webpack.base.config.js')
 config.entry = [
   'webpack-dev-server/client?' + rootUrl,
   'webpack/hot/only-dev-server',
-  './../qBuilder/assets/js/index'
+  './../qBuilder/assets/index'
 ]
 
 // override django's STATIC_URL for webpack bundles
