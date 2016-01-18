@@ -27,10 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-# Application definition
-
-INSTALLED_APPS = [
+# Out of the box apps
+DJANGO_PROVIDED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+# OUR apps
+EQ_AUTHOR_APPS = [
+    'apps.app'
+]
+
+# Application definition (Default + OURs)
+INSTALLED_APPS = DJANGO_PROVIDED_APPS + EQ_AUTHOR_APPS
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,7 +56,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'params.urls'
+ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'params.wsgi.application'
+WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
@@ -108,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-gb'
 
 TIME_ZONE = 'UTC'
 
