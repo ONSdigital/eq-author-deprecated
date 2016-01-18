@@ -1,6 +1,5 @@
 var webpack = require('webpack')
 var BundleTracker = require('webpack-bundle-tracker')
-
 var config = require('./webpack.base.config.js')
 
 config.output.path = require('path').resolve('./assets/dist')
@@ -21,6 +20,10 @@ config.plugins = config.plugins.concat([
   new webpack.optimize.UglifyJsPlugin({
     compressor: {
       warnings: false
+    },
+    compress: {
+      unused: true,
+      dead_code: true
     }
   })
 ])
