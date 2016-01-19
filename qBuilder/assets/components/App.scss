@@ -1,7 +1,0 @@
-@mixin color {
-  color: green;
-}
-
-.app {
-  @include color;
-}
