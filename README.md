@@ -17,6 +17,7 @@ externalise settings and secret management, in accordance with GDS guidance.
 2. Activate the virtualenv `workon <env-name>`
 3. Clone this repo locally
 4. Run `pip install -r requirements.txt`
+5. Create an EQ_AUTHOR_DATABASE_URL environment variable (See below)
 
 ## How to run the application
 
@@ -25,3 +26,20 @@ externalise settings and secret management, in accordance with GDS guidance.
 ## How to run the test suite
 
 `python manage.py test`
+
+## EQ_AUTHOR_DATABASE_URL
+
+The application needs a url to the database it should use.  For further documentation,
+please consult the dj-database-url project homepage [https://github.com/kennethreitz/dj-database-url].
+
+To configure the app to use settings similar to those used on the build server, the value is as follows:
+
+`EQ_AUTHOR_DATABASE_URL=postgres://eq-author:@localhost:5432/qBuilder`
+
+`postgres://` indicates we are using postgresql.
+`eq_author` indicates the username to connect with
+`:` separates the username and password (blank in this case)
+`@` separates the username and password from the host name
+`localhost` is the host running postgresql
+`:5432` Signifies which port postgresql is listening on (default 5432)
+`qBuilder` is the name of the database
