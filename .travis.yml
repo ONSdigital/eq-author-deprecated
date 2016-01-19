@@ -13,9 +13,9 @@ install:
   - pip install psycopg2 --quiet
 
 before_script:
-  - psql -c 'create user eq-author with password "password";' -U postgres
+  - psql -c 'create user "eq-author" with password "password";' -U postgres
   - psql -c 'create database qBuilder;' -U postgres
-  - psql -c 'grant all on database qBuilder to eq-author;' -U postgres
+  - psql -c 'grant all on database qBuilder to "eq-author";' -U postgres
 #  - python manage.py collectstatic --noinput
 
 script:
