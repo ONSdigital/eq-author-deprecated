@@ -1,16 +1,16 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React from 'react';
+import { Link } from 'react-router';
 
 export class NotFoundView extends React.Component {
-  render () {
+  render() {
     return (
       <div className=''>
         <h1>This is a demo 404 page!</h1>
         <hr />
         <Link to='/'>Back To Home View</Link>
       </div>
-    )
+    );
   }
 }
 
-export default NotFoundView
+export default NotFoundView;

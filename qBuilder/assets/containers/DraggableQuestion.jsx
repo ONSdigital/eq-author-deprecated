@@ -6,6 +6,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import { swapBlocks } from 'redux/modules/blocks';
 import Question from 'components/Question';
 import { DRAGGABLE_QUESTION } from 'constants/ItemTypes';
+console.log(DRAGGABLE_QUESTION);
 
 const style = {};
 

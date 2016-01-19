@@ -1,11 +1,11 @@
-import 'babel-core/register'
-import path from 'path'
-import webpack from 'webpack'
-import BundleTracker from 'webpack-bundle-tracker'
+import 'babel-core/register';
+import path from 'path';
+import webpack from 'webpack';
+import BundleTracker from 'webpack-bundle-tracker';
 
-const __DEV__ = true
-const rootPath = './../qBuilder'
-const rootUrl = 'http://localhost:3000'
+const __DEV__ = true;
+const rootPath = './../qBuilder';
+const rootUrl = 'http://localhost:3000';
 const config = {
   name: 'client',
   target: 'web',
@@ -18,7 +18,7 @@ const config = {
     ]
   },
   module: {}
-}
+};
 
 const compilerVendor = [
   'history',
@@ -28,19 +28,19 @@ const compilerVendor = [
   'redux',
   'redux-actions',
   'redux-simple-router'
-]
+];
 
 // ------------------------------------
 // Entry Points
 // ------------------------------------
-const appEntryPath = rootPath + '/assets/js/index'
+const appEntryPath = rootPath + '/assets/js/index';
 
 config.entry = {
   app: __DEV__
     ? [appEntryPath, 'webpack-hot-middleware/client?path=/__webpack_hmr']
     : [appEntryPath],
   vendor: compilerVendor
-}
+};
 
 // ------------------------------------
 // Bundle Output
@@ -49,7 +49,7 @@ config.output = {
   filename: '[name]-[hash].js',
   path: path.resolve(rootPath + '/assets/bundles/'),
   // publicPath: config.compiler_public_path
-}
+};
 
 // config.sassLoader = {
 //   includePaths: paths.client('styles')
@@ -58,7 +58,7 @@ config.output = {
 config.plugins = [
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.optimize.DedupePlugin()
-]
+];
 
 // config.module.preLoaders = [{
 //   test: /\.(js|jsx)$/,
@@ -80,7 +80,7 @@ config.module.loaders = [{
     plugins: ['transform-runtime'],
     presets: ['es2015', 'react', 'stage-0', 'react-hmre']
   }
-}]
+}];
 
 const styleLoader = [
   'style', [
@@ -90,12 +90,12 @@ const styleLoader = [
     'localIdentName=[name]__[local]___[hash:base64:5]'
   ].join('&'),
   'postcss'
-]
+];
 
 config.module.loaders.push({
   test: /\.scss$/,
   loaders: styleLoader.concat(['sass'])
-})
+});
 
 // Don't treat global SCSS as modules
 config.module.loaders.push({
@@ -107,7 +107,7 @@ config.module.loaders.push({
     'postcss',
     'sass'
   ]
-})
+});
 
 // Don't treat global, third-party CSS as modules
 config.module.loaders.push({
@@ -118,12 +118,12 @@ config.module.loaders.push({
     'css?sourceMap',
     'postcss'
   ]
-})
+});
 
 config.module.loaders.push({
   test: /\.css$/,
   loaders: styleLoader
-})
+});
 
 // File loaders
 /* eslint-disable */
@@ -154,4 +154,4 @@ config.module.loaders.push(
 // ]
 
 
-export default config
+export default config;
