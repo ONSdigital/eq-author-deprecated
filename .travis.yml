@@ -6,13 +6,15 @@ python:
 services: postgresql
 
 before_install:
-  - export DJANGO_SETTINGS_MODULE=params.settings
+  - export DJANGO_SETTINGS_MODULE=project.settings
 
 install:
   - pip install -r requirements.txt
   - pip install psycopg2 --quiet
 
-#before_script:
+before_script:
+  - psql -c 'create user eq_author;' -U postgres
+  - psql -c 'create database eq-author;' -U eq_author
 #  - python manage.py collectstatic --noinput
 
 script:
