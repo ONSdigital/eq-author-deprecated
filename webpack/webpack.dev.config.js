@@ -1,4 +1,4 @@
-import "babel-core/register"
+import 'babel-core/register'
 import path from 'path'
 import webpack from 'webpack'
 import BundleTracker from 'webpack-bundle-tracker'
@@ -13,6 +13,8 @@ config.entry = [
   'webpack/hot/only-dev-server',
   './../qBuilder/assets/index'
 ]
+
+// config.devtool = 'source-map'
 
 // override django's STATIC_URL for webpack bundles
 config.output.publicPath = rootUrl + '/assets/bundles/'

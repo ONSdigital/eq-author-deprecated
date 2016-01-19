@@ -4,9 +4,9 @@
   "description": "eQ Author Tool",
   "main": "index.js",
   "scripts": {
-    "build": "node --harmony webpack/build",
+    "build": "node --harmony -r dotenv/config webpack/build",
     "build-production": "webpack --config webpack/webpack.prod.config.js --progress --colors",
-    "dev": "node webpack/server.js"
+    "dev": "node -r dotenv/config webpack/server.js"
   },
   "repository": {
     "type": "git",
