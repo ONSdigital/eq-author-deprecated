@@ -6,7 +6,7 @@ python:
 services: postgresql
 
 before_install:
-  - export DJANGO_SETTINGS_MODULE=params.settings
+  - export DJANGO_SETTINGS_MODULE=project.settings
 
 install:
   - pip install -r requirements.txt
