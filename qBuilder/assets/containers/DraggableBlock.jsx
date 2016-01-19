@@ -42,7 +42,7 @@ class DraggableBlock extends React.Component {
 }
 
 export default compose(
-  DragSource(DRAGGABLE_BLOCK, blockSource, (connect, monitor) => ({
+  DragSource('DraggableBlock', blockSource, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
   }))
