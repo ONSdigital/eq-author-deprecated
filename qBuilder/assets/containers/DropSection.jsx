@@ -10,7 +10,7 @@ import { DRAGGABLE_BLOCK, DROP_SECTION } from 'constants/ItemTypes';
 const sectionTarget = {
   drop(props, monitor, component) {
     component.onDropped(monitor.getItem());
-    return { name: DROP_SECTION };
+    return { name: 'DropSection' };
   }
 };
 
@@ -45,7 +45,7 @@ class DropSection extends React.Component {
 
 export default compose(
   connect((state) => state),
-  DropTarget(DRAGGABLE_BLOCK, sectionTarget, (connect, monitor) => ({
+  DropTarget('DraggableBlock', sectionTarget, (connect, monitor) => ({
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
     canDrop: monitor.canDrop()
