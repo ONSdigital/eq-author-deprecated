@@ -1,9 +1,11 @@
-var path = require("path")
-var webpack = require('webpack')
-var BundleTracker = require('webpack-bundle-tracker')
-var rootPath = './../qBuilder';
-var rootUrl = 'http://localhost:3000'
-var config = require('./webpack.base.config.js')
+import "babel-core/register"
+import path from 'path'
+import webpack from 'webpack'
+import BundleTracker from 'webpack-bundle-tracker'
+import config from './webpack.base.config.js'
+
+const rootPath = './../qBuilder'
+const rootUrl = 'http://localhost:3000'
 
 // Use webpack dev server
 config.entry = [
