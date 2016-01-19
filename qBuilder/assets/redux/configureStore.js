@@ -1,35 +1,33 @@
-import thunk from 'redux-thunk';
-import rootReducer from './modules';
-import {
-  applyMiddleware,
-  compose,
-  createStore
-} from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux'
+import { syncHistory } from 'redux-simple-router'
+import thunk from 'redux-thunk'
+import rootReducer from './rootReducer'
 
-export default function configureStore(initialState) {
-  let createStoreWithMiddleware;
+function withDevTools (middleware) {
+  const devTools = window.devToolsExtension
+    ? window.devToolsExtension()
+    : false
+  return compose(middleware, devTools)
+}
 
-  const middleware = applyMiddleware(thunk);
+export default function configureStore ({ initialState = {}, history }) {
+  // Sync with router via history instance (main.js)
+  const routerMiddleware = syncHistory(history)
 
-  if (__DEBUG__) {
-    createStoreWithMiddleware = compose(
-      middleware,
-      // require('containers/DevTools').instrument(),
-      window.devToolsExtension ? window.devToolsExtension() : f => f
-    );
-  } else {
-    createStoreWithMiddleware = compose(middleware);
-  }
+  // Compose final middleware and use devtools in debug environment
+  let middleware = applyMiddleware(thunk, routerMiddleware)
+  if (__DEBUG__) middleware = withDevTools(middleware)
 
-  const store = createStoreWithMiddleware(createStore)(
-    rootReducer, initialState
-  );
+  // Create final store and subscribe router in debug env ie. for devtools
+  const store = middleware(createStore)(rootReducer, initialState)
+  if (__DEBUG__) routerMiddleware.listenForReplays(store, ({ router }) => router)
+
   if (module.hot) {
-    module.hot.accept('./modules', () => {
-      const nextRootReducer = require('./modules');
+    module.hot.accept('./rootReducer', () => {
+      const nextRootReducer = require('./rootReducer').default
 
-      store.replaceReducer(nextRootReducer);
-    });
+      store.replaceReducer(nextRootReducer)
+    })
   }
-  return store;
+  return store
 }

@@ -1,5 +1,5 @@
 require('babel-register')
-const config = require('./webpack.local.config')
+const config = require('./webpack.dev.config')
 const webpack = require('webpack')
 const compiler = webpack(config)
 

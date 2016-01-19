@@ -1,7 +1,7 @@
 {
   "name": "eq-author",
   "version": "1.0.0",
-  "description": "## What is this?",
+  "description": "eQ Author Tool",
   "main": "index.js",
   "scripts": {
     "build": "node --harmony webpack/build",
@@ -50,10 +50,14 @@
     "babel-plugin-transform-runtime": "^6.4.3",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
+    "babel-preset-react-hmre": "^1.0.1",
     "babel-preset-stage-0": "^6.3.13",
+    "babel-register": "^6.4.3",
+    "babel-runtime": "^6.3.19",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
+    "node-babel": "^0.1.2",
     "node-sass": "^3.4.2",
     "postcss-loader": "^0.8.0",
     "react": "^0.14.6",
