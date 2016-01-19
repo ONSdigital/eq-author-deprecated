@@ -6,7 +6,6 @@ import { DragSource, DropTarget } from 'react-dnd';
 import { swapBlocks } from 'redux/modules/blocks';
 import Question from 'components/Question';
 import { DRAGGABLE_QUESTION } from 'constants/ItemTypes';
-console.log(DRAGGABLE_QUESTION);
 
 const style = {};
 
@@ -76,12 +75,14 @@ const dropTargetOpts = {
   }
 };
 
+console.log(DRAGGABLE_QUESTION);
+
 export default compose(
   connect((state) => state),
-  DropTarget(DRAGGABLE_QUESTION, dropTargetOpts, connect => ({
+  DropTarget('DraggableQuestion', dropTargetOpts, connect => ({
     connectDropTarget: connect.dropTarget()
   })),
-  DragSource(DRAGGABLE_QUESTION, dragSourceOpts, (connect, monitor) => ({
+  DragSource('DraggableQuestion', dragSourceOpts, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
   }))
