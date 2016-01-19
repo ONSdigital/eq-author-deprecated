@@ -82,8 +82,6 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-DATABASES = {'default': dj_database_url.parse(os.environ['EQ_AUTHOR_DATABASE_URL'])}
-
 if 'TRAVIS' in os.environ:
     DATABASES = {
         'default': {
@@ -95,6 +93,8 @@ if 'TRAVIS' in os.environ:
             'PORT': '5432',
         }
     }
+else:
+    DATABASES = {'default': dj_database_url.parse(os.environ['EQ_AUTHOR_DATABASE_URL'])}
 
 
 # Password validation
