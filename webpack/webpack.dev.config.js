@@ -14,7 +14,7 @@ config.entry = [
   './../qBuilder/assets/index'
 ]
 
-// config.devtool = 'source-map'
+config.devtool = 'source-map'
 
 // override django's STATIC_URL for webpack bundles
 config.output.publicPath = rootUrl + '/assets/bundles/'

@@ -48,7 +48,7 @@ config.entry = {
 config.output = {
   filename: '[name]-[hash].js',
   path: path.resolve(rootPath + '/assets/bundles/'),
-  // publicPath: config.compiler_public_path
+  publicPath: rootUrl + '/assets/bundles/'
 }
 
 // config.sassLoader = {
