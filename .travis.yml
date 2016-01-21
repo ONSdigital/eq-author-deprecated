@@ -15,7 +15,6 @@ install:
   - nvm install v5.2.0
   - npm install
 
-
 before_script:
   - psql -c 'create user "eq-author" createdb;' -U postgres
   - npm install
