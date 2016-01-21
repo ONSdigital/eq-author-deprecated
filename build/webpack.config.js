@@ -67,7 +67,8 @@ if (__DEV__) {
         dead_code: true,
         warnings: false
       }
-    })
+    }),
+    new BundleTracker({filename: './qBuilder/webpack-stats-prod.json'})
   )
 }
 
