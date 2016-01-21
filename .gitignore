@@ -69,3 +69,5 @@ node_modules
 dist
 coverage
 webpack-stats.json
+webpack-stats-prod.json
+bundles
