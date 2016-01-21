@@ -66,3 +66,7 @@ The Webpack setup is based on the [React Starter Kit](https://github.com/davezuk
 - `npm run deploy` - Runs linter, tests, and then, on success, compiles your application to disk.
 - `npm run lint` - Lint all .js files.
 - `npm run lint:fix` - Lint and fix all .js files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).
+
+## Redux Dev Tools Extension
+
+There's a nifty [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) extension for Chrome which allows for navigating app state.
