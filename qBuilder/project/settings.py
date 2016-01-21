@@ -141,13 +141,13 @@ STATICFILES_DIRS = (
 WEBPACK_LOADER = {
   'DEFAULT': {
     'BUNDLE_DIR_NAME': 'bundles/',
-    'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json'),
     'IGNORE': ['.+\.hot-update.js', '.+\.map']
   }
 }
 
-if not DEBUG:
-    WEBPACK_LOADER.update({
-        'BUNDLE_DIR_NAME': 'dist/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json')
-    })
+# if not DEBUG:
+#     WEBPACK_LOADER.update({
+#         'BUNDLE_DIR_NAME': 'dist/',
+#         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json')
+#     })
