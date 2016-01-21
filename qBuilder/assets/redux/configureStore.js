@@ -4,10 +4,9 @@ import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
 
 function withDevTools(middleware) {
-  const devTools = window.devToolsExtension
-    ? window.devToolsExtension()
-    : false;
-  return compose(middleware, devTools);
+  return window.devToolsExtension
+    ? compose(middleware, window.devToolsExtension())
+    : middleware;
 }
 
 export default function configureStore({ initialState = {}, history }) {

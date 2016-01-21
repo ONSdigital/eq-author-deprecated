@@ -15,9 +15,6 @@ class Main extends React.Component {
       <div className='main'>
         <h2>Survey Name</h2>
         <DropSection />
-        <Button title='Save' onClick={() => dispatch(saveData())}/>
-        &nbsp;
-        <Button title='Load' onClick={() => dispatch(fetchData())}/>
       </div>
     );
   }
