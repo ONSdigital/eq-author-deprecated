@@ -71,3 +71,8 @@ coverage
 webpack-stats.json
 webpack-stats-prod.json
 bundles
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
