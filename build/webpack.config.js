@@ -60,6 +60,7 @@ if (__DEV__) {
   )
 } else if (__PROD__) {
   debug('Apply UglifyJS plugin.')
+  debug(webpackConfig.output.publicPath)
   webpackConfig.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {
