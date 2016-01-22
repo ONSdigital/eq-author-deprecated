@@ -14,6 +14,9 @@ This django web application has been designed to work in a 12 Factor apps patter
 4. Run `pip install -r requirements.txt`
 5. Create an EQ_AUTHOR_DATABASE_URL environment variable (See below)
 6. run `npm install` to install front-end dependencies
+7. run `npm run deploy` to build front end resources for deployment *or* run `npm run compile` to run with local development
+8. If this is your first time deploying the application, brace yourself and run `eb init`.
+9. If the elasticbeanstalk environment has already been created, you can now run `eb deploy` to deploy the built application, otherwise run `eb create` to create it first and it will be deployed automatically.
 
 ## How to run the application
 
