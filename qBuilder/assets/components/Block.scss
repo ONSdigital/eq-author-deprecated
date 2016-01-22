@@ -1,0 +1,10 @@
+.block {
+  padding: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 3px;
+  user-select: none;
+  &:hover {
+    background-color: #565555;
+  }
+}
