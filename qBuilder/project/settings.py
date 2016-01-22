@@ -26,6 +26,7 @@ SECRET_KEY = '7!(g$-ecu()j804%kk-00ew4p$glg4qhs$7=b(@7+s(6r^f@a5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+PRODUCTION = True
 
 ALLOWED_HOSTS = []
 
@@ -146,7 +147,7 @@ WEBPACK_LOADER = {
   }
 }
 
-if not DEBUG:
+if PRODUCTION:
     WEBPACK_LOADER.update({
         'BUNDLE_DIR_NAME': 'bundles/',
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json')
