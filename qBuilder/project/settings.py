@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7!(g$-ecu()j804%kk-00ew4p$glg4qhs$7=b(@7+s(6r^f@a5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -141,13 +141,13 @@ STATICFILES_DIRS = (
 WEBPACK_LOADER = {
   'DEFAULT': {
     'BUNDLE_DIR_NAME': 'bundles/',
-    'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json'),
+    'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
     'IGNORE': ['.+\.hot-update.js', '.+\.map']
   }
 }
 
-# if not DEBUG:
-#     WEBPACK_LOADER.update({
-#         'BUNDLE_DIR_NAME': 'dist/',
-#         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json')
-#     })
+if not DEBUG:
+    WEBPACK_LOADER.update({
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json')
+    })
