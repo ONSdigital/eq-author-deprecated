@@ -1,10 +1,10 @@
 /**
  * Require Browsersync along with webpack and middleware for it
  */
-import Browsersync from 'browser-sync'
-import webpack from 'webpack'
-import webpackDevMiddleware from 'webpack-dev-middleware'
-import webpackHotMiddleware from 'webpack-hot-middleware'
+import Browsersync from 'browser-sync';
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 import _debug from 'debug';
 import config from '../config';
 import webpackConfig from '../build/webpack.config';
@@ -16,7 +16,7 @@ const bundler = webpack(webpackConfig);
 const bs = Browsersync.create();
 bs.init({
   proxy: {
-    target: "192.168.33.10:5001",
+    target: '192.168.33.10:5001',
     middleware: [
       webpackDevMiddleware(bundler, {
         publicPath: webpackConfig.output.publicPath,
@@ -33,7 +33,7 @@ bs.init({
 
   // no need to watch '*.js' here, webpack will take care of it for us,
   // including full page reloads if HMR won't work
-  files: [paths.client('static') + '/**/*.*'],
+  files: [paths.client('static') + '/**/*.*']
 }, function() {
-  debug("bah")
+  debug('bah');
 });

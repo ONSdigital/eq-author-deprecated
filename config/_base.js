@@ -12,7 +12,7 @@ const config = {
   // ----------------------------------
   path_base  : path.resolve(__dirname, '../'),
   dir_client : 'qBuilder/assets',
-  dir_dist   : 'qBuilder/assets/bundles',
+  dir_dist   : 'qBuilder/bundles/',
   dir_server : 'server',
   dir_test   : 'tests',
 
