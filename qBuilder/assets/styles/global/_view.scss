@@ -1,0 +1,35 @@
+$width-sidebar: 250px;
+$height-header: 72px;
+
+.view {
+  width: 100%;
+  height: 100vh;
+}
+
+.view__header {
+  height: $height-header;
+  background: $color-white;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.19);
+  position: relative;
+  z-index: $z-header;
+  padding: 15px 20px;
+  text-align: center;
+}
+
+.view__main {
+  background: #fbfafa;
+  height: calc(100vh - #{$height-header});
+  width: calc(100% - #{$width-sidebar});
+  padding: 20px;
+}
+
+.view__sidebar {
+  background: $color-dark-grey;
+  color: $color-white;
+  width: $width-sidebar;
+  height: calc(100vh - #{$height-header});
+  position: fixed;
+  top: $height-header;
+  right: 0;
+  padding: 20px;
+}
