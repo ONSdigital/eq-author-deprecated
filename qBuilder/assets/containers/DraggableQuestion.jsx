@@ -5,7 +5,6 @@ import { compose } from 'redux';
 import { DragSource, DropTarget } from 'react-dnd';
 import { swapBlocks } from 'redux/modules/blocks';
 import Question from 'components/Question';
-import { DRAGGABLE_QUESTION } from 'constants/ItemTypes';
 
 const style = {};
 
@@ -74,8 +73,6 @@ const dropTargetOpts = {
     monitor.getItem().index = hoverIndex;
   }
 };
-
-console.log(DRAGGABLE_QUESTION);
 
 export default compose(
   connect((state) => state),

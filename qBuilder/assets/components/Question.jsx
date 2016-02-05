@@ -1,11 +1,8 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
 import {question} from './Question.scss';
 
-export default class Question extends Component {
-  render() {
-    return (<div className={question} id={this.props.id} style={this.props.style}>{this.props.title}</div>);
-  }
-}
+const Question = (props) =>
+  <div className={question} style={props.style}>{props.title}</div>;
 
 Question.propTypes = {
   style: PropTypes.object,
