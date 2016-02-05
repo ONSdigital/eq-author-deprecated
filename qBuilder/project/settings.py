@@ -116,6 +116,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': os.getenv('DJANGO_LOGGING_LEVEL', 'WARNING'),
+            'class': 'logging.FileHandler',
+            'filename': os.getenv('DJANGO_LOG_FILE', 'author.log')
+        }
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
