@@ -2,8 +2,6 @@ import React, {PropTypes} from 'react';
 import { compose } from 'redux';
 import { DragSource } from 'react-dnd';
 import Block from 'components/Block';
-import Question from 'components/Question';
-import { DRAGGABLE_BLOCK } from 'constants/ItemTypes';
 
 const blockSource = {
   beginDrag(props) {
