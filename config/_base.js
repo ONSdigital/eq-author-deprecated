@@ -65,6 +65,8 @@ Edit at Your Own Risk
 -------------------------------------------------
 ************************************************/
 
+
+
 // ------------------------------------
 // Environment
 // ------------------------------------
@@ -79,6 +81,7 @@ config.globals = {
   '__TEST__'     : config.env === 'test',
   '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
   '__DEBUG_NEW_WINDOW__' : !!argv.nw,
+  '__COMPILE__': !!argv.compile,
   '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
 };
 

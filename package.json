@@ -9,7 +9,7 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "compile": "node -r dotenv/config --harmony bin/compile",
+    "compile": "node -r dotenv/config --harmony bin/compile --compile",
     "lint": "eslint . ./",
     "lint:fix": "npm run lint -- --fix",
     "start": "better-npm-run start",
