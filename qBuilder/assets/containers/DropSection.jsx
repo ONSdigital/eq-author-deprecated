@@ -5,7 +5,6 @@ import { DropTarget } from 'react-dnd';
 import { addBlock } from 'redux/modules/blocks';
 import Section from 'components/Section';
 import DraggableQuestion from 'containers/DraggableQuestion';
-import { DRAGGABLE_BLOCK, DROP_SECTION } from 'constants/ItemTypes';
 
 const sectionTarget = {
   drop(props, monitor, component) {
@@ -30,7 +29,6 @@ class DropSection extends React.Component {
 
   render() {
     const { canDrop, isOver, connectDropTarget, blocks } = this.props;
-    console.log(blocks);
     return connectDropTarget(
       <div>
         <Section isActive={canDrop && isOver}>

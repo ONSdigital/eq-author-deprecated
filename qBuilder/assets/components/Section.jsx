@@ -13,5 +13,6 @@ export default class Section extends React.Component {
 }
 
 Section.propTypes = {
+  children: PropTypes.node,
   isActive: PropTypes.bool
 };

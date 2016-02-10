@@ -1,12 +1,11 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes} from 'react';
 import {question} from './Question.scss';
 
-const Question = (props, context) => {
-  <div className={question} id={this.props.id} style={this.props.style}>{this.props.title}</div>;
-};
+const Question = (props) =>
+  <div className={question} style={props.style}>{props.title}</div>;
 
 Question.propTypes = {
-  id: PropTypes.number.isRequired,
+  style: PropTypes.object,
   title: PropTypes.string.isRequired
 };
 
