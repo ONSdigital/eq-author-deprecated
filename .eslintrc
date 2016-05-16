@@ -15,12 +15,12 @@
     "__DEV__"      : false,
     "__PROD__"     : false,
     "__DEBUG__"    : false,
-    "__DEBUG_NEW_WINDOW__" : false,
+    "__COVERAGE__" : false,
     "__BASENAME__" : false
   },
   "rules": {
     "no-unused-vars" : [1],
-    "semi" : [2, "always"],
+    "semi" : [2, "never"],
     "space-before-function-paren": [2, "never"],
     "no-alert": 0,
     "quotes": [2, "single"],
