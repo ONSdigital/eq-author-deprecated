@@ -1,5 +1,6 @@
+blueprints/**/files/**
 coverage/**
 node_modules/**
-qBuilder/bundles/**
+dist/**
 *.spec.js
-templates/*
+src/index.html
