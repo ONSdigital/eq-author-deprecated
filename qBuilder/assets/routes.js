@@ -2,19 +2,19 @@
 // They are all wrapped in the App component, which should contain the navbar etc
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
-// import { getHooks } from 'utils/hooks';
+// import { getHooks } from 'utils/hooks'
 
 const errorLoading = (err) => {
-  console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
-};
+  console.error('Dynamic page loading failed', err) // eslint-disable-line no-console
+}
 
 const loadModule = (cb) => (componentModule) => {
-  cb(null, componentModule.default);
-};
+  cb(null, componentModule.default)
+}
 
 export default function createRoutes() {
   // Create reusable async injectors using getHooks factory
-  // const { injectReducer, injectSagas } = getHooks(store);
+  // const { injectReducer, injectSagas } = getHooks(store)
 
   return [
     {
@@ -23,22 +23,22 @@ export default function createRoutes() {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           System.import('components/HomePage'),
-        ]);
+        ])
 
-        const renderRoute = loadModule(cb);
+        const renderRoute = loadModule(cb)
 
         importModules.then(([component]) => {
-          renderRoute(component);
-        });
+          renderRoute(component)
+        })
 
-        importModules.catch(errorLoading);
+        importModules.catch(errorLoading)
       },
     }, {
       path: '/editor',
       getComponent(location, cb) {
         System.import('components/JsonEditor')
           .then(loadModule(cb))
-          .catch(errorLoading);
+          .catch(errorLoading)
       },
     }, {
       path: '*',
@@ -47,8 +47,8 @@ export default function createRoutes() {
       getComponent(nextState, cb) {
         System.import('components/NotFoundPage')
           .then(loadModule(cb))
-          .catch(errorLoading);
+          .catch(errorLoading)
       },
     },
-  ];
+  ]
 }

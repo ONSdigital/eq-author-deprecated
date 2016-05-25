@@ -6,23 +6,23 @@
 
 .wrapper {
   composes: wrapper from 'styles/shared/layout.css';
+  display: flex;
+  align-items: center;
 }
 
 .title {
   font-weight: bold;
   font-size: 1rem;
-  float: left;
 }
 
 .buttons {
   display: flex;
   justify-content: flex-end;
-}
-
-.buttons > * {
-  margin: 0 0.2rem;
-}
-
-.buttons > *:last-child {
-  margin-right: 0;
+  margin-left: auto;
+  > * {
+    margin: 0 0.2rem;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }

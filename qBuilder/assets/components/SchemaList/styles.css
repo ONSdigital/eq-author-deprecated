@@ -1,3 +1,23 @@
 .schemaList {
+  margin-top: 2rem;
+}
 
+.list {
+  list-style: none;
+  border-bottom: 1px solid #efefef;
+}
+
+.item {
+  border: 1px solid #efefef;
+  border-bottom: none;
+}
+
+.link {
+  text-decoration: none;
+  display: block;
+  padding: 1rem;
+  color: #383838;
+  &:hover {
+    background: #efefef;
+  }
 }

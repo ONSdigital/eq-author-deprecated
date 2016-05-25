@@ -4,11 +4,11 @@
  *
  */
 
-import React from 'react';
-import { connect } from 'react-redux';
-import select{{properCase name}} from './selectors';
+import React from 'react'
+import { connect } from 'react-redux'
+import select{{properCase name}} from './selectors'
 {{#if wantCSS}}
-import styles from './styles.css';
+import styles from './styles.css'
 {{/if}}
 
 export class {{ properCase name }} extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -21,16 +21,16 @@ export class {{ properCase name }} extends React.Component { // eslint-disable-l
       {{/if}}
       This is {{properCase name}} container !
       </div>
-    );
+    )
   }
 }
 
-const mapStateToProps = select{{properCase name}}();
+const mapStateToProps = select{{properCase name}}()
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-  };
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)({{ properCase name }});
+export default connect(mapStateToProps, mapDispatchToProps)({{ properCase name }})

@@ -6,16 +6,16 @@
           System.import('containers/{{ properCase component }}/reducer'),
           System.import('containers/{{ properCase component }}/sagas'),
           System.import('containers/{{ properCase component }}'),
-        ]);
+        ])
 
-        const renderRoute = loadModule(cb);
+        const renderRoute = loadModule(cb)
 
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('{{ camelCase component }}', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
+          injectReducer('{{ camelCase component }}', reducer.default)
+          injectSagas(sagas.default)
+          renderRoute(component)
+        })
 
-        importModules.catch(errorLoading);
+        importModules.catch(errorLoading)
       },
     },$1

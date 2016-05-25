@@ -1,9 +1,9 @@
-import SchemaList from '../index';
+import SchemaList from '../index'
 
-import expect from 'expect';
-import { shallow } from 'enzyme';
-import React from 'react';
+import expect from 'expect'
+import { shallow } from 'enzyme'
+import React from 'react'
 
 describe('<SchemaList />', () => {
 
-});
+})

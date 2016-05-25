@@ -3,6 +3,6 @@
       getComponent(location, cb) {
         System.import('components/{{ properCase component }}')
           .then(loadModule(cb))
-          .catch(errorLoading);
+          .catch(errorLoading)
       },
     },$1
