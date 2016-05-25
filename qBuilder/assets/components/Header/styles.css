@@ -1,0 +1,28 @@
+.default {
+  background-color: #efefef;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+}
+
+.wrapper {
+  composes: wrapper from 'styles/shared/layout.css';
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1rem;
+  float: left;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttons > * {
+  margin: 0 0.2rem;
+}
+
+.buttons > *:last-child {
+  margin-right: 0;
+}

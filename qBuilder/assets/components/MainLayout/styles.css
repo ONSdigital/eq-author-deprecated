@@ -1,0 +1,7 @@
+.mainLayout {
+  background: white;
+}
+
+.wrapper {
+  composes: wrapper from 'styles/shared/layout.css';
+}

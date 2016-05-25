@@ -1,0 +1,19 @@
+html {
+  letter-spacing: 0.05em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-feature-settings: "smcp";
+  -webkit-font-feature-settings: "smcp";
+  font-feature-settings: "smcp";
+}
+
+body {
+  font-size: 18px;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  letter-spacing: inherit;
+}
