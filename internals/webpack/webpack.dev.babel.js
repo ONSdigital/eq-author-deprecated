@@ -18,7 +18,7 @@ module.exports = require('./webpack.base.babel')({
   entry: [
     'eventsource-polyfill', // Necessary for hot reloading with IE
     'webpack-hot-middleware/client',
-    path.join(process.cwd(), `${paths.assets}/app.js`), // Start with js/app.js
+    `${paths.assets}/app.js`, // Start with js/app.js
   ],
 
   // Don't use hashes in dev mode for better performance

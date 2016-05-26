@@ -23,7 +23,7 @@ p {
 }
 
 a {
-  /*color: composes links from './colors';*/
+  color: composes links from 'style/shared/colors';
 }
 
 *,

@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './styles.css'
-// import 'codemirror/addon/edit/matchbrackets'
-// import 'codemirror/addon/edit/closebrackets'
+import 'codemirror/addon/edit/matchbrackets'
+import 'codemirror/addon/edit/closebrackets'
 import 'codemirror/lib/codemirror.css'
 import Codemirror from 'react-codemirror'
 import 'codemirror/mode/javascript/javascript'
@@ -9,7 +9,7 @@ import 'codemirror/mode/javascript/javascript'
 
 const options = {
   lineNumbers: true,
-  mode: 'javascript'
+  mode: 'javascript',
 }
 
 const onChange = (value) => {

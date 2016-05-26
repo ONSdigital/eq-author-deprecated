@@ -46,6 +46,12 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 }
 
+if (process.env.NODE_ENV === 'development') {
+  if (window.devToolsExtension) {
+    window.devToolsExtension.open()
+  }
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <Router

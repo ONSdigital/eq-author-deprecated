@@ -3,11 +3,11 @@
  */
 
 const fs = require('fs')
-const componentExists = require('../utils/componentExists')
+const utils = require('../utils')
 
 function reducerExists(comp) {
   try {
-    fs.accessSync(`app/containers/${comp}/reducer.js`, fs.F_OK)
+    fs.accessSync(`${utils.paths.containers}/${comp}/reducer.js`, fs.F_OK)
     return true
   } catch (e) {
     return false
@@ -22,7 +22,7 @@ module.exports = {
     message: 'Which component should the route show?',
     validate: value => {
       if ((/.+/).test(value)) {
-        return componentExists(value) ? true : `"${value}" doesn't exist.`
+        return utils.componentExists(value) ? true : `"${value}" doesn't exist.`
       }
 
       return 'The path is required'
@@ -48,14 +48,14 @@ module.exports = {
     if (reducerExists(data.component)) {
       actions.push({
         type: 'modify',
-        path: '../../app/routes.js',
+        path: '${utils.paths.assets}/routes.js',
         pattern: /(\s{\n\s{6}path: '\*',)/g,
         templateFile: './route/routeWithReducer.hbs',
       })
     } else {
       actions.push({
         type: 'modify',
-        path: '../../app/routes.js',
+        path: '${utils.paths.assets}/routes.js',
         pattern: /(\s{\n\s{6}path: '\*',)/g,
         templateFile: './route/route.hbs',
       })

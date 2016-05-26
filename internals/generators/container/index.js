@@ -2,7 +2,7 @@
  * Container Generator
  */
 
-const componentExists = require('../utils/componentExists')
+const utils = require('../utils')
 
 module.exports = {
   description: 'Add a container component',
@@ -13,7 +13,7 @@ module.exports = {
     default: 'Form',
     validate: value => {
       if ((/.+/).test(value)) {
-        return componentExists(value) ? 'A component or container with this name already exists' : true
+        return utils.componentExists(value) ? 'A component or container with this name already exists' : true
       }
 
       return 'The name is required'
@@ -38,12 +38,12 @@ module.exports = {
     // Generate index.js and index.test.js
     const actions = [{
       type: 'add',
-      path: '../../app/containers/{{properCase name}}/index.js',
+      path: utils.paths.components + '/{{properCase name}}/index.js',
       templateFile: './container/index.js.hbs',
       abortOnFail: true,
     }, {
       type: 'add',
-      path: '../../app/containers/{{properCase name}}/tests/index.test.js',
+      path: utils.paths.components + '/{{properCase name}}/tests/index.test.js',
       templateFile: './container/test.js.hbs',
       abortOnFail: true,
     }]
@@ -52,7 +52,7 @@ module.exports = {
     if (data.wantCSS) {
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/styles.css',
+        path: utils.paths.components + '/{{properCase name}}/styles.css',
         templateFile: './container/styles.css.hbs',
         abortOnFail: true,
       })
@@ -64,13 +64,13 @@ module.exports = {
       // Actions
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/actions.js',
+        path: utils.paths.components + '/{{properCase name}}/actions.js',
         templateFile: './container/actions.js.hbs',
         abortOnFail: true,
       })
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/actions.test.js',
+        path: utils.paths.components + '/{{properCase name}}/tests/actions.test.js',
         templateFile: './container/actions.test.js.hbs',
         abortOnFail: true,
       })
@@ -78,7 +78,7 @@ module.exports = {
       // Constants
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/constants.js',
+        path: utils.paths.components + '/{{properCase name}}/constants.js',
         templateFile: './container/constants.js.hbs',
         abortOnFail: true,
       })
@@ -86,13 +86,13 @@ module.exports = {
       // Selectors
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/selectors.js',
+        path: utils.paths.components + '/{{properCase name}}/selectors.js',
         templateFile: './container/selectors.js.hbs',
         abortOnFail: true,
       })
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/selectors.test.js',
+        path: utils.paths.components + '/{{properCase name}}/tests/selectors.test.js',
         templateFile: './container/selectors.test.js.hbs',
         abortOnFail: true,
       })
@@ -100,13 +100,13 @@ module.exports = {
       // Reducer
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/reducer.js',
+        path: utils.paths.components + '/{{properCase name}}/reducer.js',
         templateFile: './container/reducer.js.hbs',
         abortOnFail: true,
       })
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/reducer.test.js',
+        path: utils.paths.components + '/{{properCase name}}/tests/reducer.test.js',
         templateFile: './container/reducer.test.js.hbs',
         abortOnFail: true,
       })
@@ -128,13 +128,13 @@ module.exports = {
     if (data.wantSagas) {
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/sagas.js',
+        path: utils.paths.components + '/{{properCase name}}/sagas.js',
         templateFile: './container/sagas.js.hbs',
         abortOnFail: true,
       })
       actions.push({
         type: 'add',
-        path: '../../app/containers/{{properCase name}}/tests/sagas.test.js',
+        path: utils.paths.components + '/{{properCase name}}/tests/sagas.test.js',
         templateFile: './container/sagas.test.js.hbs',
         abortOnFail: true,
       })

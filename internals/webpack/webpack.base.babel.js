@@ -9,7 +9,7 @@ const paths = require('../paths')
 module.exports = (options) => ({
   entry: options.entry,
   output: Object.assign({ // Compile into js/build.js
-    path: path.resolve(process.cwd(), paths.build),
+    path: paths.build,
     publicPath: '/',
   }, options.output), // Merge with env dependent settings
   module: {

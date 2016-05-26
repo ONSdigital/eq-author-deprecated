@@ -14,13 +14,6 @@
     "mocha": true,
     "es6": true
   },
-  "globals" : {
-    "__DEV__"      : false,
-    "__PROD__"     : false,
-    "__DEBUG__"    : false,
-    "__COVERAGE__" : false,
-    "__BASENAME__" : false
-  },
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -71,8 +64,8 @@
     # "jsx-a11y/role-supports-aria-props": 2,
     # "jsx-a11y/aria-props": 2,
     # "import/no-unresolved": 2,
-    "comma-dangle": [1, "always-multiline"],
-    "no-console": 1,
+    "comma-dangle": [1, "only-multiline"],
+    "no-console": 2,
     "max-len": 0,
     "prefer-template": 2,
     "no-use-before-define": 0,

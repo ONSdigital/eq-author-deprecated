@@ -2,7 +2,6 @@
  * TEST WEBPACK CONFIGURATION
  */
 
-const path = require('path')
 const paths = require('../paths')
 const webpack = require('webpack')
 const modules = [
@@ -27,7 +26,7 @@ module.exports = {
     preLoaders: [
       { test: /\.js$/,
         loader: 'isparta',
-        include: path.resolve(paths.assets),
+        include: paths.assets,
       },
     ],
     loaders: [

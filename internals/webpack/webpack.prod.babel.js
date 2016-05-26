@@ -14,7 +14,7 @@ const postcssReporter = require('postcss-reporter')
 module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff
   entry: [
-    path.join(process.cwd(), `${paths.app}/app.js`),
+    `${paths.app}/app.js`,
   ],
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
