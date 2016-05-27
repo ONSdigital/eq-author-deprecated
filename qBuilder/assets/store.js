@@ -39,7 +39,7 @@ export default function configureStore(initialState = {}, history) {
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       const nextRootReducer = require('./reducers').default // eslint-disable-line global-require
-      store.replaceReducer(nextRootReducer)
+      store.replaceReducer(nextRootReducer(store.asyncReducers))
     })
   }
 

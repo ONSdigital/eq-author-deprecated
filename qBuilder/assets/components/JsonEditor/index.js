@@ -12,19 +12,16 @@ const options = {
   mode: 'javascript',
 }
 
-const onChange = (value) => {
-  console.log(value)
-}
-
 export const JsonEditor = (props) => (
   <div className={styles.default}>
     <label>Schema</label>
-    <Codemirror value={'{}'} options={options} onChange={onChange} />
+    <Codemirror {...props} options={options} />
   </div>
 )
 
 JsonEditor.propTypes = {
-  value: React.PropTypes.string
+  onChange: React.PropTypes.function,
+  value: React.PropTypes.string,
 }
 
 export default JsonEditor

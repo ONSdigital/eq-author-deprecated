@@ -48,14 +48,14 @@ module.exports = {
     if (reducerExists(data.component)) {
       actions.push({
         type: 'modify',
-        path: '${utils.paths.assets}/routes.js',
+        path: `${utils.paths.assets}/routes.js`,
         pattern: /(\s{\n\s{6}path: '\*',)/g,
         templateFile: './route/routeWithReducer.hbs',
       })
     } else {
       actions.push({
         type: 'modify',
-        path: '${utils.paths.assets}/routes.js',
+        path: `${utils.paths.assets}/routes.js`,
         pattern: /(\s{\n\s{6}path: '\*',)/g,
         templateFile: './route/route.hbs',
       })
