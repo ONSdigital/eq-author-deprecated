@@ -39,11 +39,13 @@ function routeReducer(state = routeInitialState, action) {
  * Creates the main reducer with the asynchronously loaded ones
  */
 import editorReducer from 'containers/Editor/reducer'
+import schemasReducer from 'containers/Schemas/reducer'
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
     editor: editorReducer,
+    schemas: schemasReducer,
     ...asyncReducers,
   })
 }

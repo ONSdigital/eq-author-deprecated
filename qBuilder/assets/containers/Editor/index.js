@@ -12,13 +12,10 @@ import { createSelector } from 'reselect'
 
 import JsonEditor from 'components/JsonEditor'
 
-export class Editor extends React.Component { // eslint-disable-line react/prefer-stateless-function
+// eslint-disable-line react/prefer-stateless-function
+export class Editor extends React.Component {
   render() {
-    return (
-      <div>
-        <JsonEditor value={this.props.value} onChange={this.props.onChange} />
-      </div>
-    )
+    return (<JsonEditor {...this.props} />)
   }
 }
 

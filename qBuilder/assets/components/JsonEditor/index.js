@@ -20,7 +20,7 @@ export const JsonEditor = (props) => (
 )
 
 JsonEditor.propTypes = {
-  onChange: React.PropTypes.function,
+  onChange: React.PropTypes.func,
   value: React.PropTypes.string,
 }
 

@@ -14,7 +14,7 @@ const loadModule = (cb) => (componentModule) => {
 
 export default function createRoutes(store) {
   // Create reusable async injectors using getHooks factory
-  const { injectReducer, injectSagas } = getHooks(store)
+  const { injectReducer } = getHooks(store)
 
   return [
     {
@@ -33,7 +33,7 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading)
       },
-    },    {
+    }, {
       path: 'editor',
       name: 'editor',
       getComponent(nextState, cb) {
