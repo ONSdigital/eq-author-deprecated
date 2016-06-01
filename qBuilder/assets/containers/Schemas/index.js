@@ -30,15 +30,10 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return {dispatch}
-// }
-
 Schemas.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
 export default connect(
-  // mapDispatchToProps,
   mapStateToProps
 )(Schemas)
