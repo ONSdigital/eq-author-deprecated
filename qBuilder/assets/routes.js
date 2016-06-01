@@ -34,7 +34,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading)
       },
     }, {
-      path: 'editor',
+      path: 'editor/:schemaId',
       name: 'editor',
       getComponent(nextState, cb) {
         const importModules = Promise.all([

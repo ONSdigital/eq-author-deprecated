@@ -6,9 +6,7 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectValue } from './selectors'
 import { changeValue } from './actions'
-import { createSelector } from 'reselect'
 
 import JsonEditor from 'components/JsonEditor'
 
@@ -21,11 +19,17 @@ export class Editor extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChange: (value) => dispatch(changeValue(value))
+    onChange: value => dispatch(changeValue(value))
   }
 }
 
-export default connect(createSelector(
-  selectValue(),
-  value => ({value})
-), mapDispatchToProps)(Editor)
+function mapStateToProps(state) {
+  return {
+    value: state.get('editor').get('value')
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Editor)

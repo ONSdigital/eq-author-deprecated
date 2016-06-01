@@ -11,22 +11,19 @@ import { fetchSchemas } from './actions'
 import SchemaList from 'components/SchemaList'
 
 export class Schemas extends Component { // eslint-disable-line react/prefer-stateless-function
-
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(fetchSchemas())
   }
 
   render() {
-    return (
-      <SchemaList {...this.props} />
-    )
+    return (<SchemaList {...this.props} />)
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
-    schemas: state.get('schemas')
+    schemas: state.get('schemas').get('items')
   }
 }
 

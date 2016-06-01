@@ -4,28 +4,24 @@
  *
  */
 
+import { fromJS } from 'immutable'
+
 import { REQUEST_SCHEMAS, RECEIVE_SCHEMAS } from './constants'
 
-function schemasReducer(state = {
+const initialState = fromJS({
   isFetching: false,
-  didInvalidate: false,
-  items: [{
-    path: 'schema/0_star_wars.json',
-    name: '0_star_wars.json'
-  }]
-}, action) {
+  items: []
+})
+
+function schemasReducer(state = initialState, action) {
   switch (action.type) {
     case REQUEST_SCHEMAS:
-      return Object.assign({}, state, {
-        isFetching: true,
-        didInvalidate: false
-      })
+      return state
+        .set('isFetching', true)
     case RECEIVE_SCHEMAS:
-      return Object.assign({}, state, {
-        isFetching: false,
-        didInvalidate: false,
-        items: action.schemas
-      })
+      return state
+        .set('isFetching', false)
+        .set('items', action.schemas)
     default:
       return state
   }
