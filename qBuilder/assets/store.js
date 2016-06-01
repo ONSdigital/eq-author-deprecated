@@ -6,11 +6,11 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { fromJS } from 'immutable'
 import { routerMiddleware } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
-// import createLogger from 'redux-logger'
+import createLogger from 'redux-logger'
 // import createSagaMiddleware from 'redux-saga'
 import createReducer from './reducers'
 
-// const loggerMiddleware = createLogger()
+const loggerMiddleware = createLogger()
 // const sagaMiddleware = createSagaMiddleware()
 const devtools = window.devToolsExtension || (() => noop => noop)
 
@@ -21,6 +21,7 @@ export default function configureStore(initialState = {}, history) {
   const middlewares = [
     // sagaMiddleware,
     thunkMiddleware,
+    loggerMiddleware,
     routerMiddleware(history),
   ]
 

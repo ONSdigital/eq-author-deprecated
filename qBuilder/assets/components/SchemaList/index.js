@@ -23,7 +23,7 @@ const SchemaList = ({schemas}) => (
 )
 
 SchemaList.propTypes = {
-  schemas: React.PropTypes.object,
+  schemas: React.PropTypes.object.isRequired,
 }
 
 export default SchemaList
