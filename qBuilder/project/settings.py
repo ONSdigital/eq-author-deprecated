@@ -38,12 +38,14 @@ DJANGO_PROVIDED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webpack_loader'
+    'webpack_loader',
+    'rest_framework',
 ]
 
 # OUR apps
 EQ_AUTHOR_APPS = [
-    'apps.app'
+    'apps.app',
+    'apps.rest_api'
 ]
 
 # Application definition (Default + OURs)

@@ -15,7 +15,7 @@ This django web application has been designed to work in a 12 Factor apps patter
 5. Create an EQ_AUTHOR_DATABASE_URL environment variable (See below)
 6. run `npm install` to install front-end dependencies
 7. run `npm run deploy` to build front end resources for deployment *or* run `npm run compile` to run with local development
-8. If this is your first time deploying the application, brace yourself and run `eb init`.
+8. If this is your first time deploying the application, brace yourself and run `eb init`. (see steps below)
 9. If the elasticbeanstalk environment has already been created, you can now run `eb deploy` to deploy the built application, otherwise run `eb create` to create it first and it will be deployed automatically.
 
 ## How to run the application
@@ -73,3 +73,12 @@ The Webpack setup is based on the [React Starter Kit](https://github.com/davezuk
 ## Redux Dev Tools Extension
 
 There's a nifty [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) extension for Chrome which allows for navigating app state.
+
+
+## How to deploy to elastic beanstalk
+1. Run the author terraform scripts in eq-terraform
+2. Delete the .elasticbeanstalk folder (if you've previously attempted a deployment)
+3. Enter `eb init -i -r eu-west-1 -p "Python 3.4"`
+4. Select your author application from the output (eq-terraform creates it)
+5. Select no to setting up ssh
+6. Enter `eb deploy`
