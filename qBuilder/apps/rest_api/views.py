@@ -7,28 +7,19 @@ from rest_framework.generics import GenericAPIView
 from .serializers import SchemaSerializer
 from .models import SchemaMeta
 from jsonschema import validate, ValidationError
-import boto3
+from .schema_storage import SchemaStorageFactory
 import json
 import logging
 
 # qbuilder imports
 import config
 
-BUCKET_NAME = config.EQ_BUCKET_NAME
-print(BUCKET_NAME)
 logger = logging.getLogger(__name__)
-
-# Let's use Amazon S3
-s3 = boto3.resource('s3')
-
-logger.debug("Attempting to create bucket name %s", BUCKET_NAME)
-
-# check if bucket exists otherwise create it
-if not s3.Bucket(BUCKET_NAME) in s3.buckets.all():
-    s3.create_bucket(Bucket=BUCKET_NAME,  CreateBucketConfiguration={'LocationConstraint': 'eu-west-1'})
 
 json_schema_file = open(config.EQ_JSON_SCHEMA_FILE).read()
 json_schema = json.loads(json_schema_file)
+
+schema_storage = SchemaStorageFactory.get_instance()
 
 
 class Schema(GenericAPIView, ListModelMixin):
@@ -59,9 +50,8 @@ class Schema(GenericAPIView, ListModelMixin):
         # construct the file name for s3
         key = str(eq_id) + '.json'
         logger.debug("Filename for new schema is %s", key)
-
         # push it to s3
-        s3.Bucket(BUCKET_NAME).put_object(Key=key, Body=json_data)
+        schema_storage.store(key, json_data)
         logger.debug("File now in s3")
 
         logger.debug("Saving metadata to the database")
@@ -89,9 +79,8 @@ class SchemaDetail(APIView):
         '''
         key = eq_id + '.json'
         logger.debug("Looking for object with key %s", key)
-        schema = s3.Object(BUCKET_NAME, key)
-        json_data = schema.get()["Body"].read().decode("utf-8")
-        return Response(json_data, status=status.HTTP_200_OK)
+        json_data = schema_storage.get(key)
+        return Response(json.loads(json_data), status=status.HTTP_200_OK)
 
     def put(self, request, eq_id):
         '''
@@ -122,7 +111,7 @@ class SchemaDetail(APIView):
         key = eq_id + '.json'
         # push it to s3
         json_data = json.dumps(request.data)
-        s3.Bucket(BUCKET_NAME).put_object(Key=key, Body=json_data)
+        schema_storage.store(key, json_data)
         logger.debug("File now in s3")
 
         return Response(eq_id, status=status.HTTP_200_OK)
