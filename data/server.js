@@ -4,15 +4,14 @@ const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
 const jsonfile = require('jsonfile')
 const dirTree = require('directory-tree')
+const path = require('path')
 
-// Set default middlewares (logger, static, cors and no-cache)
+const schemasPath = path.resolve(process.cwd(), 'data/schemas')
+
 server.use(middlewares)
 
-const schemas = dirTree('schemas', ['.json']).children.map((schema) => {
-  const schemaJson = jsonfile.readFileSync(`schemas/${schema.name}`)
-
-  console.log(schema)
-
+const schemas = dirTree(schemasPath, ['.json']).children.map((schema) => {
+  const schemaJson = jsonfile.readFileSync(`${schemasPath}/${schema.name}`)
   return {
     title: schemaJson.title,
     description: schemaJson.description,
@@ -27,7 +26,7 @@ server.get('/schemas', (req, res) => {
 })
 
 server.get('/schemas/:id', (req, res) => {
-  jsonfile.readFile(`schemas/${req.params.id}.json`, (err, response) => {
+  jsonfile.readFile(`${schemasPath}/${req.params.id}.json`, (err, response) => {
     if (err) {
       return res.jsonp(err)
     }
