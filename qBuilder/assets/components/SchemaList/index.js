@@ -12,6 +12,7 @@ import { Link } from 'react-router'
 
 const SchemaList = ({schemas}) => (
   <div className={styles.schemaList}>
+    <h2 className={styles.title}>Select a schema</h2>
     <ul className={styles.list}>
       {schemas.map(schema => (
         <li className={styles.item} key={schema.id}>
@@ -26,7 +27,7 @@ const SchemaList = ({schemas}) => (
 )
 
 SchemaList.propTypes = {
-  schemas: React.PropTypes.object.isRequired,
+  schemas: React.PropTypes.array.isRequired,
 }
 
 export default SchemaList

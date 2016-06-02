@@ -22,24 +22,26 @@ export default function createRoutes(store) {
       name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          System.import('components/HomePage'),
+          // System.import('components/HomePage'),
+          System.import('containers/Schemas/reducer'),
+          System.import('containers/Schemas'),
         ])
 
         const renderRoute = loadModule(cb)
 
-        importModules.then(([component]) => {
+        importModules.then(([reducer, component]) => {
+          injectReducer('schemas', reducer.default)
           renderRoute(component)
         })
 
         importModules.catch(errorLoading)
       },
     }, {
-      path: 'editor/:schemaId',
+      path: 'editor/:schemaID',
       name: 'editor',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           System.import('containers/Editor/reducer'),
-          // System.import('containers/Editor/sagas'),
           System.import('containers/Editor'),
         ])
 
@@ -47,7 +49,6 @@ export default function createRoutes(store) {
 
         importModules.then(([reducer, component]) => {
           injectReducer('editor', reducer.default)
-          // injectSagas(sagas.default)
           renderRoute(component)
         })
 
