@@ -2,8 +2,7 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.test import Client
 
-from .schema_storage import SchemaStorage
-from .schema_storage import SchemaStorageFactory
+import config
 
 import json
 
@@ -66,21 +65,12 @@ test_schema = {
 }
 
 
-# we can't use s3 during testing so create an in memory version
-class InMemorySchemaStorage(SchemaStorage):
-    def __init__(self):
-        self.data = {}
 
-    def store(self, key, contents):
-        self.data[key] = contents
-
-    def get(self, key):
-        return self.data[key]
 
 
 class SchemaAPI(TestCase):
     def setUp(self):
-        SchemaStorageFactory.schema_storage = InMemorySchemaStorage()
+        config.EQ_SCHEMA_STORAGE = "memory"
         self.client = Client()
 
     def test_get_empty(self):
@@ -89,7 +79,7 @@ class SchemaAPI(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertEquals([], response.data)
 
-    def test_schema_apu(self):
+    def test_schema_api(self):
         response = self.client.post(reverse("schema"), json.dumps(test_schema), content_type="application/json")
         self.assertEquals(201, response.status_code)
         self.assertEquals(1, response.data)

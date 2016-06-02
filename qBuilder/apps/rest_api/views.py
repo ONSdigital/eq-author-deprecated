@@ -19,8 +19,6 @@ logger = logging.getLogger(__name__)
 json_schema_file = open(config.EQ_JSON_SCHEMA_FILE).read()
 json_schema = json.loads(json_schema_file)
 
-schema_storage = SchemaStorageFactory.get_instance()
-
 
 class Schema(GenericAPIView, ListModelMixin):
     queryset = SchemaMeta.objects.all()
@@ -51,6 +49,7 @@ class Schema(GenericAPIView, ListModelMixin):
         key = str(eq_id) + '.json'
         logger.debug("Filename for new schema is %s", key)
         # push it to s3
+        schema_storage = SchemaStorageFactory.get_instance()
         schema_storage.store(key, json_data)
         logger.debug("File now in s3")
 
@@ -79,6 +78,7 @@ class SchemaDetail(APIView):
         '''
         key = eq_id + '.json'
         logger.debug("Looking for object with key %s", key)
+        schema_storage = SchemaStorageFactory.get_instance()
         json_data = schema_storage.get(key)
         return Response(json.loads(json_data), status=status.HTTP_200_OK)
 
@@ -111,6 +111,7 @@ class SchemaDetail(APIView):
         key = eq_id + '.json'
         # push it to s3
         json_data = json.dumps(request.data)
+        schema_storage = SchemaStorageFactory.get_instance()
         schema_storage.store(key, json_data)
         logger.debug("File now in s3")
 

@@ -14,6 +14,17 @@ class SchemaStorage(object):
     def get(self, key):
         pass
 
+# we can't use s3 during testing so create an in memory version
+class InMemorySchemaStorage(SchemaStorage):
+    def __init__(self):
+        self.data = {}
+
+    def store(self, key, contents):
+        self.data[key] = contents
+
+    def get(self, key):
+        return self.data[key]
+
 
 class S3SchemaStorage(SchemaStorage):
 
@@ -38,8 +49,13 @@ class S3SchemaStorage(SchemaStorage):
 
 
 class SchemaStorageFactory(object):
-    schema_storage = S3SchemaStorage()
+    schema_storage = None
 
-    @staticmethod
-    def get_instance():
-        return SchemaStorageFactory.schema_storage
+    @classmethod
+    def get_instance(cls):
+        if cls.schema_storage is None:
+            if config.EQ_SCHEMA_STORAGE == "s3":
+                cls.schema_storage = S3SchemaStorage()
+            else:
+                cls.schema_storage = InMemorySchemaStorage()
+        return cls.schema_storage
