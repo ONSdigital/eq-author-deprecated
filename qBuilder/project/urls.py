@@ -6,4 +6,5 @@ urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
     url(r'', include('apps.app.urls')),
+    url(r'', include('apps.rest_api.urls')),
 ]

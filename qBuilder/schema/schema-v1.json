@@ -1,0 +1,185 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "mime_type": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "questionnaire_id": {
+      "type": "string"
+    },
+    "survey_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "introduction": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "sections": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "questions": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "responses": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "q_code": {
+                                    "type": "string"
+                                  },
+                                  "label": {
+                                    "type": "string"
+                                  },
+                                  "guidance": {
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "type": "string"
+                                  },
+                                  "options": {
+                                    "type": "array",
+                                    "items": {}
+                                  },
+                                  "mandatory": {
+                                    "type": "boolean"
+                                  },
+                                  "display": {
+                                    "type": "object",
+                                    "properties": {
+                                      "properties": {
+                                        "type": "object",
+                                        "properties": {
+                                          "max_length": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "q_code",
+                                  "label",
+                                  "guidance",
+                                  "type",
+                                  "options",
+                                  "mandatory"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "description",
+                            "type",
+                            "responses"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "title",
+                      "description",
+                      "questions"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "title",
+                "sections"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "blocks"
+        ]
+      }
+    }
+  },
+  "required": [
+    "mime_type",
+    "schema_version",
+    "questionnaire_id",
+    "survey_id",
+    "title",
+    "description",
+    "introduction",
+    "groups"
+  ]
+}

@@ -38,12 +38,14 @@ DJANGO_PROVIDED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webpack_loader'
+    'webpack_loader',
+    'rest_framework',
 ]
 
 # OUR apps
 EQ_AUTHOR_APPS = [
-    'apps.app'
+    'apps.app',
+    'apps.rest_api'
 ]
 
 # Application definition (Default + OURs)
@@ -95,7 +97,7 @@ if 'TRAVIS' in os.environ:
         }
     }
 else:
-    DATABASES = {'default': dj_database_url.parse(os.environ['EQ_AUTHOR_DATABASE_URL'])}
+    DATABASES = {'default': dj_database_url.parse(os.getenv('EQ_AUTHOR_DATABASE_URL', 'sqlite:////tmp/author.db'))}
 
 
 # Password validation
