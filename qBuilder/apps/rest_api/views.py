@@ -7,7 +7,7 @@ from rest_framework.generics import GenericAPIView
 from .serializers import SchemaSerializer
 from .models import SchemaMeta
 from jsonschema import validate, ValidationError
-from .schema_storage import SchemaStorageFactory
+from .schema_storage import SchemaStorageFactory, SchemaStorageError
 import json
 import logging
 
@@ -50,8 +50,12 @@ class Schema(GenericAPIView, ListModelMixin):
         logger.debug("Filename for new schema is %s", key)
         # push it to s3
         schema_storage = SchemaStorageFactory.get_instance()
-        schema_storage.store(key, json_data)
-        logger.debug("File now in s3")
+
+        try:
+            schema_storage.store(key, json_data)
+            logger.debug("File now in s3")
+        except SchemaStorageError:
+            return Response({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         logger.debug("Saving metadata to the database")
         # save the meta data in the database
@@ -78,9 +82,12 @@ class SchemaDetail(APIView):
         '''
         key = eq_id + '.json'
         logger.debug("Looking for object with key %s", key)
-        schema_storage = SchemaStorageFactory.get_instance()
-        json_data = schema_storage.get(key)
-        return Response(json.loads(json_data), status=status.HTTP_200_OK)
+        try:
+            schema_storage = SchemaStorageFactory.get_instance()
+            json_data = schema_storage.get(key)
+            return Response(json.loads(json_data), status=status.HTTP_200_OK)
+        except SchemaStorageError:
+            return Response({}, status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, eq_id):
         '''
@@ -112,7 +119,10 @@ class SchemaDetail(APIView):
         # push it to s3
         json_data = json.dumps(request.data)
         schema_storage = SchemaStorageFactory.get_instance()
-        schema_storage.store(key, json_data)
-        logger.debug("File now in s3")
+        try:
+            schema_storage.store(key, json_data)
+            logger.debug("File now in s3")
 
-        return Response(eq_id, status=status.HTTP_200_OK)
+            return Response(eq_id, status=status.HTTP_200_OK)
+        except SchemaStorageError:
+            return Response({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
