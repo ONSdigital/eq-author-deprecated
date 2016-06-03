@@ -14,6 +14,8 @@ class SchemaStorage(object):
     def get(self, key):
         pass
 
+
+
 # we can't use s3 during testing so create an in memory version
 class InMemorySchemaStorage(SchemaStorage):
     def __init__(self):

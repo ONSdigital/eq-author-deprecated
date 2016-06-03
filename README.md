@@ -46,7 +46,7 @@ To configure the app to use settings similar to those used on the build server, 
 Create the environment variable by adding the following command to your startup script
 
 `export EQ_AUTHOR_DATABASE_URL=postgres://eq-author:@localhost:5432/qBuilder`
-
+aithr
 ---
 
 ## Front-end assets
