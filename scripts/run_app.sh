@@ -5,6 +5,11 @@ function open_url {
   open -a "/Applications/Google Chrome.app" $1
 }
 
+
+if [ -z "$EQ_JSON_SCHEMA_FILE" ]; then
+  export EQ_JSON_SCHEMA_FILE=./qBuilder/schema/schema-v1.json
+fi
+
 if [ -n "$VIRTUAL_ENV" ]; then
   echo "Already in virtual environment $VIRTUAL_ENV"
 else
