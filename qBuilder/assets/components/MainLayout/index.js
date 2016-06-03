@@ -4,11 +4,12 @@
 *
 */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import styles from './styles.css'
 
 import Header from 'components/Header'
+import Footer from 'components/Footer'
 
 function MainLayout({children}) {
   return (
@@ -19,6 +20,10 @@ function MainLayout({children}) {
       </div>
     </div>
   )
+}
+
+MainLayout.propTypes = {
+  children: PropTypes.node.isRequired
 }
 
 export default MainLayout

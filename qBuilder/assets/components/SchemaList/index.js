@@ -17,7 +17,7 @@ const SchemaList = ({schemas}) => (
       {schemas.map(schema => (
         <li className={styles.item} key={schema.id}>
           <Link className={styles.link} to={`/editor/${schema.id}`}>
-            <div><strong>{schema.title}</strong></div>
+            <h3><strong>{schema.title}</strong></h3>
             <small>{schema.path.replace('schemas/', '')}</small>
           </Link>
         </li>)

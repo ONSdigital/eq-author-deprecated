@@ -1,7 +1,19 @@
 .mainLayout {
   background: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .wrapper {
   composes: wrapper from 'styles/shared/layout.css';
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  background-color: #efefef;
 }

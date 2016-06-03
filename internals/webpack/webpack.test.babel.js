@@ -79,6 +79,7 @@ module.exports = {
     'react/lib/ExecutionEnvironment': true,
     'react/lib/ReactContext': 'window',
   },
+
   resolve: {
     modulesDirectories: modules,
     modules,

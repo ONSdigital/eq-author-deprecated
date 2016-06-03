@@ -21,7 +21,9 @@ export class Editor extends Component {
 
   render() {
     const { actions, value } = this.props
-    return (<JsonEditor value={value} onChange={actions.changeValue} />)
+    return (
+      <JsonEditor value={value} onChange={actions.changeValue} />
+    )
   }
 }
 

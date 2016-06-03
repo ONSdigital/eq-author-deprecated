@@ -4,12 +4,11 @@ import styles from './styles.css'
 import Button from 'components/Button'
 
 export const Header = ({children, title}) => (
-  <header className={styles.default}>
+  <header className={styles.header}>
     <div className={styles.wrapper}>
       <h1 className={styles.title}>{title}</h1>
       <div className={styles.buttons}>
-        <Button type='primary'>Load</Button>
-        <Button type='secondary'>New</Button>
+        <Button type='primary'>Menu</Button>
       </div>
     </div>
   </header>

@@ -1,7 +1,7 @@
 import React from 'react'
 import MainLayout from 'components/MainLayout'
 
-import 'styles/core.css'
+import './styles.css'
 
 /* eslint-disable react/prefer-stateless-function */
 export default class App extends React.Component {

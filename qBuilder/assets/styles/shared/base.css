@@ -1,41 +1,5 @@
-body,
-html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-html {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
+html,
 body {
-  position: relative;
+  height: 100%;
   width: 100%;
-  height: 100%;
-}
-
-p {
-  margin: 0 0 1rem;
-}
-
-pre {
-  font-family: cursive;
-}
-
-a {
-  color: composes links from 'style/shared/colors';
-}
-
-*,
-*::after,
-*::before {
-  box-sizing: inherit;
-}
-
-.root {
-  height: 100%;
 }

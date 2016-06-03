@@ -1,0 +1,10 @@
+.footer {
+  background: #efefef;
+  font-size: 0.8rem;
+}
+
+.wrapper {
+  composes: wrapper from 'styles/shared/layout.css';
+  flex: 1 1 auto;
+  padding: 0.5rem 0;
+}

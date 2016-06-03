@@ -1,5 +1,4 @@
 // Important modules this config uses
-const path = require('path')
 const paths = require('../paths')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -7,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
 
 // PostCSS plugins
+const precss = require('precss')
 const cssnext = require('postcss-cssnext')
 const postcssFocus = require('postcss-focus')
 const postcssReporter = require('postcss-reporter')
@@ -32,6 +32,7 @@ module.exports = require('./webpack.base.babel')({
 
   // In production, we minify our CSS with cssnano
   postcssPlugins: [
+    precss(),
     postcssFocus(),
     cssnext({
       browsers: ['last 2 versions', 'IE > 10'],
