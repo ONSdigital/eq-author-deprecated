@@ -2,19 +2,23 @@
   background-color: #efefef;
   padding: 0.5rem 0;
   flex: 0 0 auto;
+  text-align: center;
 }
 
 .wrapper {
-  composes: wrapper from 'styles/shared/layout.css';
+  /*composes: wrapper from 'styles/shared/layout.css';*/
+  padding: 0 1rem;
   display: flex;
   align-items: center;
+  text-align: center;
 }
 
 .title {
   font-size: 1rem;
+  text-align: center;
 }
 
-.buttons {
+.btn {
   display: flex;
   justify-content: flex-end;
   margin-left: auto;

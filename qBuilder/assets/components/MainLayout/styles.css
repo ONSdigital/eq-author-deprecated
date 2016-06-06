@@ -6,9 +6,6 @@
 }
 
 .wrapper {
-  composes: wrapper from 'styles/shared/layout.css';
-  padding-top: 2rem;
-  padding-bottom: 2rem;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;

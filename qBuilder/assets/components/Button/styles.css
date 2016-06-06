@@ -3,7 +3,8 @@
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   font-size: 0.9rem;
   font-weight: 600;
   text-rendering: optimizeLegibility;
@@ -20,10 +21,14 @@
 
 .primary {
   composes: button;
-  composes: primaryColor from 'styles/shared/colors.css';
+  composes: primary from 'styles/shared/colors.css';
 }
 
 .secondary {
   composes: button;
-  composes: secondaryColor from 'styles/shared/colors.css';
+  composes: secondary from 'styles/shared/colors.css';
+}
+
+.icon {
+  margin-right: 0.3rem;
 }

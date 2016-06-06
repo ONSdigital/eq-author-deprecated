@@ -7,8 +7,8 @@ export const Header = ({children, title}) => (
   <header className={styles.header}>
     <div className={styles.wrapper}>
       <h1 className={styles.title}>{title}</h1>
-      <div className={styles.buttons}>
-        <Button type='primary'>Menu</Button>
+      <div className={styles.btn}>
+        <Button type='primary' icon='menu'>Menu</Button>
       </div>
     </div>
   </header>

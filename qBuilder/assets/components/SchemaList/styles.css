@@ -1,6 +1,10 @@
 .schemaList {
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+  max-width: 80rem;
+  min-width: 50rem;
+  margin: 0 auto;
 }
 
 .list {
@@ -11,6 +15,11 @@
 .item {
   border: 1px solid #efefef;
   border-bottom: none;
+  position: relative;
+  padding-left: 2rem;
+  &:hover {
+    background: #efefef;
+  }
 }
 
 .link {
@@ -18,9 +27,12 @@
   display: block;
   padding: 1rem;
   color: #383838;
-  &:hover {
-    background: #efefef;
-  }
+}
+
+.num {
+  font-size: 1.6rem;
+  position: absolute;
+  left: 1rem;
 }
 
 .title {

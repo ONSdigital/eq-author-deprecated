@@ -4,7 +4,7 @@
 }
 
 .editor {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
@@ -13,4 +13,10 @@
     flex: 1 1 auto;
     overflow: scroll;
   }
+}
+
+.btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
 }

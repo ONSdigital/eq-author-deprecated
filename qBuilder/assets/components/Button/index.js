@@ -1,21 +1,30 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import styles from './styles.css'
 
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 
-export const Button = ({children, type}) => (
-  <Link className={styles[type]} to='/'>{children}</Link>
+const getIcon = (icon) => {
+  if (icon) {
+    return (<img className={styles.icon} src={require(`./icon-${icon}.svg`)} width='12' height='12' />)
+  }
+}
+
+export const Button = ({children, type, to, icon}) => (
+  <Link className={styles[type]} to={to}>{getIcon(icon)}{children}</Link>
 )
 
 Button.propTypes = {
-  children: React.PropTypes.string,
-  disabled: React.PropTypes.bool,
-  type: React.PropTypes.string,
+  children: PropTypes.string,
+  disabled: PropTypes.bool,
+  icon: PropTypes.string,
+  to: PropTypes.string,
+  type: PropTypes.string,
 }
 
 Button.defaultProps = {
   children: 'Submit',
   disabled: false,
+  to: '/',
   type: 'primary',
 }
 

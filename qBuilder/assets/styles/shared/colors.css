@@ -1,15 +1,11 @@
-.primaryColor {
+.primary {
   background-color: #033e58;
 }
 
-.secondaryColor {
+.secondary {
   background-color: green;
 }
 
 .text {
   color: #333;
-}
-
-.links {
-  /*composes: primaryColor;*/
 }
