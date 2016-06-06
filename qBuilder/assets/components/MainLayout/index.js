@@ -9,21 +9,23 @@ import React, { PropTypes } from 'react'
 import styles from './styles.css'
 
 import Header from 'components/Header'
-import Footer from 'components/Footer'
 
-function MainLayout({children}) {
+function MainLayout({mainChildren, headerChildren}) {
   return (
     <div className={styles.mainLayout}>
-      <Header title='eQ Schema Editor' />
-      <div className={styles.wrapper}>
-        {children}
-      </div>
+      <Header title='eQ Schema Editor'>
+        {headerChildren}
+      </Header>
+      <main className={styles.wrapper}>
+        {mainChildren}
+      </main>
     </div>
   )
 }
 
 MainLayout.propTypes = {
-  children: PropTypes.node.isRequired
+  headerChildren: PropTypes.node,
+  mainChildren: PropTypes.node.isRequired,
 }
 
 export default MainLayout

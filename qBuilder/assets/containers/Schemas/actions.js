@@ -5,6 +5,7 @@
  */
 
 import { REQUEST_SCHEMAS, RECEIVE_SCHEMAS } from './constants'
+import { API_URL } from '../../constants'
 
 export function requestSchemas() {
   return {
@@ -22,7 +23,7 @@ export function receiveSchemas(schemas) {
 export function fetchSchemas() {
   return function(dispatch) {
     dispatch(requestSchemas())
-    return fetch('http://localhost:5000/schemas/')
+    return fetch(`${API_URL}/schema`)
       .then(response => response.json())
       .then(json => dispatch(receiveSchemas(json)))
   }

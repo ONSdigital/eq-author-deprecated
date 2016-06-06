@@ -1,5 +1,4 @@
 import React from 'react'
-import MainLayout from 'components/MainLayout'
 
 import './styles.css'
 
@@ -13,9 +12,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <MainLayout>
-          {this.props.children}
-        </MainLayout>
+        {this.props.children}
       </div>
     )
   }

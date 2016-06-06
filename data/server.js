@@ -6,12 +6,12 @@ const jsonfile = require('jsonfile')
 const dirTree = require('directory-tree')
 const path = require('path')
 
-const schemasPath = path.resolve(process.cwd(), 'data/schemas')
+const schemaPath = path.resolve(process.cwd(), 'data/schema')
 
 server.use(middlewares)
 
-const schemas = dirTree(schemasPath, ['.json']).children.map((schema) => {
-  const schemaJson = jsonfile.readFileSync(`${schemasPath}/${schema.name}`)
+const schema = dirTree(schemaPath, ['.json']).children.map((schema) => {
+  const schemaJson = jsonfile.readFileSync(`${schemaPath}/${schema.name}`)
   return {
     title: schemaJson.title,
     description: schemaJson.description,
@@ -21,12 +21,12 @@ const schemas = dirTree(schemasPath, ['.json']).children.map((schema) => {
 })
 
 // Add custom routes before JSON Server router
-server.get('/schemas', (req, res) => {
-  res.jsonp(schemas)
+server.get('/schema', (req, res) => {
+  res.jsonp(schema)
 })
 
-server.get('/schemas/:id', (req, res) => {
-  jsonfile.readFile(`${schemasPath}/${req.params.id}.json`, (err, response) => {
+server.get('/schema/:id', (req, res) => {
+  jsonfile.readFile(`${schemaPath}/${req.params.id}.json`, (err, response) => {
     if (err) {
       return res.jsonp(err)
     }

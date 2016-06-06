@@ -7,8 +7,6 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/theme/material.css'
 
-import Button from 'components/Button'
-
 const options = {
   lineNumbers: true,
   mode: 'javascript',
@@ -18,16 +16,13 @@ const options = {
 export class JsonEditor extends Component {
 
   componentDidMount() {
-    this.refs.editor.codeMirror.setSize('100%', '90vh')
+    this.refs.editor.codeMirror.setSize('100%', '100vh')
   }
 
   render() {
     return (
       <div className={styles.jsonEditor}>
         <Codemirror ref='editor' className={styles.editor} {...this.props} options={options} />
-        <div className='btn'>
-          <Button type='secondary'>Save</Button>
-        </div>
       </div>
     )
   }
@@ -35,8 +30,8 @@ export class JsonEditor extends Component {
 
 JsonEditor.propTypes = {
   onChange: PropTypes.func,
-  value: PropTypes.string,
   title: PropTypes.string,
+  value: PropTypes.string,
 }
 
 export default JsonEditor

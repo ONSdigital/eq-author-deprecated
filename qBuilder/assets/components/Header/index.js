@@ -1,15 +1,11 @@
 import React from 'react'
 import styles from './styles.css'
 
-import Button from 'components/Button'
-
 export const Header = ({children, title}) => (
   <header className={styles.header}>
     <div className={styles.wrapper}>
       <h1 className={styles.title}>{title}</h1>
-      <div className={styles.btn}>
-        <Button type='primary' icon='menu'>Menu</Button>
-      </div>
+      {children}
     </div>
   </header>
 )

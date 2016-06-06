@@ -10,6 +10,8 @@ import { connect } from 'react-redux'
 import * as EditorActions from './actions'
 
 import JsonEditor from 'components/JsonEditor'
+import MainLayout from 'components/MainLayout'
+import Button from 'components/Button'
 
 // eslint-disable-line react/prefer-stateless-function
 export class Editor extends Component {
@@ -21,8 +23,20 @@ export class Editor extends Component {
 
   render() {
     const { actions, value } = this.props
-    return (
+
+    const getJsonEditor = () => (
       <JsonEditor value={value} onChange={actions.changeValue} />
+    )
+
+    const getButtons = () => (
+      <div>
+        <Button type='secondary'>Save</Button>
+        <Button type='primary' icon='menu' to='/'>List schemas</Button>
+      </div>
+    )
+
+    return (
+      <MainLayout mainChildren={getJsonEditor()} headerChildren={getButtons()} />
     )
   }
 }
