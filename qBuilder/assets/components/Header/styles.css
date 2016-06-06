@@ -18,8 +18,13 @@
   text-align: center;
 }
 
-.btn {
+.btns {
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
+  > * {
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+  }
 }

@@ -9,9 +9,13 @@ const getIcon = (icon) => {
   }
 }
 
-export const Button = ({children, type, to, icon}) => (
-  <Link className={styles[type]} to={to}>{getIcon(icon)}{children}</Link>
-)
+export const Button = ({children, type, to, icon, onClick}) => {
+  if (to) {
+    return (<Link className={styles[type]} to={to}>{getIcon(icon)}{children}</Link>)
+  } else {
+    return <button className={styles[type]} onClick={onClick}>{getIcon(icon)}{children}</button>
+  }
+}
 
 Button.propTypes = {
   children: PropTypes.string,
@@ -24,7 +28,6 @@ Button.propTypes = {
 Button.defaultProps = {
   children: 'Submit',
   disabled: false,
-  to: '/',
   type: 'primary',
 }
 

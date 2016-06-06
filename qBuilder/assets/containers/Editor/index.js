@@ -29,10 +29,10 @@ export class Editor extends Component {
     )
 
     const getButtons = () => (
-      <div>
-        <Button type='secondary'>Save</Button>
-        <Button type='primary' icon='menu' to='/'>List schemas</Button>
-      </div>
+      [
+        <Button key='btn-1' type='secondary' onClick={actions.saveSchema}>Save</Button>,
+        <Button key='btn-2' type='primary' icon='menu' to='/'>List schemas</Button>
+      ]
     )
 
     return (

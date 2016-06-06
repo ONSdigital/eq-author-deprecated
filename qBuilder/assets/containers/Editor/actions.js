@@ -38,6 +38,9 @@ export function fetchSchema(schemaID) {
 }
 
 export function saveSchema(schemaID) {
+
+  console.log('save schema');
+
   return function(dispatch) {
     dispatch(requestSchema())
     return fetch(`${API_URL}/schema/${schemaID}`, {

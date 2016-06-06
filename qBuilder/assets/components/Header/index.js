@@ -5,7 +5,9 @@ export const Header = ({children, title}) => (
   <header className={styles.header}>
     <div className={styles.wrapper}>
       <h1 className={styles.title}>{title}</h1>
-      {children}
+      <div className={styles.btns}>
+        {children}
+      </div>
     </div>
   </header>
 )

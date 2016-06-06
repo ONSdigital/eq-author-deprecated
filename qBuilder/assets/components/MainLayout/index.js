@@ -5,9 +5,7 @@
 */
 
 import React, { PropTypes } from 'react'
-
 import styles from './styles.css'
-
 import Header from 'components/Header'
 
 function MainLayout({mainChildren, headerChildren}) {
