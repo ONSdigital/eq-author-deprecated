@@ -37,8 +37,9 @@ export function requestSaveSchema(schemaID) {
 export function fetchSchema(schemaID) {
   return function(dispatch) {
     dispatch(requestSchema())
-    return fetch(`${API_URL}/schema/${schemaID}`, { method: 'GET' })
-      .then(response => response.text())
+    return fetch(`${API_URL}/schema/${schemaID}`, {
+      method: 'GET'
+    }).then(response => response.text())
       .then(json => dispatch(receiveSchema(json)))
   }
 }
@@ -51,8 +52,21 @@ export function saveSchema(schemaID) {
       headers: DEFAULT_HEADERS,
       body: getState().get('editor').get('value')
     }).then(response => {
-      console.log(response)
+      if (response.ok) {
+        let tID = window.setTimeout(() => {
+          dispatch(saveSchemaSuccess())
+          window.clearTimeout(tID)
+        }, 1000)
+      } else {
+        window.alert('Something went wrong!')
+      }
     })
     .catch(err => console.error)
+  }
+}
+
+export function saveSchemaSuccess() {
+  return {
+    type: SAVE_SCHEMA_SUCCESS
   }
 }

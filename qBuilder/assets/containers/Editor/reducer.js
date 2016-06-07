@@ -5,7 +5,13 @@
  */
 
 import { Map } from 'immutable'
-import { CHANGE_VALUE, REQUEST_SCHEMA, RECEIVE_SCHEMA, REQUEST_SAVE_SCHEMA } from './constants'
+import {
+  CHANGE_VALUE,
+  REQUEST_SCHEMA,
+  RECEIVE_SCHEMA,
+  REQUEST_SAVE_SCHEMA,
+  SAVE_SCHEMA_SUCCESS
+} from './constants'
 
 const initialState = Map({
   isFetching: false,
@@ -29,6 +35,9 @@ function editorReducer(state = initialState, action) {
     case REQUEST_SAVE_SCHEMA:
       return state
         .set('isSaving', true)
+    case SAVE_SCHEMA_SUCCESS:
+      return state
+        .set('isSaving', false)
     default:
       return state
   }
