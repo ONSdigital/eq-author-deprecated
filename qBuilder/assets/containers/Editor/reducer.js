@@ -4,18 +4,20 @@
  *
  */
 
-import { fromJS } from 'immutable'
-import { CHANGE_VALUE, REQUEST_SCHEMA, RECEIVE_SCHEMA } from './constants'
+import { Map } from 'immutable'
+import { CHANGE_VALUE, REQUEST_SCHEMA, RECEIVE_SCHEMA, REQUEST_SAVE_SCHEMA } from './constants'
 
-const initialState = fromJS({
+const initialState = Map({
   isFetching: false,
-  value: ''
+  isSaving: false,
+  value: '',
 })
 
 function editorReducer(state = initialState, action) {
   switch (action.type) {
     case CHANGE_VALUE:
-      return state.set(action.value)
+      return state
+        .set('value', action.value)
     case REQUEST_SCHEMA:
       return state
         .set('isFetching', true)
@@ -24,6 +26,9 @@ function editorReducer(state = initialState, action) {
       return state
         .set('isFetching', false)
         .set('value', action.value)
+    case REQUEST_SAVE_SCHEMA:
+      return state
+        .set('isSaving', true)
     default:
       return state
   }

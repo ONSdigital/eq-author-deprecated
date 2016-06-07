@@ -27,7 +27,6 @@ const SchemaList = ({schemas}) => (
       )}
     </ul>
     <br />
-    <Button type='secondary' icon='plus' to='/add'>Add New Schema</Button>
   </div>
 )
 

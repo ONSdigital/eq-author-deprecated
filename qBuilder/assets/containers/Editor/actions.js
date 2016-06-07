@@ -4,8 +4,8 @@
  *
  */
 
-import { CHANGE_VALUE, REQUEST_SCHEMA, RECEIVE_SCHEMA, SAVE_SCHEMA } from './constants'
-import { API_URL } from '../../constants'
+import { CHANGE_VALUE, REQUEST_SCHEMA, RECEIVE_SCHEMA, REQUEST_SAVE_SCHEMA, SAVE_SCHEMA_SUCCESS } from './constants'
+import { API_URL, DEFAULT_HEADERS } from '../../constants'
 
 export function changeValue(value) {
   return {
@@ -28,25 +28,31 @@ export function receiveSchema(value) {
   }
 }
 
+export function requestSaveSchema(schemaID) {
+  return {
+    type: REQUEST_SAVE_SCHEMA
+  }
+}
+
 export function fetchSchema(schemaID) {
   return function(dispatch) {
     dispatch(requestSchema())
-    return fetch(`${API_URL}/schema/${schemaID}`)
+    return fetch(`${API_URL}/schema/${schemaID}`, { method: 'GET' })
       .then(response => response.text())
       .then(json => dispatch(receiveSchema(json)))
   }
 }
 
 export function saveSchema(schemaID) {
-
-  console.log('save schema');
-
-  return function(dispatch) {
-    dispatch(requestSchema())
+  return function(dispatch, getState) {
+    dispatch(requestSaveSchema())
     return fetch(`${API_URL}/schema/${schemaID}`, {
-      method: 'POST'
+      method: 'POST',
+      headers: DEFAULT_HEADERS,
+      body: getState().get('editor').get('value')
     }).then(response => {
       console.log(response)
     })
+    .catch(err => console.error)
   }
 }

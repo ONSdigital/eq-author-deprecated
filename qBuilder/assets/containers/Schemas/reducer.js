@@ -4,11 +4,11 @@
  *
  */
 
-import { fromJS } from 'immutable'
+import { Map } from 'immutable'
 
 import { REQUEST_SCHEMAS, RECEIVE_SCHEMAS } from './constants'
 
-const initialState = fromJS({
+const initialState = Map({
   isFetching: false,
   items: []
 })
