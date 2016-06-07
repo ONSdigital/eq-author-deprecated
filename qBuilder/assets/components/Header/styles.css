@@ -9,7 +9,6 @@
 }
 
 .wrapper {
-  /*composes: wrapper from 'styles/shared/layout.css';*/
   padding: 0 1rem;
   display: flex;
   align-items: center;

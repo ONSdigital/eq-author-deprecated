@@ -22,15 +22,19 @@ export class Editor extends Component {
   }
 
   render() {
-    const { actions, value, params, onClick, isSaving } = this.props
+    const { actions, value, params, isSaving } = this.props
 
     const getJsonEditor = () => (
       <JsonEditor value={value} onChange={actions.changeValue} />
     )
 
+    const saveSchema = () => {
+      actions.saveSchema(params.schemaID)
+    }
+
     const getButtons = () => (
       [
-        <Button key='btn-1' type='secondary' onClick={() => actions.saveSchema(params.schemaID)}>{ isSaving ? 'Saving...' : 'Save' }</Button>,
+        <Button key='btn-1' type='secondary' onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save'}</Button>,
         <Button key='btn-2' type='primary' icon='menu' to='/'>List schemas</Button>
       ]
     )
@@ -56,6 +60,7 @@ function mapStateToProps(state) {
 
 Editor.propTypes = {
   actions: PropTypes.object.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   params: PropTypes.object.isRequired,
   value: PropTypes.string.isRequired,
 }

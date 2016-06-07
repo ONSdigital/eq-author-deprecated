@@ -10,8 +10,6 @@ import styles from './styles.css'
 
 import { Link } from 'react-router'
 
-import { Button } from 'components/Button'
-
 const SchemaList = ({schemas}) => (
   <div className={styles.schemaList}>
     <h2 className={styles.title}>Select a schema</h2>

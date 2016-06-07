@@ -61,7 +61,10 @@ export function saveSchema(schemaID) {
         window.alert('Something went wrong!')
       }
     })
-    .catch(err => console.error)
+    .catch(err => {
+      /* eslint-disable no-console */
+      console.error(err)
+    })
   }
 }
 
