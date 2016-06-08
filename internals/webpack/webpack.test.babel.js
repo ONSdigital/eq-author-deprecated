@@ -2,10 +2,10 @@
  * TEST WEBPACK CONFIGURATION
  */
 
-const paths = require('../paths')
+const path = require('path')
 const webpack = require('webpack')
 const modules = [
-  'app',
+  'qBuilder/assets',
   'node_modules',
 ]
 
@@ -26,7 +26,7 @@ module.exports = {
     preLoaders: [
       { test: /\.js$/,
         loader: 'isparta',
-        include: paths.assets,
+        include: path.resolve('qBuilder/assets/'),
       },
     ],
     loaders: [
@@ -79,7 +79,6 @@ module.exports = {
     'react/lib/ExecutionEnvironment': true,
     'react/lib/ReactContext': 'window',
   },
-
   resolve: {
     modulesDirectories: modules,
     modules,

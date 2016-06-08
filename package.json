@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon data/server.js",
+    "npmcheckversion": "node ./internals/scripts/npmcheckversion.js",
+    "preinstall": "npm run npmcheckversion",
     "prebuild": "npm run test && npm run build:clean",
     "build:clean": "rimraf ./build/*",
     "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p",
@@ -18,14 +20,11 @@
     "clean": "shjs ./internals/scripts/clean.js",
     "generate": "plop --plopfile internals/generators/index.js",
     "lint": "npm run lint:js && npm run lint:css",
-    "lint:js": "npm run lint:eslint",
-    "lint:js:staged": "npm run lint:eslint:staged",
-    "lint:eslint": "eslint . --ignore-path .eslintignore",
-    "lint:eslint:staged": "eslint-staged",
+    "lint:js": "eslint . --ignore-path .gitignore --ignore-pattern internals/scripts",
+    "lint:js:staged": "eslint-staged",
     "lint:css": "stylelint ./qBuilder/assets/**/*.css",
     "lint:css:staged": "stylelint-staged",
     "lint:staged": "npm run lint:js:staged && npm run lint:css:staged",
-    "pretest": "npm run lint",
     "test": "cross-env NODE_ENV=test karma start internals/testing/karma.conf.js --single-run",
     "test:watch": "npm run test -- --auto-watch --no-single-run",
     "test:firefox": "npm run test -- --browsers Firefox",
@@ -43,7 +42,7 @@
     "env": {
       "production": {
         "only": [
-          "app"
+          "qBuilder/assets"
         ],
         "plugins": [
           "transform-react-remove-prop-types",
@@ -135,6 +134,7 @@
     "lint-staged": "^0.2.1",
     "mocha": "^2.4.5",
     "ngrok": "2.1.8",
+    "nock": "^8.0.0",
     "nodemon": "^1.9.2",
     "null-loader": "^0.1.1",
     "offline-plugin": "^3.2.0",
@@ -149,6 +149,7 @@
     "precss": "^1.4.0",
     "psi": "^2.0.3",
     "redux-logger": "^2.6.1",
+    "redux-mock-store": "^1.1.0",
     "redux-thunk": "^2.1.0",
     "rimraf": "^2.5.2",
     "shelljs": "^0.7.0",
@@ -157,7 +158,7 @@
     "stylelint": "^6.3.3",
     "stylelint-config-standard": "^8.0.0",
     "url-loader": "^0.5.7",
-    "webpack": "^2.1.0-beta.6",
+    "webpack": "2.1.0-beta.8",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
   }

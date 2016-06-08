@@ -7,9 +7,9 @@
 import { Map } from 'immutable'
 import {
   CHANGE_VALUE,
-  REQUEST_SCHEMA,
-  RECEIVE_SCHEMA,
-  REQUEST_SAVE_SCHEMA,
+  FETCH_SCHEMA_REQUEST,
+  FETCH_SCHEMA_SUCCESS,
+  SAVE_SCHEMA_REQUEST,
   SAVE_SCHEMA_SUCCESS
 } from './constants'
 
@@ -24,15 +24,15 @@ function editorReducer(state = initialState, action) {
     case CHANGE_VALUE:
       return state
         .set('value', action.value)
-    case REQUEST_SCHEMA:
+    case FETCH_SCHEMA_REQUEST:
       return state
         .set('isFetching', true)
         .set('value', action.value)
-    case RECEIVE_SCHEMA:
+    case FETCH_SCHEMA_SUCCESS:
       return state
         .set('isFetching', false)
         .set('value', action.value)
-    case REQUEST_SAVE_SCHEMA:
+    case SAVE_SCHEMA_REQUEST:
       return state
         .set('isSaving', true)
     case SAVE_SCHEMA_SUCCESS:

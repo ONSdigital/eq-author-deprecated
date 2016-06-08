@@ -4,12 +4,12 @@
  * Check whether the given component exist in either the components or containers directory
  */
 
-const paths = require(process.cwd() + '/internals/paths')
+const paths = require(`${process.cwd()}/internals/paths`)
 const fs = require('fs')
 
 const assetPaths = {
-  components: paths.assets + '/components',
-  containers: paths.assets + '/containers',
+  components: `${paths.assets}/components`,
+  containers: `${paths.assets}/containers`,
   assets: paths.assets
 }
 

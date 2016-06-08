@@ -28,7 +28,7 @@ const reducer = (state = initialState, action) => {
 }
 
 const sagas = [
-  function* testSaga() {
+  function * testSaga() {
     yield put({ type: 'TEST', payload: 'yup' })
   },
 ]

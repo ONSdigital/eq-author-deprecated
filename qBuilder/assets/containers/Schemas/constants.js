@@ -4,5 +4,5 @@
  *
  */
 
-export const REQUEST_SCHEMAS = 'app/Schemas/REQUEST_SCHEMAS'
-export const RECEIVE_SCHEMAS = 'app/Schemas/RECEIVE_SCHEMAS'
+export const FETCH_SCHEMAS_REQUEST = 'app/Schemas/FETCH_SCHEMAS_REQUEST'
+export const FETCH_SCHEMAS_SUCCESSS = 'app/Schemas/FETCH_SCHEMAS_SUCCESSS'

@@ -6,7 +6,7 @@
 
 import { Map } from 'immutable'
 
-import { REQUEST_SCHEMAS, RECEIVE_SCHEMAS } from './constants'
+import { FETCH_SCHEMAS_REQUEST, FETCH_SCHEMAS_SUCCESSS } from './constants'
 
 const initialState = Map({
   isFetching: false,
@@ -15,10 +15,10 @@ const initialState = Map({
 
 function schemasReducer(state = initialState, action) {
   switch (action.type) {
-    case REQUEST_SCHEMAS:
+    case FETCH_SCHEMAS_REQUEST:
       return state
         .set('isFetching', true)
-    case RECEIVE_SCHEMAS:
+    case FETCH_SCHEMAS_SUCCESSS:
       return state
         .set('isFetching', false)
         .set('items', action.schemas)

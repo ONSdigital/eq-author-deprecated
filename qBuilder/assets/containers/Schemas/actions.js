@@ -4,25 +4,25 @@
  *
  */
 
-import { REQUEST_SCHEMAS, RECEIVE_SCHEMAS } from './constants'
+import { FETCH_SCHEMAS_REQUEST, FETCH_SCHEMAS_SUCCESSS } from './constants'
 import { API_URL } from '../../constants'
 
-export function requestSchemas() {
+export function fetchSchemasRequest() {
   return {
-    type: REQUEST_SCHEMAS,
+    type: FETCH_SCHEMAS_REQUEST,
   }
 }
 
 export function receiveSchemas(schemas) {
   return {
-    type: RECEIVE_SCHEMAS,
+    type: FETCH_SCHEMAS_SUCCESSS,
     schemas
   }
 }
 
 export function fetchSchemas() {
   return function(dispatch) {
-    dispatch(requestSchemas())
+    dispatch(fetchSchemasRequest())
     return fetch(`${API_URL}/schema`)
       .then(response => response.json())
       .then(json => dispatch(receiveSchemas(json)))
