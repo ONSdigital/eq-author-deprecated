@@ -13,7 +13,7 @@ const mockStore = configureMockStore(middlewares)
 
 describe('Editor sync actions', () => {
 
-  describe('Action: changeValue', () => {
+  describe('changeValue', () => {
     it('Should return the correct type and the passed value', () => {
       const value = { foo: 'bar' }
       const expectedResult = {
@@ -24,7 +24,7 @@ describe('Editor sync actions', () => {
     })
   })
 
-  describe('Action: fetchSchemaRequest', () => {
+  describe('fetchSchemaRequest', () => {
     it('Should return the correct type and the passed value', () => {
       const value = '//fetching schema...'
       const expectedResult = {
@@ -35,7 +35,7 @@ describe('Editor sync actions', () => {
     })
   })
 
-  describe('Action: fetchSchemaSuccess', () => {
+  describe('fetchSchemaSuccess', () => {
     it('Should return the correct type and the passed value', () => {
       const value = { foo: 'bar' }
       const expectedResult = {
@@ -46,7 +46,7 @@ describe('Editor sync actions', () => {
     })
   })
 
-  describe('Action: saveSchemaRequest', () => {
+  describe('saveSchemaRequest', () => {
     it('Should return the correct type', () => {
       const expectedResult = {
         type: types.SAVE_SCHEMA_REQUEST,
@@ -55,7 +55,7 @@ describe('Editor sync actions', () => {
     })
   })
 
-  describe('Action: saveSchemaSuccess', () => {
+  describe('saveSchemaSuccess', () => {
     it('Should return the correct type', () => {
       const expectedResult = {
         type: types.SAVE_SCHEMA_SUCCESS,
@@ -63,7 +63,6 @@ describe('Editor sync actions', () => {
       expect(actions.saveSchemaSuccess()).toEqual(expectedResult)
     })
   })
-
 })
 
 describe('Editor async actions', () => {
