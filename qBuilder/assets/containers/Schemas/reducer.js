@@ -4,13 +4,13 @@
  *
  */
 
-import { Map } from 'immutable'
+import { Map, List } from 'immutable'
 
 import { FETCH_SCHEMAS_REQUEST, FETCH_SCHEMAS_SUCCESSS } from './constants'
 
 const initialState = Map({
   isFetching: false,
-  items: []
+  items: List([])
 })
 
 function schemasReducer(state = initialState, action) {

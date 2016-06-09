@@ -13,7 +13,7 @@ import {
   SAVE_SCHEMA_SUCCESS
 } from './constants'
 
-const initialState = Map({
+export const initialState = Map({
   isFetching: false,
   isSaving: false,
   value: '',
@@ -27,7 +27,6 @@ function editorReducer(state = initialState, action) {
     case FETCH_SCHEMA_REQUEST:
       return state
         .set('isFetching', true)
-        .set('value', action.value)
     case FETCH_SCHEMA_SUCCESS:
       return state
         .set('isFetching', false)

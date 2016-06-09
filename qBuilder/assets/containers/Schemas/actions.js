@@ -5,7 +5,7 @@
  */
 
 import { FETCH_SCHEMAS_REQUEST, FETCH_SCHEMAS_SUCCESSS } from './constants'
-import { API_URL } from '../../constants'
+import { API_URL } from 'global_constants'
 
 export function fetchSchemasRequest() {
   return {

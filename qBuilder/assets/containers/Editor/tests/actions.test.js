@@ -1,12 +1,12 @@
 import expect from 'expect'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import nock from 'nock'
+import fetchMock from 'fetch-mock'
 
 import * as actions from '../actions'
 import * as types from '../constants'
 
-import API_URL from '../../../constants'
+import {API_URL} from 'global_constants'
 
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
@@ -17,32 +17,32 @@ describe('Editor sync actions', () => {
     it('Should return the correct type and the passed value', () => {
       const value = { foo: 'bar' }
       const expectedResult = {
-        type: types.CHANGE_USERNAME,
+        type: types.CHANGE_VALUE,
         value: value,
       }
       expect(actions.changeValue(value)).toEqual(expectedResult)
     })
   })
 
-  describe('Action: fetchSchema', () => {
+  describe('Action: fetchSchemaRequest', () => {
     it('Should return the correct type and the passed value', () => {
       const value = '//fetching schema...'
-      const fetchSchema = {
-        type: types.FETCH_SCHEMA,
-        value: value,
+      const expectedResult = {
+        type: types.FETCH_SCHEMA_REQUEST,
+        value,
       }
-      expect(actions.fetchSchema(value)).toEqual(expectedResult)
+      expect(actions.fetchSchemaRequest(value)).toEqual(expectedResult)
     })
   })
 
-  describe('Action: receiveSchema', () => {
+  describe('Action: fetchSchemaSuccess', () => {
     it('Should return the correct type and the passed value', () => {
       const value = { foo: 'bar' }
       const expectedResult = {
-        type: types.FETCH_SCHEMAS_SUCCESS,
-        value: value,
+        type: types.FETCH_SCHEMA_SUCCESS,
+        value,
       }
-      expect(actions.receiveSchema(value)).toEqual(expectedResult)
+      expect(actions.fetchSchemaSuccess(value)).toEqual(expectedResult)
     })
   })
 
@@ -51,7 +51,7 @@ describe('Editor sync actions', () => {
       const expectedResult = {
         type: types.SAVE_SCHEMA_REQUEST,
       }
-      expect(actions.saveSchemaRequest(value)).toEqual(expectedResult)
+      expect(actions.saveSchemaRequest()).toEqual(expectedResult)
     })
   })
 
@@ -60,16 +60,7 @@ describe('Editor sync actions', () => {
       const expectedResult = {
         type: types.SAVE_SCHEMA_SUCCESS,
       }
-      expect(actions.saveSchemaSuccess(value)).toEqual(expectedResult)
-    })
-  })
-
-  describe('Action: fetchSchema', () => {
-    it('Should return the correct type', () => {
-      const expectedResult = {
-        type: types.SAVE_SCHEMA_SUCCESS,
-      }
-      expect(actions.fetchSchema()).toEqual(expectedResult)
+      expect(actions.saveSchemaSuccess()).toEqual(expectedResult)
     })
   })
 
@@ -77,26 +68,24 @@ describe('Editor sync actions', () => {
 
 describe('Editor async actions', () => {
   afterEach(() => {
-    nock.cleanAll()
+    fetchMock.reset()
   })
 
-  it('creates FETCH_TODOS_SUCCESS when fetching todos has been done', () => {
-    const successMsg = {success: true}
+  it('creates FETCH_SCHEMA_SUCCESS when fetching schema', () => {
+    const value = '{ success: true }'
     const schemaID = 'blah'
 
-    nock(API_URL)
-      .get(`/schema/${schemaID}`)
-      .reply(200, { body: successMsg })
+    fetchMock.mock(`${API_URL}/schema/${schemaID}`, { body: value })
 
     const expectedActions = [
-      { type: types.SAVE_SCHEMA_REQUEST },
-      { type: types.SAVE_SCHEMA_SUCCESS body: successMsg }
+      { type: types.FETCH_SCHEMA_REQUEST, value: '//fetching schema...' },
+      { type: types.FETCH_SCHEMA_SUCCESS, value }
     ]
 
-    const store = mockStore({  })
+    const store = mockStore({ value: {} })
 
-    return store.dispatch(actions.fetchTodos())
-      .then(() => { // return of async actions
+    return store.dispatch(actions.fetchSchema(schemaID))
+      .then(() => {
         expect(store.getActions()).toEqual(expectedActions)
       })
   })

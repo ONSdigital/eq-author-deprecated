@@ -5,7 +5,7 @@
  */
 
 import { CHANGE_VALUE, FETCH_SCHEMA_REQUEST, FETCH_SCHEMA_SUCCESS, SAVE_SCHEMA_REQUEST, SAVE_SCHEMA_SUCCESS } from './constants'
-import { API_URL, DEFAULT_HEADERS } from '../../constants'
+import { API_URL, DEFAULT_HEADERS } from 'global_constants'
 
 export function changeValue(value) {
   return {
