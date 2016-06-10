@@ -28,5 +28,4 @@ env | grep EQ_
 #   npm run compile
 # fi
 
-postgres -D /usr/local/var/postgres &
 python qBuilder/manage.py runserver
