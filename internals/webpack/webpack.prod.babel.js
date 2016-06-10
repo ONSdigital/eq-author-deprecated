@@ -14,7 +14,7 @@ const postcssReporter = require('postcss-reporter')
 module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff
   entry: [
-    `${paths.app}/app.js`,
+    `${paths.assets}/app.js`,
   ],
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
@@ -59,7 +59,7 @@ module.exports = require('./webpack.base.babel')({
 
     // Minify and optimize the index.html
     new HtmlWebpackPlugin({
-      template: `${paths.app}/index.html`,
+      template: `${paths.assets}/index.html`,
       minify: {
         removeComments: true,
         collapseWhitespace: true,
