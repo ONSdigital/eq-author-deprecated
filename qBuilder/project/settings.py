@@ -38,8 +38,12 @@ DJANGO_PROVIDED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+ADDITIONAL_APPS = [
     'webpack_loader',
     'rest_framework',
+    'corsheaders',
 ]
 
 # OUR apps
@@ -49,11 +53,12 @@ EQ_AUTHOR_APPS = [
 ]
 
 # Application definition (Default + OURs)
-INSTALLED_APPS = DJANGO_PROVIDED_APPS + EQ_AUTHOR_APPS
+INSTALLED_APPS = DJANGO_PROVIDED_APPS + ADDITIONAL_APPS + EQ_AUTHOR_APPS
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -63,6 +68,9 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'project.urls'
+
+# TODO: Decide on which host will be allowed to access the API
+CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATES = [
     {
