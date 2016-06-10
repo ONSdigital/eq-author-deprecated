@@ -1,12 +1,25 @@
 language: python
 
+sudo: true
+dist: trusty
+
 python:
   - 2.7
+
+node_js:
+  - "5.0"
 
 services: postgresql
 
 before_install:
   - export DJANGO_SETTINGS_MODULE=project.settings
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - export DISPLAY=:99.0
+  - sudo apt-get update
+  - sudo apt-get install -y libappindicator1 fonts-liberation
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome*.deb
+  - sh -e /etc/init.d/xvfb start
 
 install:
   - pip install -r requirements.txt
@@ -18,11 +31,14 @@ install:
 
 before_script:
   - psql -c 'create user "eq-author" createdb;' -U postgres
-  
+
 script:
   - npm run test
   - cd qBuilder
   - python manage.py test
+  - npm run build
+
+after_success: 'npm run coveralls'
 
 notifications:
   slack: digitaleq:LDxJXRGeVmg3PpdUhp90eY3Z
