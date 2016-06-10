@@ -7,12 +7,14 @@
 
 import React from 'react'
 
+import MainLayout from 'components/MainLayout'
+
 /* eslint-disable react/prefer-stateless-function */
 export default class NotFound extends React.Component {
 
   render() {
     return (
-      <h1>Page Not Found</h1>
+      <MainLayout mainChildren={<h1>Page Not Found</h1>} />
     )
   }
 }

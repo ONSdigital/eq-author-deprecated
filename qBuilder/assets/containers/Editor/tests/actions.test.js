@@ -12,7 +12,6 @@ const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
 describe('Editor sync actions', () => {
-
   describe('changeValue', () => {
     it('Should return the correct type and the passed value', () => {
       const value = { foo: 'bar' }

@@ -6,7 +6,6 @@ import { shallow } from 'enzyme'
 import React from 'react'
 
 describe('<Editor />', () => {
-
   let props
 
   beforeEach(() => {
@@ -18,7 +17,7 @@ describe('<Editor />', () => {
         changeValue: () => { }
       }
     }
-  });
+  })
 
   it('should render a JsonEditor and some Buttons', () => {
     const renderedComponent = shallow(
@@ -27,5 +26,4 @@ describe('<Editor />', () => {
     expect(renderedComponent.contains(<JsonEditor />))
     expect(renderedComponent.contains(<Button />))
   })
-
 })

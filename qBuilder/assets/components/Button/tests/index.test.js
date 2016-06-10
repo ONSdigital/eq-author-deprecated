@@ -1,4 +1,5 @@
 import Button from '../index'
+import { Link } from 'react-router'
 
 import expect from 'expect'
 import { shallow } from 'enzyme'
@@ -11,12 +12,13 @@ describe('<Button />', () => {
     expect(renderedButton.contains(children)).toEqual(true)
   })
 
-  it('should render an icon if specified in props', () => {
-    const renderedButton = shallow(<Button icon='menu'></Button>)
-    console.log(renderedButton)
+  it('should render a <Link /> if the "to" prop is supplied', () => {
+    const renderedButton = shallow(<Button to='/' />)
+    expect(renderedButton.contains(<Link />))
   })
 
-  it('should display the correct "type" as per props', () => {
-
+  it('should render a <button /> if no "to" prop is supplied', () => {
+    const renderedButton = shallow(<Button />)
+    expect(renderedButton.contains(<button />))
   })
 })
