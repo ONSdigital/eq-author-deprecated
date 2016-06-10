@@ -1,0 +1,33 @@
+.header {
+  background-color: #efefef;
+  padding: 0.5rem 0;
+  flex: 0 0 auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  height: 4rem;
+}
+
+.wrapper {
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex: 1 1 auto;
+}
+
+.title {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  > * {
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+  }
+}

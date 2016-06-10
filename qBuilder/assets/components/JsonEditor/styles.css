@@ -1,0 +1,23 @@
+.jsonEditor {
+  display: flex;
+  flex-direction: column;
+}
+
+.editor {
+  font-size: 0.8rem;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+
+  .CodeMirror {
+    flex: 1 1 auto;
+    overflow: scroll;
+  }
+}
+
+.btnContainer {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
