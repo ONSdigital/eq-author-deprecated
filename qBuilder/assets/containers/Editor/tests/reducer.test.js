@@ -59,6 +59,4 @@ describe('editorReducer', () => {
       value: ''
     }))
   })
-
-
 })

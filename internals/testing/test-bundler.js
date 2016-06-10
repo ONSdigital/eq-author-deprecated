@@ -9,11 +9,11 @@ import chaiEnzyme from 'chai-enzyme'
 chai.use(chaiEnzyme())
 
 global.chai = chai
-global.sinon = sinon;
-global.expect = chai.expect;
-global.should = chai.should();
+global.sinon = sinon
+global.expect = chai.expect
+global.should = chai.should()
 
 // Include all .js files under `app`, except app.js, reducers.js, routes.js and
 // store.js. This is for isparta code coverage
-const context = require.context('../../qBuilder/assets', true, /^^((?!(app|reducers|routes|store)).)*\.js$/);
-context.keys().forEach(context);
+const context = require.context('../../qBuilder/assets', true, /^^((?!(app|reducers|routes|store)).)*\.js$/)
+context.keys().forEach(context)

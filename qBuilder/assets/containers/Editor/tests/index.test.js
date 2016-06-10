@@ -20,9 +20,7 @@ describe('<Editor />', () => {
   })
 
   it('should render a JsonEditor and some Buttons', () => {
-    const renderedComponent = shallow(
-      <Editor {...props} />
-    )
+    const renderedComponent = shallow(<Editor {...props} />)
     expect(renderedComponent.contains(<JsonEditor />))
     expect(renderedComponent.contains(<Button />))
   })

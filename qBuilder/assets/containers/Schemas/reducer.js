@@ -8,7 +8,7 @@ import { Map, List } from 'immutable'
 
 import { FETCH_SCHEMAS_REQUEST, FETCH_SCHEMAS_SUCCESS } from './constants'
 
-const initialState = Map({
+export const initialState = Map({
   isFetching: false,
   items: List([])
 })
