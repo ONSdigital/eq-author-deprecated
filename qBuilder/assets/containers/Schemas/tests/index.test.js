@@ -1,5 +1,4 @@
 import { Schemas } from '../index'
-import MainLayout from 'components/MainLayout'
 
 import expect from 'expect'
 import { mount } from 'enzyme'
