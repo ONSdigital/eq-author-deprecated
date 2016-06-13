@@ -4,8 +4,8 @@
  *
  */
 
-import { FETCH_SCHEMAS_REQUEST, FETCH_SCHEMAS_SUCCESS } from './constants'
-import { API_URL } from 'global_constants'
+import { FETCH_SCHEMAS_REQUEST, FETCH_SCHEMAS_SUCCESS, FETCH_SCHEMAS_FAILURE } from './constants'
+import { API_URL, DEFAULT_HEADERS } from 'global_constants'
 
 export function fetchSchemasRequest() {
   return {
@@ -20,10 +20,28 @@ export function fetchSchemasSuccess(schemas) {
   }
 }
 
+export function fetchSchemasFailure(error) {
+  return {
+    type: FETCH_SCHEMAS_FAILURE,
+    error
+  }
+}
+
 export function fetchSchemas() {
   return function(dispatch) {
+    function handleErrors(response) {
+      if (!response.ok) {
+        dispatch(fetchSchemasFailure(response.statusText))
+      }
+      return response
+    }
+
     dispatch(fetchSchemasRequest())
-    return fetch(`${API_URL}/schema`)
+    return fetch(`${API_URL}/schema/`, {
+      mode: 'cors',
+      method: 'GET',
+      headers: DEFAULT_HEADERS
+    }).then(handleErrors)
       .then(response => response.json())
       .then(json => dispatch(fetchSchemasSuccess(json)))
   }
