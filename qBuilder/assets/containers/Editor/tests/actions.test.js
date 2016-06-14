@@ -73,7 +73,7 @@ describe('Editor async actions', () => {
     const value = '{ success: true }'
     const schemaID = 'blah'
 
-    fetchMock.mock(`${API_URL}/schema/${schemaID}`, { body: value })
+    fetchMock.mock(`${API_URL}/schema/${schemaID}/`, { body: value })
 
     const expectedActions = [
       { type: types.FETCH_SCHEMA_REQUEST, value: '//fetching schema...' },

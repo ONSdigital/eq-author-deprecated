@@ -7,6 +7,8 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/theme/material.css'
 
+import { js_beautify as beautify } from 'js-beautify' // eslint-disable-line camelcase
+
 const options = {
   lineNumbers: true,
   mode: 'javascript',
@@ -20,9 +22,11 @@ export class JsonEditor extends Component {
   }
 
   render() {
+    const {onChange, value} = this.props
+    const formattedValue = beautify(value, { indent_size: 2 })
     return (
       <div className={styles.jsonEditor}>
-        <Codemirror ref='editor' className={styles.editor} {...this.props} options={options} />
+        <Codemirror ref='editor' className={styles.editor} onChange={onChange} value={formattedValue} options={options} />
       </div>
     )
   }

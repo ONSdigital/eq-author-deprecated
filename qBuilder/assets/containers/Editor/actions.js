@@ -37,7 +37,7 @@ export function saveSchemaRequest() {
 export function fetchSchema(schemaID) {
   return function(dispatch) {
     dispatch(fetchSchemaRequest())
-    return fetch(`${API_URL}/schema/${schemaID}`, {
+    return fetch(`${API_URL}/schema/${schemaID}/`, {
       method: 'GET'
     }).then(response => response.text())
       .then(json => dispatch(fetchSchemaSuccess(json)))
@@ -53,8 +53,8 @@ export function saveSchemaSuccess() {
 export function saveSchema(schemaID) {
   return function(dispatch, getState) {
     dispatch(saveSchemaRequest())
-    return fetch(`${API_URL}/schema/${schemaID}`, {
-      method: 'POST',
+    return fetch(`${API_URL}/schema/${schemaID}/`, {
+      method: 'PUT',
       headers: DEFAULT_HEADERS,
       body: getState().get('editor').get('value')
     }).then(response => {

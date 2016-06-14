@@ -13,7 +13,7 @@ export const Header = ({children, title}) => (
 )
 
 Header.propTypes = {
-  children: React.PropTypes.element,
+  children: React.PropTypes.node,
   title: React.PropTypes.string
 }
 
