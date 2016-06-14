@@ -7,6 +7,8 @@
 import { CHANGE_VALUE, FETCH_SCHEMA_REQUEST, FETCH_SCHEMA_SUCCESS, SAVE_SCHEMA_REQUEST, SAVE_SCHEMA_SUCCESS } from './constants'
 import { API_URL, DEFAULT_HEADERS } from 'global_constants'
 
+import { js_beautify as beautify } from 'js-beautify' // eslint-disable-line camelcase
+
 export function changeValue(value) {
   return {
     type: CHANGE_VALUE,
@@ -40,6 +42,7 @@ export function fetchSchema(schemaID) {
     return fetch(`${API_URL}/schema/${schemaID}/`, {
       method: 'GET'
     }).then(response => response.text())
+      .then(json => beautify(json, { indent_size: 2 }))
       .then(json => dispatch(fetchSchemaSuccess(json)))
   }
 }
