@@ -1,7 +1,7 @@
 // Important modules this config uses
 const paths = require('../paths')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const BundleTracker = require('webpack-bundle-tracker')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
 
@@ -21,6 +21,7 @@ module.exports = require('./webpack.base.babel')({
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
+    publicPath: '/bundles/'
   },
 
   // We use ExtractTextPlugin so we get a seperate CSS file instead
@@ -57,23 +58,7 @@ module.exports = require('./webpack.base.babel')({
       },
     }),
 
-    // Minify and optimize the index.html
-    new HtmlWebpackPlugin({
-      template: `${paths.assets}/index.html`,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true,
-      },
-      inject: true,
-    }),
+    new BundleTracker({filename: './qBuilder/webpack-stats-prod.json'}),
 
     // Extract the CSS into a seperate file
     new ExtractTextPlugin('[name].[contenthash].css'),
