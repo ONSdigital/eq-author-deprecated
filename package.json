@@ -9,7 +9,6 @@
   },
   "license": "MIT",
   "scripts": {
-    "server": "nodemon data/server.js",
     "npmcheckversion": "node ./internals/scripts/npmcheckversion.js",
     "prebuild": "npm run test && npm run build:clean",
     "build:clean": "rimraf ./build/*",
