@@ -35,8 +35,8 @@ before_script:
 script:
   - npm run test
   - cd qBuilder
-  - python manage.py test
   - npm run build
+  - python manage.py test
 
 after_success: 'npm run coveralls'
 
