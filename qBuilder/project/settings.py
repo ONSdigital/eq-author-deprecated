@@ -26,7 +26,11 @@ SECRET_KEY = '7!(g$-ecu()j804%kk-00ew4p$glg4qhs$7=b(@7+s(6r^f@a5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-PRODUCTION = False
+
+if "EQ_DEV_MODE" in os.environ and os.environ['EQ_DEV_MODE'].upper() == "TRUE":
+    PRODUCTION = False
+else:
+    PRODUCTION = True
 
 ALLOWED_HOSTS = []
 

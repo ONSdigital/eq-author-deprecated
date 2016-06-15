@@ -1,6 +1,8 @@
 .jsonEditor {
   display: flex;
   flex-direction: column;
+  opacity: 1;
+  background: #263238;
 }
 
 .editor {
@@ -8,11 +10,12 @@
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  transition: opacity 0.3s ease-out;
+}
 
-  .CodeMirror {
-    flex: 1 1 auto;
-    overflow: scroll;
-  }
+.editorDisabled {
+  composes: editor;
+  opacity: 0;
 }
 
 .btnContainer {

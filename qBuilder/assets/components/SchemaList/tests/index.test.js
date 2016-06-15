@@ -9,9 +9,9 @@ describe('<SchemaList />', () => {
   it('should render the link with correct path', () => {
     const schemas = [
       {
-        id: 'schema-0',
+        eq_id: 'schema-0',
         title: 'Hello I am a schema',
-        path: 'path/to/schema'
+        description: 'path/to/schema'
       },
     ]
     const schemaList = shallow(<SchemaList schemas={schemas} />)

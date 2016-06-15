@@ -20,9 +20,10 @@ export class JsonEditor extends Component {
   }
 
   render() {
+    const {onChange, value} = this.props
     return (
       <div className={styles.jsonEditor}>
-        <Codemirror ref='editor' className={styles.editor} {...this.props} options={options} />
+        <Codemirror ref='editor' className={styles.editor} onChange={onChange} value={value} options={options} />
       </div>
     )
   }

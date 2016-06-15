@@ -54,12 +54,14 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     value: state.get('editor').get('value'),
-    isSaving: state.get('editor').get('isSaving')
+    isSaving: state.get('editor').get('isSaving'),
+    isFetching: state.get('editor').get('isFetching')
   }
 }
 
 Editor.propTypes = {
   actions: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   isSaving: PropTypes.bool.isRequired,
   params: PropTypes.object.isRequired,
   value: PropTypes.string.isRequired,

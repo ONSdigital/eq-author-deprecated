@@ -11,6 +11,8 @@ import {API_URL} from 'global_constants'
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
+import { js_beautify as beautify } from 'js-beautify' // eslint-disable-line camelcase
+
 describe('Editor sync actions', () => {
   describe('changeValue', () => {
     it('Should return the correct type and the passed value', () => {
@@ -70,10 +72,10 @@ describe('Editor async actions', () => {
   })
 
   it('creates FETCH_SCHEMA_SUCCESS when fetching schema', () => {
-    const value = '{ success: true }'
+    const value = beautify('{ success: true }', { indent_size: 2 })
     const schemaID = 'blah'
 
-    fetchMock.mock(`${API_URL}/schema/${schemaID}`, { body: value })
+    fetchMock.mock(`${API_URL}/schema/${schemaID}/`, { body: value })
 
     const expectedActions = [
       { type: types.FETCH_SCHEMA_REQUEST, value: '//fetching schema...' },

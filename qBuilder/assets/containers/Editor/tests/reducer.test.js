@@ -21,7 +21,8 @@ describe('editorReducer', () => {
 
   it('should handle FETCH_SCHEMA_REQUEST', () => {
     expect(editorReducer(undefined, {
-      type: types.FETCH_SCHEMA_REQUEST
+      type: types.FETCH_SCHEMA_REQUEST,
+      value: ''
     })).toEqual(Map({
       isFetching: true,
       isSaving: false,
