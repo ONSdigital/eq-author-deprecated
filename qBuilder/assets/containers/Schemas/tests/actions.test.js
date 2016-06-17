@@ -6,8 +6,6 @@ import fetchMock from 'fetch-mock'
 import * as actions from '../actions'
 import * as types from '../constants'
 
-import {API_URL} from 'global_constants'
-
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
@@ -39,7 +37,7 @@ describe('Schemas async actions', () => {
   })
 
   it('creates FETCH_SCHEMAS_SUCCESS when fetching schemas', () => {
-    fetchMock.mock(`${API_URL}/schema/`, { body: { foo: 'bar' } })
+    fetchMock.mock('/schema/', { body: { foo: 'bar' } })
 
     const expectedActions = [
       { type: types.FETCH_SCHEMAS_REQUEST },
