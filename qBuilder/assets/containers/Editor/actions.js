@@ -39,7 +39,7 @@ export function saveSchemaRequest() {
 export function fetchSchema(schemaID) {
   return function(dispatch) {
     dispatch(fetchSchemaRequest())
-    return fetch(`${API_URL}/schema/${schemaID}/`, {
+    return fetch(`/schema/${schemaID}/`, {
       method: 'GET'
     }).then(response => response.text())
       .then(json => beautify(json, { indent_size: 2 }))
@@ -56,7 +56,7 @@ export function saveSchemaSuccess() {
 export function saveSchema(schemaID) {
   return function(dispatch, getState) {
     dispatch(saveSchemaRequest())
-    return fetch(`${API_URL}/schema/${schemaID}/`, {
+    return fetch(`/schema/${schemaID}/`, {
       method: 'PUT',
       headers: DEFAULT_HEADERS,
       body: getState().get('editor').get('value')
