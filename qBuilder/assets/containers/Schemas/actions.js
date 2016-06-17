@@ -5,7 +5,7 @@
  */
 
 import { FETCH_SCHEMAS_REQUEST, FETCH_SCHEMAS_SUCCESS, FETCH_SCHEMAS_FAILURE } from './constants'
-import { API_URL, DEFAULT_HEADERS } from 'global_constants'
+import { DEFAULT_HEADERS } from 'global_constants'
 
 export function fetchSchemasRequest() {
   return {
@@ -37,7 +37,7 @@ export function fetchSchemas() {
     }
 
     dispatch(fetchSchemasRequest())
-    return fetch(`${API_URL}/schema/`, {
+    return fetch('/schema/', {
       mode: 'cors',
       method: 'GET',
       headers: DEFAULT_HEADERS

@@ -6,8 +6,6 @@ import fetchMock from 'fetch-mock'
 import * as actions from '../actions'
 import * as types from '../constants'
 
-import {API_URL} from 'global_constants'
-
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
@@ -75,7 +73,7 @@ describe('Editor async actions', () => {
     const value = beautify('{ success: true }', { indent_size: 2 })
     const schemaID = 'blah'
 
-    fetchMock.mock(`${API_URL}/schema/${schemaID}/`, { body: value })
+    fetchMock.mock(`/schema/${schemaID}/`, { body: value })
 
     const expectedActions = [
       { type: types.FETCH_SCHEMA_REQUEST, value: '//fetching schema...' },

@@ -48,7 +48,7 @@ const rootRoute = {
 
 if (process.env.NODE_ENV === 'development') {
   if (window.devToolsExtension) {
-    window.devToolsExtension.open()
+    window.devToolsExtension.updateStore(store)
   }
 }
 
