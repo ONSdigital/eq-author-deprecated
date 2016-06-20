@@ -37,7 +37,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading)
       },
     }, {
-      path: 'editor/:schemaID',
+      path: '/editor',
       name: 'editor',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
@@ -54,6 +54,25 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading)
       },
+      childRoutes: [{
+        path: ':schemaID',
+        name: 'editSchema',
+        getComponent(nextState, cb) {
+          const importModules = Promise.all([
+            System.import('containers/Editor/reducer'),
+            System.import('containers/Editor'),
+          ])
+
+          const renderRoute = loadModule(cb)
+
+          importModules.then(([reducer, component]) => {
+            injectReducer('editor', reducer.default)
+            renderRoute(component)
+          })
+
+          importModules.catch(errorLoading)
+        }
+      }]
     }, {
       path: '*',
       name: 'notfound',

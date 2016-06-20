@@ -1,10 +1,12 @@
 import React from 'react'
 import styles from './styles.css'
 
+import { Link } from 'react-router'
+
 export const Header = ({children, title}) => (
   <header className={styles.header}>
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>{title}</h1>
+      <Link to='/'><h1 className={styles.title}>{title}</h1></Link>
       <div className={styles.btns}>
         {children}
       </div>

@@ -56,8 +56,19 @@ export function saveSchemaSuccess() {
 export function saveSchema(schemaID) {
   return function(dispatch, getState) {
     dispatch(saveSchemaRequest())
-    return fetch(`/api/v1/schema/${schemaID}/`, {
-      method: 'PUT',
+
+    const isNewSchema = (typeof schemaID === 'undefined')
+
+    let url = `/api/v1/schema/${schemaID}/`
+    let method = 'PUT'
+
+    if (isNewSchema) {
+      url = '/api/v1/schema/'
+      method = 'POST'
+    }
+
+    return fetch(url, {
+      method: method,
       headers: DEFAULT_HEADERS,
       body: getState().get('editor').get('value')
     }).then(response => {
@@ -67,12 +78,12 @@ export function saveSchema(schemaID) {
           window.clearTimeout(tID)
         }, 1000)
       } else {
+        console.log(response) // eslint-disable-line no-console
         window.alert('Something went wrong!')
       }
     })
     .catch(err => {
-      /* eslint-disable no-console */
-      console.error(err)
+      console.error(err) // eslint-disable-line no-console
     })
   }
 }
