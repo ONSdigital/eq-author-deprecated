@@ -38,21 +38,23 @@ export default function createRoutes(store) {
       },
     }, {
       path: '/editor',
-      name: 'editor',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/Editor/reducer'),
-          System.import('containers/Editor'),
-        ])
+      name: 'editNew',
+      indexRoute: {
+        getComponent(nextState, cb) {
+          const importModules = Promise.all([
+            System.import('containers/Editor/reducer'),
+            System.import('containers/Editor'),
+          ])
 
-        const renderRoute = loadModule(cb)
+          const renderRoute = loadModule(cb)
 
-        importModules.then(([reducer, component]) => {
-          injectReducer('editor', reducer.default)
-          renderRoute(component)
-        })
+          importModules.then(([reducer, component]) => {
+            injectReducer('editor', reducer.default)
+            renderRoute(component)
+          })
 
-        importModules.catch(errorLoading)
+          importModules.catch(errorLoading)
+        }
       },
       childRoutes: [{
         path: ':schemaID',
@@ -72,7 +74,22 @@ export default function createRoutes(store) {
 
           importModules.catch(errorLoading)
         }
-      }]
+      }],
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/Editor/reducer'),
+          System.import('containers/Editor'),
+        ])
+
+        const renderRoute = loadModule(cb)
+
+        importModules.then(([reducer, component]) => {
+          injectReducer('editor', reducer.default)
+          renderRoute(component)
+        })
+
+        importModules.catch(errorLoading)
+      }
     }, {
       path: '*',
       name: 'notfound',

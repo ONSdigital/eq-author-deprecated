@@ -17,9 +17,11 @@ import Button from 'components/Button'
 export class Editor extends Component {
 
   componentDidMount() {
-    const { actions, params, route } = this.props
-    if (route.name === 'editSchema') {
+    const { actions, params } = this.props
+    if (typeof params.schemaID !== 'undefined') {
       actions.fetchSchema(params.schemaID)
+    } else {
+      actions.changeValue('')
     }
   }
 
