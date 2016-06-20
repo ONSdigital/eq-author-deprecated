@@ -73,7 +73,7 @@ describe('Editor async actions', () => {
     const value = beautify('{ success: true }', { indent_size: 2 })
     const schemaID = 'blah'
 
-    fetchMock.mock(`/schema/${schemaID}/`, { body: value })
+    fetchMock.mock(`/api/v1/schema/${schemaID}/`, { body: value })
 
     const expectedActions = [
       { type: types.FETCH_SCHEMA_REQUEST, value: '//fetching schema...' },
