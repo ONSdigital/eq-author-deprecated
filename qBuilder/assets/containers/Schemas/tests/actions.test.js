@@ -37,7 +37,7 @@ describe('Schemas async actions', () => {
   })
 
   it('creates FETCH_SCHEMAS_SUCCESS when fetching schemas', () => {
-    fetchMock.mock('/schema/', { body: { foo: 'bar' } })
+    fetchMock.mock('/api/v1/schema/', { body: { foo: 'bar' } })
 
     const expectedActions = [
       { type: types.FETCH_SCHEMAS_REQUEST },

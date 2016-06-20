@@ -37,7 +37,7 @@ export function fetchSchemas() {
     }
 
     dispatch(fetchSchemasRequest())
-    return fetch('/schema/', {
+    return fetch('/api/v1/schema/', {
       mode: 'cors',
       method: 'GET',
       headers: DEFAULT_HEADERS
