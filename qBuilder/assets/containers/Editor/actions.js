@@ -89,7 +89,7 @@ export function saveSchema(schemaID) {
     }).then(response => {
       if (response.ok) {
         if (isNewSchema) {
-          response.text().then(text => browserHistory.push(`/editor/${text}`))
+          response.text().then(schemaID => browserHistory.push(`/editor/${schemaID}`))
         }
 
         let tID = window.setTimeout(() => {
@@ -98,7 +98,7 @@ export function saveSchema(schemaID) {
         }, 1000)
       } else {
         dispatch(saveSchemaFailure())
-        response.text().then(text => window.alert(`Error: ${text}`))
+        response.text().then(error => window.alert(`Error: ${error}`))
       }
     })
     .catch(err => {
