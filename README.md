@@ -18,9 +18,19 @@ This django web application has been designed to work in a 12 Factor apps patter
 8. If this is your first time deploying the application, brace yourself and run `eb init`. (see steps below)
 9. If the elasticbeanstalk environment has already been created, you can now run `eb deploy` to deploy the built application, otherwise run `eb create` to create it first and it will be deployed automatically.
 
+You will need to create a number of environment variables:
+
+- `EQ_AUTHOR_ADMIN_USERNAME` The admin username to create
+- `EQ_AUTHOR_ADMIN_EMAIL` The admin email address
+- `EQ_AUTHOR_ADMIN_PASSWORD` The Admin password
+- `EQ_AUTHOR_ADMIN_FIRSTNAME` The First name
+- `EQ_AUTHOR_ADMIN_LASTNAME` The Last name
+
 ## How to run the application
 
-`python manage.py runserver`
+`./scripts/run_app.sh`
+
+This will run any database migrations and then start the server
 
 ## How to run the test suite
 
