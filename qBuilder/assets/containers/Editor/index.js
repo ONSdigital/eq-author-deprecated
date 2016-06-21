@@ -18,7 +18,7 @@ export class Editor extends Component {
 
   componentDidMount() {
     const { actions, params } = this.props
-    if (typeof params.schemaID !== 'undefined') {
+    if (params.schemaID !== undefined) {
       actions.fetchSchema(params.schemaID)
     } else {
       actions.changeValue('')

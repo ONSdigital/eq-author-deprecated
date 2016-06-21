@@ -4,8 +4,17 @@
  *
  */
 
-import { CHANGE_VALUE, FETCH_SCHEMA_REQUEST, FETCH_SCHEMA_SUCCESS, SAVE_SCHEMA_REQUEST, SAVE_SCHEMA_SUCCESS } from './constants'
+import { CHANGE_VALUE,
+  FETCH_SCHEMA_REQUEST,
+  FETCH_SCHEMA_SUCCESS,
+  SAVE_SCHEMA_REQUEST,
+  SAVE_SCHEMA_SUCCESS,
+  SAVE_SCHEMA_FAILURE
+} from './constants'
+
 import { DEFAULT_HEADERS } from 'global_constants'
+
+import { browserHistory } from 'react-router'
 
 import { js_beautify as beautify } from 'js-beautify' // eslint-disable-line camelcase
 
@@ -36,6 +45,12 @@ export function saveSchemaRequest() {
   }
 }
 
+export function saveSchemaFailure() {
+  return {
+    type: SAVE_SCHEMA_FAILURE
+  }
+}
+
 export function fetchSchema(schemaID) {
   return function(dispatch) {
     dispatch(fetchSchemaRequest())
@@ -57,7 +72,7 @@ export function saveSchema(schemaID) {
   return function(dispatch, getState) {
     dispatch(saveSchemaRequest())
 
-    const isNewSchema = (typeof schemaID === 'undefined')
+    const isNewSchema = (schemaID === undefined)
 
     let url = `/api/v1/schema/${schemaID}/`
     let method = 'PUT'
@@ -73,13 +88,17 @@ export function saveSchema(schemaID) {
       body: getState().get('editor').get('value')
     }).then(response => {
       if (response.ok) {
+        if (isNewSchema) {
+          response.text().then(text => browserHistory.push(`/editor/${text}`))
+        }
+
         let tID = window.setTimeout(() => {
           dispatch(saveSchemaSuccess())
           window.clearTimeout(tID)
         }, 1000)
       } else {
-        console.log(response) // eslint-disable-line no-console
-        window.alert('Something went wrong!')
+        dispatch(saveSchemaFailure())
+        response.text().then(text => window.alert(`Error: ${text}`))
       }
     })
     .catch(err => {

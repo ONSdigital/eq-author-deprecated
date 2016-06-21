@@ -10,7 +10,8 @@ import {
   FETCH_SCHEMA_REQUEST,
   FETCH_SCHEMA_SUCCESS,
   SAVE_SCHEMA_REQUEST,
-  SAVE_SCHEMA_SUCCESS
+  SAVE_SCHEMA_SUCCESS,
+  SAVE_SCHEMA_FAILURE
 } from './constants'
 
 export const initialState = Map({
@@ -36,6 +37,7 @@ function editorReducer(state = initialState, action) {
       return state
         .set('isSaving', true)
     case SAVE_SCHEMA_SUCCESS:
+    case SAVE_SCHEMA_FAILURE:
       return state
         .set('isSaving', false)
     default:

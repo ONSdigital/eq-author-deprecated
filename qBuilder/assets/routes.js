@@ -38,7 +38,7 @@ export default function createRoutes(store) {
       },
     }, {
       path: '/editor',
-      name: 'editNew',
+      name: 'new',
       indexRoute: {
         getComponent(nextState, cb) {
           const importModules = Promise.all([
@@ -58,7 +58,7 @@ export default function createRoutes(store) {
       },
       childRoutes: [{
         path: ':schemaID',
-        name: 'editSchema',
+        name: 'edit',
         getComponent(nextState, cb) {
           const importModules = Promise.all([
             System.import('containers/Editor/reducer'),
