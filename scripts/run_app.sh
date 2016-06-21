@@ -19,7 +19,6 @@ fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 echo $DIR
 
-
 echo "Environment variables in use:"
 env | grep EQ_
 
@@ -28,4 +27,7 @@ env | grep EQ_
 #   npm run compile
 # fi
 
+
+
+python qBuilder/manage.py migrate
 python qBuilder/manage.py runserver
