@@ -60,4 +60,14 @@ describe('editorReducer', () => {
       value: ''
     }))
   })
+
+  it('should handle SAVE_SCHEMA_FAILURE', () => {
+    expect(editorReducer(undefined, {
+      type: types.SAVE_SCHEMA_FAILURE
+    })).toEqual(Map({
+      isFetching: false,
+      isSaving: false,
+      value: ''
+    }))
+  })
 })

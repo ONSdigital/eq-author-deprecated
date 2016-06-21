@@ -4,8 +4,17 @@
  *
  */
 
-import { CHANGE_VALUE, FETCH_SCHEMA_REQUEST, FETCH_SCHEMA_SUCCESS, SAVE_SCHEMA_REQUEST, SAVE_SCHEMA_SUCCESS } from './constants'
+import { CHANGE_VALUE,
+  FETCH_SCHEMA_REQUEST,
+  FETCH_SCHEMA_SUCCESS,
+  SAVE_SCHEMA_REQUEST,
+  SAVE_SCHEMA_SUCCESS,
+  SAVE_SCHEMA_FAILURE
+} from './constants'
+
 import { DEFAULT_HEADERS } from 'global_constants'
+
+import { browserHistory } from 'react-router'
 
 import { js_beautify as beautify } from 'js-beautify' // eslint-disable-line camelcase
 
@@ -36,6 +45,12 @@ export function saveSchemaRequest() {
   }
 }
 
+export function saveSchemaFailure() {
+  return {
+    type: SAVE_SCHEMA_FAILURE
+  }
+}
+
 export function fetchSchema(schemaID) {
   return function(dispatch) {
     dispatch(fetchSchemaRequest())
@@ -56,23 +71,38 @@ export function saveSchemaSuccess() {
 export function saveSchema(schemaID) {
   return function(dispatch, getState) {
     dispatch(saveSchemaRequest())
-    return fetch(`/api/v1/schema/${schemaID}/`, {
-      method: 'PUT',
+
+    const isNewSchema = (schemaID === undefined)
+
+    let url = `/api/v1/schema/${schemaID}/`
+    let method = 'PUT'
+
+    if (isNewSchema) {
+      url = '/api/v1/schema/'
+      method = 'POST'
+    }
+
+    return fetch(url, {
+      method: method,
       headers: DEFAULT_HEADERS,
       body: getState().get('editor').get('value')
     }).then(response => {
       if (response.ok) {
+        if (isNewSchema) {
+          response.text().then(schemaID => browserHistory.push(`/editor/${schemaID}`))
+        }
+
         let tID = window.setTimeout(() => {
           dispatch(saveSchemaSuccess())
           window.clearTimeout(tID)
         }, 1000)
       } else {
-        window.alert('Something went wrong!')
+        dispatch(saveSchemaFailure())
+        response.text().then(error => window.alert(`Error: ${error}`))
       }
     })
     .catch(err => {
-      /* eslint-disable no-console */
-      console.error(err)
+      console.error(err) // eslint-disable-line no-console
     })
   }
 }

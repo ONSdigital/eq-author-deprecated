@@ -10,6 +10,7 @@ import { fetchSchemas } from './actions'
 
 import SchemaList from 'components/SchemaList'
 import MainLayout from 'components/MainLayout'
+import Button from 'components/Button'
 
 export class Schemas extends Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -20,7 +21,17 @@ export class Schemas extends Component { // eslint-disable-line react/prefer-sta
 
   render() {
     return (
-      <MainLayout mainChildren={<SchemaList {...this.props} />} />
+      <MainLayout
+
+        mainChildren={
+          <SchemaList {...this.props} />
+        }
+
+        headerChildren={
+          <Button type='primary' icon='plus' to='/editor/'>Add new schema</Button>
+        }
+
+      />
     )
   }
 }

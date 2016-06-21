@@ -12,6 +12,8 @@ describe('<Editor />', () => {
     props = {
       value: 'hello',
       isSaving: false,
+      isFetching: false,
+      route: {},
       params: {},
       actions: {
         changeValue: () => { }

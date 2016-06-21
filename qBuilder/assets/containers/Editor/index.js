@@ -18,29 +18,33 @@ export class Editor extends Component {
 
   componentDidMount() {
     const { actions, params } = this.props
-    actions.fetchSchema(params.schemaID)
+    if (params.schemaID !== undefined) {
+      actions.fetchSchema(params.schemaID)
+    } else {
+      actions.changeValue('')
+    }
   }
 
   render() {
     const { actions, value, params, isSaving } = this.props
 
-    const getJsonEditor = () => (
-      <JsonEditor value={value} onChange={actions.changeValue} />
-    )
-
     const saveSchema = () => {
       actions.saveSchema(params.schemaID)
     }
 
-    const getButtons = () => (
-      [
-        <Button key='btn-1' type='secondary' onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save'}</Button>,
-        <Button key='btn-2' type='primary' icon='menu' to='/'>List schemas</Button>
-      ]
-    )
-
     return (
-      <MainLayout mainChildren={getJsonEditor()} headerChildren={getButtons()} />
+      <MainLayout
+
+        mainChildren={
+          <JsonEditor value={value} onChange={actions.changeValue} />
+        }
+
+        headerChildren={[
+          <Button key='btn-1' type='secondary' onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save'}</Button>,
+          <Button key='btn-2' type='primary' icon='menu' to='/'>List schemas</Button>
+        ]}
+
+      />
     )
   }
 }
@@ -64,6 +68,7 @@ Editor.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   isSaving: PropTypes.bool.isRequired,
   params: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
   value: PropTypes.string.isRequired,
 }
 
