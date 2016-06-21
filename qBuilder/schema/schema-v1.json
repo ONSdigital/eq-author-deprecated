@@ -26,10 +26,7 @@
         "description": {
           "type": "string"
         }
-      },
-      "required": [
-        "description"
-      ]
+      }
     },
     "groups": {
       "type": "array",
@@ -129,9 +126,7 @@
                                   "id",
                                   "q_code",
                                   "label",
-                                  "guidance",
                                   "type",
-                                  "options",
                                   "mandatory"
                                 ]
                               }
@@ -140,7 +135,6 @@
                           "required": [
                             "id",
                             "title",
-                            "description",
                             "type",
                             "responses"
                           ]
@@ -150,7 +144,6 @@
                     "required": [
                       "id",
                       "title",
-                      "description",
                       "questions"
                     ]
                   }
@@ -178,7 +171,6 @@
     "questionnaire_id",
     "survey_id",
     "title",
-    "description",
     "introduction",
     "groups"
   ]
