@@ -19,16 +19,12 @@ export default function(injectReducer, loadModule, errorLoading) {
     path: '/editor',
     name: 'new',
     indexRoute: {
-      getComponent(nextState, cb) {
-        getComponent(nextState, cb)
-      }
+      getComponent: getComponent
     },
     childRoutes: [{
       path: ':schemaID',
       name: 'edit',
-      getComponent(nextState, cb) {
-        getComponent(nextState, cb)
-      }
+      getComponent: getComponent
     }]
   }
 }
