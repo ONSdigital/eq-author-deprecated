@@ -19,6 +19,7 @@ import { applyRouterMiddleware, Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import useScroll from 'react-router-scroll'
 import configureStore from './store'
+import { getHooks } from 'utils/hooks'
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/lib/sanitize.css'
@@ -40,10 +41,21 @@ const history = syncHistoryWithStore(browserHistory, store, {
 
 // Set up the router, wrapping all Routes in the App component
 import App from 'containers/App'
-import createRoutes from './routes'
+import routes from './routes'
+
+const errorLoading = (err) => {
+  console.error('Dynamic page loading failed', err) // eslint-disable-line no-console
+}
+
+const loadModule = (cb) => (componentModule) => {
+  cb(null, componentModule.default)
+}
+
+const { injectReducer } = getHooks(store)
+
 const rootRoute = {
   component: App,
-  childRoutes: createRoutes(store),
+  childRoutes: routes.map(route => route(injectReducer, loadModule, errorLoading)),
 }
 
 if (process.env.NODE_ENV === 'development') {
