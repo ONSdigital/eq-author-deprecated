@@ -8,7 +8,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchSchemas } from './actions'
 
-import SchemaList from 'components/SchemaList'
+import SchemaList from '../../components/SchemaList'
 import MainLayout from 'components/MainLayout'
 import Button from 'components/Button'
 

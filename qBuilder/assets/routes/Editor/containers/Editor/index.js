@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as EditorActions from './actions'
 
-import JsonEditor from 'components/JsonEditor'
+import JsonEditor from '../../components/JsonEditor'
 import MainLayout from 'components/MainLayout'
 import Button from 'components/Button'
 

@@ -4,8 +4,8 @@ export default function(injectReducer, loadModule, errorLoading) {
     name: 'home',
     getComponent(nextState, cb) {
       const importModules = Promise.all([
-        System.import('containers/Schemas/reducer'),
-        System.import('containers/Schemas'),
+        System.import('./containers/Schemas/reducer'),
+        System.import('./containers/Schemas'),
       ])
 
       const renderRoute = loadModule(cb)
