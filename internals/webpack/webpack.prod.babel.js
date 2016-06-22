@@ -3,7 +3,6 @@ const paths = require('../paths')
 const webpack = require('webpack')
 const BundleTracker = require('webpack-bundle-tracker')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const OfflinePlugin = require('offline-plugin')
 
 // PostCSS plugins
 const precss = require('precss')
@@ -61,27 +60,7 @@ module.exports = require('./webpack.base.babel')({
     new BundleTracker({filename: './qBuilder/webpack-stats-prod.json'}),
 
     // Extract the CSS into a seperate file
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    new ExtractTextPlugin('[name].[contenthash].css')
 
-    // Put it in the end to capture all the HtmlWebpackPlugin's
-    // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
-    new OfflinePlugin({
-      ServiceWorker: {
-        output: '/bundles/sw.js'
-      },
-      relativePaths: true, // Use generated relative paths by default
-      // No need to cache .htaccess. See http://mxs.is/googmp,
-      // this is applied before any match in `caches` section
-      excludes: ['.htaccess'],
-
-      caches: {
-        main: [':rest:'],
-
-        // All chunks marked as `additional`, loaded after main section
-        // and do not prevent SW to install. Change to `optional` if
-        // do not want them to be preloaded at all (cached only when first loaded)
-        additional: ['*.chunk.js'],
-      },
-    }),
   ],
 })
