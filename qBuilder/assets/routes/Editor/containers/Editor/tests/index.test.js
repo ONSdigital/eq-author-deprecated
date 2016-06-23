@@ -1,6 +1,6 @@
 import { Editor } from '../index'
 import Button from 'components/Button'
-import JsonEditor from 'components/JsonEditor'
+import JsonEditor from '../../../components/JsonEditor'
 import expect from 'expect'
 import { shallow } from 'enzyme'
 import React from 'react'
