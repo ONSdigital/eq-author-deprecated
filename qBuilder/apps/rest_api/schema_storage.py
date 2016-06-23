@@ -5,7 +5,7 @@ import config
 
 logger = logging.getLogger(__name__)
 
-BUCKET_NAME = config.EQ_BUCKET_NAME
+BUCKET_NAME = config.EQ_SCHEMA_BUCKET
 
 
 class SchemaStorageError(BaseException):
