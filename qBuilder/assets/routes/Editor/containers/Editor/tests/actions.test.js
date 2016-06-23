@@ -17,7 +17,9 @@ describe('Editor sync actions', () => {
       const value = { foo: 'bar' }
       const expectedResult = {
         type: types.CHANGE_VALUE,
-        value: value,
+        payload: {
+          value: value,
+        }
       }
       expect(actions.changeValue(value)).toEqual(expectedResult)
     })
@@ -28,7 +30,9 @@ describe('Editor sync actions', () => {
       const value = '//fetching schema...'
       const expectedResult = {
         type: types.FETCH_SCHEMA_REQUEST,
-        value,
+        payload: {
+          value
+        },
       }
       expect(actions.fetchSchemaRequest(value)).toEqual(expectedResult)
     })
@@ -39,7 +43,9 @@ describe('Editor sync actions', () => {
       const value = { foo: 'bar' }
       const expectedResult = {
         type: types.FETCH_SCHEMA_SUCCESS,
-        value,
+        payload: {
+          value,
+        }
       }
       expect(actions.fetchSchemaSuccess(value)).toEqual(expectedResult)
     })
@@ -76,8 +82,16 @@ describe('Editor async actions', () => {
     fetchMock.mock(`/api/v1/schema/${schemaID}/`, { body: value })
 
     const expectedActions = [
-      { type: types.FETCH_SCHEMA_REQUEST, value: '//fetching schema...' },
-      { type: types.FETCH_SCHEMA_SUCCESS, value }
+      { type: types.FETCH_SCHEMA_REQUEST,
+        payload: {
+          value: '//fetching schema...'
+        }
+      },
+      { type: types.FETCH_SCHEMA_SUCCESS,
+        payload: {
+          value
+        }
+      }
     ]
 
     const store = mockStore({ value: {} })

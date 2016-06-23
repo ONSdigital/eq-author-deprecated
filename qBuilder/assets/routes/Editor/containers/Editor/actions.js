@@ -21,21 +21,27 @@ import { js_beautify as beautify } from 'js-beautify' // eslint-disable-line cam
 export function changeValue(value) {
   return {
     type: CHANGE_VALUE,
-    value
+    payload: {
+      value
+    }
   }
 }
 
 export function fetchSchemaRequest() {
   return {
     type: FETCH_SCHEMA_REQUEST,
-    value: '//fetching schema...'
+    payload: {
+      value: '//fetching schema...'
+    }
   }
 }
 
 export function fetchSchemaSuccess(value) {
   return {
     type: FETCH_SCHEMA_SUCCESS,
-    value
+    payload: {
+      value
+    }
   }
 }
 

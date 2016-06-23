@@ -24,7 +24,9 @@ describe('Schemas sync actions', () => {
       const schemas = []
       const expectedResult = {
         type: types.FETCH_SCHEMAS_SUCCESS,
-        schemas: schemas
+        payload: {
+          schemas: schemas
+        }
       }
       expect(actions.fetchSchemasSuccess(schemas)).toEqual(expectedResult)
     })
@@ -41,7 +43,11 @@ describe('Schemas async actions', () => {
 
     const expectedActions = [
       { type: types.FETCH_SCHEMAS_REQUEST },
-      { type: types.FETCH_SCHEMAS_SUCCESS, schemas: { foo: 'bar' } }
+      { type: types.FETCH_SCHEMAS_SUCCESS,
+        payload: {
+          schemas: { foo: 'bar' }
+        }
+      }
     ]
 
     const store = mockStore()
