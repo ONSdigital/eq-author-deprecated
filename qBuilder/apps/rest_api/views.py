@@ -46,8 +46,7 @@ class Schema(GenericAPIView, ListModelMixin):
 
         eq_id = schema.eq_id
         # construct the file name for s3
-        # TODO remove form type (_0) when we address the unique eq_id
-        key = str(eq_id) + '_0.json'
+        key = str(eq_id) + '.json'
         logger.debug("Filename for new schema is %s", key)
         # push it to s3
         schema_storage = SchemaStorageFactory.get_instance()
@@ -81,8 +80,7 @@ class SchemaDetail(APIView):
         :param eq_id: the eq id
         :return: the entire schema
         '''
-        # TODO as above
-        key = eq_id + '_0.json'
+        key = eq_id + '.json'
         logger.debug("Looking for object with key %s", key)
         try:
             schema_storage = SchemaStorageFactory.get_instance()
