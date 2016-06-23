@@ -12,7 +12,6 @@ test_schema = {
   "schema_version": "0.0.1",
   "questionnaire_id": "333",
   "survey_id": "33",
-  "eq_id": "0",
   "title": "Star Wars",
   "description": "Star Wars VII",
   "introduction": {
@@ -89,8 +88,7 @@ class SchemaAPI(TestCase):
         response = self.client.get(reverse("schema"))
         self.assertEquals(200, response.status_code)
         self.assertEquals(1, response.data[0]['eq_id'])
-        # TODO remove form type
-        self.assertEquals("1_0.json", response.data[0]['file_name'])
+        self.assertEquals("1.json", response.data[0]['file_name'])
         self.assertEquals("Star Wars", response.data[0]['title'])
         self.assertEquals("Star Wars VII", response.data[0]['description'])
 
