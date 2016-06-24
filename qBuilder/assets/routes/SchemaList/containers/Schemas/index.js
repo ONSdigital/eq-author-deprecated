@@ -6,7 +6,7 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchSchemas } from './actions'
+import { loadSchemas } from './actions'
 
 import SchemaList from '../../components/SchemaList'
 import MainLayout from 'components/MainLayout'
@@ -16,7 +16,7 @@ export class Schemas extends Component { // eslint-disable-line react/prefer-sta
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(fetchSchemas())
+    dispatch(loadSchemas())
   }
 
   render() {
@@ -38,6 +38,7 @@ export class Schemas extends Component { // eslint-disable-line react/prefer-sta
 
 function mapStateToProps(state) {
   const schemas = state.get('schemas').toJS()
+  console.log(schemas);
   return {
     schemas: schemas.items
   }

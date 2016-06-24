@@ -28,11 +28,11 @@ function editorReducer(state = initialState, action) {
     case FETCH_SCHEMA_REQUEST:
       return state
         .set('isFetching', true)
-        .set('value', action.payload.value)
+        .set('value', action.payload)
     case FETCH_SCHEMA_SUCCESS:
       return state
         .set('isFetching', false)
-        .set('value', action.payload.value)
+        .set('value', action.payload)
     case SAVE_SCHEMA_REQUEST:
       return state
         .set('isSaving', true)
