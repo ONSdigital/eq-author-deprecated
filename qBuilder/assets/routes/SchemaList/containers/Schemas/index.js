@@ -38,7 +38,6 @@ export class Schemas extends Component { // eslint-disable-line react/prefer-sta
 
 function mapStateToProps(state) {
   const schemas = state.get('schemas').toJS()
-  console.log(schemas);
   return {
     schemas: schemas.items
   }

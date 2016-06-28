@@ -4,16 +4,30 @@
  *
  */
 
-import { FETCH_SCHEMAS_REQUEST, FETCH_SCHEMAS_SUCCESS, FETCH_SCHEMAS_FAILURE } from './constants'
-import { CALL_API } from 'redux-api-middleware'
+import { LOAD_SCHEMAS, FETCH_SCHEMAS_REQUEST, FETCH_SCHEMAS_SUCCESS, FETCH_SCHEMAS_FAILURE } from './constants'
 
-const fetchSchemas = () => ({
-  [CALL_API]: {
-    endpoint: '/api/v1/schema/',
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-    types: [ FETCH_SCHEMAS_REQUEST, FETCH_SCHEMAS_SUCCESS, FETCH_SCHEMAS_FAILURE ],
+export function loadSchemas() {
+  return {
+    type: LOAD_SCHEMAS,
   }
-})
+}
 
-export const loadSchemas = () => dispatch => dispatch(fetchSchemas())
+export function fetchSchemasRequest() {
+  return {
+    type: FETCH_SCHEMAS_REQUEST,
+  }
+}
+
+export function fetchSchemasSuccess(schemas) {
+  return {
+    type: FETCH_SCHEMAS_SUCCESS,
+    payload: schemas
+  }
+}
+
+export function fetchSchemasFailure(error) {
+  return {
+    type: FETCH_SCHEMAS_FAILURE,
+    error
+  }
+}

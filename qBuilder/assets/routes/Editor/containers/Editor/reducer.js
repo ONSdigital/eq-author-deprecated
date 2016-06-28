@@ -9,6 +9,7 @@ import {
   CHANGE_VALUE,
   FETCH_SCHEMA_REQUEST,
   FETCH_SCHEMA_SUCCESS,
+  FETCH_SCHEMA_FAILURE,
   SAVE_SCHEMA_REQUEST,
   SAVE_SCHEMA_SUCCESS,
   SAVE_SCHEMA_FAILURE
@@ -28,11 +29,14 @@ function editorReducer(state = initialState, action) {
     case FETCH_SCHEMA_REQUEST:
       return state
         .set('isFetching', true)
-        .set('value', action.payload)
     case FETCH_SCHEMA_SUCCESS:
       return state
         .set('isFetching', false)
-        .set('value', action.payload)
+        .set('value', action.payload.value)
+    case FETCH_SCHEMA_FAILURE:
+      return state
+        .set('isFetching', false)
+        .set('value', action.payload.value)
     case SAVE_SCHEMA_REQUEST:
       return state
         .set('isSaving', true)

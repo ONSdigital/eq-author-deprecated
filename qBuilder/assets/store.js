@@ -8,11 +8,11 @@ import { routerMiddleware } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
 import { apiMiddleware } from 'redux-api-middleware'
 import createLogger from 'redux-logger'
-// import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware from 'redux-saga'
 import createReducer from './reducers'
 
 const loggerMiddleware = createLogger()
-// const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware()
 const devtools = window.devToolsExtension || (() => noop => noop)
 
 export default function configureStore(initialState = {}, history) {
@@ -20,6 +20,7 @@ export default function configureStore(initialState = {}, history) {
     apiMiddleware,
     thunkMiddleware,
     loggerMiddleware,
+    sagaMiddleware,
     routerMiddleware(history),
   ]
 
@@ -34,10 +35,8 @@ export default function configureStore(initialState = {}, history) {
     compose(...enhancers)
   )
 
-  // Create hook for async sagas
-  // store.runSaga = sagaMiddleware.run
-
-  // Make reducers hot reloadable, see http://mxs.is/googmo
+  store.runSaga = sagaMiddleware.run
+  store.asyncReducers = {}
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
@@ -49,7 +48,5 @@ export default function configureStore(initialState = {}, history) {
     })
   }
 
-  // Initialize it with no other reducers
-  store.asyncReducers = {}
   return store
 }

@@ -51,11 +51,11 @@ const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default)
 }
 
-const { injectReducer } = getHooks(store)
+const { injectReducer, injectSagas } = getHooks(store)
 
 const rootRoute = {
   component: App,
-  childRoutes: routes.map(route => route(injectReducer, loadModule, errorLoading)),
+  childRoutes: routes.map(route => route(injectReducer, injectSagas, loadModule, errorLoading)),
 }
 
 if (process.env.NODE_ENV === 'development') {
