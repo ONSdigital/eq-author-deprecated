@@ -5,8 +5,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { fromJS } from 'immutable'
 import { routerMiddleware } from 'react-router-redux'
-import thunkMiddleware from 'redux-thunk'
-import { apiMiddleware } from 'redux-api-middleware'
+
 import createLogger from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 import createReducer from './reducers'
@@ -17,8 +16,6 @@ const devtools = window.devToolsExtension || (() => noop => noop)
 
 export default function configureStore(initialState = {}, history) {
   const middlewares = [
-    apiMiddleware,
-    thunkMiddleware,
     loggerMiddleware,
     sagaMiddleware,
     routerMiddleware(history),

@@ -29,6 +29,7 @@ function editorReducer(state = initialState, action) {
     case FETCH_SCHEMA_REQUEST:
       return state
         .set('isFetching', true)
+        .set('value', action.payload.value)
     case FETCH_SCHEMA_SUCCESS:
       return state
         .set('isFetching', false)

@@ -8,6 +8,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as EditorActions from './actions'
+import { selectEditorValue, selectIsSaving, selectIsFetching } from './selectors'
 
 import JsonEditor from '../../components/JsonEditor'
 import MainLayout from 'components/MainLayout'
@@ -49,19 +50,15 @@ export class Editor extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(EditorActions, dispatch)
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(EditorActions, dispatch)
+})
 
-function mapStateToProps(state) {
-  return {
-    value: state.get('editor').get('value'),
-    isSaving: state.get('editor').get('isSaving'),
-    isFetching: state.get('editor').get('isFetching')
-  }
-}
+const mapStateToProps = state => ({
+  value: selectEditorValue(state),
+  isSaving: selectIsSaving(state),
+  isFetching: selectIsFetching(state),
+})
 
 Editor.propTypes = {
   actions: PropTypes.object.isRequired,

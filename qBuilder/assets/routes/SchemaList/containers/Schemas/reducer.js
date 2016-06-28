@@ -22,7 +22,7 @@ function schemasReducer(state = initialState, action) {
     case FETCH_SCHEMAS_SUCCESS:
       return state
         .set('isFetching', false)
-        .set('items', action.payload)
+        .set('items', action.payload.schemas)
     case FETCH_SCHEMAS_FAILURE:
       return state
         .set('isFetching', false)

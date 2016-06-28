@@ -6,22 +6,31 @@ import { delay } from 'redux-saga'
 import { saveSchemaRequest, saveSchemaSuccess, saveSchemaFailure,
          fetchSchemaRequest, fetchSchemaSuccess, fetchSchemaFailure } from './actions'
 
+import { selectEditorValue } from './selectors'
+
 import { browserHistory } from 'react-router'
 
 import { js_beautify as beautify } from 'js-beautify' // eslint-disable-line camelcase
 
 import request from 'utils/request'
 
+export function beautifySchema(schema) {
+  return beautify(JSON.stringify(schema), { indent_size: 2 })
+}
+
 export function* loadSchema(action) {
+  // dispatch action
   yield put(fetchSchemaRequest())
 
+  // perform API call
   const schema = yield call(request, `/api/v1/schema/${action.payload.schemaID}/`)
 
+  // handle response/errors
   if (!schema.err) {
-    const json = beautify(JSON.stringify(schema.data), { indent_size: 2 })
-    yield put(fetchSchemaSuccess(json))
+    // beautify the resonse if successful and dispatch success action
+    yield put(fetchSchemaSuccess(beautifySchema(schema.data)))
   } else {
-    yield put(fetchSchemaFailure(schema.err.response))
+    yield put(fetchSchemaFailure(schema.err))
   }
 }
 
@@ -30,12 +39,17 @@ export function* saveSchema(action) {
   let endpoint = '/api/v1/schema/'
   let method = 'POST'
 
+  // if no schemaID exists then it's a new schema
   if (schemaID !== undefined) {
     endpoint = `${endpoint}${schemaID}/`
     method = 'PUT'
   }
 
-  const body = yield select(state => state.get('editor').get('value'))
+  // get the current value of the JSON editor from the state
+  const body = yield select(selectEditorValue)
+  // dispatch action to update UI
+  yield put(saveSchemaRequest())
+  // perform API call
   const schema = yield call(request, endpoint, {
     method: method,
     headers: {
@@ -45,19 +59,20 @@ export function* saveSchema(action) {
     body: body
   })
 
-  yield put(saveSchemaRequest())
-
   if (!schema.err) {
     if (schemaID === undefined) {
-      browserHistory.push(`/editor/${schema.data}`)
+      // if new schema forward the browser
+      yield call(browserHistory.push, `/editor/${schema.data}`)
     }
-    yield call(delay, 1000)
+    // aribtrary UI delay
+    yield delay(500)
     yield put(saveSchemaSuccess())
   } else {
     yield put(saveSchemaFailure(schema.err.response))
   }
 }
 
+// watch for loadSchema actions
 export function* loadSchemaWatcher() {
   while (true) {
     const action = yield take(LOAD_SCHEMA)
@@ -65,6 +80,7 @@ export function* loadSchemaWatcher() {
   }
 }
 
+// watch for saveSchema actions
 export function* saveSchemaWatcher() {
   while (true) {
     const action = yield take(SAVE_SCHEMA)
@@ -72,6 +88,8 @@ export function* saveSchemaWatcher() {
   }
 }
 
+// sets up watchers as background task and cancels them when route changes
+// or schema is saved
 export function* editorData() {
   const watcher = yield [
     fork(loadSchemaWatcher),

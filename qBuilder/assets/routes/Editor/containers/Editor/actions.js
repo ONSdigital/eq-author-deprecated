@@ -41,11 +41,11 @@ export function saveSchema(schemaID) {
   }
 }
 
-export function fetchSchemaRequest(value) {
+export function fetchSchemaRequest() {
   return {
     type: FETCH_SCHEMA_REQUEST,
     payload: {
-      value
+      value: '//Loading schema'
     }
   }
 }
@@ -64,7 +64,7 @@ export function fetchSchemaFailure(err) {
     type: FETCH_SCHEMA_FAILURE,
     error: err,
     payload: {
-      value: 'There was an error loading the schema'
+      value: '//There was an error loading the schema'
     }
   }
 }

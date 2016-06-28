@@ -19,7 +19,7 @@ describe('Editor sync actions', () => {
 
   describe('fetchSchemaRequest', () => {
     it('Should return the correct type and the passed value', () => {
-      const value = '//fetching schema...'
+      const value = '//Loading schema'
       const expectedResult = {
         type: types.FETCH_SCHEMA_REQUEST,
         payload: {
