@@ -17,7 +17,6 @@ import Button from 'components/Button'
 export class Editor extends Component {
 
   componentDidMount() {
-    console.log('componentDidMount')
     const { actions, params } = this.props
     if (params.schemaID !== undefined) {
       actions.loadSchema(params.schemaID)

@@ -1,11 +1,8 @@
-/**
- * Gets the repositories of the user from Github
- */
-
-import { take, call, put, fork, cancel, select } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
-import { LOAD_SCHEMA, SAVE_SCHEMA } from './constants'
+import { LOAD_SCHEMA, SAVE_SCHEMA, SAVE_SCHEMA_SUCCESS } from './constants'
 import { LOCATION_CHANGE } from 'react-router-redux'
+
+import { take, takeLatest, call, put, fork, cancel, select } from 'redux-saga/effects'
+import { delay } from 'redux-saga'
 import { saveSchemaRequest, saveSchemaSuccess, saveSchemaFailure,
          fetchSchemaRequest, fetchSchemaSuccess, fetchSchemaFailure } from './actions'
 
@@ -62,8 +59,10 @@ export function* saveSchema(action) {
 }
 
 export function* loadSchemaWatcher() {
-  const action = yield take(LOAD_SCHEMA)
-  yield call(loadSchema, action)
+  while (true) {
+    const action = yield take(LOAD_SCHEMA)
+    yield call(loadSchema, action)
+  }
 }
 
 export function* saveSchemaWatcher() {
@@ -79,8 +78,11 @@ export function* editorData() {
     fork(saveSchemaWatcher)
   ]
 
-  yield take(LOCATION_CHANGE)
-  yield watcher.every(task => cancel(task))
+  yield [
+    take(LOCATION_CHANGE),
+    take(SAVE_SCHEMA_SUCCESS)
+  ]
+  yield watcher.forEach(task => task.cancel())
 }
 
 export default [

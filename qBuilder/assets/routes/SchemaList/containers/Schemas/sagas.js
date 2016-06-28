@@ -1,10 +1,7 @@
-/**
- * Gets the repositories of the user from Github
- */
-
-import { take, call, put, fork, cancel } from 'redux-saga/effects'
 import { LOAD_SCHEMAS } from './constants'
 import { LOCATION_CHANGE } from 'react-router-redux'
+
+import { take, call, put, fork, cancel } from 'redux-saga/effects'
 import { fetchSchemasRequest, fetchSchemasSuccess, fetchSchemasFailure } from './actions'
 
 import request from 'utils/request'
