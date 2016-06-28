@@ -1,7 +1,7 @@
 import { LOAD_SCHEMA, SAVE_SCHEMA, SAVE_SCHEMA_SUCCESS } from './constants'
 import { LOCATION_CHANGE } from 'react-router-redux'
 
-import { take, takeLatest, call, put, fork, cancel, select } from 'redux-saga/effects'
+import { take, call, put, fork, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { saveSchemaRequest, saveSchemaSuccess, saveSchemaFailure,
          fetchSchemaRequest, fetchSchemaSuccess, fetchSchemaFailure } from './actions'

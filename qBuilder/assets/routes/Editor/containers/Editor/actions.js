@@ -41,9 +41,12 @@ export function saveSchema(schemaID) {
   }
 }
 
-export function fetchSchemaRequest() {
+export function fetchSchemaRequest(value) {
   return {
-    type: FETCH_SCHEMA_REQUEST
+    type: FETCH_SCHEMA_REQUEST,
+    payload: {
+      value
+    }
   }
 }
 

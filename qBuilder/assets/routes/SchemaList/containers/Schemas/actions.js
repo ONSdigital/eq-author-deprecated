@@ -21,7 +21,9 @@ export function fetchSchemasRequest() {
 export function fetchSchemasSuccess(schemas) {
   return {
     type: FETCH_SCHEMAS_SUCCESS,
-    payload: schemas
+    payload: {
+      schemas: schemas
+    }
   }
 }
 

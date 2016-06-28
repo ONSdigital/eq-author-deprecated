@@ -120,7 +120,6 @@
     "expect-jsx": "^2.5.1",
     "exports-loader": "^0.6.3",
     "extract-text-webpack-plugin": "^1.0.1",
-    "fetch-mock": "^4.5.4",
     "file-loader": "^0.8.5",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.16.0",

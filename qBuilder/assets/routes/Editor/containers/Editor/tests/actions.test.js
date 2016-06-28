@@ -1,15 +1,7 @@
 import expect from 'expect'
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-import fetchMock from 'fetch-mock'
 
 import * as actions from '../actions'
 import * as types from '../constants'
-
-const middlewares = [ thunk ]
-const mockStore = configureMockStore(middlewares)
-
-import { js_beautify as beautify } from 'js-beautify' // eslint-disable-line camelcase
 
 describe('Editor sync actions', () => {
   describe('changeValue', () => {
@@ -67,38 +59,5 @@ describe('Editor sync actions', () => {
       }
       expect(actions.saveSchemaSuccess()).toEqual(expectedResult)
     })
-  })
-})
-
-describe('Editor async actions', () => {
-  afterEach(() => {
-    fetchMock.reset()
-  })
-
-  it('creates FETCH_SCHEMA_SUCCESS when fetching schema', () => {
-    const value = beautify('{ success: true }', { indent_size: 2 })
-    const schemaID = 'blah'
-
-    fetchMock.mock(`/api/v1/schema/${schemaID}/`, { body: value })
-
-    const expectedActions = [
-      { type: types.FETCH_SCHEMA_REQUEST,
-        payload: {
-          value: '//fetching schema...'
-        }
-      },
-      { type: types.FETCH_SCHEMA_SUCCESS,
-        payload: {
-          value
-        }
-      }
-    ]
-
-    const store = mockStore({ value: {} })
-
-    return store.dispatch(actions.fetchSchema(schemaID))
-      .then(() => {
-        expect(store.getActions()).toEqual(expectedActions)
-      })
   })
 })
