@@ -31,6 +31,8 @@ export function* loadSchema(action) {
     yield put(fetchSchemaSuccess(beautifySchema(schema.data)))
   } else {
     yield put(fetchSchemaFailure(schema.err))
+    window.alert('There was a problem loading this schema. See the Console for errors.')
+    console.error(schema.err.response) // eslint-disable-line
   }
 }
 
@@ -69,6 +71,12 @@ export function* saveSchema(action) {
     yield put(saveSchemaSuccess())
   } else {
     yield put(saveSchemaFailure(schema.err.response))
+    if (schema.err.response.body) {
+      schema.err.response.text().then(body => alert('Error: \n' + body)) //eslint-disable-line
+    } else {
+      window.alert('There was a problem saving this schema. See the Console for errors.')
+      console.error(schema.err.response) // eslint-disable-line
+    }
   }
 }
 
