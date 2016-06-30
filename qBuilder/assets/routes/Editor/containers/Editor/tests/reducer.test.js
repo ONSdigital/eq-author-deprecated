@@ -11,7 +11,9 @@ describe('editorReducer', () => {
   it('should handle CHANGE_VALUE', () => {
     expect(editorReducer(undefined, {
       type: types.CHANGE_VALUE,
-      value: 'hello'
+      payload: {
+        value: 'hello'
+      }
     })).toEqual(Map({
       isFetching: false,
       isSaving: false,
@@ -22,7 +24,9 @@ describe('editorReducer', () => {
   it('should handle FETCH_SCHEMA_REQUEST', () => {
     expect(editorReducer(undefined, {
       type: types.FETCH_SCHEMA_REQUEST,
-      value: ''
+      payload: {
+        value: ''
+      }
     })).toEqual(Map({
       isFetching: true,
       isSaving: false,
@@ -33,7 +37,9 @@ describe('editorReducer', () => {
   it('should handle FETCH_SCHEMA_SUCCESS', () => {
     expect(editorReducer(undefined, {
       type: types.FETCH_SCHEMA_SUCCESS,
-      value: 'hello'
+      payload: {
+        value: 'hello'
+      }
     })).toEqual(Map({
       isFetching: false,
       isSaving: false,

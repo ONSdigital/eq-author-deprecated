@@ -1,14 +1,16 @@
-export default function(injectReducer, loadModule, errorLoading) {
+export default function(injectReducer, injectSagas, loadModule, errorLoading) {
   const getComponent = (nextState, cb) => {
     const importModules = Promise.all([
       System.import('./containers/Editor/reducer'),
+      System.import('./containers/Editor/sagas'),
       System.import('./containers/Editor'),
     ])
 
     const renderRoute = loadModule(cb)
 
-    importModules.then(([reducer, component]) => {
+    importModules.then(([reducer, sagas, component]) => {
       injectReducer('editor', reducer.default)
+      injectSagas(sagas.default)
       renderRoute(component)
     })
 

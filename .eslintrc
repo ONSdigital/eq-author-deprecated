@@ -71,5 +71,7 @@
     "no-use-before-define": 0,
     "newline-per-chained-call": 0,
     "arrow-body-style": [1, "as-needed"],
+    "generator-star-spacing": ["error", {"before": false, "after": true}],
+    "yield-star-spacing": ["error", {"before": false, "after": true}]
   }
 }
