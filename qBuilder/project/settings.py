@@ -134,10 +134,15 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'file': {
-            'level': os.getenv('DJANGO_LOGGING_LEVEL', 'WARNING'),
-            'class': 'logging.FileHandler',
-            'filename': os.getenv('DJANGO_LOG_FILE', 'author.log')
+       'stdout': {
+            'level':  os.getenv('DJANGO_LOGGING_LEVEL', 'WARNING'),
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout
+        },
+        'stderr': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+            'stream': sys.stderr
         }
     }
 }
