@@ -10,7 +10,7 @@ import { loadSchemas } from './actions'
 import { selectSchemas } from './selectors'
 
 import SchemaList from '../../components/SchemaList'
-import MainLayout from 'components/MainLayout'
+import MainLayout from 'layouts/MainLayout'
 import Button from 'components/Button'
 
 export class Schemas extends Component { // eslint-disable-line react/prefer-stateless-function

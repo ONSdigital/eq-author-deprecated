@@ -4,21 +4,25 @@
 *
 */
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 {{#if wantCSS}}
 import styles from './styles.css'
 {{/if}}
 
-function {{ properCase name }}() {
+function {{ properCase name }}({children}) {
   return (
     {{#if wantCSS}}
-    <div className={ styles.{{ camelCase name }} }>
+    <div className={styles.{{ camelCase name }}}>
     {{else}}
     <div>
     {{/if}}
     </div>
   )
+}
+
+{{ properCase name }}.propTypes = {
+  children: PropTypes.element.isRequired,
 }
 
 export default {{ properCase name }}
