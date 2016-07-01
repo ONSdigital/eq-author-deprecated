@@ -2,8 +2,18 @@
   width: 100%;
   height: 100%;
   display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.direction-row {
+  composes: grid;
   flex-direction: row;
-  padding: 0 2rem;
+}
+
+.direction-column {
+  composes: grid;
+  flex-direction: column;
 }
 
 .column {
@@ -11,5 +21,5 @@
   opacity: 0.1;
   border: 1px solid black;
   flex: 1 0 0;
-  margin: 0 1.1rem;
+  margin: 1.1rem;
 }

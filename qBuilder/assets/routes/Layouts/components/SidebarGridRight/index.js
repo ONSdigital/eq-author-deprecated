@@ -15,7 +15,7 @@ function SidebarGridRight({children}) {
 }
 
 SidebarGridRight.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element,
 }
 
 export default SidebarGridRight

@@ -1,6 +1,8 @@
 import Layouts from './components/Layouts'
 import SidebarGridLeft from './components/SidebarGridLeft'
 import SidebarGridRight from './components/SidebarGridRight'
+import FullscreenGrid from './components/FullscreenGrid'
+import ContentPanels from './components/ContentPanels'
 
 export default function(injectReducer, injectSagas, loadModule, errorLoading) {
   return {
@@ -18,6 +20,14 @@ export default function(injectReducer, injectSagas, loadModule, errorLoading) {
       name: 'sidebarGridRight',
       path: 'sidebar-grid-right',
       component: SidebarGridRight
+    }, {
+      name: 'fullscreenGrid',
+      path: 'fullscreen-grid',
+      component: FullscreenGrid
+    }, {
+      name: 'content-panels',
+      path: 'content-panels/:variant',
+      component: ContentPanels
     }]
   }
 }

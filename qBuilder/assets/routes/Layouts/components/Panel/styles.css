@@ -1,0 +1,32 @@
+.panel {
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 3px;
+  border-color: #ebebeb;
+  width: 100%;
+  margin: 1rem;
+}
+
+.whole {
+  composes: panel;
+  flex: 1 1 calc(100% - 2rem);
+  width: calc(100% - 2rem);
+}
+
+.half {
+  composes: panel;
+  flex: 1 1 calc(50% - 2rem);
+  width: calc(50% - 2rem);
+}
+
+.third {
+  composes: panel;
+  flex: 1 1 calc(33.33333% - 2rem);
+  width: calc(33.33333% - 2rem);
+}
+
+.quarter {
+  composes: panel;
+  flex: 1 1 calc(25% - 2rem);
+  width: calc(25% - 2rem);
+}

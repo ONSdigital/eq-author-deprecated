@@ -8,27 +8,25 @@ import React, { PropTypes } from 'react'
 
 import styles from './styles.css'
 
-function Grid({children}) {
-  return (
-    <div className={styles.grid}>
-      <div className={styles.column}></div>
-      <div className={styles.column}></div>
-      <div className={styles.column}></div>
-      <div className={styles.column}></div>
-      <div className={styles.column}></div>
-      <div className={styles.column}></div>
-      <div className={styles.column}></div>
-      <div className={styles.column}></div>
-      <div className={styles.column}></div>
-      <div className={styles.column}></div>
-      <div className={styles.column}></div>
-      <div className={styles.column}></div>
-    </div>
-  )
+export const gridStyles = styles
+
+const getCols = (num) => {
+  let cols = []
+  for (var i = 0; i < num; i++) {
+    cols.push(<div className={styles.column} key={i}></div>)
+  }
+  return cols
 }
 
+const Grid = ({children, direction = 'row'}) => (
+  <div className={styles[`direction-${direction}`]}>
+    {children || getCols(12)}
+  </div>
+)
+
 Grid.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.node,
+  direction: PropTypes.string,
 }
 
 export default Grid
