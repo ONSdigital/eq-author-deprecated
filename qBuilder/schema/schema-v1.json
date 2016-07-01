@@ -81,7 +81,7 @@
                             "type": {
                               "type": "string"
                             },
-                            "responses": {
+                            "answers": {
                               "type": "array",
                               "items": {
                                 "type": "object",
@@ -107,6 +107,9 @@
                                   },
                                   "mandatory": {
                                     "type": "boolean"
+                                  },
+                                  "alias": {
+                                    "type": "string"
                                   },
                                   "display": {
                                     "type": "object",
@@ -136,7 +139,7 @@
                             "id",
                             "title",
                             "type",
-                            "responses"
+                            "answers"
                           ]
                         }
                       }

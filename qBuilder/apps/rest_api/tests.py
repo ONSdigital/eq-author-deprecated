@@ -36,7 +36,7 @@ test_schema = {
                   "title": "Chewie",
                   "description": "Jedi",
                   "type": "Integer",
-                  "responses": [
+                  "answers": [
                     {
                       "id": "6cf5c72a-c1bf-4d0c-af6c-d0f07bc5b65b",
                       "q_code": "22",
@@ -45,6 +45,7 @@ test_schema = {
                       "type": "Integer",
                       "options": [],
                       "mandatory": True,
+                      "alias":"age",
                       "validation": {
                         "messages": {
                           "NOT_INTEGER": "Please enter your age.",
