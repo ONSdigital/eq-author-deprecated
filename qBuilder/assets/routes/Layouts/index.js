@@ -4,14 +4,15 @@ import SidebarGridRight from './components/SidebarGridRight'
 import FullscreenGrid from './components/FullscreenGrid'
 import ContentPanels from './components/ContentPanels'
 import Susi from './components/Susi'
+import LayoutsIndex from './components/LayoutsIndex'
 
-export default function(injectReducer, injectSagas, loadModule, errorLoading) {
+export default function() {
   return {
     name: 'layouts',
     path: '/layouts',
     component: Layouts,
     indexRoute: {
-      component: Layouts
+      component: LayoutsIndex
     },
     childRoutes: [{
       name: 'sidebarGridLeft',
