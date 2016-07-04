@@ -126,8 +126,8 @@ describe('editorDataSaga', () => {
     expect(forkDescriptor.value).toEqual([fork(loadSchemaWatcher), fork(saveSchemaWatcher)])
   })
 
-  it('should yield until LOCATION_CHANGE or SAVE_SCHEMA_SUCCESS action', () => {
-    expect(generator.next().value).toEqual([take(LOCATION_CHANGE), take(SAVE_SCHEMA_SUCCESS)])
+  it('should yield until LOCATION_CHANGE  action', () => {
+    expect(generator.next().value).toEqual(take(LOCATION_CHANGE))
   })
 
   it('should finally cancel() the forked getReposWatcher saga',

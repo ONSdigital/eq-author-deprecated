@@ -1,7 +1,7 @@
-import { LOAD_SCHEMA, SAVE_SCHEMA, SAVE_SCHEMA_SUCCESS } from './constants'
+import { LOAD_SCHEMA, SAVE_SCHEMA, SAVE_SCHEMA_SUCCESS, SAVE_SCHEMA_FAILURE } from './constants'
 import { LOCATION_CHANGE } from 'react-router-redux'
 
-import { take, call, put, fork, select } from 'redux-saga/effects'
+import { take, call, put, fork, select, cancel, race } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { saveSchemaRequest, saveSchemaSuccess, saveSchemaFailure,
          fetchSchemaRequest, fetchSchemaSuccess, fetchSchemaFailure } from './actions'
@@ -31,8 +31,18 @@ export function* loadSchema(action) {
     yield put(fetchSchemaSuccess(beautifySchema(schema.data)))
   } else {
     yield put(fetchSchemaFailure(schema.err))
-    window.alert('There was a problem loading this schema. See the Console for errors.')
     console.error(schema.err.response) // eslint-disable-line
+    // if API returns a response
+    if (schema.err.response !== undefined) {
+      if (schema.err.response.body !== undefined) {
+        schema.err.response.text().then(body => alert('Error: \n' + body)) //eslint-disable-line
+      } else {
+        window.alert('There was a problem loading this schema. See the Console for errors.')
+        console.error(schema.err.response) // eslint-disable-line
+      }
+    } else {
+      window.alert('Error: Server didn\'t return a response')
+    }
   }
 }
 
@@ -62,20 +72,25 @@ export function* saveSchema(action) {
   })
 
   if (!schema.err) {
-    if (schemaID === undefined) {
-      // if new schema forward the browser
-      yield call(browserHistory.push, `/editor/${schema.data}`)
-    }
     // aribtrary UI delay
     yield delay(500)
     yield put(saveSchemaSuccess())
+    if (schemaID === undefined) {
+      // if new schema forward the browser
+      yield call(browserHistory.replace, `/editor/${schema.data}`)
+    }
   } else {
     yield put(saveSchemaFailure(schema.err.response))
-    if (schema.err.response.body) {
-      schema.err.response.text().then(body => alert('Error: \n' + body)) //eslint-disable-line
+    // if API returns a response
+    if (schema.err.response !== undefined) {
+      if (schema.err.response.body !== undefined) {
+        schema.err.response.text().then(body => alert('Error: \n' + body)) //eslint-disable-line
+      } else {
+        window.alert('There was a problem saving this schema. See the Console for errors.')
+        console.error(schema.err.response) // eslint-disable-line
+      }
     } else {
-      window.alert('There was a problem saving this schema. See the Console for errors.')
-      console.error(schema.err.response) // eslint-disable-line
+      window.alert('Error: Server didn\'t return a response')
     }
   }
 }
@@ -99,16 +114,15 @@ export function* saveSchemaWatcher() {
 // sets up watchers as background task and cancels them when route changes
 // or schema is saved
 export function* editorData() {
-  const watcher = yield [
-    fork(loadSchemaWatcher),
-    fork(saveSchemaWatcher)
-  ]
-
-  yield [
-    take(LOCATION_CHANGE),
-    take(SAVE_SCHEMA_SUCCESS)
-  ]
-  yield watcher.forEach(task => task.cancel())
+  yield race([
+    [
+      call(loadSchemaWatcher),
+      call(saveSchemaWatcher)
+    ],
+    take([
+      LOCATION_CHANGE
+    ])
+  ])
 }
 
 export default [
