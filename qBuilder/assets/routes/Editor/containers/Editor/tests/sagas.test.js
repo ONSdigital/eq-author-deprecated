@@ -1,6 +1,6 @@
 // DPD: 0051126741
 import expect from 'expect'
-import { call, put, take, fork, cancel, select } from 'redux-saga/effects'
+import { call, put, take, race, select } from 'redux-saga/effects'
 import { loadSchema, loadSchemaWatcher, saveSchemaWatcher,
          saveSchema, editorData } from '../sagas'
 import { fetchSchemaRequest, fetchSchemaSuccess, fetchSchemaFailure,
@@ -119,22 +119,13 @@ describe('saveSchemaWatcher Saga', () => {
 
 describe('editorDataSaga', () => {
   const generator = editorData()
-  let forkDescriptor
+  let raceDescriptor
 
-  it('should asyncronously fork loadSchemaWatcher and saveSchemaWatcher sagas', () => {
-    forkDescriptor = generator.next()
-    expect(forkDescriptor.value).toEqual([fork(loadSchemaWatcher), fork(saveSchemaWatcher)])
+  it('should run a race between load/save watchers and LOCATION_CHANGE', () => {
+    raceDescriptor = generator.next().value
+    expect(raceDescriptor).toEqual(race([
+      [call(loadSchemaWatcher), call(saveSchemaWatcher)],
+      take(LOCATION_CHANGE)
+    ]))
   })
-
-  it('should yield until LOCATION_CHANGE  action', () => {
-    expect(generator.next().value).toEqual(take(LOCATION_CHANGE))
-  })
-
-  it('should finally cancel() the forked getReposWatcher saga',
-    function* editorDataSagaCancellable() {
-      // reuse open fork for more integrated approach
-      forkDescriptor = generator.next(put(LOCATION_CHANGE))
-      expect(forkDescriptor.value).toEqual(cancel(forkDescriptor))
-    }
-  )
 })

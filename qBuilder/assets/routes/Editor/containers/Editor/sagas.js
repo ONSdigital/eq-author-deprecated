@@ -1,7 +1,7 @@
-import { LOAD_SCHEMA, SAVE_SCHEMA, SAVE_SCHEMA_SUCCESS, SAVE_SCHEMA_FAILURE } from './constants'
+import { LOAD_SCHEMA, SAVE_SCHEMA } from './constants'
 import { LOCATION_CHANGE } from 'react-router-redux'
 
-import { take, call, put, fork, select, cancel, race } from 'redux-saga/effects'
+import { take, call, put, select, race } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { saveSchemaRequest, saveSchemaSuccess, saveSchemaFailure,
          fetchSchemaRequest, fetchSchemaSuccess, fetchSchemaFailure } from './actions'
@@ -119,9 +119,7 @@ export function* editorData() {
       call(loadSchemaWatcher),
       call(saveSchemaWatcher)
     ],
-    take([
-      LOCATION_CHANGE
-    ])
+    take(LOCATION_CHANGE)
   ])
 }
 
