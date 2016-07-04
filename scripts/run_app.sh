@@ -5,6 +5,21 @@ function open_url {
   open -a "/Applications/Google Chrome.app" $1
 }
 
+if [ -z "$EQ_AUTHOR_ADMIN_USERNAME" ]; then
+  export EQ_AUTHOR_ADMIN_USERNAME=admin
+fi
+if [ -z "$EQ_AUTHOR_ADMIN_PASSWORD" ]; then
+  export EQ_AUTHOR_ADMIN_PASSWORD=password
+fi
+if [ -z "$EQ_AUTHOR_ADMIN_EMAIL" ]; then
+  export EQ_AUTHOR_ADMIN_EMAIL=admin@nowhere.com
+fi
+if [ -z "$EQ_AUTHOR_ADMIN_FIRSTNAME" ]; then
+  export EQ_AUTHOR_ADMIN_FIRSTNAME=Dummy
+fi
+if [ -z "$EQ_AUTHOR_ADMIN_LASTNAME" ]; then
+  export EQ_AUTHOR_ADMIN_LASTNAME=Admin
+fi
 
 if [ -z "$EQ_JSON_SCHEMA_FILE" ]; then
   export EQ_JSON_SCHEMA_FILE=./qBuilder/schema/schema-v1.json
