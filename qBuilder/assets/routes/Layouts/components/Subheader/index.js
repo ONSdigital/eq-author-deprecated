@@ -10,8 +10,7 @@ import styles from './styles.css'
 
 function Subheader() {
   return (
-    <div className={ styles.subheader }>
-    </div>
+    <div className={styles.subheader}></div>
   )
 }
 

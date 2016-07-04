@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 import styles from './styles.css'
 
 import Sidebar from '../../components/Sidebar'
-import Grid, { gridStyles } from '../../components/Grid'
+import Grid from '../../components/Grid'
 
 function SidebarGridLeft({children}) {
   return (

@@ -14,7 +14,7 @@ import { LOAD_SCHEMA, SAVE_SCHEMA, SAVE_SCHEMA_SUCCESS } from '../constants'
 import request from 'utils/request'
 
 describe('editor loadSchema Saga', () => {
-  let generator, next
+  let generator
   beforeEach(() => {
     // mock the action to be dispatched
     const action = {
