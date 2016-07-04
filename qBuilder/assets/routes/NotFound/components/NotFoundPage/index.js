@@ -7,7 +7,7 @@
 
 import React from 'react'
 
-import MainLayout from 'components/MainLayout'
+import MainLayout from 'layouts/MainLayout'
 
 /* eslint-disable react/prefer-stateless-function */
 export default class NotFound extends React.Component {

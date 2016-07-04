@@ -1,5 +1,5 @@
 import NotFoundPage from '../index'
-import MainLayout from 'components/MainLayout'
+import MainLayout from 'layouts/MainLayout'
 
 import expect from 'expect'
 import { shallow } from 'enzyme'
