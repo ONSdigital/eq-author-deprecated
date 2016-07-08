@@ -14,6 +14,7 @@ test_schema = {
   "survey_id": "33",
   "title": "Star Wars",
   "description": "Star Wars VII",
+  "theme": "default",
   "introduction": {
     "description": "May the force be with you"
   },
