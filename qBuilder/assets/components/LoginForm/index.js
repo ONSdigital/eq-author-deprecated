@@ -12,7 +12,9 @@ const Errors = ({ errors }) => {
   if (errors.length > 0) {
     return (
       <ul className={errorList}>
-        {errors.map(error => (<li className={errorItem}>{error}</li>))}
+        {errors.map((error, index) => (
+          <li key={index} className={errorItem}>{error}</li>)
+        )}
       </ul>
     )
   } else {
@@ -20,17 +22,17 @@ const Errors = ({ errors }) => {
   }
 }
 
-const LoginForm = ({username, next, csrfToken, errors}) => (
+const LoginForm = ({username, next, csrfToken, errors, action}) => (
   <div className={loginForm}>
-    <form method='post' action='' className={form}>
+    <form method='post' action={action} className={form}>
       <div className={field}>
         <label htmlFor='id_username'>Username</label>
-        <input type='text' name='username' id='id_username' value={username} />
+        <input type='text' name='username' id='id_username' defaultValue={username} />
       </div>
       <Errors errors={errors.username} />
       <div className={field}>
         <label htmlFor='id_password'>Password</label>
-        <input type='text' name='password' id='id_password' />
+        <input type='password' name='password' id='id_password' />
       </div>
       <Errors errors={errors.password} />
       <div className={field}>
