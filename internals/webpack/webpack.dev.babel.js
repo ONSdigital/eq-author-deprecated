@@ -14,11 +14,11 @@ const precss = require('precss')
 
 module.exports = require('./webpack.base.babel')({
   // Add hot reloading in development
-  entry: [
-    'eventsource-polyfill', // Necessary for hot reloading with IE
-    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
-    `${paths.assets}/app.js`, // Start with js/app.js
-  ],
+  entry: {
+    whm: 'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
+    main: `${paths.assets}/app.js`,
+    login: `${paths.assets}/login.js`,
+  },
 
   // Don't use hashes in dev mode for better performance
   output: {

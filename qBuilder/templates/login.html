@@ -1,0 +1,19 @@
+{% extends "_layout.html" %}
+{% load render_bundle from webpack_loader %}
+{% block page_bundle %}
+  {% render_bundle 'login' %}
+{% endblock page_bundle %}
+
+{% block scripts %}
+
+  <script type="text/javascript">
+    window.__INITIAL_STATE__ = {
+      login: {
+        username: 'hamish',
+        errors: [
+          
+        ]
+      }
+    }
+  </script>
+{% endblock scripts %}
