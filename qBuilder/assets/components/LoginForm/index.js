@@ -6,33 +6,51 @@
 
 import React, { PropTypes } from 'react'
 
-import { loginForm, form, button } from './styles.css'
+import { loginForm, form, field, button, errorList, errorItem } from './styles.css'
 
-const LoginForm = ({username}) => (
+const Errors = ({ errors }) => {
+  if (errors.length > 0) {
+    return (
+      <ul className={errorList}>
+        {errors.map(error => (<li className={errorItem}>{error}</li>))}
+      </ul>
+    )
+  } else {
+    return null
+  }
+}
+
+const LoginForm = ({username, next, csrfToken, errors}) => (
   <div className={loginForm}>
     <form method='post' action='' className={form}>
-      {/* {{ auth_form.non_field_errors }} */}
-      <div>
-        {/* {{ auth_form.username.errors }} */}
+      <div className={field}>
         <label htmlFor='id_username'>Username</label>
         <input type='text' name='username' id='id_username' value={username} />
       </div>
-      <div>
-        {/* {{ auth_form.password.errors }} */}
+      <Errors errors={errors.username} />
+      <div className={field}>
         <label htmlFor='id_password'>Password</label>
         <input type='text' name='password' id='id_password' />
       </div>
-      <div>
-        <input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token }}' />
+      <Errors errors={errors.password} />
+      <div className={field}>
+        <input type='hidden' name='csrfmiddlewaretoken' value={csrfToken} />
         <input type='submit' value='Log in' className={button} />
-        <input type='hidden' name='next' value='{{ next }}' />
+        <input type='hidden' name='next' value={next} />
       </div>
+      <Errors errors={errors.nonField} />
     </form>
   </div>
 )
 
+Errors.propTypes = {
+  errors: PropTypes.array.isRequired,
+}
+
 LoginForm.propTypes = {
-  children: PropTypes.element.isRequired,
+  csrfToken: PropTypes.string,
+  errors: PropTypes.object.isRequired,
+  next: PropTypes.string.isRequired,
   username: PropTypes.string,
 }
 
