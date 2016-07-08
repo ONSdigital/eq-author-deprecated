@@ -13,6 +13,8 @@ export function* getSchemas() {
     yield put(fetchSchemasSuccess(schemas.data))
   } else {
     yield put(fetchSchemasFailure(schemas.err))
+    window.alert('There was a loading the schemas. See the Console for errors.')
+    console.error(schemas.err.response) // eslint-disable-line
   }
 }
 

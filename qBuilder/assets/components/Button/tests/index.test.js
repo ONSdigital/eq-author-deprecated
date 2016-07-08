@@ -14,7 +14,7 @@ describe('<Button />', () => {
 
   it('should render a <Link /> if the "to" prop is supplied', () => {
     const renderedButton = shallow(<Button to='/' />)
-    expect(renderedButton.contains(<Link />))
+    expect(renderedButton.contains(<Link to='/' />))
   })
 
   it('should render a <button /> if no "to" prop is supplied', () => {

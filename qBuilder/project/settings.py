@@ -34,6 +34,12 @@ else:
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
+
 # Out of the box apps
 DJANGO_PROVIDED_APPS = [
     'django.contrib.admin',
