@@ -9,10 +9,20 @@
   <script type="text/javascript">
     window.__INITIAL_STATE__ = {
       login: {
+        csrfToken: '',
+        next: '',
         username: 'hamish',
-        errors: [
-          
-        ]
+        errors: {
+          nonField: [
+            'You did it wrong.'
+          ],
+          username: [
+            'Your username is incorrect.'
+          ],
+          password: [
+            'Your password is incorrect.'
+          ]
+        }
       }
     }
   </script>
