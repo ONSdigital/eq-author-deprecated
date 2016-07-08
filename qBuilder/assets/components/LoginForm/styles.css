@@ -1,0 +1,24 @@
+.loginForm {
+  background-color: #ebf0f2;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+.form {
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 3px;
+  border-color: #ebebeb;
+  width: 30rem;
+  height: 20rem;
+  margin: 1.1rem;
+  align-self: center;
+  margin: auto;
+}
+
+.button {
+  composes: secondary from 'styles/shared/colors.css';
+  color: white;
+  font-weight: bold;
+}
