@@ -20,6 +20,9 @@
     "description": {
       "type": "string"
     },
+    "theme": {
+      "type":"string"
+    },
     "introduction": {
       "type": "object",
       "properties": {
@@ -175,6 +178,7 @@
     "survey_id",
     "title",
     "introduction",
-    "groups"
+    "groups",
+    "theme"
   ]
 }
