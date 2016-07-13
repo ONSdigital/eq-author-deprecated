@@ -59,7 +59,6 @@ target/
 *.db
 *.sqlite3
 .idea
-staticfiles
 
 
 .DS_STORE
@@ -68,10 +67,10 @@ staticfiles
 node_modules
 dist
 coverage
-webpack-stats.json
-staticfiles
-webpack-stats-prod.json
-bundles
+qBuilder/webpack-stats.json
+qBuilder/webpack-stats-prod.json
+qBuilder/bundles
+qBuilder/static
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
