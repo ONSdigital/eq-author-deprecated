@@ -16,7 +16,7 @@ const options = {
 export class JsonEditor extends Component {
 
   componentDidMount() {
-    this.refs.editor.codeMirror.setSize('100%', '100vh')
+    this.refs.editor.codeMirror.setSize('100%', 'calc(100vh - 72px)')
   }
 
   render() {
