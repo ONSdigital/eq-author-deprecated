@@ -5,14 +5,14 @@ body {
 }
 
 html {
-  font-size: 18px;
+  font-size: 100%;
   line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: 'Work Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 h1,
@@ -32,15 +32,20 @@ label {
 input,
 textarea {
   display: block;
+  padding: 0.8rem 1rem;
   width: 100%;
-  border: 1px solid #eae7e7;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: none;
+  background: #fcfcfc;
+  border: 1px solid #e5e5e5;
+  border-radius: 1px;
 }
 
 input:focus,
 textarea:focus {
   outline: none;
   border: 1px solid #ababab;
+}
+
+.app {
+  width: 100vw;
+  min-height: 100vh;
 }
