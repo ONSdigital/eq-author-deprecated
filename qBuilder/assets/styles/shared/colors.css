@@ -1,5 +1,9 @@
 .primary {
-  background-color: #033e58;
+  background-color: #056c99;
+}
+
+.primary:hover {
+  background-color: #06597d;
 }
 
 .secondary {
@@ -7,5 +11,9 @@
 }
 
 .text {
-  color: #333;
+  color: #4a4a4a;
+}
+
+.red {
+  color: #d0021b;
 }

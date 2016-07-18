@@ -1,16 +1,19 @@
 .loginForm {
-  background-color: #ebf0f2;
-  height: 100vh;
+  background-color: #43575e;
+  min-height: 100vh;
   width: 100vw;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.logo {
+  margin-bottom: 1rem;
 }
 
 .form {
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 3px;
-  border-color: #ebebeb;
-  width: 30rem;
+  width: 18.5rem;
   margin: 1.1rem;
   align-self: center;
   margin: auto;
@@ -18,21 +21,24 @@
 
 .field {
   display: block;
+  margin-bottom: 1rem;
 }
 
 .button {
-  composes: secondary from 'styles/shared/colors.css';
+  composes: primary from 'styles/shared/colors.css';
   color: white;
-  font-weight: bold;
+  font-size: 1.2rem;
   cursor: pointer;
 }
 
 .errorList {
   list-style: none;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .errorItem {
-  color: red;
-  font-size: 0.8rem;
+  composes: red from 'styles/shared/colors.css';
+  font-size: 0.9rem;
+  font-weight: 600;
 }
