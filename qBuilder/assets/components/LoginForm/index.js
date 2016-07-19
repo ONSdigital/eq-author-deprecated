@@ -10,20 +10,13 @@ import styles from './styles.css'
 
 import Logo from 'components/Logo'
 import Panel from 'components/Panel'
-
-const Errors = ({ errors }) => {
-  if (errors.length > 0) {
-    return (
-      <ul className={styles.errorList}>
-        {errors.map((error, index) => (
-          <li key={index} className={styles.errorItem}>{error}</li>)
-        )}
-      </ul>
-    )
-  } else {
-    return null
-  }
-}
+import Form from 'components/forms/Form'
+import Field from 'components/forms/Field'
+import Label from 'components/forms/Label'
+import Input from 'components/forms/Input'
+import Button from 'components/forms/Button'
+import PasswordInput from 'components/forms/PasswordInput'
+import ErrorList from 'components/forms/ErrorList'
 
 const LoginForm = ({username, next, csrfToken, errors, action}) => (
   <div className={styles.loginForm}>
@@ -31,30 +24,26 @@ const LoginForm = ({username, next, csrfToken, errors, action}) => (
       <Logo />
     </div>
     <Panel>
-      <form method='post' action={action} className={styles.form}>
-        <div className={styles.field}>
-          <label htmlFor='id_username'>Username</label>
-          <input type='text' name='username' id='id_username' defaultValue={username} placeholder='yourname@ons.gov.uk' />
+      <Form action={action}>
+        <Field>
+          <Label htmlFor='id_username'>Email</Label>
+          <Input valid={errors.username.length < 1} type='text' name='username' id='id_username' defaultValue={username} placeholder='yourname@ons.gov.uk' required='true' />
+          <ErrorList errors={errors.username} />
+        </Field>
+        <Field>
+          <Label htmlFor='id_password'>Password</Label>
+          <PasswordInput valid={errors.password.length < 1} name='password' id='id_password' required='true' />
+          <ErrorList errors={errors.password} />
+        </Field>
+        <div>
+          <Input type='hidden' name='csrfmiddlewaretoken' value={csrfToken} />
+          <Button>Sign in</Button>
+          <Input type='hidden' name='next' value={next} />
         </div>
-        <Errors errors={errors.username} />
-        <div className={styles.field}>
-          <label htmlFor='id_password'>Password</label>
-          <input type='password' name='password' id='id_password' />
-        </div>
-        <Errors errors={errors.password} />
-        <div className={styles.field}>
-          <input type='hidden' name='csrfmiddlewaretoken' value={csrfToken} />
-          <input type='submit' value='Sign in' className={styles.button} />
-          <input type='hidden' name='next' value={next} />
-        </div>
-      </form>
+      </Form>
     </Panel>
   </div>
 )
-
-Errors.propTypes = {
-  errors: PropTypes.array.isRequired,
-}
 
 LoginForm.propTypes = {
   action: PropTypes.string.isRequired,

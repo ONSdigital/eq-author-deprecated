@@ -23,28 +23,6 @@ h5 {
   font-weight: 600;
 }
 
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-input,
-textarea {
-  display: block;
-  padding: 0.8rem 1rem;
-  width: 100%;
-  background: #fcfcfc;
-  border: 1px solid #e5e5e5;
-  border-radius: 1px;
-}
-
-input:focus,
-textarea:focus {
-  outline: none;
-  border: 1px solid #ababab;
-}
-
 .app {
   width: 100vw;
   min-height: 100vh;
