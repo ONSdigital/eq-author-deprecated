@@ -1,0 +1,5 @@
+export EQ_AUTHOR_ADMIN_USERNAME="admin"
+export EQ_AUTHOR_ADMIN_EMAIL="admin@ons.gov.uk"
+export EQ_AUTHOR_ADMIN_PASSWORD="password"
+export EQ_AUTHOR_ADMIN_FIRSTNAME="admin"
+export EQ_AUTHOR_ADMIN_LASTNAME="admin"

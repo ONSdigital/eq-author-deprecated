@@ -9,10 +9,10 @@
   <script type="text/javascript">
     window.__INITIAL_STATE__ = {
       login: {
-        action: '/dslkmasdml',
-        csrfToken: '',
+        action: '{% url 'django.contrib.auth.views.login' %}',
+        csrfToken: '{{username}}',
         next: '',
-        username: '',
+        username: '{{username}}',
         errors: {
           username: [],
           password: []
