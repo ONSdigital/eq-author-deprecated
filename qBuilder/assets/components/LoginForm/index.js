@@ -27,7 +27,7 @@ const LoginForm = ({username, next, csrfToken, errors, action}) => (
       <Form action={action}>
         <Field>
           <Label htmlFor='id_username'>Email</Label>
-          <Input valid={errors.username.length < 1} type='text' name='username' id='id_username' defaultValue={username} placeholder='yourname@ons.gov.uk' required='true' />
+          <Input valid={errors.username.length < 1} type='email' name='username' id='id_username' defaultValue={username} placeholder='yourname@ons.gov.uk' required='true' />
           <ErrorList errors={errors.username} />
         </Field>
         <Field>

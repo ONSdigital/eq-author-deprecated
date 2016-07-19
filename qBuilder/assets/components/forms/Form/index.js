@@ -16,7 +16,7 @@ const Form = ({children, action, method}) => (
 
 Form.propTypes = {
   action: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
   method: PropTypes.string,
 }
 
