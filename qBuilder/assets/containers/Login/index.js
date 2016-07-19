@@ -21,7 +21,7 @@ const mapStateToProps = state => ({
   action: selectAction(state),
   username: selectUsername(state),
   next: selectNext(state),
-  token: selectToken(state),
+  csrfToken: selectToken(state),
   errors: selectErrors(state),
 })
 
