@@ -4,6 +4,7 @@
 
 .primary:hover {
   background-color: #06597d;
+  border: none;
 }
 
 .secondary {
