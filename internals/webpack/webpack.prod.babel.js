@@ -13,7 +13,7 @@ const postcssReporter = require('postcss-reporter')
 module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff
   entry: {
-    app: `${paths.assets}/app.js`,
+    main: `${paths.assets}/app.js`,
     login: `${paths.assets}/login.js`
   },
 

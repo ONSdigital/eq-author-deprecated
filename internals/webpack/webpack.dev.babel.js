@@ -15,8 +15,10 @@ const precss = require('precss')
 module.exports = require('./webpack.base.babel')({
   // Add hot reloading in development
   entry: {
-    whm: 'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
-    main: `${paths.assets}/app.js`,
+    main: [
+      'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
+      `${paths.assets}/app.js`
+    ],
     login: `${paths.assets}/login.js`,
   },
 
