@@ -170,15 +170,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/bundles/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'bundles'),
-    # We do this so that django's collectstatic copies or our bundles to the STATIC_ROOT or syncs them to whatever storage we use.
+    # We do this so that django's collectstatic copies our bundles to the STATIC_ROOT or syncs them to whatever storage we use.
 )
 
 WEBPACK_LOADER = {
   'DEFAULT': {
-    'BUNDLE_DIR_NAME': 'bundles/',
     'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
     'IGNORE': ['.+\.hot-update.js', '.+\.map']
   }
@@ -187,7 +187,6 @@ WEBPACK_LOADER = {
 if PRODUCTION:
     WEBPACK_LOADER.update({
         'DEFAULT': {
-            'BUNDLE_DIR_NAME': 'bundles/',
             'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json')
         }
     })

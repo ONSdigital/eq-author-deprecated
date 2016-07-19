@@ -12,6 +12,8 @@ class SchemaMeta(models.Model):
     class Meta:
         ordering = ('created', 'eq_id')
 
+    def __str__(self):
+        return "{id}: {title}".format(id=self.eq_id, title=self.title)
 
 class Schema(object):
     data = {}

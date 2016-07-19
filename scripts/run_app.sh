@@ -45,4 +45,5 @@ env | grep EQ_
 
 
 python qBuilder/manage.py migrate
+python qBuilder/manage.py collectstatic --no-input
 python qBuilder/manage.py runserver
