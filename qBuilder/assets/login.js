@@ -15,7 +15,7 @@ import 'sanitize.css/lib/sanitize.css'
 import App from 'containers/App'
 import Login from 'containers/Login'
 
-const initialState = {}
+const initialState = window.__INITIAL_STATE__
 const store = configureStore(initialState)
 
 if (process.env.NODE_ENV === 'development') {
