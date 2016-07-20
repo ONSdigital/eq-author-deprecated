@@ -9,8 +9,8 @@
   <script type="text/javascript">
     window.__INITIAL_STATE__ = {
       login: {
-        action: '/editor',
-        csrfToken: '',
+        action: '{% url 'django.contrib.auth.views.login' %}',
+        csrfToken: '{{csrf_token}}',
         next: '',
         username: '',
         errors: {
