@@ -31,7 +31,7 @@ module.exports = {
     ],
     loaders: [
       { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.css$/, loader: 'null-loader' },
+      { test: /\.css$/, loaders: ['style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]--[hash:base64:5]'] },
       // sinon.js--aliased for enzyme--expects/requires global vars.
       // imports-loader allows for global vars to be injected into the module.
       // See https://github.com/webpack/webpack/issues/304

@@ -5,9 +5,6 @@
  * code.
  */
 import 'babel-polyfill'
-import 'file?name=[name].[ext]!./manifest.json'  // eslint-disable-line import/no-unresolved
-import 'file?name=[name].[ext]!./.htaccess'      // eslint-disable-line import/no-unresolved
-
 // Import all the third party stuff
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -18,7 +15,7 @@ import 'sanitize.css/lib/sanitize.css'
 import App from 'containers/App'
 import Login from 'containers/Login'
 
-const initialState = window.__INITIAL_STATE__
+const initialState = {}
 const store = configureStore(initialState)
 
 if (process.env.NODE_ENV === 'development') {
