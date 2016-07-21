@@ -18,7 +18,7 @@ import Button from 'components/forms/Button'
 import PasswordInput from 'components/forms/PasswordInput'
 import ErrorList from 'components/forms/ErrorList'
 
-const LoginForm = ({username, next, csrfToken, errors, action}) => (
+const LoginForm = ({username, csrfToken, errors, action}) => (
   <div className={styles.loginForm}>
     <div className={styles.logo}>
       <Logo />

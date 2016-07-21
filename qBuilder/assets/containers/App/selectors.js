@@ -15,7 +15,7 @@ const selectLocationState = () => {
   }
 }
 
-export const selectToken = state => state.get('auth').get('token')
+export const selectToken = state => state.get('app').get('authToken')
 
 export {
   selectLocationState,

@@ -9,7 +9,7 @@ import { fetchSchemaRequest, fetchSchemaSuccess, fetchSchemaFailure,
 import { selectEditorValue } from '../selectors'
 
 import { LOCATION_CHANGE } from 'react-router-redux'
-import { LOAD_SCHEMA, SAVE_SCHEMA, SAVE_SCHEMA_SUCCESS } from '../constants'
+import { LOAD_SCHEMA, SAVE_SCHEMA } from '../constants'
 
 import request from 'utils/request'
 
