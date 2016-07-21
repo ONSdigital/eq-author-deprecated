@@ -1,7 +1,7 @@
 import 'whatwg-fetch'
 
 import { store } from 'store'
-import { selectToken } from 'containers/Auth/selectors'
+import { selectToken } from 'containers/App/selectors'
 
 /**
  * Parses the JSON returned by a network request

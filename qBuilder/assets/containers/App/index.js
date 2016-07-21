@@ -1,8 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import styles from './styles.css'
-
-import { selectAuthToken } from './selectors'
 
 /* eslint-disable react/prefer-stateless-function */
 export class App extends React.Component {
@@ -20,8 +17,4 @@ export class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  token: selectAuthToken(state),
-})
-
-export default connect(mapStateToProps)(App)
+export default App

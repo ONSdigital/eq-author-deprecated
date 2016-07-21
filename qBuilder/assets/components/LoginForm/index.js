@@ -27,19 +27,18 @@ const LoginForm = ({username, next, csrfToken, errors, action}) => (
       <Form action={action}>
         <Field>
           <Label htmlFor='id_username'>Email</Label>
-          <Input valid={errors.username.length < 1} type='email' name='username' id='id_username' defaultValue={username} placeholder='yourname@ons.gov.uk' required='true' />
-          <ErrorList errors={errors.username} />
+          <Input type='email' name='username' id='id_username' defaultValue={username} placeholder='yourname@ons.gov.uk' required='true' />
         </Field>
         <Field>
           <Label htmlFor='id_password'>Password</Label>
-          <PasswordInput valid={errors.password.length < 1} name='password' id='id_password' required='true' />
-          <ErrorList errors={errors.password} />
+          <PasswordInput name='password' id='id_password' required='true' />
         </Field>
         <div>
           <Input type='hidden' name='csrfmiddlewaretoken' value={csrfToken} />
           <Button>Sign in</Button>
           <Input type='hidden' name='next' value={next} />
         </div>
+        <ErrorList errors={errors} />
       </Form>
     </Panel>
   </div>

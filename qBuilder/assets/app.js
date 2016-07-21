@@ -36,7 +36,7 @@ const history = syncHistoryWithStore(browserHistory, store, {
 })
 
 // Set up the router, wrapping all Routes in the App component
-import Auth from 'containers/Auth'
+import App from 'containers/App'
 import routes from './routes'
 
 const errorLoading = (err) => {
@@ -50,7 +50,7 @@ const loadModule = (cb) => (componentModule) => {
 const { injectReducer, injectSagas } = getHooks(store)
 
 const rootRoute = {
-  component: Auth,
+  component: App,
   childRoutes: routes.map(route => route(injectReducer, injectSagas, loadModule, errorLoading)),
 }
 
