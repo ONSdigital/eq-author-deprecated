@@ -19,7 +19,10 @@ module.exports = require('./webpack.base.babel')({
       'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
       `${paths.assets}/app.js`
     ],
-    login: `${paths.assets}/login.js`,
+    login: [
+      'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
+      `${paths.assets}/login.js`,
+    ]
   },
 
   // Don't use hashes in dev mode for better performance
