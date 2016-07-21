@@ -46,7 +46,7 @@ const LoginForm = ({username, csrfToken, errors, action}) => (
 LoginForm.propTypes = {
   action: PropTypes.string.isRequired,
   csrfToken: PropTypes.string,
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.array.isRequired,
   username: PropTypes.string,
 }
 
