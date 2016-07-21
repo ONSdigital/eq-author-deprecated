@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 
 
 class DahlView(LoginRequiredMixin, TemplateView):
-    login_url = '/login'
+    login_url = '/sign-in'
     redirect_field_name = 'redirect_to'
 
     def render_to_response(self, context, **response_kwargs):
