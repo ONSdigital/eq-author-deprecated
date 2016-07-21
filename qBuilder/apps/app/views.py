@@ -9,8 +9,7 @@ class DahlView(LoginRequiredMixin, TemplateView):
     redirect_field_name = 'redirect_to'
 
     def render_to_response(self, context, **response_kwargs):
-        response = render_to_response("index.html", {})
         token = Token.objects.get_or_create(user=self.request.user)
-        response['Authorization'] = "Token {}".format(token[0])
+        response = render_to_response("index.html", {'auth_token': token[0]})
         return response
 

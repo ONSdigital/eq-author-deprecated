@@ -36,7 +36,6 @@ const LoginForm = ({username, next, csrfToken, errors, action}) => (
         <div>
           <Input type='hidden' name='csrfmiddlewaretoken' value={csrfToken} />
           <Button>Sign in</Button>
-          <Input type='hidden' name='next' value={next} />
         </div>
         <ErrorList errors={errors} />
       </Form>
@@ -48,7 +47,6 @@ LoginForm.propTypes = {
   action: PropTypes.string.isRequired,
   csrfToken: PropTypes.string,
   errors: PropTypes.object.isRequired,
-  next: PropTypes.string.isRequired,
   username: PropTypes.string,
 }
 
