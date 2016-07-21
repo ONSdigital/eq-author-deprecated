@@ -24,7 +24,7 @@ import 'sanitize.css/lib/sanitize.css'
 // this uses the singleton browserHistory provided by react-router
 // Optionally, this could be changed to leverage a created history
 // e.g. `const browserHistory = useRouterHistory(createBrowserHistory)()`
-const initialState = {}
+const initialState = window.__INITIAL_STATE__
 const store = configureStore(initialState, browserHistory)
 
 // Sync history and store, as the react-router-redux reducer
@@ -36,7 +36,7 @@ const history = syncHistoryWithStore(browserHistory, store, {
 })
 
 // Set up the router, wrapping all Routes in the App component
-import App from 'containers/App'
+import Auth from 'containers/Auth'
 import routes from './routes'
 
 const errorLoading = (err) => {
@@ -50,7 +50,7 @@ const loadModule = (cb) => (componentModule) => {
 const { injectReducer, injectSagas } = getHooks(store)
 
 const rootRoute = {
-  component: App,
+  component: Auth,
   childRoutes: routes.map(route => route(injectReducer, injectSagas, loadModule, errorLoading)),
 }
 

@@ -25,10 +25,4 @@ const mapStateToProps = state => ({
   errors: selectErrors(state),
 })
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps)(Login)

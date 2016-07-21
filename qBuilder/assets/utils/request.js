@@ -1,5 +1,8 @@
 import 'whatwg-fetch'
 
+import { store } from 'store'
+import { selectToken } from 'containers/Auth/selectors'
+
 /**
  * Parses the JSON returned by a network request
  *
@@ -37,7 +40,11 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
 export default function request(url, options) {
-  return fetch(url, options)
+  // decorate all request with auth token
+  const authOptions = options || {}
+  authOptions.headers = authOptions.headers || {}
+  authOptions.headers.Authorization = selectToken(store.getState())
+  return fetch(url, authOptions)
     .then(checkStatus)
     .then(parseJSON)
     .then((data) => ({ data }))
