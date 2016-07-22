@@ -48,7 +48,7 @@ class Schema(GenericAPIView, ListModelMixin):
         eq_id = schema.eq_id
         # construct the file name for s3
         key = str(eq_id) + '.json'
-        logger.error("Filename for new schema is %s", key)
+        logger.debug("Filename for new schema is %s", key)
         # push it to s3
         schema_storage = SchemaStorageFactory.get_instance()
 
@@ -59,13 +59,13 @@ class Schema(GenericAPIView, ListModelMixin):
             logger.error("Unable to store request data %s", str(e))
             return Response({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        logger.error("Saving metadata to the database")
+        logger.debug("Saving metadata to the database")
         # save the meta data in the database
         schema.file_name = key
         schema.title = json_data.get("title")
         schema.description = json_data.get("description")
         schema.save()
-        logger.error("Saved")
+        logger.debug("Saved")
 
         return Response(eq_id, status=status.HTTP_201_CREATED)
 

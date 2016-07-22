@@ -96,7 +96,7 @@ class SchemaAPI(TestCase):
 
         # then get the details
         response = self.client.get(reverse("schema-details", kwargs={'eq_id': '1'}))
-        self.assertEquals(test_schema, response.data)
+        self.assertEquals(test_schema, json.loads(response.data))
 
         # now modify the title
         test_schema['title'] = "Star Wars VII - The Force Awakens"
