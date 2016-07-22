@@ -10,13 +10,7 @@ import { selectEditorValue } from './selectors'
 
 import { browserHistory } from 'react-router'
 
-import { js_beautify as beautify } from 'js-beautify' // eslint-disable-line camelcase
-
 import request from 'utils/request'
-
-export function beautifySchema(schema) {
-  return beautify(JSON.stringify(schema), { indent_size: 2 })
-}
 
 export function* loadSchema(action) {
   // dispatch action
@@ -27,8 +21,7 @@ export function* loadSchema(action) {
 
   // handle response/errors
   if (!schema.err) {
-    // beautify the resonse if successful and dispatch success action
-    yield put(fetchSchemaSuccess(beautifySchema(schema.data)))
+    yield put(fetchSchemaSuccess(schema.data))
   } else {
     yield put(fetchSchemaFailure(schema.err))
     console.error(schema.err.response) // eslint-disable-line
