@@ -1,17 +1,15 @@
-
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.mixins import ListModelMixin
 from rest_framework.generics import GenericAPIView
+from .parsers import PlainJSONParser
 from .serializers import SchemaSerializer
 from .models import SchemaMeta
 from jsonschema import validate, ValidationError
 from .schema_storage import SchemaStorageFactory, SchemaStorageError
 import json
 import logging
-
-# qbuilder imports
 import config
 
 logger = logging.getLogger(__name__)
@@ -23,26 +21,29 @@ json_schema = json.loads(json_schema_file)
 class Schema(GenericAPIView, ListModelMixin):
     queryset = SchemaMeta.objects.all()
     serializer_class = SchemaSerializer
+    parser_classes = (PlainJSONParser,)
 
     def post(self, request):
         '''
         Override post as we want specialized behaviour to store schema in S3 rather than the Database
         '''
-        logger.debug("Converting %s request to json data", request.data)
+        original_json = request.data.decode()
+
+        logger.debug("Converting %s request to json data", original_json)
+        json_data = json.loads(original_json)
         # run it through the json schema validator to make sure they're are no errors
         try:
-            validate(request.data, json_schema)
+            validate(json_data, json_schema)
         except ValidationError as e:
-            logger.info("Schema failed validation %s", e.message)
+            logger.error("Schema failed validation %s", e.message)
             return Response(e.message, status=status.HTTP_400_BAD_REQUEST)
 
-        json_data = json.dumps(request.data)
         logger.debug("JSON Data is : %s", json_data)
         logger.debug("About to create new schema meta data entry")
         # first create a new entry in the database to generate an id
         schema = SchemaMeta()
         schema.save()
-        logger.debug("Created schema meta data")
+        logger.error("Created schema meta data")
 
         eq_id = schema.eq_id
         # construct the file name for s3
@@ -52,16 +53,17 @@ class Schema(GenericAPIView, ListModelMixin):
         schema_storage = SchemaStorageFactory.get_instance()
 
         try:
-            schema_storage.store(key, json_data)
+            schema_storage.store(key, request.data.decode())
             logger.debug("File now in s3")
-        except SchemaStorageError:
+        except SchemaStorageError as e:
+            logger.error("Unable to store request data %s", str(e))
             return Response({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         logger.debug("Saving metadata to the database")
         # save the meta data in the database
         schema.file_name = key
-        schema.title = request.data.get("title")
-        schema.description = request.data.get("description")
+        schema.title = json_data.get("title")
+        schema.description = json_data.get("description")
         schema.save()
         logger.debug("Saved")
 
@@ -72,6 +74,7 @@ class Schema(GenericAPIView, ListModelMixin):
 
 
 class SchemaDetail(APIView):
+    parser_classes = (PlainJSONParser,)
 
     def get(self, request, eq_id):
         '''
@@ -85,7 +88,8 @@ class SchemaDetail(APIView):
         try:
             schema_storage = SchemaStorageFactory.get_instance()
             json_data = schema_storage.get(key)
-            return Response(json.loads(json_data), status=status.HTTP_200_OK)
+            logger.debug("JSON Data %s", json_data)
+            return Response(json_data, status=status.HTTP_200_OK)
         except SchemaStorageError:
             return Response({}, status=status.HTTP_404_NOT_FOUND)
 
@@ -96,11 +100,14 @@ class SchemaDetail(APIView):
         :param eq_id: the eq id for the schema
         :return: the eq_id
         '''
+        original_json = request.data.decode()
 
+        logger.debug("Converting %s request to json data", original_json)
+        json_data = json.loads(original_json)
         try:
-            validate(request.data, json_schema)
+            validate(json_data, json_schema)
         except ValidationError as e:
-            logger.info("Schema failed validation %s", e.message)
+            logger.error("Schema failed validation %s", e.message)
             return Response(e.message, status=status.HTTP_400_BAD_REQUEST)
 
         # first find the meta data
@@ -110,17 +117,16 @@ class SchemaDetail(APIView):
 
         logger.debug("Saving metadata to the database")
         # save the meta data in the database
-        schema.title = request.data.get("title")
-        schema.description = request.data.get("description")
+        schema.title = json_data.get("title")
+        schema.description = json_data.get("description")
         schema.save()
         logger.debug("Saved")
 
         key = eq_id + '.json'
         # push it to s3
-        json_data = json.dumps(request.data)
         schema_storage = SchemaStorageFactory.get_instance()
         try:
-            schema_storage.store(key, json_data)
+            schema_storage.store(key, original_json)
             logger.debug("File now in s3")
 
             return Response(eq_id, status=status.HTTP_200_OK)

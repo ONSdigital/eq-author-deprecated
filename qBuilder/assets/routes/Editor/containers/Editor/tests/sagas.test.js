@@ -32,7 +32,7 @@ describe('editor loadSchema Saga', () => {
 
   it('should dispatch a FETCH_SCHEMA_SUCCESS action if fetch is successful', () => {
     const response = {
-      data: true
+      data: 'true'
     }
     expect(generator.next(response).value).toEqual(put(fetchSchemaSuccess('true')))
   })
