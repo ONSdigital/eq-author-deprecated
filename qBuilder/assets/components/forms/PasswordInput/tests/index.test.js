@@ -10,7 +10,7 @@ let renderedInput
 
 describe('<PasswordInput />', () => {
   before(() => {
-    renderedInput = mount(<PasswordInput id='my_input' name='my_input' />)
+    renderedInput = mount(<PasswordInput id="my_input" name="my_input" />)
   })
 
   it('should render an Input', () => {

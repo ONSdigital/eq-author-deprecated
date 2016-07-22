@@ -14,7 +14,7 @@ describe('<JsonEditor />', () => {
     }
     const jsonEditor = shallow(<JsonEditor {...props} />)
     setTimeout(() => {
-      expect(jsonEditor.contains(<Codemirror ref='editor' />)).toEqual(true)
+      expect(jsonEditor.contains(<Codemirror ref="editor" />)).toEqual(true)
     }, 10)
   })
 })

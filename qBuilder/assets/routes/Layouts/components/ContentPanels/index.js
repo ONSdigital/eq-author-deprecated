@@ -17,28 +17,28 @@ const ContentPanels = ({children, routeParams: { variant }}) => {
   let panels
   if (variant === '1') {
     panels = (
-      <Grid direction='row'>
-        <Panel width='half' />
-        <Panel width='half' />
-        <Panel width='half' />
-        <Panel width='half' />
+      <Grid direction="row">
+        <Panel width="half" />
+        <Panel width="half" />
+        <Panel width="half" />
+        <Panel width="half" />
       </Grid>
     )
   } else if (variant === '2') {
     panels = (
-      <Grid direction='row'>
-        <Panel width='third' />
-        <Panel width='third' />
-        <Panel width='third' />
-        <Panel width='whole' />
+      <Grid direction="row">
+        <Panel width="third" />
+        <Panel width="third" />
+        <Panel width="third" />
+        <Panel width="whole" />
       </Grid>
     )
   } else {
     panels = (
-      <Grid direction='column' >
-        <Panel width='half' />
-        <Panel width='half' />
-        <Panel width='half' />
+      <Grid direction="column" >
+        <Panel width="half" />
+        <Panel width="half" />
+        <Panel width="half" />
       </Grid>
     )
   }

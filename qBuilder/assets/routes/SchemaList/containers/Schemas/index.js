@@ -29,7 +29,7 @@ export class Schemas extends Component { // eslint-disable-line react/prefer-sta
         }
 
         headerChildren={
-          <Button type='primary' icon='plus' to='/editor/'>Add new schema</Button>
+          <Button type="primary" icon="plus" to="/editor/">Add new schema</Button>
         }
 
       />

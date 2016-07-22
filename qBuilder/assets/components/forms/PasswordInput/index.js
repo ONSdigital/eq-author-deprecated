@@ -31,7 +31,7 @@ class PasswordInput extends Component {
     return (
       <div className={styles.passwordInput}>
         <Input type={showPassword ? 'text' : 'password'} {...this.props} />
-        <button className={styles.showPassword} onClick={this.toggleShowPassword} type='button'>{!showPassword ? 'SHOW' : 'HIDE'}</button>
+        <button className={styles.showPassword} onClick={this.toggleShowPassword} type="button">{!showPassword ? 'SHOW' : 'HIDE'}</button>
       </div>
     )
   }

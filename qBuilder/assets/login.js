@@ -10,7 +10,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import configureStore from './store'
-import 'sanitize.css/lib/sanitize.css'
+import 'sanitize.css/sanitize.css'
 
 import App from 'containers/App'
 import Login from 'containers/Login'

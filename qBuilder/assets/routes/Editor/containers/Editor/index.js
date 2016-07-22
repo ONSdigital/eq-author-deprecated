@@ -41,8 +41,8 @@ export class Editor extends Component {
         }
 
         headerChildren={[
-          <Button key='btn-1' type='secondary' onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save'}</Button>,
-          <Button key='btn-2' type='primary' icon='menu' to='/'>List schemas</Button>
+          <Button key="btn-1" type="secondary" onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save'}</Button>,
+          <Button key="btn-2" type="primary" icon="menu" to="/">List schemas</Button>
         ]}
 
       />

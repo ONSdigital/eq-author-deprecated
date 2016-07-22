@@ -21,6 +21,11 @@ h3,
 h4,
 h5 {
   font-weight: 600;
+  margin: 0;
+}
+
+input, textarea, keygen, select, button {
+  font-family: inherit;
 }
 
 .app {
