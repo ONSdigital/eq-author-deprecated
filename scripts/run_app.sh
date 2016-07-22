@@ -37,12 +37,10 @@ echo $DIR
 echo "Environment variables in use:"
 env | grep EQ_
 
-# if [ ! -s "qBuilder/bundles" ]; then
-#   npm install
-#   npm run compile
-# fi
-
-
+if [ ! -s "qBuilder/bundles" ]; then
+  npm install
+  npm run compile
+fi
 
 python qBuilder/manage.py migrate
 python qBuilder/manage.py collectstatic --no-input
