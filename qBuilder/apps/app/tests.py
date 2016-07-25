@@ -16,7 +16,7 @@ class QBuilder(TestCase):
 
         # Create a user and token and log them in
         test_user = User.objects.create_user('test_user', 'test@ons.gov.uk', 'test_password')
-        Token.objects.get_or_create(user=test_user)
+        Token.objects.get(user=test_user)
         self.client = APIClient()
         self.client.login(username='test_user', password='test_password')
 

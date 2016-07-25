@@ -76,12 +76,12 @@ class SchemaAPI(TestCase):
         test_user = User.objects.create_user('test_user', 'test@ons.gov.uk', 'test_password')
 
         # Generate a token for the user
-        token = Token.objects.get_or_create(user= test_user)
+        token = Token.objects.get(user= test_user)
 
         # Login the user and update http header to include token
         self.client = APIClient()
         self.client.login(username='test_user', password='test_password')
-        self.client.credentials(HTTP_AUTHORIZATION='Token {}'.format(token[0]))
+        self.client.credentials(HTTP_AUTHORIZATION='Token {}'.format(token))
 
     def test_get_empty(self):
         response = self.client.get(reverse("schema"))
