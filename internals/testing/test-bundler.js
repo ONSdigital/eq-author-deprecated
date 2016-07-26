@@ -15,5 +15,5 @@ global.should = chai.should()
 
 // Include all .js files under `app`, except app.js, reducers.js, routes.js and
 // store.js. This is for isparta code coverage
-const context = require.context('../../qBuilder/assets', true, /^^((?!(app|reducers|store)).)*\.js$/)
+const context = require.context('../../qBuilder/assets', true, /^^((?!(login|app|reducers|store)).)*\.js$/)
 context.keys().forEach(context)

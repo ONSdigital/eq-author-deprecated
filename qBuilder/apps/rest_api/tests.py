@@ -1,7 +1,8 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from django.test import Client
-
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+from rest_framework.test import APIClient
 import config
 
 import json
@@ -67,13 +68,20 @@ test_schema = {
 }
 
 
-
-
-
 class SchemaAPI(TestCase):
     def setUp(self):
         config.EQ_SCHEMA_STORAGE = "memory"
-        self.client = Client()
+
+        # Create user for testing
+        test_user = User.objects.create_user('test_user', 'test@ons.gov.uk', 'test_password')
+
+        # Generate a token for the user
+        token = Token.objects.get(user= test_user)
+
+        # Login the user and update http header to include token
+        self.client = APIClient()
+        self.client.login(username='test_user', password='test_password')
+        self.client.credentials(HTTP_AUTHORIZATION='Token {}'.format(token))
 
     def test_get_empty(self):
         response = self.client.get(reverse("schema"))
@@ -82,6 +90,7 @@ class SchemaAPI(TestCase):
         self.assertEquals([], response.data)
 
     def test_schema_api(self):
+
         response = self.client.post(reverse("schema"), json.dumps(test_schema), content_type="application/json")
         self.assertEquals(201, response.status_code)
         self.assertEquals(1, response.data)

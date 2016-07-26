@@ -1,0 +1,23 @@
+.input,
+.textarea {
+  display: block;
+  padding: 0.8rem 1rem;
+  width: 100%;
+  background: #fcfcfc;
+  border: 1px solid #e5e5e5;
+  border-radius: 1px;
+  transition: all 200ms ease-out;
+  &:focus {
+    outline: none;
+    border: 1px solid #ababab;
+  }
+}
+
+.invalid {
+  border-color: #d0021b;
+  background-color: #fae7e7;
+  &:focus {
+    background-color: #fff;
+    border-color: #d0021b;
+  }
+}

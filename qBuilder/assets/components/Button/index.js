@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 
 const getIcon = (icon) => {
   if (icon) {
-    return (<img className={styles.icon} src={require(`./icon-${icon}.svg`)} width='16' height='14' />)
+    return (<img className={styles.icon} src={require(`./icon-${icon}.svg`)} width="16" height="14" />)
   }
 }
 

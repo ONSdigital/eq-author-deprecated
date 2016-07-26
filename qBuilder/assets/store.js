@@ -14,6 +14,8 @@ const loggerMiddleware = createLogger()
 const sagaMiddleware = createSagaMiddleware()
 const devtools = window.devToolsExtension || (() => noop => noop)
 
+export let store
+
 export default function configureStore(initialState = {}, history) {
   const middlewares = [
     loggerMiddleware,
@@ -26,7 +28,7 @@ export default function configureStore(initialState = {}, history) {
     devtools(),
   ]
 
-  const store = createStore(
+  store = createStore(
     createReducer(),
     fromJS(initialState),
     compose(...enhancers)

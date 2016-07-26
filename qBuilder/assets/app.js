@@ -5,10 +5,6 @@
  * code.
  */
 import 'babel-polyfill'
-
-// TODO constrain eslint import/no-unresolved rule to this block
-// Load the manifest.json file and the .htaccess file
-import 'file?name=[name].[ext]!./manifest.json'  // eslint-disable-line import/no-unresolved
 import 'file?name=[name].[ext]!./.htaccess'      // eslint-disable-line import/no-unresolved
 
 // Import all the third party stuff
@@ -22,13 +18,13 @@ import configureStore from './store'
 import { getHooks } from 'utils/hooks'
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
-import 'sanitize.css/lib/sanitize.css'
+import 'sanitize.css/sanitize.css'
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
 // Optionally, this could be changed to leverage a created history
 // e.g. `const browserHistory = useRouterHistory(createBrowserHistory)()`
-const initialState = {}
+const initialState = window.__INITIAL_STATE__
 const store = configureStore(initialState, browserHistory)
 
 // Sync history and store, as the react-router-redux reducer

@@ -7,6 +7,7 @@
   align-items: center;
   font-size: 0.9rem;
   font-weight: 600;
+  font-family: inherit;
   text-rendering: optimizeLegibility;
   text-decoration: none;
   user-select: none;

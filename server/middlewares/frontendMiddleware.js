@@ -9,9 +9,9 @@ const webpack = require('webpack')
 const addDevMiddlewares = (app, options) => {
   const compiler = webpack(options)
   const middleware = webpackDevMiddleware(compiler, {
-    noInfo: true,
+    noInfo: false,
     publicPath: options.output.publicPath,
-    silent: true,
+    silent: false,
     stats: 'errors-only',
   })
 
@@ -21,7 +21,6 @@ const addDevMiddlewares = (app, options) => {
   // Since webpackDevMiddleware uses memory-fs internally to store build
   // artifacts, we use it instead
   const fs = middleware.fileSystem
-
   app.get('*', (req, res) => {
     const file = fs.readFileSync(path.join(compiler.outputPath, 'index.html'))
     res.send(file.toString())

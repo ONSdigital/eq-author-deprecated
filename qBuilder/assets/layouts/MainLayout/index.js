@@ -11,7 +11,7 @@ import Header from 'components/Header'
 function MainLayout({mainChildren, headerChildren}) {
   return (
     <div className={styles.mainLayout}>
-      <Header title='eQ Schema Editor'>
+      <Header title="eQ Schema Editor">
         {headerChildren}
       </Header>
       <main className={styles.wrapper}>

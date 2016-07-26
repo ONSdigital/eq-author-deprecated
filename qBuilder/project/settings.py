@@ -53,10 +53,22 @@ DJANGO_PROVIDED_APPS = [
 ADDITIONAL_APPS = [
     'webpack_loader',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
 ]
 
-# OUR apps
+REST_FRAMEWORK = {
+  'DEFAULT_PERMISSION_CLASSES': (
+    'rest_framework.permissions.IsAuthenticated',
+  ),
+  'DEFAULT_AUTHENTICATION_CLASSES': (
+     'rest_framework.authentication.TokenAuthentication',
+  )
+
+}
+
+LOGIN_REDIRECT_URL='/'
+
 EQ_AUTHOR_APPS = [
     'apps.app',
     'apps.rest_api'

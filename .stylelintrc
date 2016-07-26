@@ -3,6 +3,7 @@
   "ignoreFiles": [],
   "rules": {
     "at-rule-empty-line-before": ["always", "ignore": ["all-nested", "after-comment"]],
-    "indentation": 2
+    "indentation": 2,
+    "selector-list-comma-newline-after": null
   }
 }
