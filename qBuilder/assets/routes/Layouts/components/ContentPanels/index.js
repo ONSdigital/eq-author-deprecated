@@ -7,9 +7,6 @@
 import React, { PropTypes } from 'react'
 
 import styles from './styles.css'
-
-import Header from '../../components/Header'
-import Subheader from '../../components/Subheader'
 import Grid from '../../components/Grid'
 import Panel from '../../components/Panel'
 
@@ -44,8 +41,6 @@ const ContentPanels = ({children, routeParams: { variant }}) => {
   }
   return (
     <div className={styles.contentPanels}>
-      <Header />
-      <Subheader />
       {panels}
     </div>
   )

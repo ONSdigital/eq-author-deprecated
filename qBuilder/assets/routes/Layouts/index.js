@@ -9,7 +9,7 @@ import LayoutsIndex from './components/LayoutsIndex'
 export default function() {
   return {
     name: 'layouts',
-    path: '/layouts',
+    path: '/layouts/',
     component: Layouts,
     indexRoute: {
       component: LayoutsIndex

@@ -18,7 +18,7 @@ export default function(injectReducer, injectSagas, loadModule, errorLoading) {
   }
 
   return {
-    path: '/editor',
+    path: '/editor/',
     name: 'new',
     indexRoute: {
       getComponent: getComponent

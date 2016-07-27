@@ -11,7 +11,6 @@ import * as EditorActions from './actions'
 import { selectEditorValue, selectIsSaving, selectIsFetching } from './selectors'
 
 import JsonEditor from '../../components/JsonEditor'
-import MainLayout from 'layouts/MainLayout'
 import Button from 'components/Button'
 
 // eslint-disable-line react/prefer-stateless-function
@@ -33,19 +32,18 @@ export class Editor extends Component {
       actions.saveSchema(params.schemaID)
     }
 
+    const styles = {
+      display: 'none'
+    }
+
     return (
-      <MainLayout
-
-        mainChildren={
-          <JsonEditor value={value} onChange={actions.changeValue} />
-        }
-
-        headerChildren={[
+      <div>
+        <div style={styles}>
           <Button key="btn-1" type="secondary" onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save'}</Button>,
           <Button key="btn-2" type="primary" icon="menu" to="/">List schemas</Button>
-        ]}
-
-      />
+        </div>
+        <JsonEditor value={value} onChange={actions.changeValue} />
+      </div>
     )
   }
 }

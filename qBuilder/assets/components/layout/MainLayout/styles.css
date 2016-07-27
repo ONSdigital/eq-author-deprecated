@@ -1,0 +1,13 @@
+.mainLayout {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: #ebf0f2;
+}

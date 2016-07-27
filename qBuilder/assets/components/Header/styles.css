@@ -1,34 +1,15 @@
 .header {
-  background-color: #efefef;
-  padding: 0.5rem 0;
+  background: #3a4b52;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: 0.5rem 1rem;
   flex: 0 0 auto;
   text-align: center;
   display: flex;
   align-items: center;
-  height: 4rem;
+  height: 3.8rem;
+  position: relative;
 }
 
-.wrapper {
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  flex: 1 1 auto;
-}
-
-.title {
-  font-size: 1rem;
-  text-align: center;
-  composes: text from 'styles/shared/colors.css';
-}
-
-.btns {
-  display: flex;
-  justify-content: flex-end;
-  margin-left: auto;
-  > * {
-    &:not(:last-child) {
-      margin-right: 0.5rem;
-    }
-  }
+.logo {
+  margin: auto;
 }

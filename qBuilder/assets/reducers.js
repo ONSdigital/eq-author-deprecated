@@ -39,17 +39,20 @@ function routeReducer(state = routeInitialState, action) {
  * Creates the main reducer with the asynchronously loaded ones
  */
 import editorReducer from 'routes/Editor/containers/Editor/reducer'
-import schemasReducer from 'routes/SchemaList/containers/Schemas/reducer'
+import surveysReducer from 'routes/Surveys/containers/Surveys/reducer'
+
 import loginReducer from 'containers/Login/reducer'
 import appReducer from 'containers/App/reducer'
 
+// import appHeaderReducer from 'containers/AppHeader/reducer'
 export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
     editor: editorReducer,
-    schemas: schemasReducer,
     login: loginReducer,
     app: appReducer,
+    surveys: surveysReducer,
+    // appHeader: appHeaderReducer,
     ...asyncReducers,
   })
 }
