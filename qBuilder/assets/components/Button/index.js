@@ -3,33 +3,24 @@ import styles from './styles.css'
 
 import { Link } from 'react-router'
 
-const getIcon = (icon) => {
-  if (icon) {
-    return (<img className={styles.icon} src={require(`./icon-${icon}.svg`)} width="16" height="14" />)
-  }
-}
-
-export const Button = ({children, type, to, icon, onClick}) => {
+export const Button = ({children, to, onClick}) => {
   if (to) {
-    return (<Link className={styles[type]} to={to}>{getIcon(icon)}{children}</Link>)
+    return (<Link className={styles.button} to={to}>{children}</Link>)
   } else {
-    return <button className={styles[type]} onClick={onClick}>{getIcon(icon)}{children}</button>
+    return <button className={styles.button} onClick={onClick}>{children}</button>
   }
 }
 
 Button.propTypes = {
   children: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
-  icon: PropTypes.string,
   onClick: PropTypes.func,
   to: PropTypes.string,
-  type: PropTypes.string,
 }
 
 Button.defaultProps = {
   children: 'Submit',
   disabled: false,
-  type: 'primary',
 }
 
 export default Button

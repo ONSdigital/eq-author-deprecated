@@ -1,7 +1,8 @@
 .tabBar {
   display: block;
-  padding: 1.3rem 0 0;
+  padding: 0.8rem 0;
   background: white;
+  position: relative;
 }
 
 .link {
@@ -16,9 +17,20 @@
 
 .activeLink {
   composes: text from 'styles/shared/colors.css';
-  border-bottom: 1px solid #4ABEE2;
+  border-bottom: 1px solid #4abee2;
 }
 
 .disabledLink {
   color: #ccc;
+}
+
+.tabs {
+  position: absolute;
+  bottom: 0;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
 }

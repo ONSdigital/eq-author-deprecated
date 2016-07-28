@@ -5,7 +5,7 @@ import NotFound from './NotFound'
 
 import MainLayout from 'components/layout/MainLayout'
 
-import { getHooks } from 'utils/hooks'
+import { getAsyncInjectors } from 'utils/asyncInjectors'
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err) // eslint-disable-line no-console
@@ -16,7 +16,7 @@ const loadModule = (cb) => (componentModule) => {
 }
 
 export default function createRoutes(store) {
-  const { injectReducer, injectSagas } = getHooks(store)
+  const { injectReducer, injectSagas } = getAsyncInjectors(store)
 
   return [{
     path: '/',

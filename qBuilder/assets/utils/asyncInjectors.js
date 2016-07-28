@@ -14,17 +14,13 @@ export function injectAsyncReducer(store) {
  * Inject an asynchronously loaded saga
  */
 export function injectAsyncSagas(store) {
-  return (sagas) => {
-    if (sagas.map) {
-      return sagas.map(store.runSaga)
-    }
-  }
+  return (sagas) => sagas.map(store.runSaga)
 }
 
 /**
  * Helper for creating injectors
  */
-export function getHooks(store) {
+export function getAsyncInjectors(store) {
   return {
     injectReducer: injectAsyncReducer(store),
     injectSagas: injectAsyncSagas(store),

@@ -12,6 +12,7 @@ import { selectEditorValue, selectIsSaving, selectIsFetching } from './selectors
 
 import JsonEditor from '../../components/JsonEditor'
 import Button from 'components/Button'
+import TabBar from 'components/TabBar'
 
 // eslint-disable-line react/prefer-stateless-function
 export class Editor extends Component {
@@ -32,16 +33,15 @@ export class Editor extends Component {
       actions.saveSchema(params.schemaID)
     }
 
-    const styles = {
-      display: 'none'
-    }
+    const buttons = [
+      <Button type="secondary" onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save schema'}</Button>
+    ]
+
+    const tabs = [{'title': 'Schema title', 'to': ''}]
 
     return (
       <div>
-        <div style={styles}>
-          <Button key="btn-1" type="secondary" onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save'}</Button>,
-          <Button key="btn-2" type="primary" icon="menu" to="/">List schemas</Button>
-        </div>
+        <TabBar tabs={tabs} buttons={buttons} />
         <JsonEditor value={value} onChange={actions.changeValue} />
       </div>
     )

@@ -5,15 +5,15 @@ export default function(injectReducer, injectSagas, loadModule, errorLoading) {
     breadcrumbName: 'Surveys',
     getComponent(nextState, cb) {
       const importModules = Promise.all([
-        System.import('./containers/Surveys/reducer'),
-        System.import('./containers/Surveys/sagas'),
-        System.import('./containers/Surveys'),
+        System.import('./containers/SurveyListContainer/reducer'),
+        System.import('./containers/SurveyListContainer/sagas'),
+        System.import('./containers/SurveyListContainer'),
       ])
 
       const renderRoute = loadModule(cb)
 
       importModules.then(([reducer, sagas, component]) => {
-        injectReducer('surveys', reducer.default)
+        injectReducer('schemas', reducer.default)
         injectSagas(sagas.default)
         renderRoute(component)
       })

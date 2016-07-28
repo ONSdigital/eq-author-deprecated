@@ -1,0 +1,40 @@
+.table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.head {
+  background: #f2f2f2;
+  border-radius: 3px 0 0 3px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  .cell {
+    padding: 0.5rem 1rem;
+  }
+  .row {
+    border: 1px solid #e0e0e0;
+  }
+}
+
+.body {
+  background: white;
+  .cell {
+    padding: 1.5rem 1rem;
+  }
+}
+
+.cell {
+
+}
+
+.cellCenter {
+  composes: cell;
+  text-align: center;
+}
+
+.row {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ededed;
+}

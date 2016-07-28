@@ -20,12 +20,14 @@ export default function(injectReducer, injectSagas, loadModule, errorLoading) {
   return {
     path: '/editor/',
     name: 'new',
+    breadcrumbName: 'Editor',
     indexRoute: {
       getComponent: getComponent
     },
     childRoutes: [{
       path: ':schemaID',
       name: 'edit',
+      breadcrumbName: 'Edit',
       getComponent: getComponent
     }]
   }

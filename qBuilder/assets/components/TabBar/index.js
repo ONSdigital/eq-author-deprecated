@@ -5,21 +5,40 @@
 */
 
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
-
 import styles from './styles.css'
 
+import { Link } from 'react-router'
 import Wrapper from 'components/layout/Wrapper'
 
-const TabBar = () => (
+const TabBar = ({buttons, tabs}) => (
   <nav className={styles.tabBar}>
     <Wrapper direction="row">
-      <Link className={styles.link} activeClassName={styles.activeLink} to="/surveys/">My Surveys</Link>
-      <Link className={`${styles.link} ${styles.disabledLink}`} activeClassName={styles.activeLink} to="/surveys/all/">All Surveys</Link>
+      <div className={styles.tabs}>
+        {tabs.map((tab, index) => {
+          let classes = styles.link
+          if (tab.disabled) {
+            classes += ` ${styles.disabledLink}`
+          }
+          return <Link key={index} className={classes} activeClassName={styles.activeLink} to={tab.to}>{tab.title}</Link>
+        })}
+      </div>
+      <div className={styles.buttons}>
+        {buttons.map((button, index) => (
+          <div key={index}>{button}</div>
+        ))}
+      </div>
     </Wrapper>
   </nav>
 )
 
-TabBar.propTypes = {}
+TabBar.propTypes = {
+  buttons: PropTypes.array,
+  tabs: PropTypes.array
+}
+
+TabBar.defaultProps = {
+  buttons: [],
+  tabs: []
+}
 
 export default TabBar

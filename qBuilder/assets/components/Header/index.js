@@ -4,14 +4,12 @@ import { Link } from 'react-router'
 import styles from './styles.css'
 import Logo from 'components/Logo'
 import Breadcrumb from 'components/Breadcrumb'
-import Wrapper from 'components/layout/Wrapper'
 
 export const Header = ({routes}) => (
   <div>
     <header className={styles.header}>
-      <Wrapper>
-        <Link className={styles.logo} to="/"><Logo /></Link>
-      </Wrapper>
+      <Link className={styles.logo} to="/"><Logo /></Link>
+      <a href="/sign-out/">Sign out</a>
     </header>
     <Breadcrumb routes={routes} />
   </div>
