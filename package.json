@@ -66,6 +66,7 @@
     "immutable": "^3.8.1",
     "js-beautify": "^1.6.3",
     "react": "^15.0.1",
+    "react-click-outside": "^2.1.0",
     "react-codemirror": "^0.2.6",
     "react-dom": "^15.0.1",
     "react-pure-render": "^1.0.2",

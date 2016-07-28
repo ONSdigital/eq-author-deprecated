@@ -125,7 +125,7 @@ if 'TRAVIS' in os.environ:
         }
     }
 else:
-    DATABASES = {'default': dj_database_url.parse(os.getenv('EQ_AUTHOR_DATABASE_URL', 'sqlite:////tmp/author.db'))}
+    DATABASES = {'default': dj_database_url.parse(os.getenv('EQ_AUTHOR_DATABASE_URL', 'sqlite:///author.db'))}
 
 
 # Password validation

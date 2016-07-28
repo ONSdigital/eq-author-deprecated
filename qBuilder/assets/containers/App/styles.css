@@ -30,7 +30,17 @@ input, textarea, keygen, select, button {
 
 a {
   color: #61bde0;
+  &:hover {
+    color: #4791ad;
+  }
 }
+/*
+* {
+  &:focus {
+    outline: none;
+    background: rgba(0, 0, 0, 0.025);
+  }
+}*/
 
 .app {
   width: 100vw;

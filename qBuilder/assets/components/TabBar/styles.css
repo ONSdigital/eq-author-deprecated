@@ -13,15 +13,36 @@
   &:first-child {
     padding-left: 0;
   }
+  &:active,
+  &:hover {
+    outline: none;
+  }
 }
 
 .activeLink {
   composes: text from 'styles/shared/colors.css';
-  border-bottom: 1px solid #4abee2;
+  position: relative;
+  &::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: #4abee2;
+    transition: height 0.1s;
+  }
+  &:active,
+  &:hover {
+    &::after {
+      height: 3px;
+    }
+  }
 }
 
 .disabledLink {
   color: #ccc;
+  pointer-events: none;
 }
 
 .tabs {
