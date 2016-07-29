@@ -10,7 +10,6 @@ import styles from './styles.css'
 
 import TabBar from 'components/TabBar'
 import Canvas from 'components/Canvas'
-import Button from 'components/Button'
 import Wrapper from 'components/layout/Wrapper'
 import QuestionnaireList from '../../components/QuestionnaireList'
 
@@ -23,13 +22,9 @@ const tabs = [{
   disabled: true
 }]
 
-const buttons = [
-  <Button to="/surveys/new">Add survey</Button>
-]
-
 const SurveyList = ({schemas}) => (
   <div className={styles.surveyList}>
-    <TabBar tabs={tabs} buttons={buttons} />
+    <TabBar tabs={tabs} />
     <Canvas>
       <Wrapper>
         <QuestionnaireList schemas={schemas} />

@@ -1,34 +1,26 @@
-export default function(injectReducer, injectSagas, loadModule, errorLoading) {
-  const getComponent = (nextState, cb) => {
-    const importModules = Promise.all([
-      System.import('./containers/Editor/reducer'),
-      System.import('./containers/Editor/sagas'),
-      System.import('./containers/Editor'),
-    ])
+import { getAsyncComponent } from 'utils/asyncInjectors'
 
-    const renderRoute = loadModule(cb)
-
-    importModules.then(([reducer, sagas, component]) => {
-      injectReducer('editor', reducer.default)
-      injectSagas(sagas.default)
-      renderRoute(component)
-    })
-
-    importModules.catch(errorLoading)
-  }
-
+export default function(store) {
   return {
-    path: '/editor/',
+    path: '/questionnaire/new/',
     name: 'new',
-    breadcrumbName: 'Editor',
+    breadcrumbName: 'Questionnaire',
     indexRoute: {
-      getComponent: getComponent
+      getComponent: getAsyncComponent(store, 'editor', [
+        System.import('./containers/Editor/reducer'),
+        System.import('./containers/Editor/sagas'),
+        System.import('./containers/Editor'),
+      ])
     },
     childRoutes: [{
-      path: ':schemaID',
+      path: '/questionnaire/:schemaID',
       name: 'edit',
       breadcrumbName: 'Edit',
-      getComponent: getComponent
+      getComponent: getAsyncComponent(store, 'editor', [
+        System.import('./containers/Editor/reducer'),
+        System.import('./containers/Editor/sagas'),
+        System.import('./containers/Editor'),
+      ])
     }]
   }
 }

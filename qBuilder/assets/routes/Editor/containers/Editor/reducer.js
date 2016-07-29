@@ -7,6 +7,7 @@
 import { Map } from 'immutable'
 import {
   CHANGE_VALUE,
+  NEW_SCHEMA,
   FETCH_SCHEMA_REQUEST,
   FETCH_SCHEMA_SUCCESS,
   FETCH_SCHEMA_FAILURE,
@@ -18,6 +19,7 @@ import {
 export const initialState = Map({
   isFetching: false,
   isSaving: false,
+  title: 'My Survey',
   value: '',
 })
 
@@ -29,15 +31,18 @@ function editorReducer(state = initialState, action) {
     case FETCH_SCHEMA_REQUEST:
       return state
         .set('isFetching', true)
-        .set('value', action.payload.value)
+        .set('value', action.payload.value.schema)
+        .set('title', 'Loading...')
     case FETCH_SCHEMA_SUCCESS:
       return state
         .set('isFetching', false)
-        .set('value', action.payload.value)
+        .set('value', action.payload.value.schema)
+        .set('title', action.payload.value.title)
     case FETCH_SCHEMA_FAILURE:
       return state
         .set('isFetching', false)
-        .set('value', action.payload.value)
+        .set('value', action.payload.value.schema)
+        .set('title', action.payload.value.title)
     case SAVE_SCHEMA_REQUEST:
       return state
         .set('isSaving', true)
@@ -45,6 +50,11 @@ function editorReducer(state = initialState, action) {
     case SAVE_SCHEMA_FAILURE:
       return state
         .set('isSaving', false)
+    case NEW_SCHEMA:
+      return state
+        .set('isSaving', false)
+        .set('value', '')
+        .set('title', 'Questionnaire title')
     default:
       return state
   }

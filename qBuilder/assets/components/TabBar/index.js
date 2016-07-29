@@ -10,17 +10,19 @@ import styles from './styles.css'
 import { Link } from 'react-router'
 import Wrapper from 'components/layout/Wrapper'
 
-const TabBar = ({buttons, tabs}) => (
+const TabBar = ({buttons, tabs, title}) => (
   <nav className={styles.tabBar}>
     <Wrapper direction="row">
       <div className={styles.tabs}>
-        {tabs.map((tab, index) => {
-          let classes = styles.link
-          if (tab.disabled) {
-            classes += ` ${styles.disabledLink}`
+        {(() => {
+          if (tabs.length > 0) {
+            return tabs.map((tab, index) => {
+              return <Link key={index} className={styles.link} activeClassName={styles.activeLink} to={tab.to} aria-disabled={tab.disabled}>{tab.title}</Link>
+            })
+          } else {
+            return <h2 className={styles.title}>{title}</h2>
           }
-          return <Link key={index} className={classes} activeClassName={styles.activeLink} to={tab.to}>{tab.title}</Link>
-        })}
+        })()}
       </div>
       <div className={styles.buttons}>
         {buttons.map((button, index) => (
@@ -33,7 +35,8 @@ const TabBar = ({buttons, tabs}) => (
 
 TabBar.propTypes = {
   buttons: PropTypes.array,
-  tabs: PropTypes.array
+  tabs: PropTypes.array,
+  title: PropTypes.string
 }
 
 TabBar.defaultProps = {

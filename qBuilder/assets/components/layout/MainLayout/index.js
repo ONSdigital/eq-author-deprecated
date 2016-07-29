@@ -11,7 +11,7 @@ import styles from './styles.css'
 import Header from 'components/Header'
 
 const MainLayout = ({children, routes}) => {
-  routes.shift()
+  routes.splice(0, 1)
   const transitionProps = {
     pathname: location.pathname,
     atEnter: { opacity: 0 },

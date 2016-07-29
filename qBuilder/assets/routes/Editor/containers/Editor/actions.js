@@ -8,6 +8,7 @@ import {
   CHANGE_VALUE,
   LOAD_SCHEMA,
   SAVE_SCHEMA,
+  NEW_SCHEMA,
   FETCH_SCHEMA_REQUEST,
   FETCH_SCHEMA_SUCCESS,
   FETCH_SCHEMA_FAILURE,
@@ -37,6 +38,15 @@ export function saveSchema(schemaID) {
     type: SAVE_SCHEMA,
     payload: {
       schemaID: schemaID
+    }
+  }
+}
+
+export function newSchema() {
+  return {
+    type: NEW_SCHEMA,
+    payload: {
+      title: 'New Survey'
     }
   }
 }

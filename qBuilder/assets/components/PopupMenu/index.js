@@ -33,7 +33,9 @@ class PopupMenu extends React.Component {
   }
 
   onClick = () => {
-    this.setState({ open: !this.state.open })
+    if (!this.state.disabled) {
+      this.setState({ open: !this.state.open })
+    }
   }
 
   handleClickOutside() {
@@ -53,7 +55,7 @@ class PopupMenu extends React.Component {
         <div className={menuStyles}>
           <ul className={styles.options}>
             {options.map((option, index) => (
-              <li className={styles.option}>
+              <li className={styles.option} key={index}>
                 <Link className={styles.link} to={option.to} aria-disabled={option.disabled}>
                   <Icon name={option.icon} width="18px" height="18px" />
                   <span className={styles.linkText}>{option.title}</span>

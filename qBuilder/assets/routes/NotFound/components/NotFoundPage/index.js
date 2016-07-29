@@ -6,9 +6,14 @@
  */
 
 import React from 'react'
+import Wrapper from 'components/layout/Wrapper'
 /* eslint-disable react/prefer-stateless-function */
 export default class NotFound extends React.Component {
   render() {
-    return <h1>Page Not Found</h1>
+    return (
+      <Wrapper>
+        <h1>Page Not Found</h1>
+      </Wrapper>
+    )
   }
 }

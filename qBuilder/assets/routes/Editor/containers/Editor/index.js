@@ -8,7 +8,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as EditorActions from './actions'
-import { selectEditorValue, selectIsSaving, selectIsFetching } from './selectors'
+import { selectEditorValue, selectEditorTitle, selectIsSaving, selectIsFetching } from './selectors'
 
 import JsonEditor from '../../components/JsonEditor'
 import Button from 'components/Button'
@@ -22,12 +22,12 @@ export class Editor extends Component {
     if (params.schemaID !== undefined) {
       actions.loadSchema(params.schemaID)
     } else {
-      actions.changeValue('')
+      actions.newSchema()
     }
   }
 
   render() {
-    const { actions, value, params, isSaving } = this.props
+    const { actions, value, title, params, isSaving } = this.props
 
     const saveSchema = () => {
       actions.saveSchema(params.schemaID)
@@ -37,11 +37,9 @@ export class Editor extends Component {
       <Button type="secondary" onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save schema'}</Button>
     ]
 
-    const tabs = [{'title': 'Schema title', 'to': ''}]
-
     return (
       <div>
-        <TabBar tabs={tabs} buttons={buttons} />
+        <TabBar title={title} buttons={buttons} />
         <JsonEditor value={value} onChange={actions.changeValue} />
       </div>
     )
@@ -54,6 +52,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   value: selectEditorValue(state),
+  title: selectEditorTitle(state),
   isSaving: selectIsSaving(state),
   isFetching: selectIsFetching(state),
 })
@@ -64,6 +63,7 @@ Editor.propTypes = {
   isSaving: PropTypes.bool.isRequired,
   params: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
 }
 

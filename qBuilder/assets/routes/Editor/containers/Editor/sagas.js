@@ -52,6 +52,7 @@ export function* saveSchema(action) {
 
   // get the current value of the JSON editor from the state
   const body = yield select(selectEditorValue)
+
   // dispatch action to update UI
   yield put(saveSchemaRequest())
   // perform API call
@@ -70,7 +71,7 @@ export function* saveSchema(action) {
     yield put(saveSchemaSuccess())
     if (schemaID === undefined) {
       // if new schema forward the browser
-      yield call(browserHistory.replace, `/editor/${schema.data}`)
+      yield call(browserHistory.replace, `/questionnaire/${schema.data}`)
     }
   } else {
     yield put(saveSchemaFailure(schema.err.response))

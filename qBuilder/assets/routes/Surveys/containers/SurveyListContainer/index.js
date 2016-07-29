@@ -23,9 +23,7 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
   }
 
   render() {
-    return (
-      <SurveyList {...this.props} />
-    )
+    return <SurveyList {...this.props} />
   }
 }
 

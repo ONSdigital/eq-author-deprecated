@@ -88,7 +88,7 @@
 
 .horizontal {
   top: 50%;
-  left: -100%;
+  left: -100px;
   &.open {
     transform: translateX(-10px) translateY(-50%) scale(1);
   }
@@ -154,11 +154,17 @@
   }
   &[aria-disabled=true] {
     color: #333;
-    opacity: 0.5;
+    opacity: 0.2;
     pointer-events: none;
     &:hover,
-    &:active {
+    &:focus {
       background: transparent;
+    }
+    &:focus {
+      opacity: 0.5;
+    }
+    &:active {
+      opacity: 0.2;
     }
   }
 }

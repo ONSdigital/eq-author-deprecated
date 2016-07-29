@@ -15,7 +15,14 @@ const Breadcrumb = ({routes}) => (
     <Wrapper direction="row">
       {routes.map((item, index) =>
         <div key={index}>
-          <Link className={styles.link} activeClassName={styles.activeLink} onlyActiveOnIndex to={item.path || ''}>{item.breadcrumbName || item.name}</Link>
+          {(() => {
+            const linkTitle = item.breadcrumbName || item.name
+            if ((index + 1) < routes.length) {
+              return (<Link className={styles.link} to={item.path || ''}>{linkTitle}</Link>)
+            } else {
+              return (<span>&nbsp;{linkTitle}</span>)
+            }
+          })()}
           {(index + 1) < routes.length && '>'}
         </div>
       )}

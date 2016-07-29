@@ -9,7 +9,6 @@ import { LOCATION_CHANGE } from 'react-router-redux'
 
 import loginReducer from 'containers/Login/reducer'
 import appReducer from 'containers/App/reducer'
-import schemasReducer from 'routes/Surveys/containers/SurveyListContainer/reducer'
 
 /*
  * routeReducer
@@ -48,7 +47,6 @@ export default function createReducer(asyncReducers) {
     route: routeReducer,
     login: loginReducer,
     app: appReducer,
-    schemas: schemasReducer,
     ...asyncReducers,
   })
 }

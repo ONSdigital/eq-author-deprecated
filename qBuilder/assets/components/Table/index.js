@@ -13,11 +13,11 @@ import PopupMenu from 'components/PopupMenu'
 
 const surveyOpts = [{
   title: 'Add',
-  to: '/editor/',
+  to: '/questionnaire/new/',
   icon: 'pop-add',
 }, {
   title: 'Edit',
-  to: '/editor/',
+  to: '/surveys/',
   icon: 'pop-edit',
   disabled: true
 }]
@@ -41,7 +41,7 @@ const questionnaireOpts = [{
   title: 'Delete',
   to: '',
   icon: 'pop-delete',
-  disabled: true
+  disabled: false
 }]
 
 const Table = ({schemas}) => (
@@ -62,14 +62,14 @@ const Table = ({schemas}) => (
             <Icon name="comments" />
           </td>
           <td className={styles.cell}>
-            <Link className={styles.link} to={`/editor/${schema.eq_id}`}>
+            <Link className={styles.link} to={`/questionnaire/${schema.eq_id}`}>
               {schema.title || 'No title provided'}
             </Link>
           </td>
           <td className={styles.cell}><Icon name="team" /></td>
-          <td className={styles.cell}>22/11/15</td>
+          <td className={styles.cell}>10/11/15</td>
           <td className={styles.cell}>Pending Approval</td>
-          <td className={styles.cell}><PopupMenu options={questionnaireOpts} disabled /></td>
+          <td className={styles.cell}><PopupMenu options={questionnaireOpts} /></td>
         </tr>)
       )}
     </tbody>
