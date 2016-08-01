@@ -20,6 +20,9 @@ class SchemaStorage(object):
     def get(self, key):
         pass
 
+    def delete(self, key):
+        pass
+
 
 # we can't use s3 during testing so create an in memory version
 class InMemorySchemaStorage(SchemaStorage):
