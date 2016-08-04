@@ -44,6 +44,10 @@ export default function request(url, options) {
   const authOptions = options || {}
   authOptions.headers = authOptions.headers || {}
   authOptions.headers.Authorization = selectToken(store.getState())
+
+
+  console.log(authOptions)
+
   return fetch(url, authOptions)
     .then(checkStatus)
     .then(parseJSON)

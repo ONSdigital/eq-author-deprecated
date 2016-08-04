@@ -1,5 +1,4 @@
 .table {
-  display: table;
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
@@ -26,7 +25,17 @@
 }
 
 .cell {
+  width: auto;
+}
 
+.disabledCell {
+  composes: cell;
+  opacity: 0.2;
+}
+
+.titleCell {
+  composes: cell;
+  width: 40rem;
 }
 
 .cellCenter {
@@ -37,4 +46,13 @@
 .row {
   padding: 0.5rem 1rem;
   border: 1px solid #ededed;
+  transition: opacity 300ms ease-out;
+}
+
+.leave {
+  opacity: 1;
+}
+
+.leaveActive {
+  opacity: 0.01;
 }

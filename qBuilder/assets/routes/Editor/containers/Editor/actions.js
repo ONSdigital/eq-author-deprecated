@@ -14,7 +14,7 @@ import {
   FETCH_SCHEMA_FAILURE,
   SAVE_SCHEMA_REQUEST,
   SAVE_SCHEMA_SUCCESS,
-  SAVE_SCHEMA_FAILURE
+  SAVE_SCHEMA_FAILURE,
 } from './constants'
 
 export function changeValue(value) {

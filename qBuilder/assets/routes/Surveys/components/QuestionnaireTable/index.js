@@ -1,15 +1,18 @@
 /**
 *
-* Table
+* QuestionnaireTable
 *
 */
 
 import React, { PropTypes } from 'react'
+import Animate from 'rc-animate'
 import { Link } from 'react-router'
 
 import styles from './styles.css'
 import Icon from 'components/Icon'
 import PopupMenu from 'components/PopupMenu'
+
+import moment from 'moment'
 
 const surveyOpts = [{
   title: 'Add',
@@ -22,7 +25,7 @@ const surveyOpts = [{
   disabled: true
 }]
 
-const questionnaireOpts = [{
+const getQuestionnaireOpts = (deleteSchema, schemaId) => ([{
   title: 'Settings',
   to: '',
   icon: 'pop-settings',
@@ -39,45 +42,50 @@ const questionnaireOpts = [{
   disabled: true
 }, {
   title: 'Delete',
-  to: '',
+  onClick: (e) => {
+    deleteSchema(schemaId)
+  },
   icon: 'pop-delete',
   disabled: false
-}]
+}])
 
-const Table = ({schemas}) => (
+const transitionName = {
+  leave: styles.leave,
+  leaveActive: styles.leaveActive,
+}
+
+const QuestionnaireTable = ({schemas, deleteSchema}) => (
   <table className={styles.table}>
     <thead className={styles.head}>
       <tr className={styles.row}>
         <td className={styles.cell} colSpan="2">Retail sales (MCI)</td>
-        <td className={styles.cellCenter}>Shared</td>
         <td className={styles.cell}>Date Modified</td>
-        <td className={styles.cell}>Status</td>
-        <td className={styles.cell}><PopupMenu options={surveyOpts} orientation="horizontal" /></td>
+        <td className={styles.cell}><PopupMenu orientation="horizontal" options={surveyOpts} /></td>
       </tr>
     </thead>
-    <tbody className={styles.body}>
+    <Animate component="tbody" className={styles.body} transitionName={transitionName}>
       {schemas.map((schema, i) => (
         <tr className={styles.row} key={schema.eq_id}>
           <td className={styles.cell}>
             <Icon name="comments" />
           </td>
-          <td className={styles.cell}>
+          <td className={styles.titleCell}>
             <Link className={styles.link} to={`/questionnaire/${schema.eq_id}`}>
               {schema.title || 'No title provided'}
             </Link>
           </td>
-          <td className={styles.cell}><Icon name="team" /></td>
-          <td className={styles.cell}>10/11/15</td>
-          <td className={styles.cell}>Pending Approval</td>
-          <td className={styles.cell}><PopupMenu options={questionnaireOpts} /></td>
-        </tr>)
-      )}
-    </tbody>
+          <td className={styles.cell}>{moment(schema.modified).format('DD/MM/YYYY')}</td>
+          <td className={styles.cell}><PopupMenu orientation="horizontal" options={getQuestionnaireOpts(deleteSchema, schema.eq_id)} /></td>
+        </tr>
+      )
+    )}
+    </Animate>
   </table>
 )
 
-Table.propTypes = {
+QuestionnaireTable.propTypes = {
+  deleteSchema: PropTypes.func.isRequired,
   schemas: PropTypes.array.isRequired,
 }
 
-export default Table
+export default QuestionnaireTable

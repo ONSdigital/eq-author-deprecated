@@ -65,6 +65,8 @@
     "history": "^3.0.0",
     "immutable": "^3.8.1",
     "js-beautify": "^1.6.3",
+    "moment": "^2.14.1",
+    "rc-animate": "^2.3.1",
     "react": "^15.0.1",
     "react-click-outside": "^2.1.0",
     "react-codemirror": "^0.2.6",

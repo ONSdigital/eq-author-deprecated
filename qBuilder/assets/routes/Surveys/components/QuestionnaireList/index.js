@@ -8,18 +8,19 @@ import React, { PropTypes } from 'react'
 
 import styles from './styles.css'
 
-import Table from 'components/Table'
+import QuestionnaireTable from '../../components/QuestionnaireTable'
 
 class QuestionnaireList extends React.Component {
   static propTypes = {
-    schemas: PropTypes.array.isRequired
+    deleteSchema: PropTypes.func.isRequired,
+    schemas: PropTypes.array.isRequired,
   }
 
   render() {
-    const { schemas } = this.props
+    const { schemas, deleteSchema } = this.props
     return (
       <div className={styles.questionnaireList}>
-        <Table schemas={schemas} />
+        <QuestionnaireTable schemas={schemas} deleteSchema={deleteSchema} />
       </div>
     )
   }

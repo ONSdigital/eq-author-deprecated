@@ -111,7 +111,7 @@ export function* editorData() {
   yield race([
     [
       call(loadSchemaWatcher),
-      call(saveSchemaWatcher)
+      call(saveSchemaWatcher),
     ],
     take(LOCATION_CHANGE)
   ])

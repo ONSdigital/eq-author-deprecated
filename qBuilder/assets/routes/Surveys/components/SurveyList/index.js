@@ -22,18 +22,19 @@ const tabs = [{
   disabled: true
 }]
 
-const SurveyList = ({schemas}) => (
+const SurveyList = ({schemas, deleteSchema}) => (
   <div className={styles.surveyList}>
     <TabBar tabs={tabs} />
     <Canvas>
       <Wrapper>
-        <QuestionnaireList schemas={schemas} />
+        <QuestionnaireList schemas={schemas} deleteSchema={deleteSchema} />
       </Wrapper>
     </Canvas>
   </div>
 )
 
 SurveyList.propTypes = {
+  deleteSchema: PropTypes.func.isRequired,
   schemas: PropTypes.array.isRequired
 }
 

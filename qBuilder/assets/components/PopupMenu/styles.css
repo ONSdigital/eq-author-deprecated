@@ -2,6 +2,7 @@
   cursor: pointer;
   position: relative;
   text-align: center;
+  width: 2rem;
   &[aria-disabled=true] {
     opacity: 0.3;
     pointer-events: none;
@@ -12,6 +13,8 @@
   opacity: 0.5;
   cursor: pointer;
   padding: 0.2rem;
+  width: 1.8rem;
+  height: 1.8rem;
   &:hover,
   &:focus {
     outline: none;
@@ -42,7 +45,6 @@
   z-index: 100;
   min-width: 120px;
   transition: all 50ms;
-
   &::after,
   &::before {
     border: solid transparent;
@@ -88,12 +90,12 @@
 
 .horizontal {
   top: 50%;
-  left: -100px;
+  left: -10px;
   &.open {
-    transform: translateX(-10px) translateY(-50%) scale(1);
+    transform: translateX(-100%) translateY(-50%) scale(1);
   }
   &.closed {
-    transform: translateX(0) translateY(-50%) scale(0.9);
+    transform: translateX(-100%) translateY(-50%) scale(0.9);
   }
   &::after,
   &::before {
