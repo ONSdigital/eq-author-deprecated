@@ -6,7 +6,7 @@ import { loadSchema, loadSchemaWatcher, saveSchemaWatcher,
 import { fetchSchemaRequest, fetchSchemaSuccess, fetchSchemaFailure,
          saveSchemaRequest, saveSchemaSuccess, saveSchemaFailure } from '../actions'
 
-import { selectEditorValue } from '../selectors'
+import { selectSchemaValue } from '../selectors'
 
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { LOAD_SCHEMA, SAVE_SCHEMA } from '../constants'
@@ -55,7 +55,7 @@ describe('editor saveSchema Saga', () => {
     }
     // set up saga
     generator = saveSchema(action)
-    const editorValue = select(selectEditorValue)
+    const editorValue = select(selectSchemaValue)
     expect(generator.next().value).toEqual(editorValue)
     expect(generator.next().value).toEqual(put(saveSchemaRequest()))
 

@@ -5,7 +5,7 @@
  */
 
 import {
-  CHANGE_VALUE,
+  UPDATE_SCHEMA,
   LOAD_SCHEMA,
   SAVE_SCHEMA,
   NEW_SCHEMA,
@@ -17,10 +17,12 @@ import {
   SAVE_SCHEMA_FAILURE,
 } from './constants'
 
-export function changeValue(value) {
+export function updateSchema(schema) {
   return {
-    type: CHANGE_VALUE,
-    payload: { value }
+    type: UPDATE_SCHEMA,
+    payload: {
+      schema: schema
+    }
   }
 }
 
@@ -55,17 +57,15 @@ export function fetchSchemaRequest() {
   return {
     type: FETCH_SCHEMA_REQUEST,
     payload: {
-      value: '//Loading schema'
+      schema: '//Loading schema'
     }
   }
 }
 
-export function fetchSchemaSuccess(value) {
+export function fetchSchemaSuccess(payload) {
   return {
     type: FETCH_SCHEMA_SUCCESS,
-    payload: {
-      value: value
-    }
+    payload: payload
   }
 }
 
@@ -74,7 +74,7 @@ export function fetchSchemaFailure(err) {
     type: FETCH_SCHEMA_FAILURE,
     error: err,
     payload: {
-      value: '//There was an error loading the schema'
+      schema: '//There was an error loading the schema'
     }
   }
 }

@@ -19,10 +19,10 @@ export class JsonEditor extends Component {
   }
 
   render() {
-    const {onChange, value} = this.props
+    const {onChange, schema} = this.props
     return (
       <div className={styles.jsonEditor}>
-        <Codemirror ref="editor" className={styles.editor} onChange={onChange} value={value} options={options} />
+        <Codemirror ref="editor" className={styles.editor} onChange={onChange} value={schema} options={options} />
       </div>
     )
   }
@@ -30,8 +30,8 @@ export class JsonEditor extends Component {
 
 JsonEditor.propTypes = {
   onChange: PropTypes.func,
+  schema: PropTypes.string,
   title: PropTypes.string,
-  value: PropTypes.string,
 }
 
 export default JsonEditor

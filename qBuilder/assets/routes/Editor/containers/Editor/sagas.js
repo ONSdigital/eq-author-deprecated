@@ -6,7 +6,7 @@ import { delay } from 'redux-saga'
 import { saveSchemaRequest, saveSchemaSuccess, saveSchemaFailure,
          fetchSchemaRequest, fetchSchemaSuccess, fetchSchemaFailure } from './actions'
 
-import { selectEditorValue } from './selectors'
+import { selectSchemaValue } from './selectors'
 
 import { browserHistory } from 'react-router'
 
@@ -21,7 +21,10 @@ export function* loadSchema(action) {
 
   // handle response/errors
   if (!schema.err) {
-    yield put(fetchSchemaSuccess(schema.data))
+    yield put(fetchSchemaSuccess({
+      schema: schema.data.schema,
+      title: schema.data.title,
+    }))
   } else {
     yield put(fetchSchemaFailure(schema.err))
     console.error(schema.err.response) // eslint-disable-line
@@ -51,7 +54,7 @@ export function* saveSchema(action) {
   }
 
   // get the current value of the JSON editor from the state
-  const body = yield select(selectEditorValue)
+  const body = yield select(selectSchemaValue)
 
   // dispatch action to update UI
   yield put(saveSchemaRequest())

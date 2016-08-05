@@ -16,7 +16,7 @@ describe('<Editor />', () => {
       route: {},
       params: {},
       actions: {
-        changeValue: () => { }
+        updateSchema: () => { }
       }
     }
   })

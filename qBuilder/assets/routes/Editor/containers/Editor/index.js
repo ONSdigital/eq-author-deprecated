@@ -8,7 +8,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as EditorActions from './actions'
-import { selectEditorValue, selectEditorTitle, selectIsSaving, selectIsFetching } from './selectors'
+import { selectSchemaValue, selectEditorTitle, selectIsSaving, selectIsFetching } from './selectors'
 
 import JsonEditor from '../../components/JsonEditor'
 import Button from 'components/Button'
@@ -27,7 +27,7 @@ export class Editor extends Component {
   }
 
   render() {
-    const { actions, value, title, params, isSaving } = this.props
+    const { actions, schema, title, params, isSaving } = this.props
 
     const saveSchema = () => {
       actions.saveSchema(params.schemaID)
@@ -40,7 +40,7 @@ export class Editor extends Component {
     return (
       <div>
         <TabBar title={title} buttons={buttons} />
-        <JsonEditor value={value} onChange={actions.changeValue} />
+        <JsonEditor schema={schema} onChange={actions.updateSchema} />
       </div>
     )
   }
@@ -51,7 +51,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = state => ({
-  value: selectEditorValue(state),
+  schema: selectSchemaValue(state),
   title: selectEditorTitle(state),
   isSaving: selectIsSaving(state),
   isFetching: selectIsFetching(state),
@@ -63,8 +63,8 @@ Editor.propTypes = {
   isSaving: PropTypes.bool.isRequired,
   params: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
+  schema: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
 }
 
 export default connect(

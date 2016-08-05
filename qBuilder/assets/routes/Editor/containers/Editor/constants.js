@@ -4,7 +4,7 @@
  *
  */
 
-export const CHANGE_VALUE = 'app/Editor/CHANGE_VALUE'
+export const UPDATE_SCHEMA = 'app/Editor/UPDATE_SCHEMA'
 export const LOAD_SCHEMA = 'app/Editor/LOAD_SCHEMA'
 export const SAVE_SCHEMA = 'app/Editor/SAVE_SCHEMA'
 export const NEW_SCHEMA = 'app/Editor/NEW_SCHEMA'
