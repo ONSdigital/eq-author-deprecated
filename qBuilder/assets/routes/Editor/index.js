@@ -2,7 +2,7 @@ import { getAsyncComponent } from 'utils/asyncInjectors'
 
 export default function(store) {
   return {
-    path: '/questionnaire/new/',
+    path: '/surveys/questionnaire/new/',
     name: 'new',
     breadcrumbName: 'Questionnaire',
     indexRoute: {
@@ -13,7 +13,7 @@ export default function(store) {
       ])
     },
     childRoutes: [{
-      path: '/questionnaire/:schemaID',
+      path: '/surveys/questionnaire/:schemaID',
       name: 'edit',
       breadcrumbName: 'Edit',
       getComponent: getAsyncComponent(store, 'editor', [

@@ -1,16 +1,20 @@
 import MainLayout from '../index'
-import Button from 'components/Button'
-
+import Header from 'components/Header'
 import expect from 'expect'
 import { shallow } from 'enzyme'
 import React from 'react'
 
+let mainLayout, children
+
 describe('<MainLayout />', () => {
-  it('should render children given in props', () => {
-    const mainChildren = 'I am the main child'
-    const headerChildren = <Button />
-    const mainLayout = shallow(<MainLayout mainChildren={mainChildren} headerChildren={headerChildren} />)
-    expect(mainLayout.contains(mainChildren)).toEqual(true)
-    expect(mainLayout.contains(headerChildren)).toEqual(true)
+  before('content', () => {
+    children = 'I am children'
+    mainLayout = shallow(<MainLayout routes={[]}>{children}</MainLayout>)
+  })
+  it('should render children and a Header', () => {
+    expect(mainLayout.contains(children)).toEqual(true)
+  })
+  it('should render a <Header />', () => {
+    expect(mainLayout.contains(<Header routes={[]} />)).toEqual(true)
   })
 })

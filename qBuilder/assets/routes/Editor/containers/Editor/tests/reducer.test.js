@@ -17,6 +17,7 @@ describe('editorReducer', () => {
     })).toEqual(Map({
       isFetching: false,
       isSaving: false,
+      title: 'My Survey',
       value: 'hello',
     }))
   })
@@ -30,7 +31,8 @@ describe('editorReducer', () => {
     })).toEqual(Map({
       isFetching: true,
       isSaving: false,
-      value: ''
+      title: 'Loading...',
+      value: undefined,
     }))
   })
 

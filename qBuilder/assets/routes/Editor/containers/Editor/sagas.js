@@ -71,7 +71,7 @@ export function* saveSchema(action) {
     yield put(saveSchemaSuccess())
     if (schemaID === undefined) {
       // if new schema forward the browser
-      yield call(browserHistory.replace, `/questionnaire/${schema.data}`)
+      yield call(browserHistory.replace, `/surveys/questionnaire/${schema.data}`)
     }
   } else {
     yield put(saveSchemaFailure(schema.err.response))

@@ -16,7 +16,7 @@ import moment from 'moment'
 
 const surveyOpts = [{
   title: 'Add',
-  to: '/questionnaire/new/',
+  to: '/surveys/questionnaire/new/',
   icon: 'pop-add',
 }, {
   title: 'Edit',
@@ -70,7 +70,7 @@ const QuestionnaireTable = ({schemas, deleteSchema}) => (
             <Icon name="comments" />
           </td>
           <td className={styles.titleCell}>
-            <Link className={styles.link} to={`/questionnaire/${schema.eq_id}`}>
+            <Link className={styles.link} to={`/surveys/questionnaire/${schema.eq_id}`}>
               {schema.title || 'No title provided'}
             </Link>
           </td>

@@ -1,7 +1,7 @@
 import { LOAD_SCHEMAS, DELETE_SCHEMA } from './constants'
 import { LOCATION_CHANGE } from 'react-router-redux'
 
-import { take, call, put, fork, cancel } from 'redux-saga/effects'
+import { take, call, put, race } from 'redux-saga/effects'
 import { fetchSchemasRequest, fetchSchemasSuccess, fetchSchemasFailure,
          deleteSchemaRequest, deleteSchemaSuccess, deleteSchemaFailure } from './actions'
 
@@ -48,9 +48,13 @@ export function* deleteSchemasWatcher() {
 }
 
 export function* schemasData() {
-  const watchers = yield [fork(loadSchemasWatcher), fork(deleteSchemasWatcher)]
-  yield take(LOCATION_CHANGE)
-  yield cancel(watchers)
+  yield race([
+    [
+      call(loadSchemasWatcher),
+      call(deleteSchemasWatcher),
+    ],
+    take(LOCATION_CHANGE)
+  ])
 }
 export default [
   schemasData,

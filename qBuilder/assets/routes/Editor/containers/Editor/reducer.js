@@ -34,6 +34,7 @@ function editorReducer(state = initialState, action) {
         .set('value', action.payload.value.schema)
         .set('title', 'Loading...')
     case FETCH_SCHEMA_SUCCESS:
+      console.log(action.payload.value)
       return state
         .set('isFetching', false)
         .set('value', action.payload.value.schema)

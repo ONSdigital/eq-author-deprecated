@@ -1,6 +1,5 @@
 import Surveys from './Surveys'
 import Editor from './Editor'
-import Layouts from './Layouts'
 import NotFound from './NotFound'
 
 import MainLayout from 'components/layout/MainLayout'
@@ -19,7 +18,6 @@ export default function createRoutes(store) {
     childRoutes: [
       Surveys,
       Editor,
-      Layouts,
       NotFound,
     ].map(route => route(store))
   }]
