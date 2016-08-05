@@ -7,6 +7,6 @@ describe('<NotFoundPage />', () => {
   it('should render with message', () => {
     const mainChildren = (<h1>Page Not Found</h1>)
     const mainLayout = shallow(<NotFoundPage />)
-    expect(mainLayout.contains(mainChildren).toEqual(true))
+    expect(mainLayout.contains(mainChildren)).toEqual(true)
   })
 })

@@ -46,19 +46,13 @@ export function saveSchema(schemaID) {
 
 export function newSchema() {
   return {
-    type: NEW_SCHEMA,
-    payload: {
-      title: 'New Survey'
-    }
+    type: NEW_SCHEMA
   }
 }
 
 export function fetchSchemaRequest() {
   return {
     type: FETCH_SCHEMA_REQUEST,
-    payload: {
-      schema: '//Loading schema'
-    }
   }
 }
 
@@ -72,10 +66,7 @@ export function fetchSchemaSuccess(payload) {
 export function fetchSchemaFailure(err) {
   return {
     type: FETCH_SCHEMA_FAILURE,
-    error: err,
-    payload: {
-      schema: '//There was an error loading the schema'
-    }
+    error: err
   }
 }
 

@@ -17,22 +17,17 @@ describe('editorReducer', () => {
     })).toEqual(Map({
       isFetching: false,
       isSaving: false,
-      title: 'My Survey',
       schema: 'hello',
     }))
   })
 
   it('should handle FETCH_SCHEMA_REQUEST', () => {
     expect(editorReducer(undefined, {
-      type: types.FETCH_SCHEMA_REQUEST,
-      payload: {
-        schema: ''
-      }
+      type: types.FETCH_SCHEMA_REQUEST
     })).toEqual(Map({
       isFetching: true,
       isSaving: false,
       title: 'Loading...',
-      schema: undefined,
     }))
   })
 
@@ -40,12 +35,14 @@ describe('editorReducer', () => {
     expect(editorReducer(undefined, {
       type: types.FETCH_SCHEMA_SUCCESS,
       payload: {
-        schema: 'hello'
+        title: 'title',
+        schema: 'hello',
       }
     })).toEqual(Map({
       isFetching: false,
       isSaving: false,
-      schema: un
+      title: 'title',
+      schema: 'hello',
     }))
   })
 
@@ -55,7 +52,6 @@ describe('editorReducer', () => {
     })).toEqual(Map({
       isFetching: false,
       isSaving: true,
-      schema: ''
     }))
   })
 
@@ -64,8 +60,7 @@ describe('editorReducer', () => {
       type: types.SAVE_SCHEMA_SUCCESS
     })).toEqual(Map({
       isFetching: false,
-      isSaving: false,
-      schema: ''
+      isSaving: false
     }))
   })
 
@@ -75,7 +70,6 @@ describe('editorReducer', () => {
     })).toEqual(Map({
       isFetching: false,
       isSaving: false,
-      schema: ''
     }))
   })
 })

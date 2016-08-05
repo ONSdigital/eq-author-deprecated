@@ -17,24 +17,21 @@ export function* loadSchema(action) {
   yield put(fetchSchemaRequest())
 
   // perform API call
-  const schema = yield call(request, `/api/v1/schema/${action.payload.schemaID}/`)
+  const response = yield call(request, `/api/v1/schema/${action.payload.schemaID}/`)
 
   // handle response/errors
-  if (!schema.err) {
-    yield put(fetchSchemaSuccess({
-      schema: schema.data.schema,
-      title: schema.data.title,
-    }))
+  if (!response.err) {
+    yield put(fetchSchemaSuccess(response.data))
   } else {
-    yield put(fetchSchemaFailure(schema.err))
-    console.error(schema.err.response) // eslint-disable-line
+    yield put(fetchSchemaFailure(response.err))
+    console.error(response.err.response) // eslint-disable-line
     // if API returns a response
-    if (schema.err.response !== undefined) {
-      if (schema.err.response.body !== undefined) {
-        schema.err.response.text().then(body => alert('Error: \n' + body)) //eslint-disable-line
+    if (response.err.response !== undefined) {
+      if (response.err.response.body !== undefined) {
+        response.err.response.text().then(body => alert('Error: \n' + body)) //eslint-disable-line
       } else {
         window.alert('There was a problem loading this schema. See the Console for errors.')
-        console.error(schema.err.response) // eslint-disable-line
+        console.error(response.err.response) // eslint-disable-line
       }
     } else {
       window.alert('Error: Server didn\'t return a response')
@@ -59,7 +56,7 @@ export function* saveSchema(action) {
   // dispatch action to update UI
   yield put(saveSchemaRequest())
   // perform API call
-  const schema = yield call(request, endpoint, {
+  const response = yield call(request, endpoint, {
     method: method,
     headers: {
       'Accept': 'application/json',
@@ -68,23 +65,23 @@ export function* saveSchema(action) {
     body: body
   })
 
-  if (!schema.err) {
+  if (!response.err) {
     // aribtrary UI delay
     yield delay(500)
     yield put(saveSchemaSuccess())
     if (schemaID === undefined) {
       // if new schema forward the browser
-      yield call(browserHistory.replace, `/surveys/questionnaire/${schema.data}`)
+      yield call(browserHistory.replace, `/surveys/questionnaire/${response.data}`)
     }
   } else {
-    yield put(saveSchemaFailure(schema.err.response))
+    yield put(saveSchemaFailure(response.err.response))
     // if API returns a response
-    if (schema.err.response !== undefined) {
-      if (schema.err.response.body !== undefined) {
-        schema.err.response.text().then(body => alert('Error: \n' + body)) //eslint-disable-line
+    if (response.err.response !== undefined) {
+      if (response.err.response.body !== undefined) {
+        response.err.response.text().then(body => alert('Error: \n' + body)) //eslint-disable-line
       } else {
         window.alert('There was a problem saving this schema. See the Console for errors.')
-        console.error(schema.err.response) // eslint-disable-line
+        console.error(response.err.response) // eslint-disable-line
       }
     } else {
       window.alert('Error: Server didn\'t return a response')

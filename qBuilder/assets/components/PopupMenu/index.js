@@ -65,24 +65,21 @@ class PopupMenu extends React.Component {
 
   render() {
     const { options, orientation, disabled } = this.props
-    let menuStyles = styles[this.state.open ? 'open' : 'closed']
-    menuStyles += ` ${styles[orientation]}`
+    let menuStyles = `${styles.menu} ${styles[orientation]}`
 
     return (
       <div className={styles.popupMenu} aria-disabled={disabled}>
         <button onClick={this.onButtonClick} className={styles.button}>
           <Icon name="actions" />
         </button>
-        <div className={menuStyles}>
+        <div className={menuStyles} aria-hidden={!this.state.open}>
           <ul className={styles.options}>
             {options.map((option, index) => (
               <li className={styles.option} key={index}>
-
                 {this.getOption(option,
                   [<Icon name={option.icon} width="18px" height="18px" />,
                     <span className={styles.linkText}>{option.title}</span>]
                 )}
-
               </li>
             ))}
           </ul>

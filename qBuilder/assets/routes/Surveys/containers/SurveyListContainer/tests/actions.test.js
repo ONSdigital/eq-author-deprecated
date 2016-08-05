@@ -1,18 +1,27 @@
 import expect from 'expect'
-import {
-  defaultAction,
-} from '../actions'
-import {
-  DEFAULT_ACTION,
-} from '../constants'
+import * as actions from '../actions'
+import * as types from '../constants'
 
-describe('Surveys actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
-      const expected = {
-        type: DEFAULT_ACTION,
+describe('Schemas sync actions', () => {
+  describe('fetchSchemasRequest', () => {
+    it('Should return the correct type', () => {
+      const expectedResult = {
+        type: types.FETCH_SCHEMAS_REQUEST,
       }
-      expect(defaultAction()).toEqual(expected)
+      expect(actions.fetchSchemasRequest()).toEqual(expectedResult)
+    })
+  })
+
+  describe('fetchSchemasSuccess', () => {
+    it('Should return the correct type and value', () => {
+      const schemas = []
+      const expectedResult = {
+        type: types.FETCH_SCHEMAS_SUCCESS,
+        payload: {
+          schemas: schemas
+        }
+      }
+      expect(actions.fetchSchemasSuccess(schemas)).toEqual(expectedResult)
     })
   })
 })

@@ -64,37 +64,35 @@
     border-color: rgba(245, 245, 245, 0);
     border-width: 11px;
   }
-}
 
-.closed {
-  pointer-events: none;
-  composes: menu;
-  opacity: 0;
-  visibility: hidden;
-  filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0.1));
-  .option {
+  &[aria-hidden=true] {
+    pointer-events: none;
     opacity: 0;
+    visibility: hidden;
+    filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0.1));
+    .option {
+      opacity: 0;
+    }
   }
-}
 
-.open {
-  composes: menu;
-  visibility: visible;
-  opacity: 1;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.1));
-  .option {
-    transition: opacity 50ms ease-out 50ms;
+  &[aria-hidden=false] {
+    visibility: visible;
     opacity: 1;
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.1));
+    .option {
+      transition: opacity 50ms ease-out 50ms;
+      opacity: 1;
+    }
   }
 }
 
 .horizontal {
   top: 50%;
   left: -10px;
-  &.open {
+  &[aria-hidden=false] {
     transform: translateX(-100%) translateY(-50%) scale(1);
   }
-  &.closed {
+  &[aria-hidden=true] {
     transform: translateX(-100%) translateY(-50%) scale(0.9);
   }
   &::after,
@@ -117,10 +115,10 @@
 
 .vertical {
   left: 50%;
-  &.open {
+  &[aria-hidden=false] {
     transform: translateX(-50%) translateY(10px) scale(1);
   }
-  &.closed {
+  &[aria-hidden=true] {
     transform: translateX(-50%) translateY(0) scale(0.9);
   }
   &::after,

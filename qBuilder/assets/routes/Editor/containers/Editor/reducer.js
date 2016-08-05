@@ -19,8 +19,6 @@ import {
 export const initialState = Map({
   isFetching: false,
   isSaving: false,
-  title: 'My Survey',
-  schema: '',
 })
 
 function editorReducer(state = initialState, action) {
@@ -31,18 +29,16 @@ function editorReducer(state = initialState, action) {
     case FETCH_SCHEMA_REQUEST:
       return state
         .set('isFetching', true)
-        .set('schema', action.payload.schema)
         .set('title', 'Loading...')
     case FETCH_SCHEMA_SUCCESS:
       return state
         .set('isFetching', false)
-        .set('schema', action.payload.schema)
         .set('title', action.payload.title)
+        .set('schema', action.payload.schema)
     case FETCH_SCHEMA_FAILURE:
       return state
         .set('isFetching', false)
         .set('schema', action.payload.schema)
-        .set('title', action.payload.title)
     case SAVE_SCHEMA_REQUEST:
       return state
         .set('isSaving', true)
@@ -53,7 +49,6 @@ function editorReducer(state = initialState, action) {
     case NEW_SCHEMA:
       return state
         .set('isSaving', false)
-        .set('schema', '')
         .set('title', 'Questionnaire title')
     default:
       return state
