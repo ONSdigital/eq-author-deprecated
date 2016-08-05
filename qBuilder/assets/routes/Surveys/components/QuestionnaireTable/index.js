@@ -43,7 +43,9 @@ const getQuestionnaireOpts = (deleteSchema, schemaId) => ([{
 }, {
   title: 'Delete',
   onClick: (e) => {
-    deleteSchema(schemaId)
+    if (window.confirm('Do you really wish to delete this questionnaire? You cannot undo this.')) {
+      deleteSchema(schemaId)
+    }
   },
   icon: 'pop-delete',
   disabled: false
