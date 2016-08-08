@@ -26,13 +26,14 @@ const schemasReducer = (state = initialState, action) => {
     case FETCH_SCHEMAS_SUCCESS:
       return state
         .set('isFetching', false)
-        .set('items', action.payload.schemas)
+        .set('items', List(action.payload.schemas))
     case FETCH_SCHEMAS_FAILURE:
       return state
         .set('isFetching', false)
         .set('error', action.error)
     case DELETE_SCHEMA_SUCCESS:
-      return state.set('items', state.get('items').filter(item => action.payload.schemaId !== item.eq_id))
+      return state
+        .set('items', state.get('items').filter(item => action.payload.schemaId !== item.eq_id))
     default:
       return state
   }

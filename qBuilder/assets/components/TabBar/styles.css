@@ -12,12 +12,15 @@
   font-weight: 600;
   padding: 0 1rem 0.5rem;
   display: inline-block;
+
   &:first-child {
     padding-left: 0;
   }
+
   &:active,
   &:hover {
     outline: none;
+    text-decoration: none;
   }
 
   &[aria-disabled=true] {
@@ -29,6 +32,7 @@
 .activeLink {
   composes: text from 'styles/shared/colors.css';
   position: relative;
+
   &::after {
     content: '';
     width: 100%;
@@ -39,6 +43,7 @@
     background: #4abee2;
     transition: height 0.1s;
   }
+
   &:active,
   &:hover {
     &::after {

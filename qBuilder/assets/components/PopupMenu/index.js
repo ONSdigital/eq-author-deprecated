@@ -56,7 +56,7 @@ class PopupMenu extends React.Component {
       )
     } else {
       return (
-        <span className={styles.link} onClick={() => { this.onOptionClick(option.onClick) }}>
+        <span className={styles.link} onClick={() => this.onOptionClick(option.onClick)}>
           {linkInner}
         </span>
       )

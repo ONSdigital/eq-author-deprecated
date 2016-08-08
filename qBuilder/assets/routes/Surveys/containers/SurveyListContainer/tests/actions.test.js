@@ -13,8 +13,8 @@ describe('Schemas sync actions', () => {
   })
 
   describe('fetchSchemasSuccess', () => {
-    it('Should return the correct type and value', () => {
-      const schemas = []
+    it('Should return the correct type and payload', () => {
+      const schemas = [1, 2, 3]
       const expectedResult = {
         type: types.FETCH_SCHEMAS_SUCCESS,
         payload: {

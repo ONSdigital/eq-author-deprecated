@@ -13,7 +13,7 @@ const options = [{
 }, {
   title: 'Edit',
   icon: 'pop-edit',
-  onClick: (e) => {},
+  onClick: expect.createSpy(),
 }]
 
 const getMenuHiddenAttribute = () => {

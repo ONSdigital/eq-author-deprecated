@@ -16,9 +16,9 @@ const TabBar = ({buttons, tabs, title}) => (
       <div className={styles.tabs}>
         {(() => {
           if (tabs.length > 0) {
-            return tabs.map((tab, index) => {
-              return <Link key={index} className={styles.link} activeClassName={styles.activeLink} to={tab.to} aria-disabled={tab.disabled}>{tab.title}</Link>
-            })
+            return tabs.map((tab, index) => (
+              <Link key={index} className={styles.link} activeClassName={styles.activeLink} to={tab.to} aria-disabled={tab.disabled}>{tab.title}</Link>
+            ))
           } else {
             return <h2 className={styles.title}>{title}</h2>
           }
