@@ -28,6 +28,7 @@ describe('editorReducer', () => {
       isFetching: true,
       isSaving: false,
       title: 'Loading...',
+      schema: ''
     }))
   })
 

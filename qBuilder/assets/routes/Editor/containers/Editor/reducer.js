@@ -30,6 +30,7 @@ function editorReducer(state = initialState, action) {
       return state
         .set('isFetching', true)
         .set('title', 'Loading...')
+        .set('schema', '')
     case FETCH_SCHEMA_SUCCESS:
       return state
         .set('isFetching', false)
@@ -50,6 +51,7 @@ function editorReducer(state = initialState, action) {
       return state
         .set('isSaving', false)
         .set('title', 'Questionnaire title')
+        .set('schema', '')
     default:
       return state
   }
