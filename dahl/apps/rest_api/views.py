@@ -1,8 +1,9 @@
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.mixins import ListModelMixin
 from rest_framework.generics import GenericAPIView
+from rest_framework.decorators import permission_classes
 from .parsers import PlainJSONParser
 from .serializers import SchemaSerializer
 from .models import SchemaMeta
@@ -12,25 +13,61 @@ import json
 import logging
 import config
 
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework import response, schemas
+from rest_framework_swagger.renderers import OpenAPIRenderer, SwaggerUIRenderer
+
+
 logger = logging.getLogger(__name__)
 
 json_schema_file = open(config.EQ_JSON_SCHEMA_FILE).read()
 json_schema = json.loads(json_schema_file)
 
 
+@api_view()
+@renderer_classes([OpenAPIRenderer, SwaggerUIRenderer])
+@permission_classes([permissions.AllowAny])
+def schema_view(request):
+    generator = schemas.SchemaGenerator(title='Dahl API Documentation')
+    return response.Response(generator.get_schema(request=request))
+
+
 class Schema(GenericAPIView, ListModelMixin):
+    """
+    Schema API
+
+    Allows creation, retrieval, editing, and deletion of Questionnaire Schemas
+    ---
+
+    """
+
     queryset = SchemaMeta.objects.all()
     serializer_class = SchemaSerializer
     parser_classes = (PlainJSONParser,)
 
     def post(self, request):
-        '''
+        """
+        Create a Schema
+
         Override post as we want specialized behaviour to store schema in S3 rather than the Database
-        '''
+        ---
+        parameters:
+            - title:
+              type: string
+              paramType: form
+              required: false
+        """
+
         original_json = request.data.decode()
 
-        logger.debug("Converting %s request to json data", original_json)
-        json_data = json.loads(original_json)
+        try:
+            logger.debug("Converting %s request to json data", original_json)
+            json_data = json.loads(original_json)
+            logger.debug("Converting %s request to json data", request.data)
+        except Exception as e:
+            logger.error("Schema cannot be converted to json")
+            return Response(e.message, status=status.HTTP_400_BAD_REQUEST)
+
         # run it through the json schema validator to make sure they're are no errors
         try:
             validate(json_data, json_schema)
@@ -70,10 +107,16 @@ class Schema(GenericAPIView, ListModelMixin):
         return Response(eq_id, status=status.HTTP_201_CREATED)
 
     def get(self, request, *args, **kwargs):
+        """
+        Returns a list of available schemas
+        """
         return self.list(request, *args, **kwargs)
 
 
 class SchemaDetail(APIView):
+    """
+    Schema Detail API
+    """
     parser_classes = (PlainJSONParser,)
 
     def get(self, request, eq_id):
