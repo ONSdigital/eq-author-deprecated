@@ -3,6 +3,7 @@
   position: relative;
   text-align: center;
   width: 2rem;
+
   &[aria-disabled=true] {
     opacity: 0.3;
     pointer-events: none;
@@ -15,6 +16,7 @@
   padding: 0.2rem;
   width: 1.8rem;
   height: 1.8rem;
+
   &:hover,
   &:focus {
     outline: none;
@@ -45,6 +47,7 @@
   z-index: 100;
   min-width: 120px;
   transition: all 50ms;
+
   &::after,
   &::before {
     border: solid transparent;
@@ -70,6 +73,7 @@
     opacity: 0;
     visibility: hidden;
     filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0.1));
+
     .option {
       opacity: 0;
     }
@@ -79,6 +83,7 @@
     visibility: visible;
     opacity: 1;
     filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.1));
+
     .option {
       transition: opacity 50ms ease-out 50ms;
       opacity: 1;
@@ -89,17 +94,21 @@
 .horizontal {
   top: 50%;
   left: -10px;
+
   &[aria-hidden=false] {
     transform: translateX(-100%) translateY(-50%) scale(1);
   }
+
   &[aria-hidden=true] {
     transform: translateX(-100%) translateY(-50%) scale(0.9);
   }
+
   &::after,
   &::before {
     left: 100%;
     top: 50%;
   }
+
   &::after {
     border-color: rgba(213, 213, 213, 0);
     border-left-color: #fff;
@@ -115,17 +124,21 @@
 
 .vertical {
   left: 50%;
+
   &[aria-hidden=false] {
     transform: translateX(-50%) translateY(10px) scale(1);
   }
+
   &[aria-hidden=true] {
     transform: translateX(-50%) translateY(0) scale(0.9);
   }
+
   &::after,
   &::before {
     bottom: 100%;
     left: 50%;
   }
+
   &::after {
     border-color: rgba(213, 213, 213, 0);
     border-bottom-color: #fff;
@@ -140,29 +153,39 @@
 }
 
 .link {
+  font-size: 0.875rem;
   display: flex;
   align-items: center;
   flex-direction: row;
   width: 100%;
-  padding: 0.4rem 1.5rem;
+  padding: 0.4rem 1rem;
   transition: all 0.3s ease-out;
   user-select: none;
+  composes: text from 'styles/shared/colors.css';
+  font-weight: 500;
+  cursor: pointer;
+
   &:hover,
   &:active {
     outline: none;
+    text-decoration: none;
     background: rgba(0, 0, 0, 0.03);
   }
+
   &[aria-disabled=true] {
     color: #333;
     opacity: 0.2;
     pointer-events: none;
+
     &:hover,
     &:focus {
       background: transparent;
     }
+
     &:focus {
       opacity: 0.5;
     }
+
     &:active {
       opacity: 0.2;
     }
@@ -170,5 +193,9 @@
 }
 
 .linkText {
-  margin-left: 0.4rem;
+  margin-left: 0.7rem;
+}
+
+.linkButton {
+  composes: link;
 }

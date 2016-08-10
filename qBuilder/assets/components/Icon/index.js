@@ -25,8 +25,8 @@ const Icon = ({name, alt, width, height}) => {
 }
 
 Icon.defaultProps = {
-  height: '18px',
-  width: '18px',
+  height: 'auto',
+  width: 'auto',
 }
 
 Icon.propTypes = {

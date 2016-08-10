@@ -10,11 +10,16 @@
 .link {
   font-size: 1.15rem;
   font-weight: 600;
-  padding: 0 1rem 0.5rem;
+  padding: 0.5rem 0;
   display: inline-block;
+  margin-right: 2rem;
 
   &:first-child {
     padding-left: 0;
+  }
+
+  &:last-child {
+    margin-left: 0;
   }
 
   &:active,

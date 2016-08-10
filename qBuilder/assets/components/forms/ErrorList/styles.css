@@ -6,6 +6,6 @@
 
 .errorItem {
   composes: red from 'styles/shared/colors.css';
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 600;
 }

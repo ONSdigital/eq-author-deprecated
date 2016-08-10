@@ -47,18 +47,18 @@ class PopupMenu extends React.Component {
     this.setState({ open: false })
   }
 
-  getOption = (option, linkInner) => {
+  getOption = (option, linkInner, index) => {
     if (option.to !== undefined) {
       return (
-        <Link className={styles.link} to={option.to} aria-disabled={option.disabled}>
+        <Link className={styles.link} to={option.to} aria-disabled={option.disabled} key={index}>
           {linkInner}
         </Link>
       )
     } else {
       return (
-        <span className={styles.link} onClick={() => this.onOptionClick(option.onClick)}>
+        <button className={styles.linkButton} onClick={() => this.onOptionClick(option.onClick)} kery={index}>
           {linkInner}
-        </span>
+        </button>
       )
     }
   }
@@ -77,9 +77,9 @@ class PopupMenu extends React.Component {
             {options.map((option, index) => (
               <li className={styles.option} key={index}>
                 {this.getOption(option,
-                  [<Icon name={option.icon} width="18px" height="18px" />,
+                  [<Icon name={option.icon} />,
                     <span className={styles.linkText}>{option.title}</span>]
-                )}
+                , index)}
               </li>
             ))}
           </ul>
