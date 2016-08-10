@@ -15,7 +15,6 @@ import config
 
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework import response, schemas
-from rest_framework_swagger.renderers import OpenAPIRenderer, SwaggerUIRenderer
 
 
 logger = logging.getLogger(__name__)
@@ -24,19 +23,13 @@ json_schema_file = open(config.EQ_JSON_SCHEMA_FILE).read()
 json_schema = json.loads(json_schema_file)
 
 
-@api_view()
-@renderer_classes([OpenAPIRenderer, SwaggerUIRenderer])
-@permission_classes([permissions.AllowAny])
-def schema_view(request):
-    generator = schemas.SchemaGenerator(title='Dahl API Documentation')
-    return response.Response(generator.get_schema(request=request))
-
-
 class Schema(GenericAPIView, ListModelMixin):
     """
-    Schema API
 
-    Allows creation, retrieval, editing, and deletion of Questionnaire Schemas
+    Heading1
+    ========
+
+    This is some text
     ---
 
     """
@@ -58,9 +51,8 @@ class Schema(GenericAPIView, ListModelMixin):
               required: false
         """
 
-        original_json = request.data.decode()
-
         try:
+            original_json = request.data.decode()
             logger.debug("Converting %s request to json data", original_json)
             json_data = json.loads(original_json)
             logger.debug("Converting %s request to json data", request.data)

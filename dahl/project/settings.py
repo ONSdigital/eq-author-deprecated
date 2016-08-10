@@ -61,7 +61,7 @@ ADDITIONAL_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'rest_framework_swagger'
+    'rest_framework_docs'
 ]
 
 LOGIN_REDIRECT_URL = '/'
