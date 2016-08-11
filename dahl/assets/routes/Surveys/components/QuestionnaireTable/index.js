@@ -9,6 +9,8 @@ import Animate from 'rc-animate'
 import { Link } from 'react-router'
 
 import styles from './styles.css'
+import transitions from 'styles/shared/transitions.css'
+
 import PopupMenu from 'components/PopupMenu'
 
 import moment from 'moment'
@@ -50,11 +52,6 @@ const getQuestionnaireOpts = (deleteSchema, schemaId) => ([{
   disabled: false
 }])
 
-const transitionName = {
-  leave: styles.leave,
-  leaveActive: styles.leaveActive,
-}
-
 const QuestionnaireTable = ({schemas, deleteSchema}) => (
   <div className={styles.container}>
     <table className={styles.table}>
@@ -67,7 +64,7 @@ const QuestionnaireTable = ({schemas, deleteSchema}) => (
           </td>
         </tr>
       </thead>
-      <Animate component="tbody" className={styles.body} transitionName={transitionName}>
+      <Animate component="tbody" className={styles.body} transitionName={transitions}>
         {schemas.map((schema, i) => (
           <tr className={styles.row} key={schema.eq_id}>
             <td className={styles.titleCell}>

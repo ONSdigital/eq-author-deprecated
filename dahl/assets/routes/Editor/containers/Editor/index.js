@@ -34,7 +34,7 @@ export class Editor extends Component {
     }
 
     const buttons = [
-      <Button type="secondary" onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save schema'}</Button>
+      <Button onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save schema'}</Button>
     ]
 
     return (

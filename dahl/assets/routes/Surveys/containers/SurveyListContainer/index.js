@@ -11,6 +11,8 @@ import * as Actions from './actions'
 import { selectSchemas } from './selectors'
 
 import SurveyList from '../../components/SurveyList'
+import Button from 'components/Button'
+import AddSurveyModal from '../../components/AddSurveyModal'
 
 export class SurveyListContainer extends Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -23,9 +25,16 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
     this.props.actions.loadSchemas()
   }
 
+  getButton = () => <Button onClick={() => {}}>Add Survey</Button>
+
   render() {
     const { schemas, actions } = this.props
-    return <SurveyList schemas={schemas} deleteSchema={actions.deleteSchema} />
+    return (
+      <div>
+        <SurveyList schemas={schemas} deleteSchema={actions.deleteSchema} buttons={[this.getButton()]} />
+        <AddSurveyModal />
+      </div>
+    )
   }
 }
 
