@@ -4,42 +4,39 @@ import * as actions from '../actions'
 import * as types from '../constants'
 
 describe('Editor sync actions', () => {
-  describe('changeValue', () => {
-    it('Should return the correct type and the passed value', () => {
-      const value = { foo: 'bar' }
+  describe('updateSchema', () => {
+    it('Should return the correct type and the passed schema', () => {
+      const schema = { foo: 'bar' }
       const expectedResult = {
-        type: types.CHANGE_VALUE,
+        type: types.UPDATE_SCHEMA,
         payload: {
-          value: value,
+          schema,
         }
       }
-      expect(actions.changeValue(value)).toEqual(expectedResult)
+      expect(actions.updateSchema(schema)).toEqual(expectedResult)
     })
   })
 
   describe('fetchSchemaRequest', () => {
-    it('Should return the correct type and the passed value', () => {
-      const value = '//Loading schema'
+    it('Should return the correct type', () => {
       const expectedResult = {
-        type: types.FETCH_SCHEMA_REQUEST,
-        payload: {
-          value
-        },
+        type: types.FETCH_SCHEMA_REQUEST
       }
-      expect(actions.fetchSchemaRequest(value)).toEqual(expectedResult)
+      expect(actions.fetchSchemaRequest()).toEqual(expectedResult)
     })
   })
 
   describe('fetchSchemaSuccess', () => {
-    it('Should return the correct type and the passed value', () => {
-      const value = { foo: 'bar' }
+    it('Should return the correct type and the passed schema', () => {
+      const payload = {
+        title: 'My title',
+        schema: { foo: 'bar' }
+      }
       const expectedResult = {
         type: types.FETCH_SCHEMA_SUCCESS,
-        payload: {
-          value,
-        }
+        payload
       }
-      expect(actions.fetchSchemaSuccess(value)).toEqual(expectedResult)
+      expect(actions.fetchSchemaSuccess(payload)).toEqual(expectedResult)
     })
   })
 

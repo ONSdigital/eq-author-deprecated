@@ -55,7 +55,12 @@ module.exports = (options) => ({
     }],
   },
   plugins: options.plugins.concat([
-    new webpack.optimize.CommonsChunkPlugin('common'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      children: true,
+      minChunks: 2,
+      async: true,
+    }),
     new webpack.ProvidePlugin({
       // make fetch available
       fetch: 'exports?self.fetch!whatwg-fetch',

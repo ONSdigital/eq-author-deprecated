@@ -7,6 +7,9 @@ import { combineReducers } from 'redux-immutable'
 import { fromJS } from 'immutable'
 import { LOCATION_CHANGE } from 'react-router-redux'
 
+import loginReducer from 'containers/Login/reducer'
+import appReducer from 'containers/App/reducer'
+
 /*
  * routeReducer
  *
@@ -38,16 +41,10 @@ function routeReducer(state = routeInitialState, action) {
 /**
  * Creates the main reducer with the asynchronously loaded ones
  */
-import editorReducer from 'routes/Editor/containers/Editor/reducer'
-import schemasReducer from 'routes/SchemaList/containers/Schemas/reducer'
-import loginReducer from 'containers/Login/reducer'
-import appReducer from 'containers/App/reducer'
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
-    editor: editorReducer,
-    schemas: schemasReducer,
     login: loginReducer,
     app: appReducer,
     ...asyncReducers,

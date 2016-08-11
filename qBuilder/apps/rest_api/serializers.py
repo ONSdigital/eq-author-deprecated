@@ -6,7 +6,7 @@ from .models import Schema
 class SchemaSerializer(serializers.ModelSerializer):
     class Meta:
         model = SchemaMeta
-        fields = ('eq_id', 'file_name', 'created', 'title', 'description')
+        fields = ('eq_id', 'file_name', 'created', 'modified', 'title', 'description')
 
 
 class QuestionnaireSerializer(serializers.Serializer):

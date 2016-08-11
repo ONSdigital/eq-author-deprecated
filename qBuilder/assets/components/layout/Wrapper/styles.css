@@ -1,0 +1,17 @@
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  min-width: 60rem;
+  max-width: 80rem;
+  flex: 1 1 auto;
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+}

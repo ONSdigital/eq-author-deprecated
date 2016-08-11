@@ -1,26 +1,22 @@
-import React from 'react'
-import styles from './styles.css'
-
+import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-export const Header = ({children, title}) => (
-  <header className={styles.header}>
-    <div className={styles.wrapper}>
-      <Link to="/"><h1 className={styles.title}>{title}</h1></Link>
-      <div className={styles.btns}>
-        {children}
-      </div>
-    </div>
-  </header>
+import styles from './styles.css'
+import Logo from 'components/Logo'
+import Breadcrumb from 'components/Breadcrumb'
+
+export const Header = ({routes}) => (
+  <div>
+    <header className={styles.header}>
+      <Link className={styles.logo} to="/"><Logo /></Link>
+      <a href="/sign-out/">Sign out</a>
+    </header>
+    <Breadcrumb routes={routes} />
+  </div>
 )
 
 Header.propTypes = {
-  children: React.PropTypes.node,
-  title: React.PropTypes.string
-}
-
-Header.defaultProps = {
-  title: 'Header title'
+  routes: PropTypes.array.isRequired
 }
 
 export default Header

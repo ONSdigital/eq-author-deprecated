@@ -41,6 +41,7 @@
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "space-before-blocks": ["error", "always"],
     "react/display-name": 0,
+    "react/jsx-no-bind": 0,
     "react/jsx-boolean-value": "warn",
     "react/jsx-no-undef": "warn",
     "react/sort-prop-types": "warn",

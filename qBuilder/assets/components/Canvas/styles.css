@@ -1,0 +1,8 @@
+.canvas {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}

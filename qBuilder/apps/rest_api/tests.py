@@ -105,7 +105,8 @@ class SchemaAPI(TestCase):
 
         # then get the details
         response = self.client.get(reverse("schema-details", kwargs={'eq_id': '1'}))
-        self.assertEquals(test_schema, json.loads(response.data))
+        self.assertEquals("Star Wars", response.data['title'])
+        self.assertEquals(test_schema, json.loads(response.data['schema']))
 
         # now modify the title
         test_schema['title'] = "Star Wars VII - The Force Awakens"
@@ -116,3 +117,12 @@ class SchemaAPI(TestCase):
         response = self.client.get(reverse("schema"))
         self.assertEquals(200, response.status_code)
         self.assertEquals("Star Wars VII - The Force Awakens", response.data[0]['title'])
+
+        # finally delete the schema
+        response = self.client.delete(reverse("schema-details", kwargs={'eq_id': '1'}))
+        self.assertEquals(200, response.status_code)
+
+        # check its gone
+        response = self.client.get(reverse("schema"))
+        self.assertEquals(200, response.status_code)
+        self.assertEquals([], response.data)

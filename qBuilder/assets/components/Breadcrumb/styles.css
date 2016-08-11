@@ -1,0 +1,10 @@
+.breadcrumb {
+  display: flex;
+  flex-direction: row;
+  background: #f2f2f2;
+  padding: 0.5rem 0;
+}
+
+.link {
+  padding: 0 0.25rem;
+}

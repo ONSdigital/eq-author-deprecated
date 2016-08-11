@@ -1,36 +1,23 @@
 .button {
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem;
-  font-weight: 600;
-  font-family: inherit;
-  text-rendering: optimizeLegibility;
+  color: #61bde0;
   text-decoration: none;
+  border: 1px solid #61bde0;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  display: block;
   user-select: none;
-  cursor: pointer;
 }
 
 .button:focus,
 .button:hover {
+  background: #61bde0;
   outline: none;
   text-decoration: none;
   color: white;
 }
 
-.primary {
-  composes: button;
-  composes: primary from 'styles/shared/colors.css';
-}
-
-.secondary {
-  composes: button;
-  composes: secondary from 'styles/shared/colors.css';
-}
-
-.icon {
-  margin-right: 0.3rem;
+.button:active {
+  background: #50a2c1;
+  color: white;
 }

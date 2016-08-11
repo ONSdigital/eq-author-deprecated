@@ -83,13 +83,18 @@ class SchemaDetail(APIView):
         :param eq_id: the eq id
         :return: the entire schema
         '''
+        # first find the meta data
+        schema = SchemaMeta.objects.get(eq_id=eq_id)
+        if schema is None:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
         key = eq_id + '.json'
         logger.debug("Looking for object with key %s", key)
         try:
             schema_storage = SchemaStorageFactory.get_instance()
             json_data = schema_storage.get(key)
             logger.debug("JSON Data %s", json_data)
-            return Response(json_data, status=status.HTTP_200_OK)
+            return Response({'title': schema.title, 'schema': json_data}, status=status.HTTP_200_OK)
         except SchemaStorageError:
             return Response({}, status=status.HTTP_404_NOT_FOUND)
 
@@ -132,3 +137,18 @@ class SchemaDetail(APIView):
             return Response(eq_id, status=status.HTTP_200_OK)
         except SchemaStorageError:
             return Response({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def delete(self, request, eq_id):
+        logger.debug("Calling delete with id %s", eq_id)
+        # first find the meta data
+        schema = SchemaMeta.objects.get(eq_id=eq_id)
+        if schema is None:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            # delete the schema from the S3 bucket
+            schema_storage = SchemaStorageFactory.get_instance()
+            schema_storage.delete(eq_id)
+
+            # delete the meta data from the database
+            schema.delete()
+            return Response(eq_id, status=status.HTTP_200_OK)

@@ -1,0 +1,69 @@
+.tabBar {
+  height: 4.2rem;
+  display: block;
+  padding: 0.8rem 0;
+  background: white;
+  position: relative;
+}
+
+.title,
+.link {
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  display: inline-block;
+  margin-right: 2rem;
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    margin-left: 0;
+  }
+
+  &:active,
+  &:hover {
+    outline: none;
+    text-decoration: none;
+  }
+
+  &[aria-disabled=true] {
+    color: #ccc;
+    pointer-events: none;
+  }
+}
+
+.activeLink {
+  composes: text from 'styles/shared/colors.css';
+  position: relative;
+
+  &::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background: #4abee2;
+    transition: height 0.1s;
+  }
+
+  &:active,
+  &:hover {
+    &::after {
+      height: 3px;
+    }
+  }
+}
+
+.tabs {
+  position: absolute;
+  bottom: 0;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+}

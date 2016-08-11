@@ -8,11 +8,11 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as EditorActions from './actions'
-import { selectEditorValue, selectIsSaving, selectIsFetching } from './selectors'
+import { selectSchemaValue, selectEditorTitle, selectIsSaving, selectIsFetching } from './selectors'
 
 import JsonEditor from '../../components/JsonEditor'
-import MainLayout from 'layouts/MainLayout'
 import Button from 'components/Button'
+import TabBar from 'components/TabBar'
 
 // eslint-disable-line react/prefer-stateless-function
 export class Editor extends Component {
@@ -22,30 +22,26 @@ export class Editor extends Component {
     if (params.schemaID !== undefined) {
       actions.loadSchema(params.schemaID)
     } else {
-      actions.changeValue('')
+      actions.newSchema()
     }
   }
 
   render() {
-    const { actions, value, params, isSaving } = this.props
+    const { actions, schema, title, params, isSaving } = this.props
 
     const saveSchema = () => {
       actions.saveSchema(params.schemaID)
     }
 
+    const buttons = [
+      <Button type="secondary" onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save schema'}</Button>
+    ]
+
     return (
-      <MainLayout
-
-        mainChildren={
-          <JsonEditor value={value} onChange={actions.changeValue} />
-        }
-
-        headerChildren={[
-          <Button key="btn-1" type="secondary" onClick={saveSchema}>{isSaving ? 'Saving...' : 'Save'}</Button>,
-          <Button key="btn-2" type="primary" icon="menu" to="/">List schemas</Button>
-        ]}
-
-      />
+      <div>
+        <TabBar title={title} buttons={buttons} />
+        <JsonEditor schema={schema} onChange={actions.updateSchema} />
+      </div>
     )
   }
 }
@@ -55,7 +51,8 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = state => ({
-  value: selectEditorValue(state),
+  schema: selectSchemaValue(state),
+  title: selectEditorTitle(state),
   isSaving: selectIsSaving(state),
   isFetching: selectIsFetching(state),
 })
@@ -66,7 +63,8 @@ Editor.propTypes = {
   isSaving: PropTypes.bool.isRequired,
   params: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
-  value: PropTypes.string.isRequired,
+  schema: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 }
 
 export default connect(

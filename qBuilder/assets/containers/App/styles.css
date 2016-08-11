@@ -28,7 +28,18 @@ input, textarea, keygen, select, button {
   font-family: inherit;
 }
 
+a {
+  color: #61bde0;
+  text-decoration: none;
+
+  &:hover {
+    color: #4791ad;
+    text-decoration: underline;
+  }
+}
+
 .app {
   width: 100vw;
   min-height: 100vh;
+  composes: text from 'styles/shared/colors.css';
 }
