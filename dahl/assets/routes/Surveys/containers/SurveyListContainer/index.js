@@ -7,10 +7,14 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as Actions from './actions'
+import * as SurveyActions from './actions'
+import * as ModalActions from 'containers/Modal/actions'
+
 import { selectSchemas } from './selectors'
 
 import SurveyList from '../../components/SurveyList'
+import Button from 'components/Button'
+import AddSurveyModal from '../../containers/AddSurveyModal'
 
 export class SurveyListContainer extends Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -25,7 +29,13 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
 
   render() {
     const { schemas, actions } = this.props
-    return <SurveyList schemas={schemas} deleteSchema={actions.deleteSchema} />
+    const button = <Button onClick={actions.openModal}>Add Survey</Button>
+    return (
+      <div>
+        <SurveyList schemas={schemas} deleteSchema={actions.deleteSchema} buttons={[button]} />
+        <AddSurveyModal />
+      </div>
+    )
   }
 }
 
@@ -34,7 +44,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(Actions, dispatch)
+  actions: bindActionCreators({...SurveyActions, ...ModalActions}, dispatch)
 })
 
 export default connect(

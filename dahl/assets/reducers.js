@@ -9,6 +9,7 @@ import { LOCATION_CHANGE } from 'react-router-redux'
 
 import loginReducer from 'containers/Login/reducer'
 import appReducer from 'containers/App/reducer'
+import modalReducer from 'containers/Modal/reducer'
 
 /*
  * routeReducer
@@ -47,6 +48,7 @@ export default function createReducer(asyncReducers) {
     route: routeReducer,
     login: loginReducer,
     app: appReducer,
+    modal: modalReducer,
     ...asyncReducers,
   })
 }

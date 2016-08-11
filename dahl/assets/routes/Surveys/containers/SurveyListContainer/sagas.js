@@ -56,6 +56,7 @@ export function* schemasData() {
     take(LOCATION_CHANGE)
   ])
 }
+
 export default [
   schemasData,
 ]

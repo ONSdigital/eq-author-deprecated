@@ -8,7 +8,7 @@ import React, { PropTypes } from 'react'
 
 import styles from './styles.css'
 
-const Button = ({children, type}) => (
+export const Button = ({children, type}) => (
   <button className={styles.button} type={type}>{children}</button>
 )
 
