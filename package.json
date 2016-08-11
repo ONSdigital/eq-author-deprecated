@@ -126,7 +126,6 @@
     "karma-webpack": "^1.7.0",
     "lint-staged": "^2.0.2",
     "mocha": "^2.4.5",
-    "ngrok": "2.2.2",
     "nodemon": "^1.9.2",
     "null-loader": "^0.1.1",
     "plop": "^1.5.0",

@@ -12,6 +12,27 @@ import styles from './styles.css'
 import Icon from 'components/Icon'
 import { Link } from 'react-router'
 
+const PopupMenuItem = ({option, children}) => {
+  if (option.to !== undefined) {
+    return (
+      <Link className={styles.link} to={option.to} aria-disabled={option.disabled}>
+        {children}
+      </Link>
+    )
+  } else {
+    return (
+      <button className={styles.linkButton} onClick={option.onClick}>
+        {children}
+      </button>
+    )
+  }
+}
+
+PopupMenuItem.propTypes = {
+  children: PropTypes.node.isRequired,
+  option: PropTypes.object.isRequired,
+}
+
 class PopupMenu extends React.Component {
 
   static propTypes = {
@@ -38,29 +59,12 @@ class PopupMenu extends React.Component {
     }
   }
 
-  onOptionClick = (cb) => {
+  onOptionClick = () => {
     this.setState({ open: !this.state.open })
-    cb.call()
   }
 
   handleClickOutside() {
     this.setState({ open: false })
-  }
-
-  getOption = (option, linkInner, index) => {
-    if (option.to !== undefined) {
-      return (
-        <Link className={styles.link} to={option.to} aria-disabled={option.disabled} key={index}>
-          {linkInner}
-        </Link>
-      )
-    } else {
-      return (
-        <button className={styles.linkButton} onClick={() => this.onOptionClick(option.onClick)} kery={index}>
-          {linkInner}
-        </button>
-      )
-    }
   }
 
   render() {
@@ -76,10 +80,9 @@ class PopupMenu extends React.Component {
           <ul className={styles.options}>
             {options.map((option, index) => (
               <li className={styles.option} key={index}>
-                {this.getOption(option,
-                  [<Icon name={option.icon} />,
-                    <span className={styles.linkText}>{option.title}</span>]
-                , index)}
+                <PopupMenuItem option={option} onClick={this.onOptionClick}>
+                  <Icon name={option.icon} /><span className={styles.linkText}>{option.title}</span>
+                </PopupMenuItem>
               </li>
             ))}
           </ul>
