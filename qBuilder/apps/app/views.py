@@ -5,11 +5,16 @@ from django.shortcuts import render_to_response, get_object_or_404
 
 
 class DahlView(LoginRequiredMixin, TemplateView):
+    """
+    DahlView Class
+    """
     login_url = '/sign-in'
     redirect_field_name = 'redirect_to'
 
     def render_to_response(self, context, **response_kwargs):
+        """
+        Returns the main view for Dahl if the user is logged in
+        """
         token = get_object_or_404(Token, user=self.request.user)
         response = render_to_response("index.html", {'auth_token': token})
         return response
-

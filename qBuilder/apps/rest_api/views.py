@@ -19,6 +19,9 @@ json_schema = json.loads(json_schema_file)
 
 
 class Schema(GenericAPIView, ListModelMixin):
+    """
+    Schema
+    """
     queryset = SchemaMeta.objects.all()
     serializer_class = SchemaSerializer
     parser_classes = (PlainJSONParser,)
@@ -74,6 +77,9 @@ class Schema(GenericAPIView, ListModelMixin):
 
 
 class SchemaDetail(APIView):
+    """
+    SchemaDetail
+    """
     parser_classes = (PlainJSONParser,)
 
     def get(self, request, eq_id):
