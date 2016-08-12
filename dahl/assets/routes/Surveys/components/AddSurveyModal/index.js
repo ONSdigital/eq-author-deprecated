@@ -14,7 +14,7 @@ import Field from 'components/forms/Field'
 import Input from 'components/forms/Input'
 import Label from 'components/forms/Label'
 
-const AddSurveyModal = () => (
+const AddSurveyModal = ({closeModal}) => (
   <Modal title="Add a Survey">
     <Panel>
       <Form action="">
@@ -29,13 +29,16 @@ const AddSurveyModal = () => (
         <div style={{ 'text-align': 'center' }}>
           <SubmitButton>Create Survey</SubmitButton>
           <br />
-          <Button type="clear">Cancel</Button>
+          <Button type="clear" onClick={closeModal}>Cancel</Button>
         </div>
       </Form>
     </Panel>
   </Modal>
 )
 
-AddSurveyModal.propTypes = {}
+AddSurveyModal.propTypes = {
+  children: PropTypes.node.isRequired,
+  closeModal: PropTypes.func.isRequired,
+}
 
 export default AddSurveyModal

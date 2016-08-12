@@ -11,15 +11,15 @@ import {
 } from './constants'
 
 const initialState = fromJS({
-  open: false
+  isOpen: false
 })
 
 function modalReducer(state = initialState, action) {
   switch (action.type) {
     case OPEN_MODAL:
-      return state.set('open', true)
+      return state.set('isOpen', true)
     case CLOSE_MODAL:
-      return state.set('false', true)
+      return state.set('isOpen', false)
     default:
       return state
   }

@@ -7,7 +7,8 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as Actions from './actions'
+import * as SurveyActions from './actions'
+import * as ModalActions from 'containers/Modal/actions'
 import { selectSchemas } from './selectors'
 
 import SurveyList from '../../components/SurveyList'
@@ -25,14 +26,13 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
     this.props.actions.loadSchemas()
   }
 
-  getButton = () => <Button onClick={() => {}}>Add Survey</Button>
-
   render() {
     const { schemas, actions } = this.props
+    const button = <Button onClick={actions.openModal}>Add Survey</Button>
     return (
       <div>
-        <SurveyList schemas={schemas} deleteSchema={actions.deleteSchema} buttons={[this.getButton()]} />
-        <AddSurveyModal />
+        <SurveyList schemas={schemas} deleteSchema={actions.deleteSchema} buttons={[button]} />
+        <AddSurveyModal closeModal={actions.closeModal} />
       </div>
     )
   }
@@ -43,7 +43,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(Actions, dispatch)
+  actions: bindActionCreators({...SurveyActions, ...ModalActions}, dispatch)
 })
 
 export default connect(

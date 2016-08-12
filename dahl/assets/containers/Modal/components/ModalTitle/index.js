@@ -15,7 +15,7 @@ const ModalTitle = ({children}) => (
 )
 
 ModalTitle.propTypes = {
-  children: PropTypes.oneOf(['element', 'string']).isRequired,
+  children: PropTypes.string.isRequired,
 }
 
 export default ModalTitle

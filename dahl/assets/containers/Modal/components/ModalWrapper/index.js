@@ -13,17 +13,19 @@ import transitions from 'styles/shared/transitions.css'
 class ModalWrapper extends React.Component {
 
   static propTypes = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    isOpen: PropTypes.bool.isRequired
   }
 
   render() {
-    const { children } = this.props
+    const { children, isOpen } = this.props
     return (
-      <Animate transitionName={transitions} transitionAppear>
+      isOpen
+      ? <Animate transitionName={transitions} transitionAppear>
         <div className={styles.modal}>
           {children}
         </div>
-      </Animate>
+      </Animate> : null
     )
   }
 }
