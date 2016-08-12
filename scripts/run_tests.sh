@@ -22,7 +22,7 @@ if [ -z "$EQ_AUTHOR_ADMIN_LASTNAME" ]; then
 fi
 
 if [ -z "$EQ_JSON_SCHEMA_FILE" ]; then
-  export EQ_JSON_SCHEMA_FILE=./qBuilder/schema/schema-v1.json
+  export EQ_JSON_SCHEMA_FILE=./dahl/schema/schema-v1.json
 fi
 
 if [ -n "$VIRTUAL_ENV" ]; then
@@ -37,13 +37,13 @@ echo $DIR
 echo "Environment variables in use:"
 env | grep EQ_
 
-# if [ ! -s "qBuilder/bundles" ]; then
+# if [ ! -s "dahl/bundles" ]; then
 #   npm install
 #   npm run compile
 # fi
 
 
 
-python qBuilder/manage.py migrate
-python qBuilder/manage.py collectstatic --no-input
-python qBuilder/manage.py test 
+python dahl/manage.py migrate
+python dahl/manage.py collectstatic --no-input
+python dahl/manage.py test 

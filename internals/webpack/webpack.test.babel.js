@@ -5,7 +5,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const modules = [
-  'qBuilder/assets',
+  'dahl/assets',
   'node_modules',
 ]
 
@@ -26,7 +26,7 @@ module.exports = {
     preLoaders: [
       { test: /\.js$/,
         loader: 'isparta',
-        include: path.resolve('qBuilder/assets/'),
+        include: path.resolve('dahl/assets/'),
       },
     ],
     loaders: [

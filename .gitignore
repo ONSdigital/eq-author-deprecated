@@ -67,10 +67,10 @@ target/
 node_modules
 dist
 coverage
-qBuilder/webpack-stats.json
-qBuilder/webpack-stats-prod.json
-qBuilder/bundles
-qBuilder/static
+dahl/webpack-stats.json
+dahl/webpack-stats-prod.json
+dahl/bundles
+dahl/static
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

@@ -58,7 +58,7 @@ module.exports = require('./webpack.base.babel')({
       },
     }),
 
-    new BundleTracker({filename: './qBuilder/webpack-stats-prod.json'}),
+    new BundleTracker({filename: './dahl/webpack-stats-prod.json'}),
 
     // Extract the CSS into a seperate file
     new ExtractTextPlugin('[name].[contenthash].css')

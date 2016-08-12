@@ -1,4 +1,4 @@
 {
   "verbose": false,
-  "ignore": ["dist", "coverage", "tests", "qBuilder"]
+  "ignore": ["dist", "coverage", "tests", "dahl"]
 }

@@ -43,7 +43,7 @@ please consult the dj-database-url project homepage [https://github.com/kennethr
 
 To configure the app to use settings similar to those used on the build server, the value is as follows:
 
-`postgres://eq-author:@localhost:5432/qBuilder`
+`postgres://eq-author:@localhost:5432/dahl`
 
 `postgres://` indicates we are using postgresql.
 `eq_author` indicates the username to connect with
@@ -51,11 +51,11 @@ To configure the app to use settings similar to those used on the build server, 
 `@` separates the username and password from the host name
 `localhost` is the host running postgresql
 `:5432` Signifies which port postgresql is listening on (default 5432)
-`qBuilder` is the name of the database
+`dahl` is the name of the database
 
 Create the environment variable by adding the following command to your startup script
 
-`export EQ_AUTHOR_DATABASE_URL=postgres://eq-author:@localhost:5432/qBuilder`
+`export EQ_AUTHOR_DATABASE_URL=postgres://eq-author:@localhost:5432/dahl`
 aithr
 ---
 

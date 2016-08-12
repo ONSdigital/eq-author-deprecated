@@ -51,7 +51,7 @@ module.exports = require('./webpack.base.babel')({
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // Tell webpack we want hot reloading
     new webpack.NoErrorsPlugin(),
-    new BundleTracker({filename: './qBuilder/webpack-stats.json'}),
+    new BundleTracker({filename: './dahl/webpack-stats.json'}),
   ],
 
   // Tell babel that we want to hot-reload
