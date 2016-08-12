@@ -1,5 +1,5 @@
 {
-  "sourceBase":"qBuilder/assets",
+  "sourceBase":"dahl/assets",
   "testBase":"tests",
   "smartPath":"containers",
   "dumbPath":"components",

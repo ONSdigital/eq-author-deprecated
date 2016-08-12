@@ -11,7 +11,7 @@
   "scripts": {
     "npmcheckversion": "node ./internals/scripts/npmcheckversion.js",
     "prebuild": "npm run test && npm run build:clean",
-    "build:clean": "rimraf ./qBuilder/bundles",
+    "build:clean": "rimraf ./dahl/bundles",
     "build": "npm run compile",
     "precompile": "npm run build:clean",
     "compile": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p",
@@ -25,7 +25,7 @@
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint . --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:js:staged": "eslint-staged",
-    "lint:css": "stylelint ./qBuilder/assets/**/*.css",
+    "lint:css": "stylelint ./dahl/assets/**/*.css",
     "lint:css:staged": "stylelint-staged",
     "lint:staged": "npm run lint:js:staged && npm run lint:css:staged",
     "pretest": "npm run lint",

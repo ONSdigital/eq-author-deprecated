@@ -39,7 +39,7 @@ before_script:
 
 script:
   - npm run test
-  - cd qBuilder
+  - cd dahl
   - npm run build
   - python manage.py test
 

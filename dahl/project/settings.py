@@ -117,7 +117,7 @@ if 'TRAVIS' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'qBuilder',
+            'NAME': 'dahl',
             'USER': 'eq-author',
             'PASSWORD': '',
             'HOST': '127.0.0.1',

@@ -6,7 +6,7 @@
 "env": {
   "production": {
     "only": [
-      "qBuilder/assets"
+      "dahl/assets"
     ],
     "plugins": [
       "transform-react-remove-prop-types",
