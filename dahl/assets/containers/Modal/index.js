@@ -7,26 +7,62 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { selectModalIsOpen } from './selectors'
+import { closeModal } from './actions'
 
 import { ModalWrapper, ModalTitle, ModalBody } from './components'
+import { VelocityTransitionGroup } from 'velocity-react'
+
+const transitionWrapperOpts = {
+  component: 'div',
+  enter: {
+    animation: 'fadeIn',
+    duration: 300,
+  },
+  leave: {
+    animation: 'fadeOut',
+      duration: 100,
+  }
+}
+
+const transitionContentOpts = {
+  component: 'div',
+  runOnMount: true,
+  enter: {
+    animation: 'fadeIn',
+    duration: 100,
+    delay: 400
+  },
+  leave: {
+    animation: 'fadeOut',
+  }
+}
 
 export class Modal extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    window.document.addEventListener('keypress', this.onKeyPress)
+    window.document.addEventListener('keyup', this.handleKeyUp)
   }
 
-  onKeyPress = (e) => {
-    console.log(e)
+  handleKeyUp = (e) => {
+    const KEYCODE_ESC = 27
+    if (e.keyCode === KEYCODE_ESC) {
+      this.props.dispatch(closeModal())
+    }
   }
 
   render() {
-    const { title, children, isOpen, closeButtons } = this.props
+    const { title, children, isOpen } = this.props
 
     return (
-      <ModalWrapper isOpen={isOpen}>
-        <ModalTitle>{title}</ModalTitle>
-        <ModalBody>{children}</ModalBody>
-      </ModalWrapper>
+      <VelocityTransitionGroup {...transitionWrapperOpts}>
+        {isOpen ? <div>
+          <ModalWrapper>
+            <VelocityTransitionGroup {...transitionContentOpts}>
+              <ModalTitle>{title}</ModalTitle>
+              <ModalBody>{children}</ModalBody>
+            </VelocityTransitionGroup>
+          </ModalWrapper>
+        </div> : undefined}
+      </VelocityTransitionGroup>
     )
   }
 }

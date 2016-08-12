@@ -14,10 +14,15 @@ import Field from 'components/forms/Field'
 import Input from 'components/forms/Input'
 import Label from 'components/forms/Label'
 
+const handleSubmit = (e) => {
+  e.preventDefault()
+  return false
+}
+
 const AddSurveyModal = ({closeModal}) => (
   <Modal title="Add a Survey">
     <Panel>
-      <Form action="">
+      <Form action="" onSubmit={handleSubmit}>
         <Field>
           <Label htmlFor="survey_title">Survey Title</Label>
           <Input type="text" name="survey_title" id="survey_title" required="true" />
@@ -26,7 +31,7 @@ const AddSurveyModal = ({closeModal}) => (
           <Label htmlFor="survey_id">Survey ID</Label>
           <Input name="text" id="survey_id" required="true" />
         </Field>
-        <div style={{ 'text-align': 'center' }}>
+        <div style={{ textAlign: 'center' }}>
           <SubmitButton>Create Survey</SubmitButton>
           <br />
           <Button type="clear" onClick={closeModal}>Cancel</Button>

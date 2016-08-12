@@ -27,12 +27,19 @@ class Input extends React.Component {
   checkValidity = () => {
     this.setState({ valid: this.refs.input.validity.valid })
   }
+  // filters invalid props passes to the <input>
+  filterProps(props) {
+    let ks = ['valid']
+    let result = Object.assign({}, props)
+    ks.forEach(k => { delete result[k] })
+    return result
+  }
   render() {
     let className = styles.input
     if (!this.state.valid) {
       className += ` ${styles.invalid}`
     }
-    return <input ref="input" className={className} {...this.props} />
+    return <input ref="input" className={className} {...this.filterProps(this.props)} />
   }
 }
 
