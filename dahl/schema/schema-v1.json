@@ -165,9 +165,6 @@
                           "id": {
                             "type": "string"
                           },
-                          "location": {
-                            "type": "string"
-                          },
                           "when": {
                             "type": "object",
                             "properties": {
@@ -190,10 +187,6 @@
                         },
                         "required": [
                           "id"
-                        ],
-                        "oneOf": [
-                          {"required": ["location"]},
-                          {"required": ["when"]}
                         ]
                       },
                       "repeat": {
