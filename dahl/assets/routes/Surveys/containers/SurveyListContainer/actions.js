@@ -1,72 +1,99 @@
 /*
  *
- * Schemas actions
+ * Surveys actions
  *
  */
 
-import { LOAD_SCHEMAS,
-         DELETE_SCHEMA,
-         FETCH_SCHEMAS_REQUEST,
-         FETCH_SCHEMAS_SUCCESS,
-         FETCH_SCHEMAS_FAILURE,
-         DELETE_SCHEMA_REQUEST,
-         DELETE_SCHEMA_SUCCESS,
-         DELETE_SCHEMA_FAILURE } from './constants'
+import * as actions from './constants'
 
-export function loadSchemas() {
+export function loadSurveys() {
   return {
-    type: LOAD_SCHEMAS,
+    type: actions.LOAD_SURVEYS,
   }
 }
 
-export function fetchSchemasRequest() {
+export function fetchSurveysRequest() {
   return {
-    type: FETCH_SCHEMAS_REQUEST,
+    type: actions.FETCH_SURVEYS_REQUEST,
   }
 }
 
-export function fetchSchemasSuccess(schemas) {
+export function fetchSurveysSuccess(surveys) {
   return {
-    type: FETCH_SCHEMAS_SUCCESS,
+    type: actions.FETCH_SURVEYS_SUCCESS,
     payload: {
-      schemas: schemas
+      surveys: surveys
     }
   }
 }
 
-export function fetchSchemasFailure(error) {
+export function fetchSurveysFailure(error) {
   return {
-    type: FETCH_SCHEMAS_FAILURE,
+    type: actions.FETCH_SURVEYS_FAILURE,
     error
   }
 }
 
-export function deleteSchema(schemaId) {
+export function deleteSurvey(surveyId) {
   return {
-    type: DELETE_SCHEMA,
+    type: actions.DELETE_SURVEY,
     payload: {
-      schemaId: schemaId
+      surveyId: surveyId
     }
   }
 }
 
-export function deleteSchemaRequest() {
+export function deleteSurveyRequest() {
   return {
-    type: DELETE_SCHEMA_REQUEST
+    type: actions.DELETE_SURVEY_REQUEST
   }
 }
 
-export function deleteSchemaSuccess(schemaId) {
+export function deleteSurveySuccess(surveyId) {
   return {
-    type: DELETE_SCHEMA_SUCCESS,
+    type: actions.DELETE_SURVEY_SUCCESS,
     payload: {
-      schemaId: schemaId
+      surveyId: surveyId
     }
   }
 }
 
-export function deleteSchemaFailure() {
+export function deleteSurveyFailure() {
   return {
-    type: DELETE_SCHEMA_FAILURE
+    type: actions.DELETE_SURVEY_FAILURE
+  }
+}
+
+export function createSurvey(surveyDetails) {
+  return {
+    type: actions.CREATE_SURVEY,
+    payload: {
+      survey: surveyDetails
+    }
+  }
+}
+
+export function createSurveyRequest() {
+  return {
+    type: actions.CREATE_SURVEY_REQUEST
+  }
+}
+
+export function createSurveyCancel() {
+  return {
+    type: actions.CREATE_SURVEY_CANCEL
+  }
+}
+
+export function createSurveySuccess() {
+  return {
+    type: actions.CREATE_SURVEY_SUCCESS
+  }
+}
+
+export function createSurveyFailure(error) {
+  return {
+    type: actions.CREATE_SURVEY_FAILURE,
+    error
   }
 }
