@@ -8,7 +8,7 @@ import React from 'react'
 const setup = () => {
   const props = {
     actions: {
-      deleteSurvey: expect.createSpy(),
+      deleteQuestionnaire: expect.createSpy(),
       loadSurveys: expect.createSpy()
     },
     surveys: [{
