@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema",
   "type": "object",
   "properties": {
     "mime_type": {
@@ -151,6 +151,54 @@
                       "id",
                       "title",
                       "questions"
+                    ]
+                  }
+                },
+                "routing_rules": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "goto": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "location": {
+                            "type": "string"
+                          },
+                          "when": {
+                            "type": "object",
+                            "properties": {
+                              "id" : {
+                                "type": "string"
+                              },
+                              "condition": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "condition",
+                              "value"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ],
+                        "oneOf": [
+                          {"required": ["location"]},
+                          {"required": ["when"]}
+                        ]
+                      }
+                    },
+                    "required": [
+                      "goto"
                     ]
                   }
                 }
