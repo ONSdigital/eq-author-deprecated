@@ -1,6 +1,27 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "definitions": {
+    "when": {
+      "type": "object",
+      "properties": {
+        "id" : {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "condition",
+        "value"
+      ]
+    }
+  },
   "properties": {
     "mime_type": {
       "type": "string"
@@ -80,6 +101,14 @@
                             },
                             "description": {
                               "type": "string"
+                            },
+                            "skip_condition": {
+                              "type": "object",
+                              "properties": {
+                                "when": {
+                                  "$ref": "#/definitions/when"
+                                }
+                              }
                             },
                             "type": {
                               "type": "string"
@@ -166,23 +195,7 @@
                             "type": "string"
                           },
                           "when": {
-                            "type": "object",
-                            "properties": {
-                              "id" : {
-                                "type": "string"
-                              },
-                              "condition": {
-                                "type": "string"
-                              },
-                              "value": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "id",
-                              "condition",
-                              "value"
-                            ]
+                            "$ref": "#/definitions/when"
                           }
                         },
                         "required": [
