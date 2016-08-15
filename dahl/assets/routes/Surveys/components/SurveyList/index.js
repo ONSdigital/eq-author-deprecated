@@ -22,12 +22,12 @@ const tabs = [{
   disabled: true
 }]
 
-const SurveyList = ({schemas, deleteSchema, buttons}) => (
+const SurveyList = ({surveys, deleteSurvey, buttons}) => (
   <div className={styles.surveyList}>
     <TabBar tabs={tabs} buttons={buttons} />
     <Canvas>
       <Wrapper>
-        <QuestionnaireList schemas={schemas} deleteSchema={deleteSchema} />
+        <QuestionnaireList surveys={surveys} deleteSurvey={deleteSurvey} />
       </Wrapper>
     </Canvas>
   </div>
@@ -35,8 +35,8 @@ const SurveyList = ({schemas, deleteSchema, buttons}) => (
 
 SurveyList.propTypes = {
   buttons: PropTypes.array,
-  deleteSchema: PropTypes.func.isRequired,
-  schemas: PropTypes.array.isRequired
+  deleteSurvey: PropTypes.func.isRequired,
+  surveys: PropTypes.array.isRequired
 }
 
 export default SurveyList

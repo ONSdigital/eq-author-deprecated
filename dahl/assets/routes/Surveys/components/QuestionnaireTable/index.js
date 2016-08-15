@@ -24,7 +24,7 @@ const surveyOpts = [{
   disabled: true
 }]
 
-const getQuestionnaireOpts = (deleteSchema, schemaId) => ([{
+const getQuestionnaireOpts = (deleteSurvey, surveyId) => ([{
   title: 'Settings',
   to: '',
   icon: 'pop-settings',
@@ -43,7 +43,7 @@ const getQuestionnaireOpts = (deleteSchema, schemaId) => ([{
   title: 'Delete',
   onClick: (e) => {
     if (window.confirm('Do you really wish to delete this questionnaire? You cannot undo this.')) {
-      deleteSchema(schemaId)
+      deleteSurvey(surveyId)
     }
   },
   icon: 'pop-delete',
@@ -62,7 +62,7 @@ const transitionWrapperOpts = {
   }
 }
 
-const QuestionnaireTable = ({schemas, deleteSchema}) => (
+const QuestionnaireTable = ({surveys, deleteSurvey}) => (
   <div className={styles.container}>
     <table className={styles.table}>
       <thead className={styles.head}>
@@ -75,18 +75,18 @@ const QuestionnaireTable = ({schemas, deleteSchema}) => (
         </tr>
       </thead>
       <VelocityTransitionGroup {...transitionWrapperOpts}>
-        {schemas.map((schema, i) => (
-          <tr className={styles.row} key={schema.eq_id}>
+        {surveys.map((survey, i) => (
+          <tr className={styles.row} key={survey.eq_id}>
             <td className={styles.titleCell}>
-              <Link className={styles.link} to={`/surveys/questionnaire/${schema.eq_id}`}>
-                {schema.title || 'No title provided'}
+              <Link className={styles.link} to={`/surveys/questionnaire/${survey.eq_id}`}>
+                {survey.title || 'No title provided'}
               </Link>
             </td>
             <td className={styles.cell}>
-              {moment(schema.modified).format('DD/MM/YYYY')}
+              {moment(survey.modified).format('DD/MM/YYYY')}
             </td>
             <td className={styles.cellAlignRight}>
-              <PopupMenu orientation="horizontal" options={getQuestionnaireOpts(deleteSchema, schema.eq_id)} />
+              <PopupMenu orientation="horizontal" options={getQuestionnaireOpts(deleteSurvey, survey.eq_id)} />
             </td>
           </tr>
         )
@@ -97,8 +97,8 @@ const QuestionnaireTable = ({schemas, deleteSchema}) => (
 )
 
 QuestionnaireTable.propTypes = {
-  deleteSchema: PropTypes.func.isRequired,
-  schemas: PropTypes.array.isRequired,
+  deleteSurvey: PropTypes.func.isRequired,
+  surveys: PropTypes.array.isRequired,
 }
 
 export default QuestionnaireTable

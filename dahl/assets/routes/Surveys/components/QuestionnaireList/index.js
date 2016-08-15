@@ -12,15 +12,15 @@ import QuestionnaireTable from '../../components/QuestionnaireTable'
 
 class QuestionnaireList extends React.Component {
   static propTypes = {
-    deleteSchema: PropTypes.func.isRequired,
-    schemas: PropTypes.array.isRequired,
+    deleteSurvey: PropTypes.func.isRequired,
+    surveys: PropTypes.array.isRequired,
   }
 
   render() {
-    const { schemas, deleteSchema } = this.props
+    const { surveys, deleteSurvey } = this.props
     return (
       <div className={styles.questionnaireList}>
-        <QuestionnaireTable schemas={schemas} deleteSchema={deleteSchema} />
+        <QuestionnaireTable surveys={surveys} deleteSurvey={deleteSurvey} />
       </div>
     )
   }

@@ -1,16 +1,22 @@
 /*
  *
- * Schemas constants
+ * Surveys constants
  *
  */
 
-export const LOAD_SCHEMAS = 'app/Schemas/LOAD_SCHEMAS'
-export const DELETE_SCHEMA = 'app/Schemas/DELETE_SCHEMA'
+export const LOAD_SURVEYS = 'app/Surveys/LOAD_SURVEYS'
+export const CREATE_SURVEY = 'app/Surveys/CREATE_SURVEY'
+export const DELETE_SURVEY = 'app/Surveys/DELETE_SURVEY'
 
-export const FETCH_SCHEMAS_REQUEST = 'app/Schemas/FETCH_SCHEMAS_REQUEST'
-export const FETCH_SCHEMAS_SUCCESS = 'app/Schemas/FETCH_SCHEMAS_SUCCESS'
-export const FETCH_SCHEMAS_FAILURE = 'app/Schemas/FETCH_SCHEMAS_FAILURE'
+export const FETCH_SURVEYS_REQUEST = 'app/Surveys/FETCH_SURVEYS_REQUEST'
+export const FETCH_SURVEYS_SUCCESS = 'app/Surveys/FETCH_SURVEYS_SUCCESS'
+export const FETCH_SURVEYS_FAILURE = 'app/Surveys/FETCH_SURVEYS_FAILURE'
 
-export const DELETE_SCHEMA_REQUEST = 'app/Schemas/DELETE_SCHEMA_REQUEST'
-export const DELETE_SCHEMA_SUCCESS = 'app/Schemas/DELETE_SCHEMA_SUCCESS'
-export const DELETE_SCHEMA_FAILURE = 'app/Schemas/DELETE_SCHEMA_FAILURE'
+export const DELETE_SURVEY_REQUEST = 'app/Surveys/DELETE_SURVEY_REQUEST'
+export const DELETE_SURVEY_SUCCESS = 'app/Surveys/DELETE_SURVEY_SUCCESS'
+export const DELETE_SURVEY_FAILURE = 'app/Surveys/DELETE_SURVEY_FAILURE'
+
+export const CREATE_SURVEY_REQUEST = 'app/Surveys/CREATE_SURVEY_REQUEST'
+export const CREATE_SURVEY_SUCCESS = 'app/Surveys/CREATE_SURVEY_SUCCESS'
+export const CREATE_SURVEY_FAILURE = 'app/Surveys/CREATE_SURVEY_FAILURE'
+export const CREATE_SURVEY_CANCEL = 'app/Surveys/CREATE_SURVEY_CANCEL'

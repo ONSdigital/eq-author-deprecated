@@ -8,13 +8,13 @@ import React from 'react'
 const setup = () => {
   const props = {
     actions: {
-      deleteSchema: expect.createSpy(),
-      loadSchemas: expect.createSpy()
+      deleteSurvey: expect.createSpy(),
+      loadSurveys: expect.createSpy()
     },
-    schemas: [{
+    surveys: [{
       id: 0,
-      title: 'Hello I am a schema',
-      path: 'path/to/schema'
+      title: 'Hello I am a survey',
+      path: 'path/to/survey'
     }]
   }
 

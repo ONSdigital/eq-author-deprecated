@@ -5,9 +5,6 @@
  */
 
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
 import { Button as SubmitButton } from 'components/forms/Button'
 import Button from 'components/Button'
 import Modal from 'containers/Modal'
@@ -17,9 +14,6 @@ import Field from 'components/forms/Field'
 import Input from 'components/forms/Input'
 import Label from 'components/forms/Label'
 
-import * as ModalActions from 'containers/Modal/actions'
-import * as CreateSurveyActions from './actions'
-
 export class AddSurveyModal extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
@@ -27,7 +21,7 @@ export class AddSurveyModal extends React.Component { // eslint-disable-line rea
   }
 
   handleSubmit = (e) => {
-    this.props.actions.createSurvey({
+    this.props.createSurvey({
       title: this.refs.surveyTitle.value(),
       id: this.refs.surveyId.value(),
     })
@@ -35,8 +29,13 @@ export class AddSurveyModal extends React.Component { // eslint-disable-line rea
     return false
   }
 
+  handleCancel = (e) => {
+    const { closeModal, createSurveyCancel } = this.props
+    closeModal()
+    createSurveyCancel()
+  }
+
   render() {
-    const { actions } = this.props
     return (
       <Modal title="Add a Survey">
         <Panel>
@@ -52,7 +51,7 @@ export class AddSurveyModal extends React.Component { // eslint-disable-line rea
             <div style={{ textAlign: 'center' }}>
               <SubmitButton>Create Survey</SubmitButton>
               <br />
-              <Button type="button" style="clear" onClick={actions.closeModal}>Cancel</Button>
+              <Button type="button" style="clear" onClick={this.handleCancel}>Cancel</Button>
             </div>
           </Form>
         </Panel>
@@ -61,8 +60,4 @@ export class AddSurveyModal extends React.Component { // eslint-disable-line rea
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({...ModalActions, ...CreateSurveyActions}, dispatch)
-})
-
-export default connect(null, mapDispatchToProps)(AddSurveyModal)
+export default AddSurveyModal

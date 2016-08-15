@@ -10,37 +10,37 @@ import { connect } from 'react-redux'
 import * as SurveyActions from './actions'
 import * as ModalActions from 'containers/Modal/actions'
 
-import { selectSchemas } from './selectors'
+import { selectSurveys } from './selectors'
 
 import SurveyList from '../../components/SurveyList'
 import Button from 'components/Button'
-import AddSurveyModal from '../../containers/AddSurveyModal'
+import AddSurveyModal from '../../components/AddSurveyModal'
 
 export class SurveyListContainer extends Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    schemas: PropTypes.array.isRequired
+    surveys: PropTypes.array.isRequired
   }
 
   componentDidMount() {
-    this.props.actions.loadSchemas()
+    this.props.actions.loadSurveys()
   }
 
   render() {
-    const { schemas, actions } = this.props
+    const { surveys, actions } = this.props
     const button = <Button onClick={actions.openModal}>Add Survey</Button>
     return (
       <div>
-        <SurveyList schemas={schemas} deleteSchema={actions.deleteSchema} buttons={[button]} />
-        <AddSurveyModal />
+        <SurveyList surveys={surveys} deleteSurvey={actions.deleteSurvey} buttons={[button]} />
+        <AddSurveyModal {...actions} />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  schemas: selectSchemas(state).items
+  surveys: selectSurveys(state).items
 })
 
 const mapDispatchToProps = dispatch => ({

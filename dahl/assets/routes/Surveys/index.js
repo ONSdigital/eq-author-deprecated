@@ -6,13 +6,10 @@ export default function(store) {
     name: 'surveys',
     breadcrumbName: 'Surveys',
     getComponent: getAsyncComponent(store, {
-      schemas: [
+      surveys: [
         System.import('./containers/SurveyListContainer/reducer'),
         System.import('./containers/SurveyListContainer/sagas'),
         System.import('./containers/SurveyListContainer'),
-      ], addSurvey: [
-        System.import('./containers/AddSurveyModal/reducer'),
-        System.import('./containers/AddSurveyModal/sagas'),
       ]
     }),
   }

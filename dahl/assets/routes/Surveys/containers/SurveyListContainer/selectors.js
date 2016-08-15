@@ -1,1 +1,1 @@
-export const selectSchemas = state => state.get('schemas').toJS()
+export const selectSurveys = state => state.get('surveys').toJS()

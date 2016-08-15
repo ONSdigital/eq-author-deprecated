@@ -1,9 +1,9 @@
 import expect from 'expect'
 import { call, put, take, race } from 'redux-saga/effects'
-import { fetchSchemasRequest, fetchSchemasSuccess, fetchSchemasFailure } from '../actions'
-import { getSchemas, deleteSchema, loadSchemasWatcher, deleteSchemasWatcher, schemasData } from '../sagas'
+import { fetchSurveysRequest, fetchSurveysSuccess, fetchSurveysFailure } from '../actions'
+import { getSurveys, deleteSurvey, loadSurveysWatcher, deleteSurveysWatcher, surveysData } from '../sagas'
 import { LOCATION_CHANGE } from 'react-router-redux'
-import { LOAD_SCHEMAS, DELETE_SCHEMA } from '../constants'
+import { LOAD_SURVEYS, DELETE_SURVEY } from '../constants'
 
 import request from 'utils/request'
 
@@ -11,74 +11,74 @@ describe('SurveyListContainer sagas', () => {
   let generator, next
 
   beforeEach(() => {
-    generator = getSchemas()
+    generator = getSurveys()
     next = generator.next()
-    expect(next.value).toEqual(put(fetchSchemasRequest()))
+    expect(next.value).toEqual(put(fetchSurveysRequest()))
 
-    const requestURL = '/api/v1/schema/'
+    const requestURL = '/api/v1/survey/'
     next = generator.next()
     expect(next.value).toEqual(call(request, requestURL))
   })
 
-  it('should dispatch a fetchSchemasSuccess action', () => {
+  it('should dispatch a fetchSurveysSuccess action', () => {
     const response = {
       data: 'some data'
     }
     next = generator.next(response)
-    expect(next.value).toEqual(put(fetchSchemasSuccess('some data')))
+    expect(next.value).toEqual(put(fetchSurveysSuccess('some data')))
   })
 
-  it('should dispatch a fetchSchemasFailure action', () => {
+  it('should dispatch a fetchSurveysFailure action', () => {
     const response = {
       err: 'some error'
     }
     next = generator.next(response)
-    expect(next.value).toEqual(put(fetchSchemasFailure('some error')))
+    expect(next.value).toEqual(put(fetchSurveysFailure('some error')))
   })
 
-  // it('should dispatch a deleteSchemaSuccess action', () => {
+  // it('should dispatch a deleteSurveySuccess action', () => {
   //   const response = {
   //     data: 'some data'
   //   }
   //   next = generator.next(response)
-  //   expect(next.value).toEqual(put(deleteSchemaSuccess('some data')))
+  //   expect(next.value).toEqual(put(deleteSurveySuccess('some data')))
   // })
 })
 
-describe('loadSchemasWatcher Saga', () => {
-  const generator = loadSchemasWatcher()
+describe('loadSurveysWatcher Saga', () => {
+  const generator = loadSurveysWatcher()
 
-  it('should watch for LOAD_SCHEMAS action', () => {
-    expect(generator.next().value).toEqual(take(LOAD_SCHEMAS))
+  it('should watch for LOAD_SURVEYS action', () => {
+    expect(generator.next().value).toEqual(take(LOAD_SURVEYS))
   })
 
-  it('should invoke getSchemas saga on actions', () => {
-    expect(generator.next(put(LOAD_SCHEMAS)).value).toEqual(call(getSchemas))
+  it('should invoke getSurveys saga on actions', () => {
+    expect(generator.next(put(LOAD_SURVEYS)).value).toEqual(call(getSurveys))
   })
 })
 
-describe('deleteSchemasWatcher Saga', () => {
-  const generator = deleteSchemasWatcher()
+describe('deleteSurveysWatcher Saga', () => {
+  const generator = deleteSurveysWatcher()
 
-  it('should watch for DELETE_SCHEMA action', () => {
-    expect(generator.next().value).toEqual(take(DELETE_SCHEMA))
+  it('should watch for DELETE_SURVEY action', () => {
+    expect(generator.next().value).toEqual(take(DELETE_SURVEY))
   })
 
-  it('should invoke deleteSchema saga on actions', () => {
-    const action = put(DELETE_SCHEMA)
+  it('should invoke deleteSurvey saga on actions', () => {
+    const action = put(DELETE_SURVEY)
     const callDescriptor = generator.next(action).value
-    expect(callDescriptor).toEqual(call(deleteSchema, action))
+    expect(callDescriptor).toEqual(call(deleteSurvey, action))
   })
 })
 
-describe('schemasData', () => {
-  const generator = schemasData()
+describe('surveysData', () => {
+  const generator = surveysData()
   let raceDescriptor
 
-  it('should run a race between loadSchemasWatcher/deleteSchemasWatcher watchers and LOCATION_CHANGE', () => {
+  it('should run a race between loadSurveysWatcher/deleteSurveysWatcher watchers and LOCATION_CHANGE', () => {
     raceDescriptor = generator.next().value
     expect(raceDescriptor).toEqual(race([
-      [call(loadSchemasWatcher), call(deleteSchemasWatcher)],
+      [call(loadSurveysWatcher), call(deleteSurveysWatcher)],
       take(LOCATION_CHANGE)
     ]))
   })

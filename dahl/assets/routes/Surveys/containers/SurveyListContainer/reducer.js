@@ -1,16 +1,12 @@
 /*
  *
- * Schemas reducer
+ * Surveys reducer
  *
  */
 
 import { Map, List } from 'immutable'
 
-import {
-  FETCH_SCHEMAS_REQUEST,
-  FETCH_SCHEMAS_SUCCESS,
-  FETCH_SCHEMAS_FAILURE,
-  DELETE_SCHEMA_SUCCESS } from './constants'
+import * as actions from './constants'
 
 export const initialState = Map({
   isFetching: false,
@@ -18,25 +14,31 @@ export const initialState = Map({
   error: ''
 })
 
-const schemasReducer = (state = initialState, action) => {
+const surveysReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_SCHEMAS_REQUEST:
+    case actions.FETCH_SURVEYS_REQUEST:
       return state
         .set('isFetching', true)
-    case FETCH_SCHEMAS_SUCCESS:
+    case actions.FETCH_SURVEYS_SUCCESS:
       return state
         .set('isFetching', false)
-        .set('items', List(action.payload.schemas))
-    case FETCH_SCHEMAS_FAILURE:
+        .set('items', List(action.payload.surveys))
+    case actions.FETCH_SURVEYS_FAILURE:
       return state
         .set('isFetching', false)
         .set('error', action.error)
-    case DELETE_SCHEMA_SUCCESS:
+    case actions.DELETE_SURVEY_SUCCESS:
       return state
-        .set('items', state.get('items').filter(item => action.payload.schemaId !== item.eq_id))
+        .set('items', state.get('items').filter(item => action.payload.surveyId !== item.eq_id))
+    case actions.CREATE_SURVEY:
+      return state
+    case actions.CREATE_SURVEY_REQUEST:
+      return state.set('isFetching', true)
+    case actions.CREATE_SURVEY_SUCCESS:
+      return state.set('isFetching', false)
     default:
       return state
   }
 }
 
-export default schemasReducer
+export default surveysReducer
