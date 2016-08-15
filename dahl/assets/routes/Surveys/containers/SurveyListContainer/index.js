@@ -32,7 +32,7 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
     const button = <Button onClick={actions.openModal}>Add Survey</Button>
     return (
       <div>
-        <SurveyList surveys={surveys} deleteSurvey={actions.deleteSurvey} buttons={[button]} />
+        <SurveyList surveys={surveys} deleteQuestionnaire={actions.deleteQuestionnaire} buttons={[button]} />
         <AddSurveyModal {...actions} />
       </div>
     )

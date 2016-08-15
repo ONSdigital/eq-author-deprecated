@@ -7,7 +7,7 @@ import React from 'react'
 
 describe('<SurveyList />', () => {
   it('render a QuestionnaireList', () => {
-    const surveyList = shallow(<SurveyList surveys={[]} deleteSurvey={() => {}} />)
+    const surveyList = shallow(<SurveyList surveys={[]} deleteQuestionnaire={() => {}} />)
     expect(surveyList.find(QuestionnaireList).length).toEqual(1)
   })
 })

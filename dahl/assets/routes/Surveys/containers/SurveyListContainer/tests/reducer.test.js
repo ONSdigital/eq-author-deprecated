@@ -42,7 +42,7 @@ describe('surveysReducer', () => {
     }))
   })
 
-  it('should handle DELETE_SURVEY_SUCCESS', () => {
+  it('should handle DELETE_QUESTIONNAIRE_SUCCESS', () => {
     const surveys = [{
       eq_id: 0
     }, {
@@ -55,7 +55,7 @@ describe('surveysReducer', () => {
       items: List(surveys),
       error: ''
     }), {
-      type: types.DELETE_SURVEY_SUCCESS,
+      type: types.DELETE_QUESTIONNAIRE_SUCCESS,
       payload: {
         surveyId: 1
       }

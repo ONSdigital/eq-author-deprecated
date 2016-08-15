@@ -34,33 +34,33 @@ export function fetchSurveysFailure(error) {
   }
 }
 
-export function deleteSurvey(surveyId) {
+export function deleteQuestionnaire(surveyId) {
   return {
-    type: actions.DELETE_SURVEY,
+    type: actions.DELETE_QUESTIONNAIRE,
     payload: {
       surveyId: surveyId
     }
   }
 }
 
-export function deleteSurveyRequest() {
+export function deleteQuestionnaireRequest() {
   return {
-    type: actions.DELETE_SURVEY_REQUEST
+    type: actions.DELETE_QUESTIONNAIRE_REQUEST
   }
 }
 
-export function deleteSurveySuccess(surveyId) {
+export function deleteQuestionnaireSuccess(surveyId) {
   return {
-    type: actions.DELETE_SURVEY_SUCCESS,
+    type: actions.DELETE_QUESTIONNAIRE_SUCCESS,
     payload: {
       surveyId: surveyId
     }
   }
 }
 
-export function deleteSurveyFailure() {
+export function deleteQuestionnaireFailure() {
   return {
-    type: actions.DELETE_SURVEY_FAILURE
+    type: actions.DELETE_QUESTIONNAIRE_FAILURE
   }
 }
 

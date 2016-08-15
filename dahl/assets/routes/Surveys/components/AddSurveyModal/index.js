@@ -17,10 +17,13 @@ import Label from 'components/forms/Label'
 export class AddSurveyModal extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    actions: PropTypes.object
+    closeModal: PropTypes.func,
+    createSurvey: PropTypes.func,
+    createSurveyCancel: PropTypes.func,
   }
 
   handleSubmit = (e) => {
+    this.props.closeModal()
     this.props.createSurvey({
       title: this.refs.surveyTitle.value(),
       id: this.refs.surveyId.value(),
@@ -42,7 +45,7 @@ export class AddSurveyModal extends React.Component { // eslint-disable-line rea
           <Form action="" onSubmit={this.handleSubmit}>
             <Field>
               <Label htmlFor="survey_title">Survey Title</Label>
-              <Input defaultValue="lol" ref="surveyTitle" type="text" name="survey_title" id="survey_title" required autoFocus />
+              <Input ref="surveyTitle" type="text" name="survey_title" id="survey_title" required autoFocus />
             </Field>
             <Field>
               <Label htmlFor="survey_id">Survey ID</Label>

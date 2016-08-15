@@ -27,7 +27,7 @@ const surveysReducer = (state = initialState, action) => {
       return state
         .set('isFetching', false)
         .set('error', action.error)
-    case actions.DELETE_SURVEY_SUCCESS:
+    case actions.DELETE_QUESTIONNAIRE_SUCCESS:
       return state
         .set('items', state.get('items').filter(item => action.payload.surveyId !== item.eq_id))
     case actions.CREATE_SURVEY:

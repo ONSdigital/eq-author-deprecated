@@ -1,6 +1,6 @@
 /**
 *
-* QuestionnaireTable
+* SurveyTable
 *
 */
 
@@ -15,7 +15,9 @@ import moment from 'moment'
 
 const surveyOpts = [{
   title: 'Add',
-  to: '/surveys/questionnaire/new/',
+  onClick: (e) => {
+    console.log(e)
+  },
   icon: 'pop-add',
 }, {
   title: 'Edit',
@@ -24,7 +26,7 @@ const surveyOpts = [{
   disabled: true
 }]
 
-const getQuestionnaireOpts = (deleteSurvey, surveyId) => ([{
+const getQuestionnaireOpts = (deleteQuestionnaire, surveyId) => ([{
   title: 'Settings',
   to: '',
   icon: 'pop-settings',
@@ -43,7 +45,7 @@ const getQuestionnaireOpts = (deleteSurvey, surveyId) => ([{
   title: 'Delete',
   onClick: (e) => {
     if (window.confirm('Do you really wish to delete this questionnaire? You cannot undo this.')) {
-      deleteSurvey(surveyId)
+      deleteQuestionnaire(surveyId)
     }
   },
   icon: 'pop-delete',
@@ -62,12 +64,12 @@ const transitionWrapperOpts = {
   }
 }
 
-const QuestionnaireTable = ({surveys, deleteSurvey}) => (
+const SurveyTable = ({survey, deleteQuestionnaire}) => (
   <div className={styles.container}>
     <table className={styles.table}>
       <thead className={styles.head}>
         <tr className={styles.row}>
-          <td className={styles.cell}>Retail sales (MCI)</td>
+          <td className={styles.cell}>{survey.title}</td>
           <td className={styles.cell}>Date Modified</td>
           <td className={styles.cellAlignRight}>
             <PopupMenu orientation="horizontal" options={surveyOpts} />
@@ -75,18 +77,18 @@ const QuestionnaireTable = ({surveys, deleteSurvey}) => (
         </tr>
       </thead>
       <VelocityTransitionGroup {...transitionWrapperOpts}>
-        {surveys.map((survey, i) => (
-          <tr className={styles.row} key={survey.eq_id}>
+        {survey.questionnaires.map((questionnaire, i) => (
+          <tr className={styles.row} key={i}>
             <td className={styles.titleCell}>
-              <Link className={styles.link} to={`/surveys/questionnaire/${survey.eq_id}`}>
-                {survey.title || 'No title provided'}
+              <Link className={styles.link} to={`/surveys/questionnaire/${questionnaire.eq_id}`}>
+                {questionnaire.title}
               </Link>
             </td>
             <td className={styles.cell}>
-              {moment(survey.modified).format('DD/MM/YYYY')}
+              {moment(questionnaire.modified).format('DD/MM/YYYY')}
             </td>
             <td className={styles.cellAlignRight}>
-              <PopupMenu orientation="horizontal" options={getQuestionnaireOpts(deleteSurvey, survey.eq_id)} />
+              <PopupMenu orientation="horizontal" options={getQuestionnaireOpts(deleteQuestionnaire, questionnaire.eq_id)} />
             </td>
           </tr>
         )
@@ -96,9 +98,9 @@ const QuestionnaireTable = ({surveys, deleteSurvey}) => (
   </div>
 )
 
-QuestionnaireTable.propTypes = {
-  deleteSurvey: PropTypes.func.isRequired,
-  surveys: PropTypes.array.isRequired,
+SurveyTable.propTypes = {
+  deleteQuestionnaire: PropTypes.func.isRequired,
+  survey: PropTypes.object.isRequired,
 }
 
-export default QuestionnaireTable
+export default SurveyTable
