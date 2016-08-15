@@ -195,10 +195,25 @@
                           {"required": ["location"]},
                           {"required": ["when"]}
                         ]
+                      },
+                      "repeat": {
+                        "type": "object",
+                        "properties": {
+                          "answer_id": {
+                            "type": "string"
+                          },
+                          "goto": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "answer_id"
+                        ]
                       }
                     },
-                    "required": [
-                      "goto"
+                    "oneOf": [
+                      {"required": ["goto"]},
+                      {"required": ["repeat"]}
                     ]
                   }
                 }
