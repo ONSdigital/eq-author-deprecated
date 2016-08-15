@@ -8,7 +8,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { selectModalIsOpen } from './selectors'
 import { closeModal } from './actions'
-
 import { ModalWrapper, ModalTitle, ModalBody } from './components'
 import { VelocityTransitionGroup } from 'velocity-react'
 
@@ -16,11 +15,11 @@ const transitionWrapperOpts = {
   component: 'div',
   enter: {
     animation: 'fadeIn',
-    duration: 300,
+    duration: 200,
   },
   leave: {
     animation: 'fadeOut',
-      duration: 100,
+    duration: 100,
   }
 }
 
@@ -28,12 +27,19 @@ const transitionContentOpts = {
   component: 'div',
   runOnMount: true,
   enter: {
-    animation: 'fadeIn',
+    animation: {
+      translateY: 0,
+      opacity: 1,
+      easing: 'ease-out'
+    },
     duration: 100,
-    delay: 400
+    delay: 200
   },
   leave: {
-    animation: 'fadeOut',
+    animation: {
+      translateY: 100,
+      opacity: 0,
+    },
   }
 }
 

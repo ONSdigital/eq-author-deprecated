@@ -66,6 +66,7 @@
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.1",
     "sanitize.css": "^4.1.0",
+    "velocity-animate": "^1.2.3",
     "velocity-react": "^1.1.5",
     "whatwg-fetch": "^1.0.0"
   },

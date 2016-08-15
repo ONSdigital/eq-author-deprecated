@@ -9,11 +9,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as SurveyActions from './actions'
 import * as ModalActions from 'containers/Modal/actions'
+
 import { selectSchemas } from './selectors'
 
 import SurveyList from '../../components/SurveyList'
 import Button from 'components/Button'
-import AddSurveyModal from '../../components/AddSurveyModal'
+import AddSurveyModal from '../../containers/AddSurveyModal'
 
 export class SurveyListContainer extends Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -32,7 +33,7 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
     return (
       <div>
         <SurveyList schemas={schemas} deleteSchema={actions.deleteSchema} buttons={[button]} />
-        <AddSurveyModal closeModal={actions.closeModal} />
+        <AddSurveyModal />
       </div>
     )
   }
