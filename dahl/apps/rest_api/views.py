@@ -25,15 +25,8 @@ json_schema = json.loads(json_schema_file)
 
 class Schema(GenericAPIView, ListModelMixin):
     """
-
-    Heading1
-    ========
-
-    This is some text
-    ---
-
+    The Schema API Endpoint allows you create new and questionnaire schemas and list existing ones
     """
-
     queryset = SchemaMeta.objects.all()
     serializer_class = SchemaSerializer
     parser_classes = (PlainJSONParser,)
@@ -107,7 +100,7 @@ class Schema(GenericAPIView, ListModelMixin):
 
 class SchemaDetail(APIView):
     """
-    Schema Detail API
+    The SchemaDetail API Endpoint allows you to view a specific schema and update it
     """
     parser_classes = (PlainJSONParser,)
 
