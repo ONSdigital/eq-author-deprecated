@@ -12,4 +12,3 @@ class DahlView(LoginRequiredMixin, TemplateView):
         token = get_object_or_404(Token, user=self.request.user)
         response = render_to_response("index.html", {'auth_token': token})
         return response
-
