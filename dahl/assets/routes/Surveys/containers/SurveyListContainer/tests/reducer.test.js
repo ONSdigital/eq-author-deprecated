@@ -57,7 +57,7 @@ describe('surveysReducer', () => {
     }), {
       type: types.DELETE_QUESTIONNAIRE_SUCCESS,
       payload: {
-        surveyId: 1
+        surveyID: 1
       }
     })).toEqual(Map({
       isFetching: false,

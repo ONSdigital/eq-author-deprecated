@@ -7,7 +7,7 @@
 import React, { PropTypes } from 'react'
 import { Button as SubmitButton } from 'components/forms/Button'
 import Button from 'components/Button'
-import Modal from 'containers/Modal'
+import Modal from 'components/Modal'
 import Panel from 'components/Panel'
 import Form from 'components/forms/Form'
 import Field from 'components/forms/Field'
@@ -17,30 +17,24 @@ import Label from 'components/forms/Label'
 export class AddSurveyModal extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    closeModal: PropTypes.func,
-    createSurvey: PropTypes.func,
-    createSurveyCancel: PropTypes.func,
+    addSurvey: PropTypes.func.isRequired,
+    addSurveyCancel: PropTypes.func.isRequired,
+    isOpen: PropTypes.bool,
   }
 
   handleSubmit = (e) => {
-    this.props.closeModal()
-    this.props.createSurvey({
+    this.props.addSurvey({
       title: this.refs.surveyTitle.value(),
-      id: this.refs.surveyId.value(),
+      id: this.refs.surveyID.value(),
     })
     e.preventDefault()
     return false
   }
 
-  handleCancel = (e) => {
-    const { closeModal, createSurveyCancel } = this.props
-    closeModal()
-    createSurveyCancel()
-  }
-
   render() {
+    const { isOpen, addSurveyCancel } = this.props
     return (
-      <Modal title="Add a Survey">
+      <Modal title="Add a Survey" isOpen={isOpen} onClose={addSurveyCancel}>
         <Panel>
           <Form action="" onSubmit={this.handleSubmit}>
             <Field>
@@ -49,12 +43,12 @@ export class AddSurveyModal extends React.Component { // eslint-disable-line rea
             </Field>
             <Field>
               <Label htmlFor="survey_id">Survey ID</Label>
-              <Input ref="surveyId" name="text" id="survey_id" required />
+              <Input ref="surveyID" name="text" id="survey_id" required />
             </Field>
             <div style={{ textAlign: 'center' }}>
               <SubmitButton>Create Survey</SubmitButton>
               <br />
-              <Button type="button" style="clear" onClick={this.handleCancel}>Cancel</Button>
+              <Button type="button" style="clear" onClick={addSurveyCancel}>Cancel</Button>
             </div>
           </Form>
         </Panel>

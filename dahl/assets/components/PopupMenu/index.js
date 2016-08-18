@@ -12,27 +12,6 @@ import styles from './styles.css'
 import Icon from 'components/Icon'
 import { Link } from 'react-router'
 
-const PopupMenuItem = ({option, children}) => {
-  if (option.to !== undefined) {
-    return (
-      <Link className={styles.link} to={option.to} aria-disabled={option.disabled}>
-        {children}
-      </Link>
-    )
-  } else {
-    return (
-      <button className={styles.linkButton} onClick={option.onClick}>
-        {children}
-      </button>
-    )
-  }
-}
-
-PopupMenuItem.propTypes = {
-  children: PropTypes.node.isRequired,
-  option: PropTypes.object.isRequired,
-}
-
 class PopupMenu extends React.Component {
 
   static propTypes = {
@@ -59,8 +38,9 @@ class PopupMenu extends React.Component {
     }
   }
 
-  onOptionClick = () => {
+  handleClick = (cb) => {
     this.setState({ open: !this.state.open })
+    cb.call()
   }
 
   handleClickOutside() {
@@ -80,7 +60,7 @@ class PopupMenu extends React.Component {
           <ul className={styles.options}>
             {options.map((option, index) => (
               <li className={styles.option} key={index}>
-                <PopupMenuItem option={option} onClick={this.onOptionClick}>
+                <PopupMenuItem option={option} handleClick={this.handleClick}>
                   <Icon name={option.icon} /><span className={styles.linkText}>{option.title}</span>
                 </PopupMenuItem>
               </li>
@@ -90,6 +70,27 @@ class PopupMenu extends React.Component {
       </div>
     )
   }
+}
+
+const PopupMenuItem = ({option, children, handleClick}) => {
+  if (option.to !== undefined) {
+    return (
+      <Link className={styles.link} to={option.to} aria-disabled={option.disabled}>
+        {children}
+      </Link>
+    )
+  } else {
+    return (
+      <button className={styles.linkButton} onClick={() => handleClick(option.onClick)}>
+        {children}
+      </button>
+    )
+  }
+}
+
+PopupMenuItem.propTypes = {
+  children: PropTypes.node.isRequired,
+  option: PropTypes.object.isRequired,
 }
 
 export default enhanceWithClickOutside(PopupMenu)
