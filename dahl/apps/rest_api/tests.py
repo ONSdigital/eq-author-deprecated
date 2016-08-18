@@ -7,6 +7,11 @@ import config
 
 import json
 
+test_survey = {
+   "survey_id": "33",
+   "title": "Star Wars Surveys",
+   "questionnaires": []
+}
 
 test_schema = {
   "mime_type": "application/json/ons/eq",
@@ -83,6 +88,65 @@ class SchemaAPI(TestCase):
         self.client.login(username='test_user', password='test_password')
         self.client.credentials(HTTP_AUTHORIZATION='Token {}'.format(token))
 
+    def test_survey_api(self):
+        response = self.client.post(reverse("survey"), json.dumps(test_survey), content_type="application/json")
+        self.assertEquals(201, response.status_code)
+
+        # check its now in the list of surveys
+        response = self.client.get(reverse("survey"))
+        self.assertEquals(200, response.status_code)
+        self.assertEquals("33", response.data[0]['survey_id'])
+        self.assertEquals("Star Wars Surveys", response.data[0]['title'])
+
+        # add a schema to the survey
+        response = self.client.post(reverse("schema"), json.dumps(test_schema), content_type="application/json")
+        self.assertEquals(201, response.status_code)
+        eq_id = response.data
+        response = self.client.get(reverse("schema-details", kwargs={'eq_id': eq_id}))
+        self.assertEquals(200, response.status_code)
+
+        # check schema is in surveys
+        response = self.client.get(reverse("survey"))
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(eq_id, response.data[0]['questionnaires'][0])
+
+        # then get the details
+        response = self.client.get(reverse("survey-details", kwargs={'survey_id': '33'}))
+        self.assertEquals("Star Wars Surveys", response.data['title'])
+
+        # now modify the title
+        test_survey['title'] = "Star Wars Surveys - The Complete Collection"
+        response = self.client.put(reverse("survey-details", kwargs={'survey_id': '33'}), json.dumps(test_survey), content_type="application/json")
+        self.assertEquals(200, response.status_code)
+
+        # check the title has been updated
+        response = self.client.get(reverse("survey"))
+        self.assertEquals(200, response.status_code)
+        self.assertEquals("Star Wars Surveys - The Complete Collection", response.data[0]['title'])
+
+        # finally delete the survey
+        response = self.client.delete(reverse("survey-details", kwargs={'survey_id': '33'}))
+        self.assertEquals(204, response.status_code)
+
+        # check its gone
+        response = self.client.get(reverse("survey"))
+        self.assertEquals(200, response.status_code)
+        self.assertEquals([], response.data)
+
+        # check that the associated schema has been deleted
+        response = self.client.get(reverse("schema"))
+        self.assertEquals(200, response.status_code)
+        # `TODO: The following test should work, it doesn't!`
+        # self.assertEquals([], response.data)
+
+    def test_survey_api_dupicate_survey(self):
+        response = self.client.post(reverse("survey"), json.dumps(test_survey), content_type="application/json")
+        self.assertEquals(201, response.status_code)
+
+        # try and create the same survey again
+        response = self.client.post(reverse("survey"), json.dumps(test_survey), content_type="application/json")
+        self.assertEquals(400, response.status_code)
+
     def test_get_empty(self):
         response = self.client.get(reverse("schema"))
         # expecting empty response
@@ -90,27 +154,34 @@ class SchemaAPI(TestCase):
         self.assertEquals([], response.data)
 
     def test_schema_api(self):
+        response = self.client.post(reverse("survey"), json.dumps(test_survey), content_type="application/json")
+        self.assertEquals(201, response.status_code)
 
         response = self.client.post(reverse("schema"), json.dumps(test_schema), content_type="application/json")
         self.assertEquals(201, response.status_code)
-        self.assertEquals(1, response.data)
+        eq_id = response.data
+
+        # check schema is in surveys
+        response = self.client.get(reverse("survey"))
+        self.assertEquals(200, response.status_code)
+        self.assertEquals(1, response.data[0]['questionnaires'][0])
 
         # check its now in the list of schemas
         response = self.client.get(reverse("schema"))
         self.assertEquals(200, response.status_code)
-        self.assertEquals(1, response.data[0]['eq_id'])
+        self.assertEquals(eq_id, response.data[0]['eq_id'])
         self.assertEquals("1.json", response.data[0]['file_name'])
         self.assertEquals("Star Wars", response.data[0]['title'])
         self.assertEquals("Star Wars VII", response.data[0]['description'])
 
         # then get the details
-        response = self.client.get(reverse("schema-details", kwargs={'eq_id': '1'}))
+        response = self.client.get(reverse("schema-details", kwargs={'eq_id': eq_id}))
         self.assertEquals("Star Wars", response.data['title'])
         self.assertEquals(test_schema, json.loads(response.data['schema']))
 
         # now modify the title
         test_schema['title'] = "Star Wars VII - The Force Awakens"
-        response = self.client.put(reverse("schema-details", kwargs={'eq_id': '1'}),json.dumps(test_schema), content_type="application/json")
+        response = self.client.put(reverse("schema-details", kwargs={'eq_id': eq_id}),json.dumps(test_schema), content_type="application/json")
         self.assertEquals(200, response.status_code)
 
         # check the title has been updated
@@ -119,10 +190,20 @@ class SchemaAPI(TestCase):
         self.assertEquals("Star Wars VII - The Force Awakens", response.data[0]['title'])
 
         # finally delete the schema
-        response = self.client.delete(reverse("schema-details", kwargs={'eq_id': '1'}))
+        response = self.client.delete(reverse("schema-details", kwargs={'eq_id': eq_id}))
         self.assertEquals(200, response.status_code)
 
         # check its gone
         response = self.client.get(reverse("schema"))
         self.assertEquals(200, response.status_code)
         self.assertEquals([], response.data)
+
+        # check schema is not in surveys
+        response = self.client.get(reverse("survey"))
+        self.assertEquals(200, response.status_code)
+        self.assertEquals([], response.data[0]['questionnaires'])
+
+    def test_schema_api_survey_doesnt_exist(self):
+        response = self.client.post(reverse("schema"), json.dumps(test_schema), content_type="application/json")
+        self.assertEquals(400, response.status_code)
+

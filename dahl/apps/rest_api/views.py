@@ -3,10 +3,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.mixins import ListModelMixin
 from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.decorators import permission_classes
 from .parsers import PlainJSONParser
-from .serializers import SchemaSerializer
-from .models import SchemaMeta
+from .serializers import SchemaSerializer, SurveySerializer
+from .models import SchemaMeta, Survey
 from jsonschema import validate, ValidationError
 from .schema_storage import SchemaStorageFactory, SchemaStorageError
 import json
@@ -86,6 +87,16 @@ class Schema(GenericAPIView, ListModelMixin):
         schema.file_name = key
         schema.title = json_data.get("title")
         schema.description = json_data.get("description")
+
+        survey_id = json_data.get("survey_id")
+        survey = Survey()
+        try:
+            survey = Survey.objects.get(survey_id=survey_id)
+        except Survey.DoesNotExist as e:
+            logger.debug("Survey [survey_id=%s] does not exist: %s", survey_id, str(e))
+            return Response({"survey_id": [str(e)]}, status=status.HTTP_400_BAD_REQUEST)
+
+        schema.survey = survey
         schema.save()
         logger.debug("Saved")
 
@@ -180,3 +191,16 @@ class SchemaDetail(APIView):
             # delete the meta data from the database
             schema.delete()
             return Response(eq_id, status=status.HTTP_200_OK)
+
+
+class SurveyView(ListCreateAPIView):
+    queryset = Survey.objects.all()
+    serializer_class = SurveySerializer
+    model = Survey
+
+
+class SurveyDetailsView(RetrieveUpdateDestroyAPIView):
+    queryset = Survey.objects.all()
+    serializer_class = SurveySerializer
+    model = Survey
+    lookup_field = "survey_id"
