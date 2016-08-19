@@ -17,23 +17,23 @@ export class Modal extends React.Component { // eslint-disable-line react/prefer
   }
 
   componentDidMount() {
-    window.document.addEventListener('keyup', this.handleKeyUp)
+    document.addEventListener('keyup', this.handleKeyUp)
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ isOpen: nextProps.isOpen })
   }
 
+  componentDidUnMount() {
+    document.removeEventListener('keyup', this.handleKeyUp)
+  }
+
   handleKeyUp = (e) => {
     const KEYCODE_ESC = 27
-    if (e.keyCode === KEYCODE_ESC) {
+    if (e.keyCode === KEYCODE_ESC && this.props.isOpen) {
       this.setState({ isOpen: false })
       this.props.onClose()
     }
-  }
-
-  componentDidUnMount() {
-    window.document.removeEventListener('keyup', this.handleKeyUp)
   }
 
   render() {

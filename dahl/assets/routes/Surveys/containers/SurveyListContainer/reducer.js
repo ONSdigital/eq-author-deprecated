@@ -14,13 +14,15 @@ import * as actions from './constants'
 export const initialState = fromJS({
   addQuestionnaireModal: {
     visible: false,
+    errors: []
   },
   addSurveyModal: {
     visible: false,
+    errors: []
   },
   isFetching: false,
   items: [],
-  error: ''
+  errors: []
 })
 
 const surveysReducer = (state = initialState, action) => {
@@ -38,49 +40,52 @@ const surveysReducer = (state = initialState, action) => {
     case actions.FETCH_SURVEYS_FAILURE:
       return state
         .set('isFetching', false)
-        .set('error', action.error)
-
-    case actions.DELETE_QUESTIONNAIRE_SUCCESS:
-      return state
-        .set('items', state.get('items').filter(item => action.payload.surveyID !== item.eq_id))
-
-    case actions.ADD_QUESTIONNAIRE:
-      return state.set('addQuestionnaireModal', {
-        visible: false,
-        questionnaireDetails: action.payload.questionnaireDetails
-      })
-
-    case actions.ADD_QUESTIONNAIRE_CANCEL:
-      return state.set('addQuestionnaireModal', {
-        visible: false,
-      })
-
-    case actions.TOGGLE_ADD_QUESTIONNAIRE_MODAL:
-      return state.set('addQuestionnaireModal', {
-        visible: action.payload.visible
-      })
+        .set('errors', action.errors)
 
     case actions.TOGGLE_ADD_SURVEY_MODAL:
-      return state.set('addSurveyModal', {
-        visible: action.payload.visible
-      })
+      return state
+        .setIn(['addSurveyModal', 'visible'], action.payload.visible)
 
     case actions.ADD_SURVEY:
-      return state.set('addSurveyModal', {
-        visible: false,
-        surveyID: action.payload.surveyID
-      })
+      return state
 
     case actions.ADD_SURVEY_CANCEL:
-      return state.set('addSurveyModal', {
-        visible: false
-      })
+      return state
+        .setIn(['addSurveyModal', 'visible'], false)
 
     case actions.ADD_SURVEY_REQUEST:
-      return state.set('isFetching', true)
+      return state
+        .set('isFetching', true)
 
     case actions.ADD_SURVEY_SUCCESS:
-      return state.set('isFetching', false)
+      const mergedList = state.get('items').concat(List(action.payload.survey))
+      return state
+        .set('isFetching', false)
+        .set('items', mergedList)
+
+    case actions.ADD_SURVEY_FAILURE:
+      return state
+        .set('isFetching', false)
+        .setIn(['addSurveyModal', 'visible'], true)
+        .setIn(['addSurveyModal', 'error'], List(action.error))
+
+    case actions.DELETE_QUESTIONNAIRE_SUCCESS:
+      const newList = state.get('items').filter(item => action.payload.surveyID !== item.eq_id)
+      return state
+        .set('items', newList)
+
+    case actions.ADD_QUESTIONNAIRE:
+      return state
+        .setIn(['addQuestionnaireModal', 'visible'], false)
+        .setIn(['addQuestionnaireModal', 'questionnaireDetails'], List(action.payload.questionnaireDetails))
+
+    case actions.ADD_QUESTIONNAIRE_CANCEL:
+      return state
+        .setIn(['addQuestionnaireModal', 'visible'], false)
+
+    case actions.TOGGLE_ADD_QUESTIONNAIRE_MODAL:
+      return state
+        .setIn(['addQuestionnaireModal', 'visible'], action.payload.visible)
 
     default:
       return state
