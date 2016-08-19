@@ -205,5 +205,6 @@ class SchemaAPI(TestCase):
 
     def test_schema_api_survey_doesnt_exist(self):
         response = self.client.post(reverse("schema"), json.dumps(test_schema), content_type="application/json")
-        self.assertEquals(400, response.status_code)
-
+        # TODO remove once front end changes in place
+        # self.assertEquals(400, response.status_code)
+        self.assertEquals(201, response.status_code)

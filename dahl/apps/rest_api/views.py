@@ -1,10 +1,11 @@
-from rest_framework import status, permissions
+from django.db import transaction
+from rest_framework import status
+from rest_framework.exceptions import NotFound
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.mixins import ListModelMixin
-from rest_framework.generics import GenericAPIView
 from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.decorators import permission_classes
+from .exceptions import SurveyNotFoundException, BadRequestException, SchemaValidationException, InternalServerError
 from .parsers import PlainJSONParser
 from .serializers import SchemaSerializer, SurveySerializer
 from .models import SchemaMeta, Survey
@@ -13,9 +14,6 @@ from .schema_storage import SchemaStorageFactory, SchemaStorageError
 import json
 import logging
 import config
-
-from rest_framework.decorators import api_view, renderer_classes
-from rest_framework import response, schemas
 
 
 logger = logging.getLogger(__name__)
@@ -32,6 +30,7 @@ class Schema(GenericAPIView, ListModelMixin):
     serializer_class = SchemaSerializer
     parser_classes = (PlainJSONParser,)
 
+    @transaction.atomic
     def post(self, request):
         """
         Create a Schema
@@ -52,14 +51,14 @@ class Schema(GenericAPIView, ListModelMixin):
             logger.debug("Converting %s request to json data", request.data)
         except Exception as e:
             logger.error("Schema cannot be converted to json")
-            return Response(e.message, status=status.HTTP_400_BAD_REQUEST)
+            raise BadRequestException()
 
         # run it through the json schema validator to make sure they're are no errors
         try:
             validate(json_data, json_schema)
         except ValidationError as e:
             logger.error("Schema failed validation %s", e.message)
-            return Response(e.message, status=status.HTTP_400_BAD_REQUEST)
+            raise SchemaValidationException()
 
         logger.debug("JSON Data is : %s", json_data)
         logger.debug("About to create new schema meta data entry")
@@ -79,8 +78,9 @@ class Schema(GenericAPIView, ListModelMixin):
             schema_storage.store(key, request.data.decode())
             logger.debug("File now in s3")
         except SchemaStorageError as e:
-            logger.error("Unable to store request data %s", str(e))
-            return Response({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            logger.error("Unable to store request data")
+            logger.exception(e)
+            raise InternalServerError()
 
         logger.debug("Saving metadata to the database")
         # save the meta data in the database
@@ -89,16 +89,22 @@ class Schema(GenericAPIView, ListModelMixin):
         schema.description = json_data.get("description")
 
         survey_id = json_data.get("survey_id")
-        survey = Survey()
         try:
             survey = Survey.objects.get(survey_id=survey_id)
+            schema.survey = survey
+            schema.save()
+            logger.debug("Saved")
         except Survey.DoesNotExist as e:
-            logger.debug("Survey [survey_id=%s] does not exist: %s", survey_id, str(e))
-            return Response({"survey_id": [str(e)]}, status=status.HTTP_400_BAD_REQUEST)
-
-        schema.survey = survey
-        schema.save()
-        logger.debug("Saved")
+            logger.warning("Survey [survey_id=%s] does not exist: %s", survey_id, str(e))
+            # TODO remove this as soon as Front end changes allow a survey to be created
+            survey = Survey()
+            survey.survey_id = survey_id
+            schema.survey = survey
+            survey.save()
+            schema.save()
+            logger.warning("Created and saved a new survey - note this functionality needs to be removed")
+            # END TODO
+            # raise SurveyNotFoundException()
 
         return Response(eq_id, status=status.HTTP_201_CREATED)
 
@@ -134,9 +140,11 @@ class SchemaDetail(APIView):
             json_data = schema_storage.get(key)
             logger.debug("JSON Data %s", json_data)
             return Response({'title': schema.title, 'schema': json_data}, status=status.HTTP_200_OK)
-        except SchemaStorageError:
-            return Response({}, status=status.HTTP_404_NOT_FOUND)
+        except SchemaStorageError as e:
+            logger.error("Unable to store schema")
+            raise SurveyNotFoundException()
 
+    @transaction.atomic
     def put(self, request, eq_id):
         '''
         Updates the schema for a particular eq_id
@@ -152,12 +160,12 @@ class SchemaDetail(APIView):
             validate(json_data, json_schema)
         except ValidationError as e:
             logger.error("Schema failed validation %s", e.message)
-            return Response(e.message, status=status.HTTP_400_BAD_REQUEST)
+            raise SchemaValidationException()
 
         # first find the meta data
         schema = SchemaMeta.objects.get(eq_id=eq_id)
         if schema is None:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            raise NotFound()
 
         logger.debug("Saving metadata to the database")
         # save the meta data in the database
@@ -175,14 +183,15 @@ class SchemaDetail(APIView):
 
             return Response(eq_id, status=status.HTTP_200_OK)
         except SchemaStorageError:
-            return Response({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            raise InternalServerError()
 
+    @transaction.atomic
     def delete(self, request, eq_id):
         logger.debug("Calling delete with id %s", eq_id)
         # first find the meta data
         schema = SchemaMeta.objects.get(eq_id=eq_id)
         if schema is None:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            raise NotFound()
         else:
             # delete the schema from the S3 bucket
             schema_storage = SchemaStorageFactory.get_instance()
