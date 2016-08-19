@@ -13,6 +13,7 @@ import Form from 'components/forms/Form'
 import Field from 'components/forms/Field'
 import Input from 'components/forms/Input'
 import Label from 'components/forms/Label'
+import ErrorList from 'components/forms/ErrorList'
 
 export class AddSurveyModal extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -41,10 +42,12 @@ export class AddSurveyModal extends React.Component { // eslint-disable-line rea
             <Field>
               <Label htmlFor="survey_title">Survey Title</Label>
               <Input ref="surveyTitle" type="text" name="survey_title" id="survey_title" required autoFocus />
+              <ErrorList errors={errors['survey_title']} />
             </Field>
             <Field>
               <Label htmlFor="survey_id">Survey ID</Label>
               <Input ref="surveyID" name="text" id="survey_id" required />
+              <ErrorList errors={errors['survey_id']} />
             </Field>
             <div style={{ textAlign: 'center' }}>
               <SubmitButton>Create Survey</SubmitButton>

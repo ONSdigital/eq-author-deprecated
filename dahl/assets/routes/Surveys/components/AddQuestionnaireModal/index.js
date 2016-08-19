@@ -26,7 +26,6 @@ export class AddQuestionnaireModal extends React.Component { // eslint-disable-l
     this.props.addQuestionnaire({
       surveyID: this.props.surveyID,
       title: this.refs.questionnaireTitle.value(),
-      id: this.refs.questionnaireId.value(),
     })
     e.preventDefault()
     return false
@@ -41,10 +40,6 @@ export class AddQuestionnaireModal extends React.Component { // eslint-disable-l
             <Field>
               <Label htmlFor="questionnaire_title">Questionnaire Title</Label>
               <Input ref="questionnaireTitle" type="text" name="questionnaire_title" id="questionnaire_title" required autoFocus />
-            </Field>
-            <Field>
-              <Label htmlFor="questionnaire_id">Questionnaire ID</Label>
-              <Input ref="questionnaireId" name="text" id="questionnaire_id" required />
             </Field>
             <div style={{ textAlign: 'center' }}>
               <SubmitButton>Create Questionnaire</SubmitButton>

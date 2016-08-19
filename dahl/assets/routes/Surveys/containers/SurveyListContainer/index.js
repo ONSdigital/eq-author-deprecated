@@ -7,8 +7,9 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as SurveyActions from './actions'
+import { VelocityTransitionGroup } from 'velocity-react'
 
+import * as SurveyActions from './actions'
 import { selectSurveys, selectAddSurveyModal, selectAddQuestionnaireModal } from './selectors'
 
 import PopupMenu from 'components/PopupMenu'
@@ -94,14 +95,14 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
           <TabBar tabs={tabs} buttons={[addSurveyBtn()]} />
           <Canvas>
             <Wrapper>
+              <VelocityTransitionGroup {...transitionWrapperOpts}>
               {surveys.length > 0
-
               ? surveys.map((survey, index) => (
                 <SurveyTable survey={survey} surveyMenu={surveyMenu(survey.survey_id)}
                   questionnaireMenu={questionnaireMenu(survey.survey_id)} />
               ))
-
               : <div>No surveys found.</div>}
+              </VelocityTransitionGroup>
             </Wrapper>
           </Canvas>
         </div>
@@ -110,6 +111,17 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
           surveyID={addQuestionnaireModal.surveyID} errors={addQuestionnaireModal.errors} {...actions} />
       </div>
     )
+  }
+}
+
+const transitionWrapperOpts = {
+  enter: {
+    animation: 'fadeIn',
+    duration: 300,
+    delay: 500,
+  },
+  leave: {
+    animation: 'fadeOut',
   }
 }
 
