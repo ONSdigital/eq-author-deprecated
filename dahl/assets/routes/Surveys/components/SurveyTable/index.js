@@ -22,20 +22,23 @@ const SurveyTable = ({survey, surveyMenu, questionnaireMenu}) => (
         </tr>
       </thead>
       <VelocityTransitionGroup {...transitionWrapperOpts}>
-        {survey.questionnaires.map((questionnaire, i) => (
-          <tr className={styles.row} key={i}>
-            <td className={styles.titleCell}>
-              <Link className={styles.link} to={`/surveys/questionnaire/${questionnaire.eq_id}`}>
-                {questionnaire.title}
-              </Link>
-            </td>
-            <td className={styles.cell}>
-              {moment(questionnaire.modified).format('DD/MM/YYYY')}
-            </td>
-            <td className={styles.cellAlignRight}>{questionnaireMenu}</td>
-          </tr>
-        )
-      )}
+        {(survey.questionnaires.length > 0)
+          ? survey.questionnaires.map((questionnaire, i) => (
+            <tr className={styles.row} key={i}>
+              <td className={styles.titleCell}>
+                <Link className={styles.link} to={`/surveys/questionnaire/${questionnaire.eq_id}`}>
+                  {questionnaire.title}
+                </Link>
+              </td>
+              <td className={styles.cell}>
+                {moment(questionnaire.modified).format('DD/MM/YYYY')}
+              </td>
+              <td className={styles.cellAlignRight}>{questionnaireMenu}</td>
+            </tr>
+          )
+        ) : <tr className={styles.row}>
+          <td className={styles.cell} colSpan={3}>No questionnaires found. </td>
+        </tr>}
       </VelocityTransitionGroup>
     </table>
   </div>

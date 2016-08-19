@@ -1,0 +1,14 @@
+.modal {
+  position: absolute;
+  width: 100%;
+  height: calc(100vh - 3.8rem);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+}
+
+.hiddenModal {
+  composes: modal;
+  display: none;
+}

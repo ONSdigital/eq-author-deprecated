@@ -14,10 +14,9 @@ class ModalWrapper extends React.Component {
   }
 
   render() {
-    const { children } = this.props
     return (
-      <div className={styles.modal}>
-        {children}
+      <div className={styles.modalWrapper}>
+        {this.props.children}
       </div>
     )
   }

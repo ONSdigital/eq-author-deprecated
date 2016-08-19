@@ -35,7 +35,7 @@ const surveysReducer = (state = initialState, action) => {
     case actions.FETCH_SURVEYS_SUCCESS:
       return state
         .set('isFetching', false)
-        .set('items', List(action.payload.surveys))
+        .set('items', fromJS(action.payload.surveys))
 
     case actions.FETCH_SURVEYS_FAILURE:
       return state
@@ -58,16 +58,18 @@ const surveysReducer = (state = initialState, action) => {
         .set('isFetching', true)
 
     case actions.ADD_SURVEY_SUCCESS:
-      const mergedList = state.get('items').concat(List(action.payload.survey))
+      const mergedList = state.get('items').concat(action.payload.survey)
       return state
         .set('isFetching', false)
-        .set('items', mergedList)
+        .set('items', fromJS(mergedList))
+        .setIn(['addSurveyModal', 'errors'], fromJS({}))
+        .setIn(['addSurveyModal', 'visible'], false)
 
     case actions.ADD_SURVEY_FAILURE:
       return state
         .set('isFetching', false)
         .setIn(['addSurveyModal', 'visible'], true)
-        .setIn(['addSurveyModal', 'error'], List(action.error))
+        .setIn(['addSurveyModal', 'errors'], fromJS(action.errors))
 
     case actions.DELETE_QUESTIONNAIRE_SUCCESS:
       const newList = state.get('items').filter(item => action.payload.surveyID !== item.eq_id)
@@ -77,7 +79,7 @@ const surveysReducer = (state = initialState, action) => {
     case actions.ADD_QUESTIONNAIRE:
       return state
         .setIn(['addQuestionnaireModal', 'visible'], false)
-        .setIn(['addQuestionnaireModal', 'questionnaireDetails'], List(action.payload.questionnaireDetails))
+        .setIn(['addQuestionnaireModal', 'questionnaireDetails'], fromJS(action.payload.questionnaireDetails))
 
     case actions.ADD_QUESTIONNAIRE_CANCEL:
       return state
