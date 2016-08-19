@@ -58,10 +58,6 @@ export function* saveSchema(action) {
   // perform API call
   const response = yield call(request, endpoint, {
     method: method,
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
     body: body
   })
 

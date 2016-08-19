@@ -94,16 +94,20 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
           <TabBar tabs={tabs} buttons={[addSurveyBtn()]} />
           <Canvas>
             <Wrapper>
-              {surveys.map((survey, index) => (
+              {surveys.length > 0
+
+              ? surveys.map((survey, index) => (
                 <SurveyTable survey={survey} surveyMenu={surveyMenu(survey.survey_id)}
                   questionnaireMenu={questionnaireMenu(survey.survey_id)} />
-              ))}
+              ))
+
+              : <div>No surveys found.</div>}
             </Wrapper>
           </Canvas>
         </div>
-        <AddSurveyModal isOpen={addSurveyModal.visible} {...actions} />
+        <AddSurveyModal isOpen={addSurveyModal.visible} errors={addSurveyModal.errors} {...actions} />
         <AddQuestionnaireModal isOpen={addQuestionnaireModal.visible}
-          surveyID={addQuestionnaireModal.surveyID} {...actions} />
+          surveyID={addQuestionnaireModal.surveyID} errors={addQuestionnaireModal.errors} {...actions} />
       </div>
     )
   }

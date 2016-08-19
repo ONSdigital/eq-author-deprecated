@@ -51,7 +51,8 @@ class Input extends React.Component {
     if (!this.state.valid) {
       className += ` ${styles.invalid}`
     }
-    return <input ref="input" className={className} onChange={this.handleChange} {...this.filterProps(this.props)} />
+    return (<input ref="input" className={className} onChange={this.handleChange}
+      {...this.filterProps(this.props)} autoComplete="off" />)
   }
 }
 

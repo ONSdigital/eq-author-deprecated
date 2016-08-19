@@ -25,14 +25,15 @@ export class AddSurveyModal extends React.Component { // eslint-disable-line rea
   handleSubmit = (e) => {
     this.props.addSurvey({
       title: this.refs.surveyTitle.value(),
-      id: this.refs.surveyID.value(),
+      survey_id: this.refs.surveyID.value(),
+      questionnaires: []
     })
     e.preventDefault()
     return false
   }
 
   render() {
-    const { isOpen, addSurveyCancel } = this.props
+    const { isOpen, addSurveyCancel, errors } = this.props
     return (
       <Modal title="Add a Survey" isOpen={isOpen} onClose={addSurveyCancel}>
         <Panel>

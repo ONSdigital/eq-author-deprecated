@@ -31,10 +31,10 @@ export function fetchSurveysSuccess(surveys) {
   }
 }
 
-export function fetchSurveysFailure(error) {
+export function fetchSurveysFailure(errors) {
   return {
     type: actions.FETCH_SURVEYS_FAILURE,
-    error
+    errors: errors
   }
 }
 
@@ -72,16 +72,19 @@ export function addSurveyCancel() {
   }
 }
 
-export function addSurveySuccess() {
+export function addSurveySuccess(survey) {
   return {
-    type: actions.ADD_SURVEY_SUCCESS
+    type: actions.ADD_SURVEY_SUCCESS,
+    payload: {
+      survey: survey
+    }
   }
 }
 
-export function addSurveyFailure(error) {
+export function addSurveyFailure(errors) {
   return {
     type: actions.ADD_SURVEY_FAILURE,
-    error
+    errors: errors
   }
 }
 
