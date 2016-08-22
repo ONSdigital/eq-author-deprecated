@@ -92,20 +92,21 @@ export function addSurveyFailure(errors) {
  * Add questionnaire
  * * * * * * * * * * * * * * * * * * * * * * * * */
 
-export function toggleAddQuestionnaireModal(visible) {
+export function toggleAddQuestionnaireModal(visible, surveyID) {
   return {
     type: actions.TOGGLE_ADD_QUESTIONNAIRE_MODAL,
     payload: {
-      visible: visible
+      visible: visible,
+      surveyID: surveyID
     }
   }
 }
 
-export function addQuestionnaire(questionnaireDetails) {
+export function addQuestionnaire(questionniareDetails) {
   return {
     type: actions.ADD_QUESTIONNAIRE,
     payload: {
-      questionnaireDetails: questionnaireDetails
+      questionniareDetails: questionniareDetails
     }
   }
 }
@@ -122,12 +123,9 @@ export function addQuestionnaireRequest() {
   }
 }
 
-export function addQuestionnaireSuccess(surveyID) {
+export function addQuestionnaireSuccess() {
   return {
     type: actions.ADD_QUESTIONNAIRE_SUCCESS,
-    payload: {
-      surveyID: surveyID
-    }
   }
 }
 
@@ -141,11 +139,11 @@ export function addQuestionnaireFailure() {
  * Delete questionnaire
  * * * * * * * * * * * * * * * * * * * * * * * * */
 
-export function deleteQuestionnaire(surveyID) {
+export function deleteQuestionnaire(questionnaireID) {
   return {
     type: actions.DELETE_QUESTIONNAIRE,
     payload: {
-      surveyID: surveyID
+      questionnaireID: questionnaireID
     }
   }
 }
@@ -156,11 +154,11 @@ export function deleteQuestionnaireRequest() {
   }
 }
 
-export function deleteQuestionnaireSuccess(surveyID) {
+export function deleteQuestionnaireSuccess(questionnaireID) {
   return {
     type: actions.DELETE_QUESTIONNAIRE_SUCCESS,
     payload: {
-      surveyID: surveyID
+      questionnaireID: questionnaireID
     }
   }
 }

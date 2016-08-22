@@ -33,7 +33,8 @@ export function* getSurveys() {
   const response = yield call(request, '/api/v1/surveys/')
 
   if (!response.err) {
-    yield put(actions.fetchSurveysSuccess(response.data))
+    const surveys = response.data
+    yield put(actions.fetchSurveysSuccess(surveys))
   } else {
     yield put(actions.fetchSurveysFailure(response.err))
     console.error(response.err.response) // eslint-disable-line
@@ -41,6 +42,8 @@ export function* getSurveys() {
 }
 
 export function* loadSurveysWatcher() {
-  yield take(LOAD_SURVEYS)
-  yield call(getSurveys)
+  while (true) {
+    yield take(LOAD_SURVEYS)
+    yield call(getSurveys)
+  }
 }

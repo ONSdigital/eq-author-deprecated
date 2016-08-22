@@ -47,6 +47,7 @@
     "history": "^3.0.0",
     "immutable": "^3.8.1",
     "js-beautify": "^1.6.3",
+    "lodash": "^4.15.0",
     "moment": "^2.14.1",
     "react": "^15.0.1",
     "react-click-outside": "^2.1.0",
