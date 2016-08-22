@@ -33,7 +33,7 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
   }
 
   createComponents() {
-    const { deleteQuestionnaire, toggleAddSurveyModal, toggleAddQuestionnaireModal } = this.props.actions
+    const { toggleAddSurveyModal, toggleAddQuestionnaireModal } = this.props.actions
     return {
 
       addSurveyBtn: () => (
@@ -44,7 +44,7 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
         <PopupMenu orientation="horizontal" options={[{
           title: 'Add',
           onClick: (e) => {
-            toggleAddQuestionnaireModal(true)
+            toggleAddQuestionnaireModal(true, surveyID)
           },
           icon: 'pop-add',
         }, {
@@ -55,40 +55,22 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
         }]} />
       ),
 
-      questionnaireMenu: (surveyID) => (
-        <PopupMenu orientation="horizontal" options={[{
-          title: 'Settings',
-          to: '',
-          icon: 'pop-settings',
-          disabled: true
-        }, {
-          title: 'Team',
-          to: '',
-          icon: 'pop-user',
-          disabled: true
-        }, {
-          title: 'Share',
-          to: '',
-          icon: 'pop-share',
-          disabled: true
-        }, {
-          title: 'Delete',
-          onClick: (e) => {
-            if (window.confirm('Do you really wish to delete this questionnaire? You cannot undo this.')) {
-              deleteQuestionnaire(surveyID)
-            }
-          },
-          icon: 'pop-delete',
-          disabled: false
-        }]
-      } />)
-
     }
   }
 
   render() {
     const { surveys, actions, addSurveyModal, addQuestionnaireModal } = this.props
-    const { surveyMenu, questionnaireMenu, addSurveyBtn } = this.createComponents()
+    const { surveyMenu, addSurveyBtn } = this.createComponents()
+    const transitionWrapperOpts = {
+      enter: {
+        animation: 'fadeIn',
+        duration: 300,
+        delay: 500,
+      },
+      leave: {
+        animation: 'fadeOut',
+      }
+    }
     return (
       <div>
         <div>
@@ -97,9 +79,10 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
             <Wrapper>
               <VelocityTransitionGroup {...transitionWrapperOpts}>
               {surveys.length > 0
-              ? surveys.map((survey, index) => (
-                <SurveyTable survey={survey} surveyMenu={surveyMenu(survey.survey_id)}
-                  questionnaireMenu={questionnaireMenu(survey.survey_id)} />
+              ? surveys.map(survey => (
+                <SurveyTable key={survey.survey_id} survey={survey}
+                  surveyMenu={surveyMenu(survey.survey_id)}
+                  deleteQuestionnaire={actions.deleteQuestionnaire} />
               ))
               : <div>No surveys found.</div>}
               </VelocityTransitionGroup>
@@ -111,17 +94,6 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
           surveyID={addQuestionnaireModal.surveyID} errors={addQuestionnaireModal.errors} {...actions} />
       </div>
     )
-  }
-}
-
-const transitionWrapperOpts = {
-  enter: {
-    animation: 'fadeIn',
-    duration: 300,
-    delay: 500,
-  },
-  leave: {
-    animation: 'fadeOut',
   }
 }
 

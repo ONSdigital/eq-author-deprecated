@@ -4,17 +4,14 @@
  *
  */
 
-import {
-  List,
-  fromJS
-} from 'immutable'
-
+import { fromJS, Map, List } from 'immutable'
 import * as actions from './constants'
 
 export const initialState = fromJS({
   addQuestionnaireModal: {
     visible: false,
-    errors: []
+    errors: [],
+    surveyId: undefined,
   },
   addSurveyModal: {
     visible: false,
@@ -71,10 +68,10 @@ const surveysReducer = (state = initialState, action) => {
         .setIn(['addSurveyModal', 'visible'], true)
         .setIn(['addSurveyModal', 'errors'], fromJS(action.errors))
 
-    case actions.DELETE_QUESTIONNAIRE_SUCCESS:
-      const newList = state.get('items').filter(item => action.payload.surveyID !== item.eq_id)
+    case actions.TOGGLE_ADD_QUESTIONNAIRE_MODAL:
       return state
-        .set('items', newList)
+        .setIn(['addQuestionnaireModal', 'visible'], action.payload.visible)
+        .setIn(['addQuestionnaireModal', 'surveyID'], action.payload.surveyID)
 
     case actions.ADD_QUESTIONNAIRE:
       return state
@@ -85,9 +82,16 @@ const surveysReducer = (state = initialState, action) => {
       return state
         .setIn(['addQuestionnaireModal', 'visible'], false)
 
-    case actions.TOGGLE_ADD_QUESTIONNAIRE_MODAL:
+    case actions.ADD_QUESTIONNAIRE_SUCCESS:
+      // const items = state.get('items').map((item, index) => {
+      //   if (item.get('survey_id') === action.payload.questionnaire.survey_id) {
+      //     return item.set('questionnaires', item.get('questionnaires').push(action.payload.questionnaire))
+      //   }
+      //   return item
+      // })
+
       return state
-        .setIn(['addQuestionnaireModal', 'visible'], action.payload.visible)
+        .setIn(['addQuestionnaireModal', 'visible'], false)
 
     default:
       return state
