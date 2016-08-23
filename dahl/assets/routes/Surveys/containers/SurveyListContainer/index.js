@@ -25,7 +25,9 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    surveys: PropTypes.array.isRequired
+    addQuestionnaireModal: PropTypes.object.isRequired,
+    addSurveyModal: PropTypes.object.isRequired,
+    surveys: PropTypes.array.isRequired,
   }
 
   componentDidMount() {
@@ -64,28 +66,40 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
     const transitionWrapperOpts = {
       enter: {
         animation: 'fadeIn',
-        duration: 300,
+        duration: surveys.length !== 1 ? 300 : 0,
         delay: 500,
       },
       leave: {
         animation: 'fadeOut',
       }
     }
+
+    const tabs = [{
+      title: 'My Surveys',
+      to: '/surveys/'
+    }, {
+      title: 'All surveys',
+      to: '/surveys/all',
+      disabled: true
+    }]
+
+    const renderSurveyTable = (surveys) => (
+      <VelocityTransitionGroup {...transitionWrapperOpts}>
+        {surveys.map(survey => (
+          <SurveyTable key={survey.survey_id} survey={survey}
+            surveyMenu={surveyMenu(survey.survey_id)}
+            deleteQuestionnaire={actions.deleteQuestionnaire} />
+        ))}
+      </VelocityTransitionGroup>
+    )
+
     return (
       <div>
         <div>
           <TabBar tabs={tabs} buttons={[addSurveyBtn()]} />
           <Canvas>
             <Wrapper>
-              <VelocityTransitionGroup {...transitionWrapperOpts}>
-              {surveys.length > 0
-              ? surveys.map(survey => (
-                <SurveyTable key={survey.survey_id} survey={survey}
-                  surveyMenu={surveyMenu(survey.survey_id)}
-                  deleteQuestionnaire={actions.deleteQuestionnaire} />
-              ))
-              : <div>No surveys found.</div>}
-              </VelocityTransitionGroup>
+              {renderSurveyTable(surveys)}
             </Wrapper>
           </Canvas>
         </div>
@@ -96,16 +110,6 @@ export class SurveyListContainer extends Component { // eslint-disable-line reac
     )
   }
 }
-
-const tabs = [{
-  title: 'My Surveys',
-  to: '/surveys/'
-}, {
-  title: 'All surveys',
-  to: '/surveys/all',
-  disabled: true
-}]
-
 const mapStateToProps = state => ({
   surveys: selectSurveys(state),
   addSurveyModal: selectAddSurveyModal(state),

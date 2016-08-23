@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import styles from './styles.css'
@@ -13,7 +13,13 @@ import { VelocityTransitionGroup } from 'velocity-react'
 
 const renderSubtreeIntoContainer = ReactDOM.unstable_renderSubtreeIntoContainer
 
-export class Modal extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class Modal extends Component { // eslint-disable-line react/prefer-stateless-function
+
+  static propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func
+  }
+
   constructor(props) {
     super(props)
     this.state = {
