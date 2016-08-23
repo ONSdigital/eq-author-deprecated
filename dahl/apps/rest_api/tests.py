@@ -96,13 +96,13 @@ class SchemaAPI(TestCase):
         # check schema is in surveys
         response = self.client.get(reverse("survey"))
         self.assertEquals(200, response.status_code)
-        self.assertEquals(1, response.data[0]['questionnaires'][0])
+        self.assertEquals(eq_id, response.data[0]['questionnaires'][0])
 
         # check its now in the list of schemas
         response = self.client.get(reverse("schema"))
         self.assertEquals(200, response.status_code)
         self.assertEquals(eq_id, response.data[0]['eq_id'])
-        self.assertEquals("1.json", response.data[0]['file_name'])
+        self.assertEquals("%d.json" % eq_id, response.data[0]['file_name'])
         self.assertEquals("Star Wars", response.data[0]['title'])
         self.assertEquals("Star Wars VII", response.data[0]['description'])
 
