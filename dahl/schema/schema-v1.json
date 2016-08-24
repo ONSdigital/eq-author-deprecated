@@ -1,6 +1,27 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "definitions": {
+    "when": {
+      "type": "object",
+      "properties": {
+        "id" : {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "condition",
+        "value"
+      ]
+    }
+  },
   "properties": {
     "mime_type": {
       "type": "string"
@@ -81,6 +102,14 @@
                             "description": {
                               "type": "string"
                             },
+                            "skip_condition": {
+                              "type": "object",
+                              "properties": {
+                                "when": {
+                                  "$ref": "#/definitions/when"
+                                }
+                              }
+                            },
                             "type": {
                               "type": "string"
                             },
@@ -151,6 +180,46 @@
                       "id",
                       "title",
                       "questions"
+                    ]
+                  }
+                },
+                "routing_rules": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "goto": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "when": {
+                            "$ref": "#/definitions/when"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      "repeat": {
+                        "type": "object",
+                        "properties": {
+                          "answer_id": {
+                            "type": "string"
+                          },
+                          "goto": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "answer_id"
+                        ]
+                      }
+                    },
+                    "oneOf": [
+                      {"required": ["goto"]},
+                      {"required": ["repeat"]}
                     ]
                   }
                 }

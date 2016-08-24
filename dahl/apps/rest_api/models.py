@@ -9,7 +9,7 @@ class SchemaMeta(models.Model):
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=256)
     file_name = models.CharField(max_length=64, null=True)
-    survey = models.ForeignKey('Survey', related_name='questionnaires', blank=True, null=True)
+    survey = models.ForeignKey('Survey', related_name='questionnaires', blank=True, null=False)
 
     class Meta:
         ordering = ('created', 'eq_id')
