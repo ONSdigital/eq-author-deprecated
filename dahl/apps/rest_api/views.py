@@ -64,6 +64,7 @@ class Schema(GenericAPIView, ListModelMixin):
         logger.debug("About to create new schema meta data entry")
         # first create a new entry in the database to generate an id
         schema = SchemaMeta()
+        schema.survey_id = json_data['survey_id']
         schema.save()
         logger.error("Created schema meta data")
 
@@ -99,7 +100,7 @@ class Schema(GenericAPIView, ListModelMixin):
             # TODO remove this as soon as Front end changes allow a survey to be created
             survey = Survey()
             survey.survey_id = survey_id
-            schema.survey = survey
+            schema.survey_id = survey_id
             survey.save()
             schema.save()
             logger.warning("Created and saved a new survey - note this functionality needs to be removed")
