@@ -17,7 +17,7 @@ export function* loadSchema(action) {
   yield put(fetchSchemaRequest())
 
   // perform API call
-  const response = yield call(request, `/api/v1/schema/${action.payload.schemaID}/`)
+  const response = yield call(request, `/schema/${action.payload.schemaID}/`)
 
   // handle response/errors
   if (!response.err) {
@@ -41,7 +41,7 @@ export function* loadSchema(action) {
 
 export function* saveSchema(action) {
   const schemaID = action.payload.schemaID
-  let endpoint = '/api/v1/schema/'
+  let endpoint = '/schema/'
   let method = 'POST'
 
   // if no schemaID exists then it's a new schema

@@ -7,7 +7,7 @@ import request from 'utils/request'
 
 export function* addQuestionnaire(action) {
   yield put(actions.addQuestionnaireRequest())
-  const response = yield call(request, '/api/v1/schema/', {
+  const response = yield call(request, 'schema/', {
     method: 'POST',
     body: {
       'mime_type': 'application/json/ons/eq',
@@ -35,7 +35,7 @@ export function* addQuestionnaire(action) {
 export function* deleteQuestionnaire(action) {
   yield put(actions.deleteQuestionnaireRequest())
 
-  const response = yield call(request, `/api/v1/schema/${action.payload.questionnaireID}/`, {
+  const response = yield call(request, `schema/${action.payload.questionnaireID}/`, {
     method: 'DELETE'
   })
 
