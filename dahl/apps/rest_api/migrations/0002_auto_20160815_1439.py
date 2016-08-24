@@ -8,8 +8,6 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    replaces = [('rest_api', '0002_auto_20160815_1439'), ('rest_api', '0003_auto_20160815_1717'), ('rest_api', '0004_auto_20160816_1445')]
-
     dependencies = [
         ('rest_api', '0001_initial'),
     ]
