@@ -51,7 +51,7 @@ export default function request(url, options) {
   if (requestOptions.body !== undefined) {
     requestOptions.body = JSON.stringify(requestOptions.body)
   }
-  return fetch(url, requestOptions)
+  return fetch(`/api/v1/${url}`, requestOptions)
     .then(checkStatus)
     .then(parseJSON)
     .then((data) => ({ data }))

@@ -26,7 +26,7 @@ describe('editor loadSchema Saga', () => {
     expect(generator.next().value).toEqual(put(fetchSchemaRequest()))
 
     // make request
-    const requestURL = `/api/v1/schema/${action.payload.schemaID}/`
+    const requestURL = `/schema/${action.payload.schemaID}/`
     expect(generator.next(action).value).toEqual(call(request, requestURL))
   })
 
@@ -60,7 +60,7 @@ describe('editor saveSchema Saga', () => {
     expect(generator.next().value).toEqual(put(saveSchemaRequest()))
 
     // make request
-    const requestURL = `/api/v1/schema/${action.payload.schemaID}/`
+    const requestURL = `/schema/${action.payload.schemaID}/`
     const requestOpts = {
       method: 'PUT',
       body: undefined

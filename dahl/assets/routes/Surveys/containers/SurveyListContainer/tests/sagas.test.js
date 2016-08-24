@@ -17,7 +17,7 @@ describe('SurveyListContainer sagas', () => {
     next = generator.next()
     expect(next.value).toEqual(put(fetchSurveysRequest()))
 
-    const requestURL = '/api/v1/surveys/'
+    const requestURL = 'surveys/'
     next = generator.next()
     expect(next.value).toEqual(call(request, requestURL))
   })

@@ -8,7 +8,7 @@ import request from 'utils/request'
 export function* addSurvey(action) {
   yield put(actions.addSurveyRequest())
 
-  const response = yield call(request, '/api/v1/surveys/', {
+  const response = yield call(request, 'surveys/', {
     method: 'POST',
     body: action.payload.survey
   })
@@ -30,7 +30,7 @@ export function* addSurveyWatcher() {
 
 export function* getSurveys() {
   yield put(actions.fetchSurveysRequest())
-  const response = yield call(request, '/api/v1/surveys/')
+  const response = yield call(request, 'surveys/')
 
   if (!response.err) {
     const surveys = response.data
