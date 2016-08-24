@@ -78,15 +78,15 @@ const renderData = (survey, deleteQuestionnaire) => (
     {survey.questionnaires.map((questionnaire, i) => (
       <tr className={styles.row} key={i}>
         <td className={styles.titleCell}>
-          <Link className={styles.link} to={`/surveys/questionnaire/${questionnaire}`}>
-            {questionnaire.title || 'No title given'}
+          <Link className={styles.link} to={`/surveys/questionnaire/${questionnaire.eq_id}`}>
+            {questionnaire.title}
           </Link>
         </td>
         <td className={styles.cell}>
           {moment(questionnaire.modified).format('DD/MM/YYYY')}
         </td>
         <td className={styles.cellAlignRight}>
-          {getQuestionnaireMenu(deleteQuestionnaire, questionnaire)}
+          {getQuestionnaireMenu(deleteQuestionnaire, questionnaire.eq_id)}
         </td>
       </tr>)
     )}
