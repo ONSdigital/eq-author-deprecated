@@ -17,6 +17,16 @@ import TabBar from 'components/TabBar'
 // eslint-disable-line react/prefer-stateless-function
 export class Editor extends Component {
 
+  static propTypes = {
+    actions: PropTypes.object.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    isSaving: PropTypes.bool.isRequired,
+    params: PropTypes.object.isRequired,
+    route: PropTypes.object.isRequired,
+    schema: PropTypes.string,
+    title: PropTypes.string,
+  }
+
   componentDidMount() {
     const { actions, params } = this.props
     if (params.schemaID !== undefined) {
@@ -56,16 +66,6 @@ const mapStateToProps = state => ({
   isSaving: selectIsSaving(state),
   isFetching: selectIsFetching(state),
 })
-
-Editor.propTypes = {
-  actions: PropTypes.object.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  isSaving: PropTypes.bool.isRequired,
-  params: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired,
-  schema: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-}
 
 export default connect(
   mapStateToProps,
