@@ -90,6 +90,7 @@ const PopupMenuItem = ({option, children, handleClick}) => {
 
 PopupMenuItem.propTypes = {
   children: PropTypes.node.isRequired,
+  handleClick: PropTypes.func.isRequired,
   option: PropTypes.object.isRequired,
 }
 

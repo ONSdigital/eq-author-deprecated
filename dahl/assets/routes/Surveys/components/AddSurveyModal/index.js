@@ -20,6 +20,7 @@ export class AddSurveyModal extends React.Component { // eslint-disable-line rea
   static propTypes = {
     addSurvey: PropTypes.func.isRequired,
     addSurveyCancel: PropTypes.func.isRequired,
+    errors: PropTypes.array,
     isOpen: PropTypes.bool,
   }
 

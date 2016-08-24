@@ -1,7 +1,9 @@
 import expect from 'expect'
 import { call, put, take, race } from 'redux-saga/effects'
 import { fetchSurveysRequest, fetchSurveysSuccess, fetchSurveysFailure } from '../actions'
-import { getSurveys, deleteQuestionnaire, loadSurveysWatcher, deleteQuestionnairesWatcher, surveysData } from '../sagas'
+import { getSurveys, loadSurveysWatcher, addSurveyWatcher } from '../sagas/surveys'
+import { deleteQuestionnaire, deleteQuestionnairesWatcher, addQuestionnaireWatcher } from '../sagas/questionnaires'
+import { sagas as surveysSaga } from '../sagas'
 import { LOCATION_CHANGE } from 'react-router-redux'
 import { LOAD_SURVEYS, DELETE_QUESTIONNAIRE } from '../constants'
 
@@ -15,7 +17,7 @@ describe('SurveyListContainer sagas', () => {
     next = generator.next()
     expect(next.value).toEqual(put(fetchSurveysRequest()))
 
-    const requestURL = '/api/v1/survey/'
+    const requestURL = '/api/v1/surveys/'
     next = generator.next()
     expect(next.value).toEqual(call(request, requestURL))
   })
@@ -25,7 +27,7 @@ describe('SurveyListContainer sagas', () => {
       data: 'some data'
     }
     next = generator.next(response)
-    expect(next.value).toEqual(put(fetchSurveysSuccess('some data')))
+    expect(next.value).toEqual(put(fetchSurveysSuccess(response.data)))
   })
 
   it('should dispatch a fetchSurveysFailure action', () => {
@@ -35,14 +37,6 @@ describe('SurveyListContainer sagas', () => {
     next = generator.next(response)
     expect(next.value).toEqual(put(fetchSurveysFailure('some error')))
   })
-
-  // it('should dispatch a deleteQuestionnaireSuccess action', () => {
-  //   const response = {
-  //     data: 'some data'
-  //   }
-  //   next = generator.next(response)
-  //   expect(next.value).toEqual(put(deleteQuestionnaireSuccess('some data')))
-  // })
 })
 
 describe('loadSurveysWatcher Saga', () => {
@@ -72,13 +66,18 @@ describe('deleteQuestionnairesWatcher Saga', () => {
 })
 
 describe('surveysData', () => {
-  const generator = surveysData()
+  const generator = surveysSaga()
   let raceDescriptor
 
-  it('should run a race between loadSurveysWatcher/deleteQuestionnairesWatcher watchers and LOCATION_CHANGE', () => {
+  it('should run a race between the watchers and LOCATION_CHANGE', () => {
     raceDescriptor = generator.next().value
     expect(raceDescriptor).toEqual(race([
-      [call(loadSurveysWatcher), call(deleteQuestionnairesWatcher)],
+      [
+        call(loadSurveysWatcher),
+        call(addSurveyWatcher),
+        call(addQuestionnaireWatcher),
+        call(deleteQuestionnairesWatcher),
+      ],
       take(LOCATION_CHANGE)
     ]))
   })
