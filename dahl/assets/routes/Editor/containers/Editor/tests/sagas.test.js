@@ -63,10 +63,6 @@ describe('editor saveSchema Saga', () => {
     const requestURL = `/api/v1/schema/${action.payload.schemaID}/`
     const requestOpts = {
       method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
       body: undefined
     }
     expect(generator.next().value).toEqual(call(request, requestURL, requestOpts))

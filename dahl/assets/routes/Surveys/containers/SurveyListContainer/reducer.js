@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS, Map, List } from 'immutable'
+import { fromJS } from 'immutable'
 import * as actions from './constants'
 
 export const initialState = fromJS({
@@ -83,13 +83,6 @@ const surveysReducer = (state = initialState, action) => {
         .setIn(['addQuestionnaireModal', 'visible'], false)
 
     case actions.ADD_QUESTIONNAIRE_SUCCESS:
-      // const items = state.get('items').map((item, index) => {
-      //   if (item.get('survey_id') === action.payload.questionnaire.survey_id) {
-      //     return item.set('questionnaires', item.get('questionnaires').push(action.payload.questionnaire))
-      //   }
-      //   return item
-      // })
-
       return state
         .setIn(['addQuestionnaireModal', 'visible'], false)
 
