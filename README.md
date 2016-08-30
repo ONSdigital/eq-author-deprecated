@@ -14,7 +14,7 @@ Before installing the application, there are a number of things that need to be 
 
 ## Dependencies
 
-- Python (version??)
+- Python 3.5
 - virtualenv
 - postgres
 - node 5.2.0
@@ -29,8 +29,10 @@ Before running the application, you will need to create a number of environment 
 - `EQ_AUTHOR_ADMIN_PASSWORD` The Admin password
 - `EQ_AUTHOR_ADMIN_FIRSTNAME` The First name
 - `EQ_AUTHOR_ADMIN_LASTNAME` The Last name
-- `EQ_AUTHOR_DATABASE_URL` The URL of the postgres database (see next section)
+- `EQ_AUTHOR_DATABASE_URL` If you're not using SQLite, then this is the URL of the postgres database (see next section)
 - `ENV_DEV_MODE` Set to `True` if you are developing front-end assets and wish to use the webpack dev server
+
+If you do not set the EQ_AUTHOR_DATABASE_URL it will default to using a SQLite database with the database file written to your current working directory.
 
 ## Postgres database
 
@@ -83,7 +85,7 @@ To run the Javascript tests:
 
 # Deployment
 
-_EXPLAIN DEPLOYMENT PROCESS HERE_
+To deploy the application into elastic beanstalk, first make sure you've run the author terraform job in the eq-terraform repository, as this sets up your environment ready for the application to be deployed.
 
 1. If this is your first time deploying the application, brace yourself and run `eb init`. (see steps below)
 2. If the elasticbeanstalk environment has already been created, you can now run `eb deploy` to deploy the built application, otherwise run `eb create` to create it first and it will be deployed automatically.
