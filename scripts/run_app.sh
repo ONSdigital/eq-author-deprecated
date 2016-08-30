@@ -39,9 +39,11 @@ env | grep EQ_
 
 if [ ! -s "dahl/bundles" ]; then
   npm install
-  npm run compile
 fi
+
+npm run compile
 
 python dahl/manage.py migrate
 python dahl/manage.py collectstatic --no-input
 python dahl/manage.py runserver
+
