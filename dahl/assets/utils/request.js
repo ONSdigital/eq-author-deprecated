@@ -44,13 +44,10 @@ export default function request(url, options) {
   const requestOptions = options || {}
   requestOptions.headers = requestOptions.headers || {
     'Accept': 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   }
   requestOptions.headers.Authorization = selectToken(store.getState())
   requestOptions.credentials = 'include'  // Send cookies Cross-Origin
-  if (requestOptions.body !== undefined) {
-    requestOptions.body = JSON.stringify(requestOptions.body)
-  }
   return fetch(`/api/v1/${url}`, requestOptions)
     .then(checkStatus)
     .then(parseJSON)
