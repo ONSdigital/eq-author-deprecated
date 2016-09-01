@@ -44,7 +44,7 @@ class Schema(GenericAPIView, ListModelMixin):
               required: false
         """
         try:
-            original_json = request.data
+            original_json = request.data.decode()
             logger.debug("Converting %s request to json data", original_json)
             json_data = json.loads(original_json)
             logger.debug("Converting %s request to json data", request.data)

@@ -1,13 +1,13 @@
 import TabBar from '../index'
 import styles from '../styles.css'
-import Button from 'components/forms/Button'
+import SubmitButton from 'components/SubmitButton'
 import expect from 'expect'
 import { shallow } from 'enzyme'
 import React from 'react'
 
 const setup = () => {
   const props = {
-    buttons: [<Button>Button</Button>],
+    buttons: [<SubmitButton>SubmitButton</SubmitButton>],
     tabs: [{
       to: '/',
       title: 'Tab 1'
@@ -23,7 +23,7 @@ const setup = () => {
 describe('<TabBar />', () => {
   it('should render a button, if provided by props', () => {
     const { wrapper } = setup()
-    expect(wrapper.find(Button).length).toEqual(1)
+    expect(wrapper.find(SubmitButton).length).toEqual(1)
   })
 
   it('should render some tabs', () => {

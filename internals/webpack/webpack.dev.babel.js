@@ -5,7 +5,7 @@
 const paths = require('../paths')
 const webpack = require('webpack')
 const BundleTracker = require('webpack-bundle-tracker')
-
+const DashboardPlugin = require('webpack-dashboard/plugin')
 // PostCSS plugins
 const cssnext = require('postcss-cssnext')
 const postcssFocus = require('postcss-focus')
@@ -51,6 +51,7 @@ module.exports = require('./webpack.base.babel')({
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // Tell webpack we want hot reloading
     new webpack.NoErrorsPlugin(),
+  new DashboardPlugin(),
     new BundleTracker({filename: './dahl/webpack-stats.json'}),
   ],
 

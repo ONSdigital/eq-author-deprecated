@@ -5,14 +5,12 @@
  */
 
 import React, { PropTypes } from 'react'
-import { Button as SubmitButton } from 'components/forms/Button'
+
 import Button from 'components/Button'
 import Modal from 'components/Modal'
 import Panel from 'components/Panel'
-import Form from 'components/forms/Form'
-import Field from 'components/forms/Field'
-import Input from 'components/forms/Input'
-import Label from 'components/forms/Label'
+
+import { Form, Field, Input, Label, SubmitButton } from 'components/forms'
 
 export class AddQuestionnaireModal extends React.Component { // eslint-disable-line react/prefer-stateless-function
 

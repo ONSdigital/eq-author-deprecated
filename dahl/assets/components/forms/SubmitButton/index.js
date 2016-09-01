@@ -8,17 +8,17 @@ import React, { PropTypes } from 'react'
 
 import styles from './styles.css'
 
-export const Button = ({children, type}) => (
+export const SubmitButton = ({children, type}) => (
   <button className={styles.button} type={type}>{children}</button>
 )
 
-Button.propTypes = {
+SubmitButton.propTypes = {
   children: PropTypes.string.isRequired,
   type: PropTypes.string,
 }
 
-Button.defaultProps = {
+SubmitButton.defaultProps = {
   type: 'submit'
 }
 
-export default Button
+export default SubmitButton
