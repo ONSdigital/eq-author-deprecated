@@ -9,7 +9,7 @@ export function* addQuestionnaire(action) {
   yield put(actions.addQuestionnaireRequest())
   const response = yield call(request, 'schema/', {
     method: 'POST',
-    body: {
+    body: JSON.stringify({
       'mime_type': 'application/json/ons/eq',
       'questionnaire_id': '0',
       'schema_version': '0.0.1',
@@ -19,7 +19,7 @@ export function* addQuestionnaire(action) {
       'introduction': {},
       'groups': [],
       'theme': 'default'
-    }
+    }, null, ' ')
   })
 
   if (!response.err) {
