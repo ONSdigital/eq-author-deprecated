@@ -51,7 +51,7 @@ module.exports = require('./webpack.base.babel')({
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // Tell webpack we want hot reloading
     new webpack.NoErrorsPlugin(),
-  new DashboardPlugin(),
+    new DashboardPlugin(),
     new BundleTracker({filename: './dahl/webpack-stats.json'}),
   ],
 

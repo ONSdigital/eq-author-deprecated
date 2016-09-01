@@ -5,20 +5,24 @@ import * as actions from './../actions'
 
 import request from 'utils/request'
 
+export const questionnaireData = {
+  'mime_type': 'application/json/ons/eq',
+  'questionnaire_id': '0',
+  'schema_version': '0.0.1',
+  'description': '',
+  'introduction': {},
+  'groups': [],
+  'theme': 'default'
+}
+
 export function* addQuestionnaire(action) {
   yield put(actions.addQuestionnaireRequest())
   const response = yield call(request, 'schema/', {
     method: 'POST',
     body: JSON.stringify({
-      'mime_type': 'application/json/ons/eq',
-      'questionnaire_id': '0',
-      'schema_version': '0.0.1',
+      ...questionnaireData,
       'survey_id': action.payload.questionniareDetails.surveyID,
       'title': action.payload.questionniareDetails.title,
-      'description': '',
-      'introduction': {},
-      'groups': [],
-      'theme': 'default'
     }, null, ' ')
   })
 

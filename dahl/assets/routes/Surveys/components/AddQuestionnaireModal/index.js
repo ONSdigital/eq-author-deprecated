@@ -18,6 +18,7 @@ export class AddQuestionnaireModal extends React.Component { // eslint-disable-l
     addQuestionnaire: PropTypes.func.isRequired,
     addQuestionnaireCancel: PropTypes.func.isRequired,
     isOpen: PropTypes.bool,
+    modalOpts: PropTypes.object,
     surveyID: PropTypes.string
   }
 
@@ -32,8 +33,8 @@ export class AddQuestionnaireModal extends React.Component { // eslint-disable-l
 
   render() {
     const { isOpen, addQuestionnaireCancel, surveyID } = this.props
-    return (
-      <Modal title="Add a Questionnaire" isOpen={isOpen} onClose={addQuestionnaireCancel}>
+    this._modal = (
+      <Modal title="Add a Questionnaire" isOpen={isOpen} onClose={addQuestionnaireCancel} renderContext={this.node} ref="modal">
         <Panel>
           <Form action="" onSubmit={this.handleSubmit}>
             <Field>
@@ -53,6 +54,7 @@ export class AddQuestionnaireModal extends React.Component { // eslint-disable-l
         </Panel>
       </Modal>
     )
+    return this._modal
   }
 }
 

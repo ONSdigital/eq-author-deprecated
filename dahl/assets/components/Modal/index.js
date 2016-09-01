@@ -5,13 +5,11 @@
  */
 
 import React, { PropTypes, Component } from 'react'
-import ReactDOM from 'react-dom'
+import { unstable_renderSubtreeIntoContainer as renderSubtreeIntoContainer } from 'react-dom'
 
 import styles from './styles.css'
 import { ModalWrapper, ModalTitle, ModalBody } from './components'
 import { VelocityTransitionGroup } from 'velocity-react'
-
-const renderSubtreeIntoContainer = ReactDOM.unstable_renderSubtreeIntoContainer
 
 export class Modal extends Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -28,8 +26,8 @@ export class Modal extends Component { // eslint-disable-line react/prefer-state
   }
 
   componentDidMount() {
-    document.addEventListener('keyup', this.handleKeyUp)
     this.node = document.createElement('div')
+    this.node.addEventListener('keyup', this.handleKeyUp)
     this.node.className = styles.hiddenModal
     document.body.appendChild(this.node)
     this.renderModal(this.props)
@@ -40,8 +38,9 @@ export class Modal extends Component { // eslint-disable-line react/prefer-state
     this.renderModal(nextProps)
   }
 
-  componentDidUnMount() {
-    document.removeEventListener('keyup', this.handleKeyUp)
+  componentWillUnmount() {
+    this.node.removeEventListener('keyup', this.handleKeyUp)
+    document.body.removeChild(this.node)
   }
 
   handleKeyUp = (e) => {
@@ -54,7 +53,7 @@ export class Modal extends Component { // eslint-disable-line react/prefer-state
 
   renderModal({ title, children, isOpen }) {
     this.node.className = isOpen ? styles.modal : styles.hiddenModal
-    const modal = (
+    this._modal = (
       <VelocityTransitionGroup {...transitionWrapperOpts}>
         {isOpen
           ? <div>
@@ -67,7 +66,7 @@ export class Modal extends Component { // eslint-disable-line react/prefer-state
           </div> : undefined}
       </VelocityTransitionGroup>
     )
-    renderSubtreeIntoContainer(this, modal, this.node)
+    renderSubtreeIntoContainer(this, this._modal, this.node)
   }
 
   render() {

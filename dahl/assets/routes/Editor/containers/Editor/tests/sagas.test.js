@@ -26,27 +26,24 @@ describe('editor loadSchema Saga', () => {
     expect(generator.next().value).toEqual(put(fetchSchemaRequest()))
 
     // make request
-    const requestURL = `/schema/${action.payload.schemaID}/`
+    const requestURL = `schema/${action.payload.schemaID}/`
     expect(generator.next(action).value).toEqual(call(request, requestURL))
   })
 
   it('should dispatch a FETCH_SCHEMA_SUCCESS action if fetch is successful', () => {
-    const response = {
-      data: 'true'
-    }
-    expect(generator.next(response).value).toEqual(put(fetchSchemaSuccess('true')))
+    const response = { data: 'Hello I am some data' }
+    const a = generator.next(response).value
+    expect(a).toEqual(put(fetchSchemaSuccess(response.data)))
   })
 
   it('should dispatch a FETCH_SCHEMA_FAILURE action if fetch is unsuccessful', () => {
-    const response = {
-      err: 'Some error',
-    }
+    const response = { err: 'Some error' }
     expect(generator.next(response).value).toEqual(put(fetchSchemaFailure(response.err)))
   })
 })
 
 describe('editor saveSchema Saga', () => {
-  let generator
+  let generator, next
   beforeEach(() => {
     const action = {
       payload: {
@@ -60,7 +57,7 @@ describe('editor saveSchema Saga', () => {
     expect(generator.next().value).toEqual(put(saveSchemaRequest()))
 
     // make request
-    const requestURL = `/schema/${action.payload.schemaID}/`
+    const requestURL = `schema/${action.payload.schemaID}/`
     const requestOpts = {
       method: 'PUT',
       body: undefined
@@ -74,12 +71,15 @@ describe('editor saveSchema Saga', () => {
     }
     // skip over the delay
     generator.next(response)
-    expect(generator.next(response).value).toEqual(put(saveSchemaSuccess()))
+    expect(generator.next(response).value).toEqual(put(saveSchemaSuccess(response)))
   })
 
   it('should dispatch a SAVE_SCHEMA_FAILURE action if fetch is unsuccessful', () => {
     const response = {
       err: 'Some error',
+      json: () => {
+        return 'Some error'
+      }
     }
     expect(generator.next(response).value).toEqual(put(saveSchemaFailure(response.err)))
   })

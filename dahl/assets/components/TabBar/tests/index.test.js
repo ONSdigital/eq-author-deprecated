@@ -1,6 +1,6 @@
 import TabBar from '../index'
 import styles from '../styles.css'
-import SubmitButton from 'components/SubmitButton'
+import SubmitButton from 'components/forms/SubmitButton'
 import expect from 'expect'
 import { shallow } from 'enzyme'
 import React from 'react'

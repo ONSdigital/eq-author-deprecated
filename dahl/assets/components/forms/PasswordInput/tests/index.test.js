@@ -1,5 +1,5 @@
 import PasswordInput from '../index'
-import Input from 'components/Input'
+import Input from 'components/forms/Input'
 
 import expect from 'expect'
 import { mount } from 'enzyme'
