@@ -61,10 +61,24 @@ class Schema(GenericAPIView, ListModelMixin):
             raise SchemaValidationException()
 
         logger.debug("JSON Data is : %s", json_data)
+
+        survey_id = json_data.get("survey_id")
+        try:
+            survey = Survey.objects.get(survey_id=survey_id)
+        except Survey.DoesNotExist as e:
+            logger.warning("Survey [survey_id=%s] does not exist: %s", survey_id, str(e))
+            # TODO remove this as soon as Front end changes allow a survey to be created
+            survey = Survey()
+            survey.survey_id = survey_id
+            survey.save()
+            logger.warning("Created and saved a new survey - note this functionality needs to be removed")
+            # END TODO
+            # raise SurveyNotFoundException()
+
         logger.debug("About to create new schema meta data entry")
         # first create a new entry in the database to generate an id
         schema_meta = SchemaMeta()
-        schema_meta.survey_id = json_data['survey_id']
+        schema_meta.survey = survey
         schema_meta.save()
         logger.error("Created schema meta data")
 
@@ -89,23 +103,8 @@ class Schema(GenericAPIView, ListModelMixin):
         schema_meta.title = json_data.get("title")
         schema_meta.description = json_data.get("description")
 
-        survey_id = json_data.get("survey_id")
-        try:
-            survey = Survey.objects.get(survey_id=survey_id)
-            schema_meta.survey = survey
-            schema_meta.save()
-            logger.debug("Saved")
-        except Survey.DoesNotExist as e:
-            logger.warning("Survey [survey_id=%s] does not exist: %s", survey_id, str(e))
-            # TODO remove this as soon as Front end changes allow a survey to be created
-            survey = Survey()
-            survey.survey_id = survey_id
-            schema_meta.survey_id = survey_id
-            survey.save()
-            schema_meta.save()
-            logger.warning("Created and saved a new survey - note this functionality needs to be removed")
-            # END TODO
-            # raise SurveyNotFoundException()
+        schema_meta.save()
+        logger.debug("Saved")
 
         return Response(eq_id, status=status.HTTP_201_CREATED)
 

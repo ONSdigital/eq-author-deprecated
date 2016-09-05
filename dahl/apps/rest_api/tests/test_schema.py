@@ -103,6 +103,16 @@ class SchemaAPI(TestCase):
 
         self.assertEquals([], response.data)
 
+    def test_survey_is_created_if_it_doesnt_exist(self):
+        survey_id = '999'
+        response = self.client.get(reverse("survey-details", kwargs={'survey_id': survey_id}))
+        self.assertEquals(404, response.status_code)
+        self.valid_schema['survey_id'] = survey_id
+        response = self.client.post(reverse("schema"), json.dumps(self.valid_schema), content_type="application/json")
+        self.assertEquals(201, response.status_code)
+        response = self.client.get(reverse("survey-details", kwargs={'survey_id': survey_id}))
+        self.assertEquals(200, response.status_code)
+
     def test_invalid_schema_fails(self):
         response = self.client.post(reverse("schema"), json.dumps(self.invalid_schema), content_type="application/json")
         self.assertEquals(400, response.status_code)
