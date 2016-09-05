@@ -63,12 +63,12 @@ class Schema(GenericAPIView, ListModelMixin):
         logger.debug("JSON Data is : %s", json_data)
         logger.debug("About to create new schema meta data entry")
         # first create a new entry in the database to generate an id
-        schema = SchemaMeta()
-        schema.survey_id = json_data['survey_id']
-        schema.save()
+        schema_meta = SchemaMeta()
+        schema_meta.survey_id = json_data['survey_id']
+        schema_meta.save()
         logger.error("Created schema meta data")
 
-        eq_id = schema.eq_id
+        eq_id = schema_meta.eq_id
         # construct the file name for s3
         key = str(eq_id) + '.json'
         logger.debug("Filename for new schema is %s", key)
@@ -85,24 +85,24 @@ class Schema(GenericAPIView, ListModelMixin):
 
         logger.debug("Saving metadata to the database")
         # save the meta data in the database
-        schema.file_name = key
-        schema.title = json_data.get("title")
-        schema.description = json_data.get("description")
+        schema_meta.file_name = key
+        schema_meta.title = json_data.get("title")
+        schema_meta.description = json_data.get("description")
 
         survey_id = json_data.get("survey_id")
         try:
             survey = Survey.objects.get(survey_id=survey_id)
-            schema.survey = survey
-            schema.save()
+            schema_meta.survey = survey
+            schema_meta.save()
             logger.debug("Saved")
         except Survey.DoesNotExist as e:
             logger.warning("Survey [survey_id=%s] does not exist: %s", survey_id, str(e))
             # TODO remove this as soon as Front end changes allow a survey to be created
             survey = Survey()
             survey.survey_id = survey_id
-            schema.survey_id = survey_id
+            schema_meta.survey_id = survey_id
             survey.save()
-            schema.save()
+            schema_meta.save()
             logger.warning("Created and saved a new survey - note this functionality needs to be removed")
             # END TODO
             # raise SurveyNotFoundException()
@@ -130,8 +130,9 @@ class SchemaDetail(APIView):
         :return: the entire schema
         '''
         # first find the meta data
-        schema = SchemaMeta.objects.get(eq_id=eq_id)
-        if schema is None:
+        try:
+            schema_meta = SchemaMeta.objects.get(eq_id=eq_id)
+        except SchemaMeta.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         key = eq_id + '.json'
@@ -140,7 +141,7 @@ class SchemaDetail(APIView):
             schema_storage = SchemaStorageFactory.get_instance()
             json_data = schema_storage.get(key)
             logger.debug("JSON Data %s", json_data)
-            return Response({'title': schema.title, 'schema': json_data}, status=status.HTTP_200_OK)
+            return Response({'title': schema_meta.title, 'schema': json_data}, status=status.HTTP_200_OK)
         except SchemaStorageError as e:
             logger.error("Unable to store schema")
             raise SurveyNotFoundException()
@@ -164,15 +165,16 @@ class SchemaDetail(APIView):
             raise SchemaValidationException()
 
         # first find the meta data
-        schema = SchemaMeta.objects.get(eq_id=eq_id)
-        if schema is None:
+        try:
+            schema_meta = SchemaMeta.objects.get(eq_id=eq_id)
+        except SchemaMeta.DoesNotExist:
             raise NotFound()
 
         logger.debug("Saving metadata to the database")
         # save the meta data in the database
-        schema.title = json_data.get("title")
-        schema.description = json_data.get("description")
-        schema.save()
+        schema_meta.title = json_data.get("title")
+        schema_meta.description = json_data.get("description")
+        schema_meta.save()
         logger.debug("Saved")
 
         key = eq_id + '.json'
@@ -190,17 +192,18 @@ class SchemaDetail(APIView):
     def delete(self, request, eq_id):
         logger.debug("Calling delete with id %s", eq_id)
         # first find the meta data
-        schema = SchemaMeta.objects.get(eq_id=eq_id)
-        if schema is None:
+        try:
+            schema_meta = SchemaMeta.objects.get(eq_id=eq_id)
+        except SchemaMeta.DoesNotExist:
             raise NotFound()
-        else:
-            # delete the schema from the S3 bucket
-            schema_storage = SchemaStorageFactory.get_instance()
-            schema_storage.delete(eq_id)
 
-            # delete the meta data from the database
-            schema.delete()
-            return Response(eq_id, status=status.HTTP_200_OK)
+        # delete the schema from the S3 bucket
+        schema_storage = SchemaStorageFactory.get_instance()
+        schema_storage.delete(eq_id)
+
+        # delete the meta data from the database
+        schema_meta.delete()
+        return Response(eq_id, status=status.HTTP_200_OK)
 
 
 class SurveyView(ListCreateAPIView):
