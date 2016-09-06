@@ -43,17 +43,18 @@ class Schema(GenericAPIView, ListModelMixin):
               paramType: form
               required: false
         """
-
         try:
             original_json = request.data.decode()
             logger.debug("Converting %s request to json data", original_json)
             json_data = json.loads(original_json)
             logger.debug("Converting %s request to json data", request.data)
-        except Exception as e:
+        except ValueError as e:
             logger.error("Schema cannot be converted to json")
             raise BadRequestException()
 
-        # run it through the json schema validator to make sure they're are no errors
+        # Run it through the json schema validator to make sure there are
+        # no errors present. TODO give a more meaningful error message.
+
         try:
             validate(json_data, json_schema)
         except ValidationError as e:

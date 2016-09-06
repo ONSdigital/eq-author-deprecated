@@ -1,72 +1,170 @@
 /*
  *
- * Schemas actions
+ * Surveys actions
  *
  */
 
-import { LOAD_SCHEMAS,
-         DELETE_SCHEMA,
-         FETCH_SCHEMAS_REQUEST,
-         FETCH_SCHEMAS_SUCCESS,
-         FETCH_SCHEMAS_FAILURE,
-         DELETE_SCHEMA_REQUEST,
-         DELETE_SCHEMA_SUCCESS,
-         DELETE_SCHEMA_FAILURE } from './constants'
+import * as actions from './constants'
 
-export function loadSchemas() {
+/* * * * * * * * * * * * * * * * * * * * * * * * *
+ * Load surveys
+ * * * * * * * * * * * * * * * * * * * * * * * * */
+
+export function loadSurveys() {
   return {
-    type: LOAD_SCHEMAS,
+    type: actions.LOAD_SURVEYS,
   }
 }
 
-export function fetchSchemasRequest() {
+export function fetchSurveysRequest() {
   return {
-    type: FETCH_SCHEMAS_REQUEST,
+    type: actions.FETCH_SURVEYS_REQUEST,
   }
 }
 
-export function fetchSchemasSuccess(schemas) {
+export function fetchSurveysSuccess(surveys) {
   return {
-    type: FETCH_SCHEMAS_SUCCESS,
+    type: actions.FETCH_SURVEYS_SUCCESS,
     payload: {
-      schemas: schemas
+      surveys: surveys
     }
   }
 }
 
-export function fetchSchemasFailure(error) {
+export function fetchSurveysFailure(errors) {
   return {
-    type: FETCH_SCHEMAS_FAILURE,
-    error
+    type: actions.FETCH_SURVEYS_FAILURE,
+    errors: errors
   }
 }
 
-export function deleteSchema(schemaId) {
+/* * * * * * * * * * * * * * * * * * * * * * * * *
+ * Create survey
+ * * * * * * * * * * * * * * * * * * * * * * * * */
+
+export function toggleAddSurveyModal(visible) {
   return {
-    type: DELETE_SCHEMA,
+    type: actions.TOGGLE_ADD_SURVEY_MODAL,
     payload: {
-      schemaId: schemaId
+      visible: visible
     }
   }
 }
 
-export function deleteSchemaRequest() {
+export function addSurvey(surveyDetails) {
   return {
-    type: DELETE_SCHEMA_REQUEST
-  }
-}
-
-export function deleteSchemaSuccess(schemaId) {
-  return {
-    type: DELETE_SCHEMA_SUCCESS,
+    type: actions.ADD_SURVEY,
     payload: {
-      schemaId: schemaId
+      survey: surveyDetails
     }
   }
 }
 
-export function deleteSchemaFailure() {
+export function addSurveyRequest() {
   return {
-    type: DELETE_SCHEMA_FAILURE
+    type: actions.ADD_SURVEY_REQUEST
+  }
+}
+
+export function addSurveyCancel() {
+  return {
+    type: actions.ADD_SURVEY_CANCEL
+  }
+}
+
+export function addSurveySuccess(survey) {
+  return {
+    type: actions.ADD_SURVEY_SUCCESS,
+    payload: {
+      survey: survey
+    }
+  }
+}
+
+export function addSurveyFailure(errors) {
+  return {
+    type: actions.ADD_SURVEY_FAILURE,
+    errors: errors
+  }
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * *
+ * Add questionnaire
+ * * * * * * * * * * * * * * * * * * * * * * * * */
+
+export function toggleAddQuestionnaireModal(visible, surveyID) {
+  return {
+    type: actions.TOGGLE_ADD_QUESTIONNAIRE_MODAL,
+    payload: {
+      visible: visible,
+      surveyID: surveyID
+    }
+  }
+}
+
+export function addQuestionnaire(questionniareDetails) {
+  return {
+    type: actions.ADD_QUESTIONNAIRE,
+    payload: {
+      questionniareDetails: questionniareDetails
+    }
+  }
+}
+
+export function addQuestionnaireCancel() {
+  return {
+    type: actions.ADD_QUESTIONNAIRE_CANCEL,
+  }
+}
+
+export function addQuestionnaireRequest() {
+  return {
+    type: actions.ADD_QUESTIONNAIRE_REQUEST
+  }
+}
+
+export function addQuestionnaireSuccess() {
+  return {
+    type: actions.ADD_QUESTIONNAIRE_SUCCESS,
+  }
+}
+
+export function addQuestionnaireFailure() {
+  return {
+    type: actions.ADD_QUESTIONNAIRE_FAILURE
+  }
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * *
+ * Delete questionnaire
+ * * * * * * * * * * * * * * * * * * * * * * * * */
+
+export function deleteQuestionnaire(questionnaireID) {
+  return {
+    type: actions.DELETE_QUESTIONNAIRE,
+    payload: {
+      questionnaireID: questionnaireID
+    }
+  }
+}
+
+export function deleteQuestionnaireRequest() {
+  return {
+    type: actions.DELETE_QUESTIONNAIRE_REQUEST
+  }
+}
+
+export function deleteQuestionnaireSuccess(questionnaireID) {
+  return {
+    type: actions.DELETE_QUESTIONNAIRE_SUCCESS,
+    payload: {
+      questionnaireID: questionnaireID
+    }
+  }
+}
+
+export function deleteQuestionnaireFailure() {
+  return {
+    type: actions.DELETE_QUESTIONNAIRE_FAILURE
   }
 }

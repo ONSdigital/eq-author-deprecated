@@ -34,16 +34,21 @@ export const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default)
 }
 
-export const getAsyncComponent = (store, name, imports) => (nextState, cb) => {
-  const importModules = Promise.all(imports)
-  const renderRoute = loadModule(cb)
-  const { injectReducer, injectSagas } = getAsyncInjectors(store)
+export const getAsyncComponent = (store, components) => (nextState, cb) => {
+  for (let name in components) {
+    const imports = components[name]
+    const importModules = Promise.all(imports)
+    const renderRoute = loadModule(cb)
+    const { injectReducer, injectSagas } = getAsyncInjectors(store)
 
-  importModules.then(([reducer, sagas, component]) => {
-    injectReducer(name, reducer.default)
-    injectSagas(sagas.default)
-    renderRoute(component)
-  })
+    importModules.then(([reducer, sagas, component]) => {
+      injectReducer(name, reducer.default)
+      injectSagas(sagas.default)
+      if (component !== undefined) {
+        renderRoute(component)
+      }
+    })
 
-  importModules.catch(errorLoading)
+    importModules.catch(errorLoading)
+  }
 }

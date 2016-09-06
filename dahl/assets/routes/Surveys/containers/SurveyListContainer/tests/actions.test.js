@@ -2,26 +2,26 @@ import expect from 'expect'
 import * as actions from '../actions'
 import * as types from '../constants'
 
-describe('Schemas sync actions', () => {
-  describe('fetchSchemasRequest', () => {
+describe('Surveys sync actions', () => {
+  describe('fetchSurveysRequest', () => {
     it('Should return the correct type', () => {
       const expectedResult = {
-        type: types.FETCH_SCHEMAS_REQUEST,
+        type: types.FETCH_SURVEYS_REQUEST,
       }
-      expect(actions.fetchSchemasRequest()).toEqual(expectedResult)
+      expect(actions.fetchSurveysRequest()).toEqual(expectedResult)
     })
   })
 
-  describe('fetchSchemasSuccess', () => {
+  describe('fetchSurveysSuccess', () => {
     it('Should return the correct type and payload', () => {
-      const schemas = [1, 2, 3]
+      const surveys = [1, 2, 3]
       const expectedResult = {
-        type: types.FETCH_SCHEMAS_SUCCESS,
+        type: types.FETCH_SURVEYS_SUCCESS,
         payload: {
-          schemas: schemas
+          surveys: surveys
         }
       }
-      expect(actions.fetchSchemasSuccess(schemas)).toEqual(expectedResult)
+      expect(actions.fetchSurveysSuccess(surveys)).toEqual(expectedResult)
     })
   })
 })
