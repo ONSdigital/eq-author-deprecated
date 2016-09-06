@@ -9,7 +9,7 @@ import React, { PropTypes } from 'react'
 import styles from './styles.css'
 
 const ErrorList = ({errors}) => {
-  if (errors.length > 0) {
+  if (errors !== undefined && errors.length > 0) {
     return (
       <ul className={styles.errorList}>
         {errors.map((error, index) => (
@@ -23,7 +23,7 @@ const ErrorList = ({errors}) => {
 }
 
 ErrorList.propTypes = {
-  errors: PropTypes.array.isRequired,
+  errors: PropTypes.array,
 }
 
 export default ErrorList

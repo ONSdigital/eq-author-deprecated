@@ -41,11 +41,14 @@ function checkStatus(response) {
  */
 export default function request(url, options) {
   // decorate all request with auth token
-  const authOptions = options || {}
-  authOptions.headers = authOptions.headers || {}
-  authOptions.headers.Authorization = selectToken(store.getState())
-  authOptions.credentials = 'include'  // Send cookies Cross-Origin
-  return fetch(url, authOptions)
+  const requestOptions = options || {}
+  requestOptions.headers = requestOptions.headers || {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  }
+  requestOptions.headers.Authorization = selectToken(store.getState())
+  requestOptions.credentials = 'include'  // Send cookies Cross-Origin
+  return fetch(`/api/v1/${url}`, requestOptions)
     .then(checkStatus)
     .then(parseJSON)
     .then((data) => ({ data }))

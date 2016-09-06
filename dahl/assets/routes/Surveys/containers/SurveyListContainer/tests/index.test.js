@@ -1,5 +1,5 @@
 import { SurveyListContainer } from '../index'
-import SurveyList from 'routes/Surveys/components/SurveyList'
+import SurveyTable from 'routes/Surveys/components/SurveyTable'
 
 import expect from 'expect'
 import { shallow } from 'enzyme'
@@ -8,13 +8,15 @@ import React from 'react'
 const setup = () => {
   const props = {
     actions: {
-      deleteSchema: expect.createSpy(),
-      loadSchemas: expect.createSpy()
+      deleteQuestionnaire: expect.createSpy(),
+      loadSurveys: expect.createSpy()
     },
-    schemas: [{
+    addQuestionnaireModal: {},
+    addSurveyModal: {},
+    surveys: [{
       id: 0,
-      title: 'Hello I am a schema',
-      path: 'path/to/schema'
+      title: 'Hello I am a survey',
+      path: 'path/to/survey'
     }]
   }
 
@@ -27,8 +29,8 @@ const setup = () => {
 }
 
 describe('<SurveyListContainer />', () => {
-  it('should render a SurveyList component', () => {
+  it('should render a SurveyTable component', () => {
     const { wrapper } = setup()
-    expect(wrapper.find(SurveyList).length).toBe(1)
+    expect(wrapper.find(SurveyTable).length).toBe(1)
   })
 })

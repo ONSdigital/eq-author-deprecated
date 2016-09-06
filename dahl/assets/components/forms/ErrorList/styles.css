@@ -1,11 +1,12 @@
 .errorList {
   list-style: none;
   margin: 1rem 0 0;
-  text-align: center;
+  padding: 0;
+  text-align: left;
 }
 
 .errorItem {
   composes: red from 'styles/shared/colors.css';
   font-size: 0.875rem;
-  font-weight: 600;
+  padding: 0;
 }

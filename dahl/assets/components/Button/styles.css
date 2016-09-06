@@ -7,6 +7,7 @@
   text-align: center;
   display: block;
   user-select: none;
+  cursor: pointer;
 }
 
 .button:focus,
@@ -20,4 +21,26 @@
 .button:active {
   background: #50a2c1;
   color: white;
+}
+
+.button-regular {
+  composes: button;
+}
+
+.button-clear {
+  composes: button;
+  color: #61bde0;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  padding: 0;
+
+  &:hover,
+  &:focus {
+    color: #4791ad;
+    text-decoration: underline;
+    background: none;
+  }
 }
