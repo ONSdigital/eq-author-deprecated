@@ -1,44 +1,42 @@
-# EQ Author tool
+# Dahl
 
 ## What is this?
 
-EQ Author provides a rich web application, that acts as an Authoring tool for surveys and questionaires. It enables a user to create and publish a questionaires as part of a survey series, to be completed by a respondent (be they an organisation, individual or business).
+EQ Author provides a rich web application, that acts as an Authoring tool for surveys and questionnaires. It enables a user to create and publish a questionnaires as part of a survey series, to be completed by a respondent (be they an organisation, individual or business).
 
 This django web application has been designed to work in a 12 Factor apps pattern, relying on the setting of certain environment variables to be able to externalise settings and secret management, in accordance with GDS guidance.
 
-## How to install
+---
 
-1. Create a new virtualenv `mkvirtualenv <env-name>`
-2. Activate the virtualenv `workon <env-name>`
-3. Clone this repo locally
-4. Run `pip install -r requirements.txt`
-5. Create an EQ_AUTHOR_DATABASE_URL environment variable (See below)
-6. run `npm install` to install front-end dependencies
-7. run `npm run deploy` to build front end resources for deployment *or* run `npm run compile` to run with local development
-8. If this is your first time deploying the application, brace yourself and run `eb init`. (see steps below)
-9. If the elasticbeanstalk environment has already been created, you can now run `eb deploy` to deploy the built application, otherwise run `eb create` to create it first and it will be deployed automatically.
+# Before installing
 
-You will need to create a number of environment variables:
+Before installing the application, there are a number of things that need to be set up:
+
+## Dependencies
+
+- Python 3.5
+- virtualenv
+- postgres
+- node 5.2.0
+- npm 3.8.3
+
+## Environment variables
+
+Before running the application, you will need to create a number of environment variables:
 
 - `EQ_AUTHOR_ADMIN_USERNAME` The admin username to create
 - `EQ_AUTHOR_ADMIN_EMAIL` The admin email address
 - `EQ_AUTHOR_ADMIN_PASSWORD` The Admin password
 - `EQ_AUTHOR_ADMIN_FIRSTNAME` The First name
 - `EQ_AUTHOR_ADMIN_LASTNAME` The Last name
+- `EQ_AUTHOR_DATABASE_URL` If you're not using SQLite, then this is the URL of the postgres database (see next section)
+- `ENV_DEV_MODE` Set to `True` if you are developing front-end assets and wish to use the webpack dev server
 
-## How to run the application
+If you do not set the EQ_AUTHOR_DATABASE_URL it will default to using a SQLite database with the database file written to your current working directory.
 
-`./scripts/run_app.sh`
+## Postgres database
 
-This will run any database migrations and then start the server
-
-## How to run the test suite
-
-`python manage.py test`
-
-## EQ_AUTHOR_DATABASE_URL
-
-The application needs a url to the database it should use.  For further documentation,
+As mentioned above, the application needs a url to the database it should use via the `EQ_AUTHOR_DATABASE_URL` environment variable. For further documentation,
 please consult the dj-database-url project homepage [https://github.com/kennethreitz/dj-database-url].
 
 To configure the app to use settings similar to those used on the build server, the value is as follows:
@@ -56,42 +54,95 @@ To configure the app to use settings similar to those used on the build server, 
 Create the environment variable by adding the following command to your startup script
 
 `export EQ_AUTHOR_DATABASE_URL=postgres://eq-author:@localhost:5432/dahl`
-aithr
 ---
 
-## Front-end assets
+# Installation
+
+1. Create a new virtualenv `mkvirtualenv <env-name>`
+2. Activate the virtualenv `workon <env-name>`
+3. Clone this repo locally
+4. Run `pip install -r requirements.txt`
+
+---
+
+# Running the application
+
+`./scripts/run_app.sh`
+
+This will run any database migrations and then start the server. This will also run `npm install` and `npm run compile` if no static assets are detected (ie. you haven't already done this).
+
+---
+
+# Testing
+
+To run the python test suite:
+
+`python manage.py test`
+
+To run the Javascript tests:
+
+`npm run test`
+
+# Deployment
+
+To deploy the application into elastic beanstalk, first make sure you've run the author terraform job in the eq-terraform repository, as this sets up your environment ready for the application to be deployed.
+
+1. If this is your first time deploying the application, brace yourself and run `eb init`. (see steps below)
+2. If the elasticbeanstalk environment has already been created, you can now run `eb deploy` to deploy the built application, otherwise run `eb create` to create it first and it will be deployed automatically.
+
+### Deploy to Elastic Beanstalk
+
+1. Run the author terraform scripts in eq-terraform
+2. Delete the .elasticbeanstalk folder (if you've previously attempted a deployment)
+3. Enter `eb init -i -r eu-west-1 -p "Python 3.4"`
+4. Select your author application from the output (eq-terraform creates it)
+5. Select no to setting up ssh
+6. Enter `eb deploy`
+
+---
+
+# Front-end assets
 
 The front-end assets are compiled and bundled with [Webpack](https://webpack.github.io/). These are the technologies used:
 
 - ES6 (via Babel)
 - React
 - Redux
+- Redux Sagas
 - Testing in Mocha (via Karma)
 - Postcss
-# Command Line Commands
 
-## Initialization
+## NPM Tasks
+
+There are a number of NPM tasks available for developing and testing front-end components.
+
+### Building
 
 ```Shell
-$ npm run setup
+$ npm run compile
 ```
 
-Initializes a new project with this boilerplate. Deletes the `react-boilerplate`
-git history, installs the dependencies and initializes a new repository.
+Compiles, optimises and minifies the front-end assets into the bundles folder.
+*NOTE: you must subsequently`./scripts/run_app.sh` for these to be copied to Djangos static assets folder.*
 
-> Note: This command is self-destructive, once you've run it the init script is
-gone forever. This is for your own safety, so you can't delete your project's
-history irreversibly by accident.
 
-## Development
+```Shell
+$ npm run build
+```
+
+This performs a number of tasks, readying the app for deployment:
+
+- runs all front-end linting and tests
+- compiles the assets, minifying and optimising them into bundles
 
 ```Shell
 $ npm run start
 ```
 
-Starts the development server running on `http://localhost:3000`
+Starts the webpack development server running on `http://localhost:3000`.
+*NOTE: You only need to do this if you are making front-end changes, otherwise `npm run compile` compile static assets. You will also need to set the environment variable `ENV_DEV_MODE` to `True`*
 
-## Generators
+### Generators
 
 ```Shell
 $ npm run generate
@@ -102,44 +153,7 @@ application, specifically `component`s, `container`s, and `route`s. You can
 also run `npm run generate <part>` to skip the first selection. (e.g. `npm run
 generate container`)
 
-## Server
-
-### Development
-
-```Shell
-$ npm start
-```
-
-Starts the development server and makes your application accessible at
-`localhost:3000`. Tunnels that server with `ngrok`, which means the website
-accessible anywhere! Changes in the application code will be hot-reloaded.
-
-### Production
-
-```Shell
-$ npm run start:prod
-```
-
-Starts the production server, configured for optimal performance: assets are
-minified and served gzipped.
-
-### Port
-
-To change the port the app is accessible at pass the `-p` option to the command
-with `--`. E.g. to make the app visible at `localhost:5000`, run the following:
-`$ npm start -- -p 5000`
-
-## Building
-
-```Shell
-$ npm run build
-```
-
-Preps your app for deployment. Optimizes and minifies all files, piping them to
-a folder called `build`. Upload the contents of `build` to your web server to
-see your work live!
-
-## Unit testing
+### Unit testing
 
 ```Shell
 $ npm run test
@@ -210,7 +224,7 @@ you can upload to the [webpack analyzer](https://webpack.github.io/analyse/). Th
 analyzer will visualize your dependencies and chunks with detailed statistics
 about the bundle size.
 
-## Linting
+### Linting
 
 ```Shell
 $ npm run lint
@@ -233,11 +247,3 @@ $ npm run lint:css
 ```
 
 Only lints your CSS.
-
-## How to deploy to elastic beanstalk
-1. Run the author terraform scripts in eq-terraform
-2. Delete the .elasticbeanstalk folder (if you've previously attempted a deployment)
-3. Enter `eb init -i -r eu-west-1 -p "Python 3.4"`
-4. Select your author application from the output (eq-terraform creates it)
-5. Select no to setting up ssh
-6. Enter `eb deploy`

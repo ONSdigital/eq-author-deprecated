@@ -46,4 +46,4 @@ env | grep EQ_
 
 python dahl/manage.py migrate
 python dahl/manage.py collectstatic --no-input
-python dahl/manage.py test 
+python dahl/manage.py test

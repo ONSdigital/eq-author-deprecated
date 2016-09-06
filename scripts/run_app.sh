@@ -41,6 +41,9 @@ if [ ! -s "dahl/bundles" ]; then
   npm install
 fi
 
+npm run compile
+
 python dahl/manage.py migrate
 python dahl/manage.py collectstatic --no-input
 python dahl/manage.py runserver
+
