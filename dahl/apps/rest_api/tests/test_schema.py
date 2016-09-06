@@ -49,7 +49,7 @@ class SchemaAPI(TestCase):
          # check schema is in surveys
         response = self.client.get(reverse("survey"))
         self.assertEquals(200, response.status_code)
-        self.assertEquals(self.eq_id, response.data[0]['questionnaires'][0])
+        self.assertEquals(self.eq_id, response.data[0]['questionnaires'][0]['eq_id'])
 
     def test_schema_in_list_schemas(self):
         # check its now in the list of schemas
@@ -94,7 +94,7 @@ class SchemaAPI(TestCase):
     def test_survey_deletion_deletes_associated_schemas(self):
         # demonstrate schema exists in survey
         response = self.client.get(reverse("survey"))
-        self.assertEquals(self.eq_id, response.data[0]['questionnaires'][0])
+        self.assertEquals(self.eq_id, response.data[0]['questionnaires'][0]['eq_id'])
 
         response = self.client.delete(reverse("survey-details", kwargs={'survey_id': self.valid_schema['survey_id']}))
         # check that the associated schema has been deleted
