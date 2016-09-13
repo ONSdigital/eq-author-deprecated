@@ -58,8 +58,9 @@ class Schema(GenericAPIView, ListModelMixin):
         try:
             validate(json_data, json_schema)
         except ValidationError as e:
-            logger.error("Schema failed validation %s", e.message)
-            raise SchemaValidationException()
+            error = "Schema failed validation. error={0} path={1}".format(e.message, list(e.path))
+            logger.error(error)
+            raise SchemaValidationException(error)
 
         logger.debug("JSON Data is : %s", json_data)
 
@@ -161,8 +162,9 @@ class SchemaDetail(APIView):
         try:
             validate(json_data, json_schema)
         except ValidationError as e:
-            logger.error("Schema failed validation %s", e.message)
-            raise SchemaValidationException()
+            error = "Schema failed validation. error={0} path={1}".format(e.message, list(e.path))
+            logger.error(error)
+            raise SchemaValidationException(error)
 
         # first find the meta data
         try:
