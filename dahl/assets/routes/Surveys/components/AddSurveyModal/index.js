@@ -16,7 +16,7 @@ export class AddSurveyModal extends React.Component { // eslint-disable-line rea
   static propTypes = {
     addSurvey: PropTypes.func.isRequired,
     addSurveyCancel: PropTypes.func.isRequired,
-    errors: PropTypes.array,
+    errors: PropTypes.object,
     isOpen: PropTypes.bool,
   }
 
@@ -39,7 +39,7 @@ export class AddSurveyModal extends React.Component { // eslint-disable-line rea
             <Field>
               <Label htmlFor="survey_title">Survey Title</Label>
               <Input ref="surveyTitle" type="text" name="survey_title" id="survey_title" required autoFocus />
-              <ErrorList errors={errors['survey_title']} />
+              <ErrorList errors={errors['title']} />
             </Field>
             <Field>
               <Label htmlFor="survey_id">Survey ID</Label>
