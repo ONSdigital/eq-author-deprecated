@@ -10,7 +10,7 @@ export function* addSurvey(action) {
 
   const response = yield call(request, 'surveys/', {
     method: 'POST',
-    body: action.payload.survey
+    body: JSON.stringify(action.payload.survey)
   })
 
   if (!response.err) {
