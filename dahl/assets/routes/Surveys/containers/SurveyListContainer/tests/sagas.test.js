@@ -73,7 +73,7 @@ describe('addSurvey Saga', () => {
     next = generator.next()
     expect(next.value).toEqual(call(request, requestURL, {
       method: 'POST',
-      body: surveyAction.payload.survey
+      body: JSON.stringify(surveyAction.payload.survey)
     }))
   })
 
