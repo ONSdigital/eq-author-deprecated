@@ -21,6 +21,8 @@ class QuestionnaireSerializer(serializers.Serializer):
 
 
 class SurveySerializer(serializers.ModelSerializer):
+    questionnaires = SchemaSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Survey
         fields = ('survey_id', 'title', 'created_at', 'questionnaires')

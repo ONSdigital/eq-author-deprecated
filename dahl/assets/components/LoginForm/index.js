@@ -10,13 +10,8 @@ import styles from './styles.css'
 
 import Logo from 'components/Logo'
 import Panel from 'components/Panel'
-import Form from 'components/forms/Form'
-import Field from 'components/forms/Field'
-import Label from 'components/forms/Label'
-import Input from 'components/forms/Input'
-import Button from 'components/forms/Button'
-import PasswordInput from 'components/forms/PasswordInput'
-import ErrorList from 'components/forms/ErrorList'
+
+import { Form, Field, Input, Label, SubmitButton, PasswordInput, ErrorList } from 'components/forms'
 
 const LoginForm = ({username, csrfToken, errors, action}) => (
   <div className={styles.loginForm}>
@@ -35,7 +30,7 @@ const LoginForm = ({username, csrfToken, errors, action}) => (
         </Field>
         <div>
           <Input type="hidden" name="csrfmiddlewaretoken" value={csrfToken} />
-          <Button>Sign in</Button>
+          <SubmitButton>Sign in</SubmitButton>
         </div>
         <ErrorList errors={errors} />
       </Form>

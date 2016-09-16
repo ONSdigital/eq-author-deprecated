@@ -2,12 +2,17 @@
   background: white;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+  background: #ebf0f2;
 }
 
 .main {
   position: relative;
   height: 100%;
   width: 100%;
-  background: #ebf0f2;
+  flex: 1;
+
+  &[aria-hidden=true] {
+    display: none;
+  }
 }

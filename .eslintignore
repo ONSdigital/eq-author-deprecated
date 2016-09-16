@@ -2,3 +2,6 @@ internals/generators/**
 coverage/**
 node_modules/**
 src/index.html
+*.test.js
+dahl/bundles
+dahl/static

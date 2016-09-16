@@ -38,29 +38,13 @@ class PopupMenu extends React.Component {
     }
   }
 
-  onOptionClick = (cb) => {
+  handleClick = (cb) => {
     this.setState({ open: !this.state.open })
     cb.call()
   }
 
   handleClickOutside() {
     this.setState({ open: false })
-  }
-
-  getOption = (option, linkInner, index) => {
-    if (option.to !== undefined) {
-      return (
-        <Link className={styles.link} to={option.to} aria-disabled={option.disabled} key={index}>
-          {linkInner}
-        </Link>
-      )
-    } else {
-      return (
-        <button className={styles.linkButton} onClick={() => this.onOptionClick(option.onClick)} kery={index}>
-          {linkInner}
-        </button>
-      )
-    }
   }
 
   render() {
@@ -76,10 +60,9 @@ class PopupMenu extends React.Component {
           <ul className={styles.options}>
             {options.map((option, index) => (
               <li className={styles.option} key={index}>
-                {this.getOption(option,
-                  [<Icon name={option.icon} />,
-                    <span className={styles.linkText}>{option.title}</span>]
-                , index)}
+                <PopupMenuItem option={option} handleClick={this.handleClick}>
+                  <Icon name={option.icon} /><span className={styles.linkText}>{option.title}</span>
+                </PopupMenuItem>
               </li>
             ))}
           </ul>
@@ -87,6 +70,28 @@ class PopupMenu extends React.Component {
       </div>
     )
   }
+}
+
+const PopupMenuItem = ({option, children, handleClick}) => {
+  if (option.to !== undefined) {
+    return (
+      <Link className={styles.link} to={option.to} aria-disabled={option.disabled}>
+        {children}
+      </Link>
+    )
+  } else {
+    return (
+      <button className={styles.linkButton} onClick={() => handleClick(option.onClick)}>
+        {children}
+      </button>
+    )
+  }
+}
+
+PopupMenuItem.propTypes = {
+  children: PropTypes.node.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  option: PropTypes.object.isRequired,
 }
 
 export default enhanceWithClickOutside(PopupMenu)
