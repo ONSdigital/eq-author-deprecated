@@ -1,3 +1,7 @@
+__THIS IS NOW DEPRECATED__
+
+Use https://github.com/ONSdigital/eq-author instead
+
 # Dahl
 
 ## What is this?
